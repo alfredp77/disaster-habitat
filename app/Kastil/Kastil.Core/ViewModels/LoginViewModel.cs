@@ -9,6 +9,11 @@ namespace Kastil.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        public const string PleaseKeyInYourStaffCode = "Please key in your staff code";
+        public const string LoggingYouIn = "Logging you in";
+        public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
+
+
         private string _staffCode;
         public string StaffCode
         {
@@ -17,7 +22,7 @@ namespace Kastil.Core.ViewModels
         }
 
         MvxAsyncCommand _loginCommand;
-        public System.Windows.Input.ICommand LoginCommand
+        public MvxAsyncCommand LoginCommand
         {
             get
             {
@@ -31,11 +36,11 @@ namespace Kastil.Core.ViewModels
             var dialog = Resolve<IUserDialogs>();
             if (string.IsNullOrEmpty(_staffCode))
             {
-                await dialog.PromptAsync("Please key in your staff code");
+                await dialog.PromptAsync(PleaseKeyInYourStaffCode);
                 return;
             }
 
-            dialog.ShowLoading("Logging you in");
+            dialog.ShowLoading(LoggingYouIn);
 
             try
             {
@@ -44,7 +49,7 @@ namespace Kastil.Core.ViewModels
                 if (user != null)
                     ShowViewModel<HomeViewModel>();
                 else
-                    await dialog.PromptAsync("Something went wrong. Please try again.");
+                    await dialog.PromptAsync(SomethingWentWrongPleaseTryAgain);
             }
             catch (Exception ex)
             {
