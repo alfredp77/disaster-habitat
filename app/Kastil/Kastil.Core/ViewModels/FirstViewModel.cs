@@ -1,9 +1,7 @@
-using MvvmCross.Core.ViewModels;
-
 namespace Kastil.Core.ViewModels
 {
     public class FirstViewModel
-        : MvxViewModel
+        : BaseViewModel
     {
         private string _hello = "Hello MvvmCross";
         public string Hello
