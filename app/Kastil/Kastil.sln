@@ -11,7 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kastil.iOS", "Kastil.iOS\Ka
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1CAF773C-F943-400B-A912-C105DAFBABDC}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Kastil.Shared", "Kastil.Shared\Kastil.Shared.shproj", "{184536F0-432D-4C97-9342-AE97A6CD230A}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Kastil.Shared\Kastil.Shared.projitems*{31d7792c-8339-4c32-8c91-123c9b248b83}*SharedItemsImports = 4
+		Kastil.Shared\Kastil.Shared.projitems*{184536f0-432d-4c97-9342-ae97a6cd230a}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|iPhone = Ad-Hoc|iPhone

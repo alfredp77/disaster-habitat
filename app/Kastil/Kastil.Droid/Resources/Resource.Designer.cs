@@ -26,6 +26,7 @@ namespace Kastil.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Couchbase.Lite.Android.Resource.String.library_name = global::Kastil.Droid.Resource.String.library_name;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxBind = global::Kastil.Droid.Resource.Attribute.MvxBind;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::Kastil.Droid.Resource.Attribute.MvxDropDownItemTemplate;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxGroupItemTemplate = global::Kastil.Droid.Resource.Attribute.MvxGroupItemTemplate;
@@ -2531,14 +2532,14 @@ namespace Kastil.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f070019
-			public const int ApplicationName = 2131165209;
-			
-			// aapt resource value: 0x7f070017
-			public const int Hello = 2131165207;
+			// aapt resource value: 0x7f07001a
+			public const int ApplicationName = 2131165210;
 			
 			// aapt resource value: 0x7f070018
-			public const int Navigation = 2131165208;
+			public const int Hello = 2131165208;
+			
+			// aapt resource value: 0x7f070019
+			public const int Navigation = 2131165209;
 			
 			// aapt resource value: 0x7f070000
 			public const int abc_action_bar_home_description = 2131165184;
@@ -2605,6 +2606,9 @@ namespace Kastil.Droid
 			
 			// aapt resource value: 0x7f070016
 			public const int character_counter_pattern = 2131165206;
+			
+			// aapt resource value: 0x7f070017
+			public const int library_name = 2131165207;
 			
 			// aapt resource value: 0x7f070013
 			public const int status_bar_notification_info_overflow = 2131165203;
