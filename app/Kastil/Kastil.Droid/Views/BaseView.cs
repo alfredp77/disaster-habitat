@@ -18,11 +18,17 @@ namespace Kastil.Droid.Views
             if (Toolbar != null)
             {
                 SetSupportActionBar(Toolbar);
-                SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-                SupportActionBar.SetHomeButtonEnabled(true);
+                SetupToolbar();
             }
         }
 
         protected abstract int LayoutResource { get; }
+
+        protected virtual void SetupToolbar()
+        {
+            // this is displaying the back button on the toolbar
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetHomeButtonEnabled(true);
+        }
     }
 }

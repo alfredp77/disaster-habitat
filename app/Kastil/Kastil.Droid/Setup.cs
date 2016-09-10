@@ -1,6 +1,9 @@
+using Acr.UserDialogs;
 using Android.Content;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
 
 namespace Kastil.Droid
@@ -19,6 +22,12 @@ namespace Kastil.Droid
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
+        }
+
+        protected override void InitializeFirstChance()
+        {
+            Mvx.RegisterType<IUserDialogs>(() => new UserDialogsImpl(() => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity));
+            base.InitializeFirstChance();
         }
     }
 }
