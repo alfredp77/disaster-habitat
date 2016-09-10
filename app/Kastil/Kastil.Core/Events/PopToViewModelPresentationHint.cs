@@ -1,7 +1,7 @@
 ﻿using System;
 using MvvmCross.Core.ViewModels;
 
-namespace Kastil.Core.Messages
+namespace Kastil.Core.Events
 {
     public class PopToViewModelPresentationHint : MvxPresentationHint
     {

@@ -9,5 +9,10 @@ namespace Kastil.Core.ViewModels
         {
             return Mvx.Resolve<TService>();
         }
+
+        protected void Close()
+        {
+            Close(this);
+        }
     }
 }

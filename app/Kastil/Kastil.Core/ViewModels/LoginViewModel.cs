@@ -9,11 +9,6 @@ namespace Kastil.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public const string PleaseKeyInYourStaffCode = "Please key in your staff code";
-        public const string LoggingYouIn = "Logging you in";
-        public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
-
-
         private string _staffCode;
         public string StaffCode
         {
@@ -36,11 +31,11 @@ namespace Kastil.Core.ViewModels
             var dialog = Resolve<IUserDialogs>();
             if (string.IsNullOrEmpty(_staffCode))
             {
-                await dialog.PromptAsync(PleaseKeyInYourStaffCode);
+                await dialog.PromptAsync(Messages.Login.PleaseKeyInYourStaffCode);
                 return;
             }
 
-            dialog.ShowLoading(LoggingYouIn);
+            dialog.ShowLoading(Messages.Login.LoggingYouIn);
 
             try
             {
@@ -49,11 +44,12 @@ namespace Kastil.Core.ViewModels
                 if (user != null)
                     ShowViewModel<HomeViewModel>();
                 else
-                    await dialog.PromptAsync(SomethingWentWrongPleaseTryAgain);
+                    await dialog.PromptAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
             }
             catch (Exception ex)
             {
                 Mvx.Trace("Fail logging in user {0}. Exception: {1}", _staffCode, ex);
+                await dialog.PromptAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
             }
             finally
             {

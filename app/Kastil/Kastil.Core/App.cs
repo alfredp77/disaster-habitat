@@ -6,12 +6,13 @@ namespace Kastil.Core
     {
         public override void Initialize()
         {
-            CreatableTypes()
+            CreatableTypes()      
+                .StartingWith("Fake")          
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.FirstViewModel>();
+            RegisterAppStart<ViewModels.LoginViewModel>();
         }
     }
 }
