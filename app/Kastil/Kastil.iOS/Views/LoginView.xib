@@ -24,7 +24,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="96" width="280" height="30"/>
+                        <rect key="frame" x="20" y="96" width="97" height="30"/>
                     </variation>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11" translatesAutoresizingMaskIntoConstraints="NO">
@@ -56,4 +56,10 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <resources>
+        <image name="Images.xcassets/NavigationAdd.imageset/ButtonAdd.png" width="31" height="31"/>
+        <image name="Images.xcassets/NavigationClose.imageset/Close.png" width="30" height="30"/>
+        <image name="Images.xcassets/NavigationDone.imageset/Done.png" width="16.5" height="13.5"/>
+        <image name="Images.xcassets/NavigationMenuSetting.imageset/MenuSetting.png" width="15" height="16"/>
+    </resources>
 </document>

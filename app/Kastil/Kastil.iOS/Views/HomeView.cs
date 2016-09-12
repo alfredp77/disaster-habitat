@@ -13,7 +13,7 @@ namespace Kastil.iOS.Views
 
             var set = this.CreateBindingSet<HomeView, HomeViewModel>();
             set.Bind(logoutButton).To(vm => vm.LogoutCommand);
-            set.Apply();
+            set.Apply();                        
         }
     }
 }

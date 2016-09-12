@@ -17,5 +17,10 @@ namespace Kastil.iOS.Views
             set.Bind(staffCodeField).To(vm => vm.StaffCode);
             set.Apply();
         }
+
+        protected override void CreateNavBarItems()
+        {
+            // do nothing!
+        }
     }
 }
