@@ -31,7 +31,7 @@ namespace Kastil.Core.ViewModels
             var dialog = Resolve<IUserDialogs>();
             if (string.IsNullOrEmpty(_staffCode))
             {
-                await dialog.PromptAsync(Messages.Login.PleaseKeyInYourStaffCode);
+                await dialog.AlertAsync(Messages.Login.PleaseKeyInYourStaffCode);
                 return;
             }
 
@@ -44,12 +44,12 @@ namespace Kastil.Core.ViewModels
                 if (user != null)
                     ShowViewModel<HomeViewModel>();
                 else
-                    await dialog.PromptAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
+                    await dialog.AlertAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
             }
             catch (Exception ex)
             {
                 Mvx.Trace("Fail logging in user {0}. Exception: {1}", _staffCode, ex);
-                await dialog.PromptAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
+                await dialog.AlertAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
             }
             finally
             {

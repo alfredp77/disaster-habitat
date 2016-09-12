@@ -40,7 +40,7 @@ namespace Kastil.Core.Tests.ViewModels
             _vm.StaffCode = "";
             await _vm.LoginCommand.ExecuteAsync();
 
-            _userDialog.Verify(u => u.PromptAsync(Messages.Login.PleaseKeyInYourStaffCode, null, null, null, "", InputType.Default, null));
+            _userDialog.Verify(u => u.AlertAsync(Messages.Login.PleaseKeyInYourStaffCode, null, null, null));
             AssertDispatcherNotCalled<HomeViewModel>();            
         }
 
@@ -65,7 +65,7 @@ namespace Kastil.Core.Tests.ViewModels
             _vm.StaffCode = staffCode;
             await _vm.LoginCommand.ExecuteAsync();
 
-            _userDialog.Verify(u => u.PromptAsync(Messages.General.SomethingWentWrongPleaseTryAgain, null, null, null, "", InputType.Default, null));
+            _userDialog.Verify(u => u.AlertAsync(Messages.General.SomethingWentWrongPleaseTryAgain, null, null, null));
             AssertDispatcherNotCalled<HomeViewModel>();
         }
     }
