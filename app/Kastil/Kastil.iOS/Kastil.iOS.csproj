@@ -88,21 +88,25 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\HomeView.cs" />
+    <Compile Include="Views\HomeView.designer.cs">
+      <DependentUpon>HomeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.cs" />
+    <Compile Include="Views\LoginView.designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <InterfaceDefinition Include="Views\LoginView.xib" />
+    <InterfaceDefinition Include="Views\HomeView.xib" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\FirstView.designer.cs">
-      <DependentUpon>FirstView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FirstView.cs" />
-    <InterfaceDefinition Include="Views\FirstView.storyboard">
-      <SubType>Designer</SubType>
-    </InterfaceDefinition>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
   </ItemGroup>
   <ItemGroup>
