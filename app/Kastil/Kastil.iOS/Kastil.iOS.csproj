@@ -99,10 +99,6 @@
     <Compile Include="Views\DisastersView.designer.cs">
       <DependentUpon>DisastersView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomeView.cs" />
-    <Compile Include="Views\HomeView.designer.cs">
-      <DependentUpon>HomeView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\LoginView.designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
@@ -113,7 +109,6 @@
       <SubType>Designer</SubType>
     </None>
     <InterfaceDefinition Include="Views\LoginView.xib" />
-    <InterfaceDefinition Include="Views\HomeView.xib" />
     <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>

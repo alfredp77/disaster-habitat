@@ -41,7 +41,7 @@ namespace Kastil.Core.Tests.ViewModels
             await _vm.LoginCommand.ExecuteAsync();
 
             _userDialog.Verify(u => u.AlertAsync(Messages.Login.PleaseKeyInYourStaffCode, null, null, null));
-            AssertDispatcherNotCalled<HomeViewModel>();            
+            AssertDispatcherNotCalled<DisastersViewModel>();            
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace Kastil.Core.Tests.ViewModels
             _vm.StaffCode = user.StaffCode;
             await _vm.LoginCommand.ExecuteAsync();
 
-            AssertDispatcherCalled<HomeViewModel>();
+            AssertDispatcherCalled<DisastersViewModel>();
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Kastil.Core.Tests.ViewModels
             await _vm.LoginCommand.ExecuteAsync();
 
             _userDialog.Verify(u => u.AlertAsync(Messages.General.SomethingWentWrongPleaseTryAgain, null, null, null));
-            AssertDispatcherNotCalled<HomeViewModel>();
+            AssertDispatcherNotCalled<DisastersViewModel>();
         }
     }
 }

@@ -1121,32 +1121,32 @@ namespace Kastil.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b0050
-			public const int abc_background_cache_hint_selector_material_dark = 2131427408;
+			// aapt resource value: 0x7f0b0054
+			public const int abc_background_cache_hint_selector_material_dark = 2131427412;
 			
-			// aapt resource value: 0x7f0b0051
-			public const int abc_background_cache_hint_selector_material_light = 2131427409;
+			// aapt resource value: 0x7f0b0055
+			public const int abc_background_cache_hint_selector_material_light = 2131427413;
 			
-			// aapt resource value: 0x7f0b0052
-			public const int abc_color_highlight_material = 2131427410;
+			// aapt resource value: 0x7f0b0056
+			public const int abc_color_highlight_material = 2131427414;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int abc_input_method_navigation_guard = 2131427328;
 			
-			// aapt resource value: 0x7f0b0053
-			public const int abc_primary_text_disable_only_material_dark = 2131427411;
-			
-			// aapt resource value: 0x7f0b0054
-			public const int abc_primary_text_disable_only_material_light = 2131427412;
-			
-			// aapt resource value: 0x7f0b0055
-			public const int abc_primary_text_material_dark = 2131427413;
-			
-			// aapt resource value: 0x7f0b0056
-			public const int abc_primary_text_material_light = 2131427414;
-			
 			// aapt resource value: 0x7f0b0057
-			public const int abc_search_url_text = 2131427415;
+			public const int abc_primary_text_disable_only_material_dark = 2131427415;
+			
+			// aapt resource value: 0x7f0b0058
+			public const int abc_primary_text_disable_only_material_light = 2131427416;
+			
+			// aapt resource value: 0x7f0b0059
+			public const int abc_primary_text_material_dark = 2131427417;
+			
+			// aapt resource value: 0x7f0b005a
+			public const int abc_primary_text_material_light = 2131427418;
+			
+			// aapt resource value: 0x7f0b005b
+			public const int abc_search_url_text = 2131427419;
 			
 			// aapt resource value: 0x7f0b0001
 			public const int abc_search_url_text_normal = 2131427329;
@@ -1157,11 +1157,11 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f0b0003
 			public const int abc_search_url_text_selected = 2131427331;
 			
-			// aapt resource value: 0x7f0b0058
-			public const int abc_secondary_text_material_dark = 2131427416;
+			// aapt resource value: 0x7f0b005c
+			public const int abc_secondary_text_material_dark = 2131427420;
 			
-			// aapt resource value: 0x7f0b0059
-			public const int abc_secondary_text_material_light = 2131427417;
+			// aapt resource value: 0x7f0b005d
+			public const int abc_secondary_text_material_light = 2131427421;
 			
 			// aapt resource value: 0x7f0b0046
 			public const int accent = 2131427398;
@@ -1187,8 +1187,11 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f0b0009
 			public const int background_material_light = 2131427337;
 			
-			// aapt resource value: 0x7f0b004f
-			public const int blue_007aff = 2131427407;
+			// aapt resource value: 0x7f0b0053
+			public const int black = 2131427411;
+			
+			// aapt resource value: 0x7f0b0051
+			public const int blue_007aff = 2131427409;
 			
 			// aapt resource value: 0x7f0b000a
 			public const int bright_foreground_disabled_material_dark = 2131427338;
@@ -1266,10 +1269,16 @@ namespace Kastil.Droid
 			public const int foreground_material_light = 2131427351;
 			
 			// aapt resource value: 0x7f0b004d
-			public const int gray_bcbcbc = 2131427405;
+			public const int gray_a3a3a3 = 2131427405;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int gray_bcbcbc = 2131427407;
 			
 			// aapt resource value: 0x7f0b004e
-			public const int gray_ededed = 2131427406;
+			public const int gray_dddddd = 2131427406;
+			
+			// aapt resource value: 0x7f0b0050
+			public const int gray_ededed = 2131427408;
 			
 			// aapt resource value: 0x7f0b0018
 			public const int highlighted_text_material_dark = 2131427352;
@@ -1355,6 +1364,9 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f0b002f
 			public const int primary_text_disabled_material_light = 2131427375;
 			
+			// aapt resource value: 0x7f0b0052
+			public const int pure_white = 2131427410;
+			
 			// aapt resource value: 0x7f0b0030
 			public const int ripple_material_dark = 2131427376;
 			
@@ -1382,11 +1394,11 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f0b0037
 			public const int switch_thumb_disabled_material_light = 2131427383;
 			
-			// aapt resource value: 0x7f0b005a
-			public const int switch_thumb_material_dark = 2131427418;
+			// aapt resource value: 0x7f0b005e
+			public const int switch_thumb_material_dark = 2131427422;
 			
-			// aapt resource value: 0x7f0b005b
-			public const int switch_thumb_material_light = 2131427419;
+			// aapt resource value: 0x7f0b005f
+			public const int switch_thumb_material_light = 2131427423;
 			
 			// aapt resource value: 0x7f0b0038
 			public const int switch_thumb_normal_material_dark = 2131427384;
@@ -2024,8 +2036,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f06007c
 			public const int StaffCode = 2131099772;
 			
-			// aapt resource value: 0x7f06007d
-			public const int action0 = 2131099773;
+			// aapt resource value: 0x7f06007e
+			public const int action0 = 2131099774;
 			
 			// aapt resource value: 0x7f06005c
 			public const int action_bar = 2131099740;
@@ -2051,8 +2063,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f06005d
 			public const int action_context_bar = 2131099741;
 			
-			// aapt resource value: 0x7f060081
-			public const int action_divider = 2131099777;
+			// aapt resource value: 0x7f060082
+			public const int action_divider = 2131099778;
 			
 			// aapt resource value: 0x7f060003
 			public const int action_menu_divider = 2131099651;
@@ -2084,14 +2096,14 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f06002c
 			public const int bottom = 2131099692;
 			
-			// aapt resource value: 0x7f060077
-			public const int button1 = 2131099767;
+			// aapt resource value: 0x7f06007d
+			public const int button1 = 2131099773;
 			
 			// aapt resource value: 0x7f060046
 			public const int buttonPanel = 2131099718;
 			
-			// aapt resource value: 0x7f06007e
-			public const int cancel_action = 2131099774;
+			// aapt resource value: 0x7f06007f
+			public const int cancel_action = 2131099775;
 			
 			// aapt resource value: 0x7f06002d
 			public const int center = 2131099693;
@@ -2105,8 +2117,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060054
 			public const int checkbox = 2131099732;
 			
-			// aapt resource value: 0x7f060084
-			public const int chronometer = 2131099780;
+			// aapt resource value: 0x7f060085
+			public const int chronometer = 2131099781;
 			
 			// aapt resource value: 0x7f060035
 			public const int clip_horizontal = 2131099701;
@@ -2120,8 +2132,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f06004c
 			public const int contentPanel = 2131099724;
 			
-			// aapt resource value: 0x7f060076
-			public const int content_frame = 2131099766;
+			// aapt resource value: 0x7f06007b
+			public const int content_frame = 2131099771;
 			
 			// aapt resource value: 0x7f060052
 			public const int custom = 2131099730;
@@ -2153,14 +2165,17 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060010
 			public const int disableHome = 2131099664;
 			
+			// aapt resource value: 0x7f060076
+			public const int disasterTable = 2131099766;
+			
 			// aapt resource value: 0x7f06005e
 			public const int edit_query = 2131099742;
 			
 			// aapt resource value: 0x7f06001e
 			public const int end = 2131099678;
 			
-			// aapt resource value: 0x7f060089
-			public const int end_padder = 2131099785;
+			// aapt resource value: 0x7f06008a
+			public const int end_padder = 2131099786;
 			
 			// aapt resource value: 0x7f060025
 			public const int enterAlways = 2131099685;
@@ -2204,8 +2219,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060041
 			public const int image = 2131099713;
 			
-			// aapt resource value: 0x7f060088
-			public const int info = 2131099784;
+			// aapt resource value: 0x7f060089
+			public const int info = 2131099785;
 			
 			// aapt resource value: 0x7f060000
 			public const int item_touch_helper_previous_elevation = 2131099648;
@@ -2213,11 +2228,11 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060031
 			public const int left = 2131099697;
 			
-			// aapt resource value: 0x7f060082
-			public const int line1 = 2131099778;
+			// aapt resource value: 0x7f060083
+			public const int line1 = 2131099779;
 			
-			// aapt resource value: 0x7f060086
-			public const int line3 = 2131099782;
+			// aapt resource value: 0x7f060087
+			public const int line3 = 2131099783;
 			
 			// aapt resource value: 0x7f06000d
 			public const int listMode = 2131099661;
@@ -2225,17 +2240,17 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060043
 			public const int list_item = 2131099715;
 			
+			// aapt resource value: 0x7f060079
+			public const int loadingImage = 2131099769;
+			
+			// aapt resource value: 0x7f060077
+			public const int loadingProgressBar = 2131099767;
+			
 			// aapt resource value: 0x7f06007a
-			public const int loadingImage = 2131099770;
+			public const int loadingProgressWheel = 2131099770;
 			
-			// aapt resource value: 0x7f060078
-			public const int loadingProgressBar = 2131099768;
-			
-			// aapt resource value: 0x7f06007b
-			public const int loadingProgressWheel = 2131099771;
-			
-			// aapt resource value: 0x7f060080
-			public const int media_actions = 2131099776;
+			// aapt resource value: 0x7f060081
+			public const int media_actions = 2131099777;
 			
 			// aapt resource value: 0x7f06001f
 			public const int middle = 2131099679;
@@ -2369,8 +2384,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060033
 			public const int start = 2131099699;
 			
-			// aapt resource value: 0x7f06007f
-			public const int status_bar_latest_event_content = 2131099775;
+			// aapt resource value: 0x7f060080
+			public const int status_bar_latest_event_content = 2131099776;
 			
 			// aapt resource value: 0x7f060067
 			public const int submit_area = 2131099751;
@@ -2378,20 +2393,20 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f06000f
 			public const int tabMode = 2131099663;
 			
-			// aapt resource value: 0x7f060087
-			public const int text = 2131099783;
+			// aapt resource value: 0x7f060088
+			public const int text = 2131099784;
 			
-			// aapt resource value: 0x7f060085
-			public const int text2 = 2131099781;
+			// aapt resource value: 0x7f060086
+			public const int text2 = 2131099782;
 			
 			// aapt resource value: 0x7f06004f
 			public const int textSpacerNoButtons = 2131099727;
 			
-			// aapt resource value: 0x7f060079
-			public const int textViewStatus = 2131099769;
+			// aapt resource value: 0x7f060078
+			public const int textViewStatus = 2131099768;
 			
-			// aapt resource value: 0x7f060083
-			public const int time = 2131099779;
+			// aapt resource value: 0x7f060084
+			public const int time = 2131099780;
 			
 			// aapt resource value: 0x7f060045
 			public const int title = 2131099717;
@@ -2591,10 +2606,10 @@ namespace Kastil.Droid
 			public const int design_navigation_menu_item = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int FirstView = 2130903077;
+			public const int DisasterItemCell = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int HomeView = 2130903078;
+			public const int DisastersView = 2130903078;
 			
 			// aapt resource value: 0x7f030027
 			public const int loading = 2130903079;
