@@ -90,6 +90,15 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="PlatformSpecific\UINavigationControllerBarExtensions.cs" />
     <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\CustomTableViewSource.cs" />
+    <Compile Include="Views\DisasterItemCell.cs" />
+    <Compile Include="Views\DisasterItemCell.designer.cs">
+      <DependentUpon>DisasterItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisastersView.cs" />
+    <Compile Include="Views\DisastersView.designer.cs">
+      <DependentUpon>DisastersView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.cs" />
     <Compile Include="Views\HomeView.designer.cs">
       <DependentUpon>HomeView.cs</DependentUpon>
@@ -105,10 +114,20 @@
     </None>
     <InterfaceDefinition Include="Views\LoginView.xib" />
     <InterfaceDefinition Include="Views\HomeView.xib" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationClose.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationDone.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationClose.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationDone.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <InterfaceDefinition Include="Views\DisastersView.xib" />
+    <InterfaceDefinition Include="Views\DisasterItemCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
@@ -174,12 +193,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\MenuSetting%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\MenuSetting.png" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationDone.imageset\Done%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationClose.imageset\Close%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\ButtonAdd%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\ButtonAdd.png" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\MenuSetting%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\MenuSetting.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationDone.imageset\Done%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationClose.imageset\Close%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\ButtonAdd%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\ButtonAdd.png">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kastil.Core\Kastil.Core.csproj">

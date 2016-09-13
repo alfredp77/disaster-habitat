@@ -4,6 +4,7 @@
     {
         public static class General
         {
+            public const string Loading = "Loading";
             public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
         }
 
@@ -13,5 +14,6 @@
             public const string LoggingYouIn = "Logging you in";
             public const string LoggingYouOut = "Logging you out ...";
         }
+
     }
 }

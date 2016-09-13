@@ -42,7 +42,7 @@ namespace Kastil.Core.ViewModels
                 var service = Resolve<IUserService>();
                 var user = await service.Login(_staffCode);
                 if (user != null)
-                    ShowViewModel<HomeViewModel>();
+                    ShowViewModel<DisastersViewModel>();
                 else
                     await dialog.AlertAsync(Messages.General.SomethingWentWrongPleaseTryAgain);
             }

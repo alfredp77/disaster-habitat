@@ -38,8 +38,11 @@
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DisasterService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
     <Compile Include="ViewModels\FirstViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
