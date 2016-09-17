@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
+using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -101,6 +102,33 @@ namespace Kastil.Core.ViewModels
             return Load();
         }
 
-        
-    }
+		MvxCommand<DisasterListItemViewModel> _disasterSelectedCommand;
+		public MvxCommand<DisasterListItemViewModel> DisasterSelectedCommand {
+			get {
+				_disasterSelectedCommand = _disasterSelectedCommand ?? new MvxCommand<DisasterListItemViewModel>(DoDisasterSelectedCommand);
+				return _disasterSelectedCommand;
+			}
+		}
+
+		private void DoDisasterSelectedCommand (DisasterListItemViewModel itemVm)
+		{
+			var actionSheetConfig = new ActionSheetConfig ();
+			actionSheetConfig.Add (Messages.DisasterMenu.Assesment, () => DoShowAssesment(itemVm.Value));
+			actionSheetConfig.Add (Messages.DisasterMenu.Shelters, () => DoShowShelters(itemVm.Value));
+
+			var dialog = Resolve<IUserDialogs> ();
+			dialog.ActionSheet (actionSheetConfig);
+		}
+
+		private void DoShowAssesment(Disaster disaster)
+		{
+			ShowViewModel<AssesmentViewModel> (new { disasterId = disaster.Id });
+		}
+
+		private void DoShowShelters (Disaster disaster)
+		{
+			ShowViewModel<SheltersViewModel> (new { disasterId = disaster.Id });
+		}
+
+	}
 }

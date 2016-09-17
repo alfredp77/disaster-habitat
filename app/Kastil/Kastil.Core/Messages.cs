@@ -16,7 +16,7 @@
         }
 
 
-        public static class Disaster
+        public static class DisasterMenu
         {
             public const string Assesment = "Assesment";
             public const string Shelters = "Shelters";

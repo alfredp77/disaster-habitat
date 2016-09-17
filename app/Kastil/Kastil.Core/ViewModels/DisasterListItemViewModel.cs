@@ -31,8 +31,8 @@ namespace Kastil.Core.ViewModels
         private void  DoActionCommand()
         {
             var actionSheetConfig = new ActionSheetConfig();
-            actionSheetConfig.Add(Messages.Disaster.Assesment, DoShowAssesment);
-            actionSheetConfig.Add(Messages.Disaster.Shelters, DoShowShelters);
+            actionSheetConfig.Add(Messages.DisasterMenu.Assesment, DoShowAssesment);
+            actionSheetConfig.Add(Messages.DisasterMenu.Shelters, DoShowShelters);
 
             var dialog = Resolve<IUserDialogs>();
             dialog.ActionSheet(actionSheetConfig);
