@@ -35,10 +35,10 @@ namespace Kastil.Core.ViewModels
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);
 
-            var disasterService = Resolve<IDisasterService>();
+            var disasterService = Resolve<ITap2HelpService>();
             try
             {
-                var disasters = await disasterService.Load(new DisasterFilter(), _nextPage);
+                var disasters = await disasterService.GetDisasters();
                 if (disasters != null)
                 {
                     Items.AddRange(disasters.Select(d => new DisasterListItemViewModel(d)));
