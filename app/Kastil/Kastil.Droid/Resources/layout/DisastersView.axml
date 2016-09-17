@@ -30,5 +30,5 @@
             app:MvxBind="ItemsSource Items; ItemClick DisasterSelectedCommand"
             app:MvxItemTemplate="@layout/disasteritemcell"
             android:layout_marginBottom="0.0dp" />
-    </kastil.droid.platformSpecific.MvxSwipeRefreshLayout>     
+    </kastil.droid.platformSpecific.MvxSwipeRefreshLayout>
 </RelativeLayout>

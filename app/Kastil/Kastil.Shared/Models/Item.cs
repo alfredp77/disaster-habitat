@@ -8,6 +8,7 @@ namespace Kastil.Shared.Models
     /// </summary>
     public abstract class Item : BaseModel
     {
+        public string DisasterId { get; set; }
         public string Name { get; set; }
         public Location Location { get; set; }
         public List<Attribute> Attributes { get; set; } = new List<Attribute>();

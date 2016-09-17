@@ -202,7 +202,7 @@
     <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\SheltersView.cs" />
-    <Compile Include="Views\AssesmentView.cs" />
+    <Compile Include="Views\AssesmentsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -223,7 +223,10 @@
     <AndroidResource Include="Resources\layout\SheltersView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssesmentView.axml">
+    <AndroidResource Include="Resources\layout\AssesmentsView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AssesmentItemCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

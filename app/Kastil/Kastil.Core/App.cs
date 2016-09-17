@@ -12,7 +12,7 @@ namespace Kastil.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.LoginViewModel>();
+            RegisterAppStart<ViewModels.DisastersViewModel>();
         }
     }
 }
