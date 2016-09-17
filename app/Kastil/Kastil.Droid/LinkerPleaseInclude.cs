@@ -13,6 +13,7 @@ namespace Kastil.Droid
         public void Include(Button button)
         {
             button.Click += (s, e) => button.Text = button.Text + "";
+			button.Click += (s, e) => button.Visibility = button.Visibility - 1;
         }
 
         public void Include(CheckBox checkBox)

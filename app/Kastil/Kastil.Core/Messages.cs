@@ -15,5 +15,12 @@
             public const string LoggingYouOut = "Logging you out ...";
         }
 
+
+        public static class Actions
+        {
+            public const string Capacity = "Capacity";
+            public const string Disasters = "Disasters";
+            public const string Logout = "Logout";
+        }
     }
 }

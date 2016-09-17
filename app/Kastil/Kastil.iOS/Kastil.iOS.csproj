@@ -89,6 +89,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="PlatformSpecific\UINavigationControllerBarExtensions.cs" />
+    <Compile Include="PlatformSpecific\ViewPresenter.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\CustomTableViewSource.cs" />
     <Compile Include="Views\DisasterItemCell.cs" />

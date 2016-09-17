@@ -15,10 +15,13 @@ namespace Kastil.iOS.Views
             CreateNavBarItems();
         }
 
-        protected virtual void CreateNavBarItems()
+        private void CreateNavBarItems()
         {
-            this.AddLeftButton(ButtonTypes.Setting, (s, e) => { });
-            this.AddRightButton(ButtonTypes.Add, (s, e) => { /* do something here */ });
+            if (ViewModel.SettingCommand != null)
+                this.AddLeftButton(ButtonTypes.Setting, async (s, e) => await ViewModel.SettingCommand.ExecuteAsync());
+            if (ViewModel.AddCommand != null)
+                this.AddRightButton(ButtonTypes.Add, async (s, e) => await ViewModel.AddCommand.ExecuteAsync());
         }
+
     }
 }

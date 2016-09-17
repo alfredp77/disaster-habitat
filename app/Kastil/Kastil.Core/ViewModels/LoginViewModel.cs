@@ -9,6 +9,11 @@ namespace Kastil.Core.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        public LoginViewModel()
+        {
+            AllowSettingCommand = false;
+        }
+
         private string _staffCode;
         public string StaffCode
         {

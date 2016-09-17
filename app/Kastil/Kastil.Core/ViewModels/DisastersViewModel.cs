@@ -19,6 +19,7 @@ namespace Kastil.Core.ViewModels
             Items = new ObservableRangeCollection<DisasterListItemViewModel>();
         }
 
+
         public Task Initialize()
         {
             _nextPage = 0;
@@ -99,5 +100,7 @@ namespace Kastil.Core.ViewModels
             _nextPage++;
             return Load();
         }
+
+        
     }
 }

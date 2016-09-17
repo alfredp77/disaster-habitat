@@ -1,5 +1,8 @@
 using Android.OS;
 using Android.Support.V7.Widget;
+using Android.Views;
+using Java.Interop;
+using Kastil.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Kastil.Droid.Views
@@ -29,6 +32,20 @@ namespace Kastil.Droid.Views
             // this is displaying the back button on the toolbar
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetHomeButtonEnabled(true);
+        }
+
+        [Export]
+        public void InvokeSettingsCommand(View view)
+        {
+            var vm = (BaseViewModel) ViewModel;
+            vm.SettingCommand.ExecuteAsync();
+        }
+
+        [Export]
+        public void InvokeAddCommand(View view)
+        {
+            var vm = (BaseViewModel)ViewModel;
+            vm.AddCommand.ExecuteAsync();
         }
     }
 }
