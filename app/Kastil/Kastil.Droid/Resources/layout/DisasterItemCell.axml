@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/pure_white">
+    android:background="@color/pure_white"
+              app:MvxBind="ItemClick ActionCommand">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"        

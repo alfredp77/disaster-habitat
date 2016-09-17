@@ -41,6 +41,7 @@
     <Compile Include="Services\DisasterService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
+    <Compile Include="ViewModels\AssesmentViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />

@@ -70,7 +70,7 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        private Task DoSettingCommand()
+        protected virtual Task DoSettingCommand()
         {
 			var dialog = Resolve<IUserDialogs> ();
 			return dialog.AlertAsync ("Test Settings");

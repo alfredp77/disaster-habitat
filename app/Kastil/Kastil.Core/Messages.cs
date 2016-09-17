@@ -16,11 +16,10 @@
         }
 
 
-        public static class Actions
+        public static class Disaster
         {
-            public const string Capacity = "Capacity";
-            public const string Disasters = "Disasters";
-            public const string Logout = "Logout";
+            public const string Assesment = "Assesment";
+            public const string Shelters = "Shelters";
         }
     }
 }
