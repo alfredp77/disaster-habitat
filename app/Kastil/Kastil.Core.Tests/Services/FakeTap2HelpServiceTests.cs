@@ -36,6 +36,25 @@ namespace Kastil.Core.Tests.Services
             Assert.That(first.Attributes.FirstOrDefault(), Is.Not.Null);
         }
 
+        [Test]
+        public async Task GetAllAssesmentIsWorking()
+        {
+            var assesments = await _service.GetAssesments();
+            Assert.That(assesments.Any());
+        }
+
+        [Test]
+        public async Task GetAllAssesmentsForEachDisaster()
+        {
+            var disasters = await _service.GetDisasters();
+            foreach(var disaster in disasters)
+            {
+                var assesments = await _service.GetAssesments(disaster.Id);
+                Assert.That(assesments.Any());
+                Assert.True(assesments.All(a => a.DisasterId.Equals(disaster.Id)));
+            }
+        }
+
 
     }
 }
