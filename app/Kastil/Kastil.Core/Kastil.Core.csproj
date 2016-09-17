@@ -39,6 +39,8 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DisasterService.cs" />
+    <Compile Include="Services\FakeTap2HelpService.cs" />
+    <Compile Include="Services\ITap2HelpService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\AssesmentViewModel.cs" />

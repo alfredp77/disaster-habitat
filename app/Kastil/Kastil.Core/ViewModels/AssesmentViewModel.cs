@@ -12,9 +12,6 @@ namespace Kastil.Core.ViewModels
         {
         }
 
-		protected override Task DoSettingCommand ()
-		{
-			return Task.Factory.StartNew (Close);
-		}
+		
     }
 }

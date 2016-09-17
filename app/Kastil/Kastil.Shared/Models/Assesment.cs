@@ -1,6 +1,6 @@
 namespace Kastil.Shared.Models
 {
-    public class Shelter : Item
+    public class Assesment : Item
     {
     }
 }

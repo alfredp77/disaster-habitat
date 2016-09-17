@@ -1,12 +1,8 @@
-﻿namespace Kastil.Shared.Models
+namespace Kastil.Shared.Models
 {
     public class Location
     {
-        public static Location P(double lat, double lng, string name, int zoomLevel = 17)
-        {
-            return new Location(lat, lng) { Name = name, ZoomLevel = zoomLevel };
-        }
-
+        
 
         public string type { get; set; }
         public double[] coordinates { get; set; }
