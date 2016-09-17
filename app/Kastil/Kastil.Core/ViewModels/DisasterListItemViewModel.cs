@@ -18,35 +18,5 @@ namespace Kastil.Core.ViewModels
         public string Text => Value.Name;
         public DateTimeOffset When => Value.When;
 
-        MvxCommand _actionCommand;
-        public MvxCommand ActionCommand
-        {
-            get
-            {
-                _actionCommand = _actionCommand ?? new MvxCommand(DoActionCommand);
-                return _actionCommand;
-            }
-        }
-
-        private void  DoActionCommand()
-        {
-            var actionSheetConfig = new ActionSheetConfig();
-            actionSheetConfig.Add(Messages.DisasterMenu.Assesment, DoShowAssesment);
-            actionSheetConfig.Add(Messages.DisasterMenu.Shelters, DoShowShelters);
-
-            var dialog = Resolve<IUserDialogs>();
-            dialog.ActionSheet(actionSheetConfig);
-        }
-
-        private void DoShowAssesment()
-        {
-            ShowViewModel<AssesmentViewModel>(new {disasterId = Value.Id});
-        }
-
-        private void DoShowShelters()
-        {
-            ShowViewModel<SheltersViewModel>(new { disasterId = Value.Id });
-        }
-
     }
 }
