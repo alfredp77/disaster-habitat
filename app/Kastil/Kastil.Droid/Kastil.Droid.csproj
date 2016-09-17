@@ -198,11 +198,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="Views\AssesmentView.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\SheltersView.cs" />
-    <Compile Include="Views\AssesmentsView.cs" />
+    <Compile Include="Views\AssesmentListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -223,10 +224,13 @@
     <AndroidResource Include="Resources\layout\SheltersView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssesmentsView.axml">
+    <AndroidResource Include="Resources\layout\AssesmentListView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AssesmentItemCell.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AssesmentView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -16,6 +16,9 @@ namespace Kastil.Core.ViewModels
 
         public Assesment Value { get; }
 
+        public string DisasterId => Value.DisasterId;
+        public string AssesmentId => Value.Id;
+
         public string Text => Value.Name;
         public string ShortDescription
         {

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssesmentsViewModel : BaseViewModel
+    public class AssesmentListViewModel : BaseViewModel
     {
         public ObservableRangeCollection<AssesmentListItemViewModel> Items { get; }
 
-        public String DisasterId { get; set; }
+        public string DisasterId { get; set; }
 
-        public AssesmentsViewModel()
+        public AssesmentListViewModel()
         {
             Items = new ObservableRangeCollection<AssesmentListItemViewModel>();
         }
@@ -103,12 +103,7 @@ namespace Kastil.Core.ViewModels
 
         private void DoAssessmentSelectedCommand(AssesmentListItemViewModel itemVm)
         {
-            var actionSheetConfig = new ActionSheetConfig();
-            //actionSheetConfig.Add(Messages.DisasterMenu.Assesment, () => DoShowAssesment(itemVm.Value));
-            //actionSheetConfig.Add(Messages.DisasterMenu.Shelters, () => DoShowShelters(itemVm.Value));
-
-            //var dialog = Resolve<IUserDialogs>();
-            //dialog.ActionSheet(actionSheetConfig);
+            ShowViewModel<AssesmentViewModel>(new { disasterId = itemVm.DisasterId, assestmentId = itemVm.AssesmentId });
         }
     }
 }

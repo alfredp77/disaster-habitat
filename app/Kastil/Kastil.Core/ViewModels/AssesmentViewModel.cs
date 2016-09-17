@@ -8,10 +8,14 @@ namespace Kastil.Core.ViewModels
 {
     public class AssesmentViewModel : BaseViewModel
     {
-        public void Init(string disasterId)
+        public void Init(String disasterId, String assesmentId)
         {
         }
 
-		
+
+        public void Initialize()
+        {
+
+        }
     }
 }

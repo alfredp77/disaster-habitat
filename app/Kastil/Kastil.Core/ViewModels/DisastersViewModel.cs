@@ -122,7 +122,7 @@ namespace Kastil.Core.ViewModels
 
 		private void DoShowAssesment(Disaster disaster)
 		{
-			ShowViewModel<AssesmentsViewModel> (new { disasterId = disaster.Id });
+			ShowViewModel<AssesmentListViewModel> (new { disasterId = disaster.Id });
 		}
 
 		private void DoShowShelters (Disaster disaster)

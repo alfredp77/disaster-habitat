@@ -45,7 +45,7 @@
     <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\AssesmentViewModel.cs" />
     <Compile Include="ViewModels\AssesmentListItemViewModel.cs" />
-    <Compile Include="ViewModels\AssesmentsViewModel.cs" />
+    <Compile Include="ViewModels\AssesmentListViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
