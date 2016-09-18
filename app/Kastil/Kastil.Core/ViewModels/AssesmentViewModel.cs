@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -10,7 +9,7 @@ using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssesmentViewModel : BaseViewModel, INotifyPropertyChanged
+    public class AssesmentViewModel : BaseViewModel
     {
         public AssesmentViewModel()
         {
@@ -24,16 +23,16 @@ namespace Kastil.Core.ViewModels
             set
             {
                 _assesment = value;
-                OnPropertyChanged("AssestmentName");
-                OnPropertyChanged("AssestmentLocation");
+                RaisePropertyChanged("AssesmentName");
+                RaisePropertyChanged("AssestmentLocation");
             }
         }
 
         public string AssestmentName => Assesment.Name;
-          
         public string AssestmentLocation => Assesment.Location.Name;
-
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; }
+        public string AssesmentId { get; private set; }
+        public string DisasterId { get; private set; }
 
         public void Init(string disasterId, string assesmentId)
         {
@@ -82,17 +81,7 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        public string AssesmentId { get; set; }
-
-        public string DisasterId { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
+       
     }
 }

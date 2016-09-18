@@ -38,6 +38,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Connection.Details.cs" />
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
+    <Compile Include="Fakes\FakeSyncService.cs" />
     <Compile Include="FolderProvider.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
