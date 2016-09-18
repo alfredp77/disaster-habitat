@@ -38,7 +38,7 @@ namespace Kastil.Core.ViewModels
 			try {
 
 				var syncService = Resolve<ISyncService> ();
-				//await syncService.Sync ();
+				await syncService.Sync<Disaster>(true);
 			} catch (Exception ex) {
 				dialog.HideLoading ();
 				Mvx.Trace ("Unable to Sync, exception: {0}", ex);

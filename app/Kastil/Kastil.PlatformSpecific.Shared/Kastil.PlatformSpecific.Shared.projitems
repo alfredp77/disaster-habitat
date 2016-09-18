@@ -9,6 +9,7 @@
     <Import_RootNamespace>Kastil.PlatformSpecific.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)FolderProviderFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestServiceCaller.cs" />
   </ItemGroup>
 </Project>

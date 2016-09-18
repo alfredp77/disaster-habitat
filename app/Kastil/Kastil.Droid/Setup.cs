@@ -1,5 +1,6 @@
 using Acr.UserDialogs;
 using Android.Content;
+using Kastil.Core;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -30,8 +31,8 @@ namespace Kastil.Droid
         protected override void InitializeFirstChance()
         {
             Mvx.RegisterType<IUserDialogs>(() => new UserDialogsImpl(() => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity));
-			Mvx.RegisterType<IRestServiceCaller> (() => new RestServiceCaller());
-			Mvx.RegisterType<IJsonSerializer> (() => new JsonSerializer());
+			Mvx.RegisterSingleton<IRestServiceCaller> (() => new RestServiceCaller());			
+            Mvx.RegisterSingleton(FolderProviderFactory.Create);
             base.InitializeFirstChance();
         }
     }

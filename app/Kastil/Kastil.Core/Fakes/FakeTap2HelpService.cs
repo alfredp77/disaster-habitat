@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Kastil.Core.Services;
 using Kastil.Shared.Models;
 using Attribute = Kastil.Shared.Models.Attribute;
 
-namespace Kastil.Core.Services
+namespace Kastil.Core.Fakes
 {
     public class FakeTap2HelpService : ITap2HelpService
     {
@@ -18,8 +19,8 @@ namespace Kastil.Core.Services
 
         private void GenerateDisasters()
         {
-            var disaster1 = new Disaster { Id = Guid.NewGuid().ToString(), Name = "Typhoon Haiyan", When = new DateTimeOffset(2013, 11, 8, 0, 0, 0, TimeSpan.FromHours(8)) };
-            var disaster2 = new Disaster { Id = Guid.NewGuid().ToString(), Name = "Aceh Tsunami", When = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)) };
+            var disaster1 = new Disaster { Id = Guid.NewGuid().ToString(), Name = "Typhoon Haiyan", DateWhen = new DateTimeOffset(2013, 11, 8, 0, 0, 0, TimeSpan.FromHours(8)) };
+            var disaster2 = new Disaster { Id = Guid.NewGuid().ToString(), Name = "Aceh Tsunami", DateWhen = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)) };
             _disasters.Add(disaster1.Id, disaster1);
             _disasters.Add(disaster2.Id, disaster2);
         }

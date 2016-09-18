@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Kastil.Core.Utils;
 using Kastil.Shared.Models;
-using MvvmCross.Plugins.File;
-using Newtonsoft.Json;
 using Attribute = Kastil.Shared.Models.Attribute;
 
 namespace Kastil.Core.Services

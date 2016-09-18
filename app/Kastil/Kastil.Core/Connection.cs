@@ -7,7 +7,7 @@ using Kastil.Shared.Models;
 
 namespace Kastil.Core
 {
-    public class Connection
+    public partial class Connection
     {
         public string AppId { get; set; }
         public string SecretKey { get; set; }

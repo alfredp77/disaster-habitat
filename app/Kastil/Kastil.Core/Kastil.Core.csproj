@@ -36,20 +36,22 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Connection.cs" />
+    <Compile Include="Connection.Details.cs" />
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
+    <Compile Include="FolderProvider.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BackendlessTap2HelpService.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\DisasterService.cs" />
-    <Compile Include="Services\FakeTap2HelpService.cs" />
+    <Compile Include="Fakes\FakeTap2HelpService.cs" />
+    <Compile Include="Fakes\FakeUserService.cs" />
+    <Compile Include="Services\FileBasedPersistenceContext.cs" />
+    <Compile Include="Services\FileBasedPersistenceContextFactory.cs" />
     <Compile Include="Services\IPersistenceContext.cs" />
     <Compile Include="Services\IPersistenceContextFactory.cs" />
     <Compile Include="Services\IRestServiceCaller.cs" />
     <Compile Include="Services\ISyncService.cs" />
     <Compile Include="Services\ITap2HelpService.cs" />
-    <Compile Include="Services\PersistenceContext.cs" />
-    <Compile Include="Services\PersistenceContextFactory.cs" />
     <Compile Include="Services\SyncService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\Asyncer.cs" />
@@ -107,7 +109,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="connection.json" />
     <None Include="packages.config" />
     <None Include="SampleData\disas.json" />
   </ItemGroup>

@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Core.Utils;
 using Kastil.Shared.Models;
-using Newtonsoft.Json.Linq;
 
 namespace Kastil.Core.Services
 {
