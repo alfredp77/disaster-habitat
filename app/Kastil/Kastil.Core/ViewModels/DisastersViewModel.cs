@@ -21,15 +21,33 @@ namespace Kastil.Core.ViewModels
         }
 
 
-        public Task Initialize()
+        public async Task Initialize()
         {
             _nextPage = 0;
             Items.Clear();
-            return Load();
+			await Sync();
+            await Load();
         }
 
         private int _nextPage;
-         
+
+		private async Task Sync ()
+		{
+			var dialog = Resolve<IUserDialogs> ();
+			dialog.ShowLoading (Messages.General.Syncing);
+			try {
+
+				var syncService = Resolve<ISyncService> ();
+				//await syncService.Sync ();
+			} catch (Exception ex) {
+				dialog.HideLoading ();
+				Mvx.Trace ("Unable to Sync, exception: {0}", ex);
+				await dialog.AlertAsync ("Unable to load Disasters list. Please try again");
+			} finally {
+				dialog.HideLoading ();
+			}
+		}
+
         private async Task Load()
         {
             var dialog = Resolve<IUserDialogs>();

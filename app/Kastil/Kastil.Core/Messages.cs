@@ -5,6 +5,7 @@
         public static class General
         {
             public const string Loading = "Loading";
+			public const string Syncing = "Syncing";
             public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
         }
 

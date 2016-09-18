@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Core.Events;
+using Moq;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -26,6 +27,8 @@ namespace Kastil.Core.Tests
     [TestFixture]
     public abstract class BaseTest : MvxIoCSupportingTest
     {
+        private MockRepository _mockRepository;
+
         /// <summary>
         /// The mock dispatcher.
         /// </summary>
@@ -48,6 +51,9 @@ namespace Kastil.Core.Tests
 
             _messengerHub = new MvxMessengerHub();
             Ioc.RegisterSingleton<IMvxMessenger>(_messengerHub);
+
+            _mockRepository = new MockRepository(MockBehavior.Default);
+
             this.Initialize();
             this.CreateTestableObject();
         }
@@ -64,10 +70,13 @@ namespace Kastil.Core.Tests
             _subscriptionTokens.Clear();
         }
 
-        public virtual void CreateTestableObject()
+        public abstract void CreateTestableObject();
+
+        protected Mock<T> CreateMock<T>() where T : class
         {
+            return _mockRepository.Create<T>();
         }
-       
+
         protected virtual void Initialize()
         {
         }

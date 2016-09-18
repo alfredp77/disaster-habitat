@@ -72,6 +72,14 @@
       <HintPath>..\packages\MvvmCross.Core.4.2.3\lib\net45\MvvmCross.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvvX.Plugins.CouchBaseLite, Version=2.2.0.21350, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvX.Plugins.CouchBaseLite.2.2.0.21350\lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch\MvvX.Plugins.CouchBaseLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.core, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -112,6 +120,9 @@
     <Compile Include="MockDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FakeTap2HelpServiceTests.cs" />
+    <Compile Include="Services\PersistenceContextFactoryTests.cs" />
+    <Compile Include="Services\PersistenceContextTests.cs" />
+    <Compile Include="Services\SyncServiceTests.cs" />
     <Compile Include="ViewModels\LoginViewModelTests.cs" />
     <Compile Include="Waiter.cs" />
   </ItemGroup>

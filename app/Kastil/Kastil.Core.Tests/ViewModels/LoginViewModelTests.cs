@@ -16,19 +16,16 @@ namespace Kastil.Core.Tests.ViewModels
     [TestFixture]
     public class LoginViewModelTests : BaseTest
     {
-        private MockRepository _mockRepository;
         private LoginViewModel _vm;
         private Mock<IUserService> _userService;
         private Mock<IUserDialogs> _userDialog;
-
+        
         public override void CreateTestableObject()
         {
-            base.CreateTestableObject();
-            _mockRepository = new MockRepository(MockBehavior.Default);
             _vm = new LoginViewModel();
 
-            _userService = _mockRepository.Create<IUserService>();
-            _userDialog = _mockRepository.Create<IUserDialogs>();
+            _userService = CreateMock<IUserService>();
+            _userDialog = CreateMock<IUserDialogs>();
 
             Ioc.RegisterSingleton(_userService.Object);
             Ioc.RegisterSingleton(_userDialog.Object);

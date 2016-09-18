@@ -15,7 +15,7 @@ namespace Kastil.Core.Tests.Services
     public class PersistenceContextTests
     {
         private MockRepository _mockRepository;
-        private PersistenceContext<TestModel> _context;
+        private IPersistenceContext<TestModel> _context;
 
         private Mock<IDatabase> _db;
         private Mock<IJsonSerializer> _serializer;
@@ -107,7 +107,7 @@ namespace Kastil.Core.Tests.Services
         }
     }
 
-    class TestModel : BaseModel
+    public class TestModel : BaseModel
     {
         public string Name { get; set; }
     }

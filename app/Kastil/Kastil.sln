@@ -15,10 +15,14 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Kastil.Shared", "Kastil.Sha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kastil.Core.Tests", "Kastil.Core.Tests\Kastil.Core.Tests.csproj", "{FA8740A9-AB9F-4E80-9ABB-1C0B97F6DEBD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Kastil.PlatformSpecific.Shared", "Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.shproj", "{12B98F90-3B56-483C-AC55-952D17D1F66B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Kastil.Shared\Kastil.Shared.projitems*{31d7792c-8339-4c32-8c91-123c9b248b83}*SharedItemsImports = 4
+		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{12b98f90-3b56-483c-ac55-952d17d1f66b}*SharedItemsImports = 13
 		Kastil.Shared\Kastil.Shared.projitems*{184536f0-432d-4c97-9342-ae97a6cd230a}*SharedItemsImports = 13
+		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{e033292c-1101-44f4-867d-083ef8db215f}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

@@ -8,25 +8,25 @@ namespace Kastil.Core.Services
 {
     public class PersistenceContext<T> : IPersistenceContext<T> where T : BaseModel
     {
-        private readonly IDatabase _db;
-        private readonly IJsonSerializer _serializer;
+        public IDatabase Db { get; }
+        public IJsonSerializer Serializer { get; }
 
         public PersistenceContext(IDatabase db, IJsonSerializer serializer)
         {
-            _db = db;
-            _serializer = serializer;
+            Db = db;
+            Serializer = serializer;
         }
 
         private Dictionary<string, object> Convert(T document)
         {
-            var json = _serializer.Serialize(document);
-            var values = _serializer.Deserialize<Dictionary<string, object>>(json);
+            var json = Serializer.Serialize(document);
+            var values = Serializer.Deserialize<Dictionary<string, object>>(json);
             return values;
         }
 
         public void Save(T document)
         {
-            _db.PutLocalDocument(document.Id, Convert(document));
+            Db.PutLocalDocument(document.Id, Convert(document));
         }
 
         public void SaveAll(IEnumerable<T> documents)
@@ -39,24 +39,24 @@ namespace Kastil.Core.Services
         
         public IEnumerable<T> LoadAll()
         {
-            var query = _db.CreateAllDocumentsQuery();
+            var query = Db.CreateAllDocumentsQuery();
             
             var queryResult = query.Run();
 
-            return queryResult.Select(row => _serializer.Serialize(row.DocumentProperties))
-                .Select(json => _serializer.Deserialize<T>(json))
+            return queryResult.Select(row => Serializer.Serialize(row.DocumentProperties))
+                .Select(json => Serializer.Deserialize<T>(json))
                 .ToList();
         }
 
         public void DeleteAll()
         {
-            _db.Delete();
+            Db.Delete();
         }
 
         public void PersistJson(string id, string json)
         {
-            var values = _serializer.Deserialize<Dictionary<string, object>>(json);
-            _db.PutLocalDocument(id, values);
+            var values = Serializer.Deserialize<Dictionary<string, object>>(json);
+            Db.PutLocalDocument(id, values);
         }
 
         public void PersistAllJson(IEnumerable<KeyValuePair<string, string>> kvps)
