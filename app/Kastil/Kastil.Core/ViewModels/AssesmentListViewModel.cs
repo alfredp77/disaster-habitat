@@ -4,9 +4,7 @@ using Kastil.Core.Utils;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Kastil.Core.ViewModels
@@ -103,7 +101,7 @@ namespace Kastil.Core.ViewModels
 
         private void DoAssessmentSelectedCommand(AssesmentListItemViewModel itemVm)
         {
-            ShowViewModel<AssesmentViewModel>(new { disasterId = itemVm.DisasterId, assestmentId = itemVm.AssesmentId });
+            ShowViewModel<AssesmentViewModel>(new { disasterId = itemVm.DisasterId, assesmentId = itemVm.AssesmentId });
         }
     }
 }
