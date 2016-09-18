@@ -27,7 +27,7 @@ namespace Kastil.Core.Tests.Services
             _restServiceCaller = CreateMock<IRestServiceCaller>();
             _persistenceContextFactory = CreateMock<IPersistenceContextFactory>();
             _persistenceContext = CreateMock<IPersistenceContext<TestModel>>();
-            _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>()).Returns(_persistenceContext.Object);
+            _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>("")).Returns(_persistenceContext.Object);
             _serializer = CreateMock<IJsonSerializer>();
 
             _restServiceCaller.Setup(c => c.Get(Connection.GenerateGetUrl<TestModel>(), _connection.Headers))

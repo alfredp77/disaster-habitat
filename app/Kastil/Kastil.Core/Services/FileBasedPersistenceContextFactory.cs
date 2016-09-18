@@ -12,17 +12,20 @@ namespace Kastil.Core.Services
         private FolderProvider FolderProvider => Resolve<FolderProvider>();
         private IMvxFileStore FileStore => Resolve<IMvxFileStore>();
 
-        private string GetStorageFolder<T>() where T : BaseModel
+        private string GetStorageFolder<T>(string name) where T : BaseModel
         {
             var path = FileStore.PathCombine(FolderProvider.MyDocuments, DATA_PATH);
-            path = FileStore.PathCombine(path, typeof (T).Name.ToLowerInvariant());
+            var folderName = typeof (T).Name;
+            if (!string.IsNullOrEmpty(name))
+                folderName = $"{name}_{folderName}";
+            path = FileStore.PathCombine(path, folderName.ToLowerInvariant());
             FileStore.EnsureFolderExists(path);
             return path;
         }
 
-        public IPersistenceContext<T> CreateFor<T>() where T : BaseModel
+        public IPersistenceContext<T> CreateFor<T>(string name="") where T : BaseModel
         {
-            return new FileBasedPersistenceContext<T>(GetStorageFolder<T>(), Serializer, FileStore);
+            return new FileBasedPersistenceContext<T>(GetStorageFolder<T>(name), Serializer, FileStore);
         }
     }
 }

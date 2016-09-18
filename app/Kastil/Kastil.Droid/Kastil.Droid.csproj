@@ -210,7 +210,7 @@
     <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\SheltersView.cs" />
-    <Compile Include="Views\AssesmentView.cs" />
+    <Compile Include="Views\AssesmentListView.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>

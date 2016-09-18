@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Core.Utils;
 using Kastil.Shared.Models;
@@ -19,32 +20,50 @@ namespace Kastil.Core.Services
 
         public Task<IEnumerable<Assesment>> GetAssesments()
         {
-            throw new NotImplementedException();
+            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            return Asyncer.Async(context.LoadAll);
+        }
+
+        public Task<IEnumerable<Assesment>> GetAssesments(string disasterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            return Asyncer.Async(() => context.LoadAll().Where(a => a.DisasterId == disasterId));
+        }
+
+        public Task<Assesment> GetAssesment(string disasterId, string assesmentId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(a => a.DisasterId == disasterId && a.Id == assesmentId));
         }
 
         public Task<IEnumerable<Shelter>> GetShelters()
         {
-            throw new NotImplementedException();
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            return Asyncer.Async(context.LoadAll);
         }
 
         public Task<IEnumerable<Attribute>> GetShelterAttributes()
         {
-            throw new NotImplementedException();
+            var context = PersistenceContextFactory.CreateFor<Attribute>(typeof(Shelter).Name);
+            return Asyncer.Async(context.LoadAll);
         }
 
         public Task<IEnumerable<Attribute>> GetAssesmentAttributes()
         {
-            throw new NotImplementedException();
+            var context = PersistenceContextFactory.CreateFor<Attribute>(typeof(Assesment).Name);
+            return Asyncer.Async(context.LoadAll);
         }
 
         public Task Save(Assesment assesment)
         {
-            throw new NotImplementedException();
+            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            return Asyncer.Async(() => context.Save(assesment));
         }
 
         public Task Save(Shelter shelter)
         {
-            throw new NotImplementedException();
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            return Asyncer.Async(() => context.Save(shelter));
         }
     }
 }
