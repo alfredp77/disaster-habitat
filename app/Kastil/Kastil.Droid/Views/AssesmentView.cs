@@ -15,10 +15,5 @@ namespace Kastil.Droid.Views
             var vm = (AssesmentViewModel)ViewModel;
             vm.Initialize();
         }
-
-        protected override void SetupToolbar()
-        {
-            // do nothing
-        }
     }
 }

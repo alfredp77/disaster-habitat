@@ -16,10 +16,6 @@ namespace Kastil.Droid.Views
             vm.Initialize();
         }
 
-        protected override void SetupToolbar()
-        {
-            // do nothing
-        }
     }
 }
 

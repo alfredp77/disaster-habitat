@@ -76,5 +76,7 @@ namespace Kastil.Core.ViewModels
 			return dialog.AlertAsync ("Test Settings");
         }
 
+
+        public string Title { get; protected set; }
     }
 }
