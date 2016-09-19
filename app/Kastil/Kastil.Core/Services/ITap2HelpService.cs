@@ -16,5 +16,7 @@ namespace Kastil.Core.Services
 
         Task Save(Assesment assesment);
         Task Save(Shelter shelter);
+
+        Task DeleteAssesments(string disasterId);
     }
 }

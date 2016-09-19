@@ -14,5 +14,10 @@ namespace Kastil.Core.Utils
         {
             return Task.Factory.StartNew(func);
         }
+
+        public static Task DoNothing()
+        {
+            return Task.Factory.StartNew(() => { });
+        }
     }
 }

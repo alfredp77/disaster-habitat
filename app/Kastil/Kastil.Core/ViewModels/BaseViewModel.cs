@@ -56,7 +56,7 @@ namespace Kastil.Core.ViewModels
 			return dialog.AlertAsync ("Test");
         }
 
-		public bool AllowSettingCommand { get; protected set; } = true;
+		public bool AllowSettingCommand { get; protected set; } = false;
         MvxAsyncCommand _settingCommand;
         public MvxAsyncCommand SettingCommand
         {
@@ -70,10 +70,22 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        protected virtual Task DoSettingCommand()
+        protected virtual async Task DoSettingCommand()
         {
 			var dialog = Resolve<IUserDialogs> ();
-			return dialog.AlertAsync ("Test Settings");
+            if (await dialog.ConfirmAsync(Messages.General.SynchronizeData))
+            {
+                dialog.ShowLoading(Messages.General.Syncing);
+                try
+                {
+                    var service = Resolve<ISyncService>();
+                    await service.Sync();
+                }
+                finally
+                {
+                    dialog.HideLoading();
+                }
+            }
         }
 
 

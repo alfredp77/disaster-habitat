@@ -18,6 +18,7 @@ namespace Kastil.Core.ViewModels
         public DisastersViewModel()
         {
             Title = "Disasters";
+			AllowSettingCommand = true;
         }
 
 
@@ -25,28 +26,10 @@ namespace Kastil.Core.ViewModels
         {
             _nextPage = 0;
             Items.Clear();
-			await Sync();
             await Load();
         }
 
         private int _nextPage;
-
-		private async Task Sync ()
-		{
-			var dialog = Resolve<IUserDialogs> ();
-			dialog.ShowLoading (Messages.General.Syncing);
-			try {
-
-				var syncService = Resolve<ISyncService> ();
-				await syncService.Sync<Disaster>(true);
-			} catch (Exception ex) {
-				dialog.HideLoading ();
-				Mvx.Trace ("Unable to Sync, exception: {0}", ex);
-				await dialog.AlertAsync ("Unable to load Disasters list. Please try again");
-			} finally {
-				dialog.HideLoading ();
-			}
-		}
 
         private async Task Load()
         {

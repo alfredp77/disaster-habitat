@@ -6,6 +6,7 @@
         {
             public const string Loading = "Loading";
 			public const string Syncing = "Syncing";
+            public const string SynchronizeData = "Synchronize data?";
             public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
         }
 

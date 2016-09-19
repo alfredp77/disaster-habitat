@@ -11,13 +11,13 @@ namespace Kastil.Core.ViewModels
 {
     public class AssesmentListViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<AssesmentListItemViewModel> Items { get; }
+        public ObservableRangeCollection<AssesmentListItemViewModel> Items { get; } = new ObservableRangeCollection<AssesmentListItemViewModel> ();
 
         public string DisasterId { get; set; }
 
         public AssesmentListViewModel()
         {
-            Items = new ObservableRangeCollection<AssesmentListItemViewModel>();
+			AllowAddCommand = true; 
         }
 
         public Task Initialize()

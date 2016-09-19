@@ -38,6 +38,8 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Connection.Details.cs" />
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
+    <Compile Include="Fakes\FakePullService.cs" />
+    <Compile Include="Fakes\FakePushService.cs" />
     <Compile Include="Fakes\FakeSyncService.cs" />
     <Compile Include="FolderProvider.cs" />
     <Compile Include="Messages.cs" />
@@ -50,9 +52,13 @@
     <Compile Include="Services\FileBasedPersistenceContextFactory.cs" />
     <Compile Include="Services\IPersistenceContext.cs" />
     <Compile Include="Services\IPersistenceContextFactory.cs" />
+    <Compile Include="Services\IPushService.cs" />
     <Compile Include="Services\IRestServiceCaller.cs" />
+    <Compile Include="Services\IPullService.cs" />
     <Compile Include="Services\ISyncService.cs" />
     <Compile Include="Services\ITap2HelpService.cs" />
+    <Compile Include="Services\PullService.cs" />
+    <Compile Include="Services\PushService.cs" />
     <Compile Include="Services\SyncService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\Asyncer.cs" />
@@ -91,6 +97,10 @@
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Platform.4.2.3\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.Visibility, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.2.3\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.Visibility.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvX.Plugins.CouchBaseLite, Version=2.2.0.21350, Culture=neutral, processorArchitecture=MSIL">

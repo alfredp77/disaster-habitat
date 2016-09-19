@@ -42,16 +42,16 @@ namespace Kastil.Core.Services
             return Asyncer.Async(context.LoadAll);
         }
 
-        public Task<IEnumerable<Attribute>> GetShelterAttributes()
+        public async Task<IEnumerable<Attribute>> GetShelterAttributes()
         {
-            var context = PersistenceContextFactory.CreateFor<Attribute>(typeof(Shelter).Name);
-            return Asyncer.Async(context.LoadAll);
+            var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
+            return await Asyncer.Async(context.LoadAll);
         }
 
-        public Task<IEnumerable<Attribute>> GetAssesmentAttributes()
+        public async Task<IEnumerable<Attribute>> GetAssesmentAttributes()
         {
-            var context = PersistenceContextFactory.CreateFor<Attribute>(typeof(Assesment).Name);
-            return Asyncer.Async(context.LoadAll);
+            var context = PersistenceContextFactory.CreateFor<AssesmentAttribute>();
+            return await Asyncer.Async(context.LoadAll);
         }
 
         public Task Save(Assesment assesment)
@@ -64,6 +64,16 @@ namespace Kastil.Core.Services
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
             return Asyncer.Async(() => context.Save(shelter));
+        }
+
+        public async Task DeleteAssesments(string disasterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            var assesments = await GetAssesments(disasterId);
+            foreach (var assesment in assesments)
+            {
+                await Asyncer.Async(() => context.Delete(assesment));
+            }
         }
     }
 }

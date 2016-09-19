@@ -13,6 +13,8 @@ namespace Kastil.Core.Utils
 
         IEnumerable<KeyValuePair<string, string>> ParseArray(string json, string arrayPropertyName,
             string idPropertyName);
+
+        T Clone<T>(T o);        
     }
 
     public class JsonSerializer : IJsonSerializer
@@ -31,7 +33,7 @@ namespace Kastil.Core.Utils
         {
             var json = Serialize(o);
             return Deserialize<T>(json);
-        }
+        }        
 
         public IEnumerable<KeyValuePair<string, string>> ParseArray(string json, string arrayPropertyName, string idPropertyName)
         {

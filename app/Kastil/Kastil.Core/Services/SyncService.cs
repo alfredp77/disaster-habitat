@@ -1,26 +1,30 @@
+using System.Linq;
 using System.Threading.Tasks;
-using Kastil.Core.Utils;
 using Kastil.Shared.Models;
 
 namespace Kastil.Core.Services
 {
     public class SyncService : BaseService, ISyncService
     {
-        private IRestServiceCaller Caller => Resolve<IRestServiceCaller>();
-        private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
-        private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
-        private Connection Connection => Resolve<Connection>();
-        
-        public async Task Sync<T>(bool clear=false) where T : BaseModel
-        {
-            var url = Connection.GenerateGetUrl<T>();
-            var json = await Caller.Get(url, Connection.Headers);
-            var docs = Serializer.ParseArray(json, "data", "id");
+        private ITap2HelpService Tap2HelpService => Resolve<ITap2HelpService>();
+        private IPullService PullService => Resolve<IPullService>();
+        private IPushService PushService => Resolve<IPushService>();
 
-            var context = PersistenceContextFactory.CreateFor<T>();
-            if (clear)
-                await Asyncer.Async(context.DeleteAll);
-            await Asyncer.Async(() => context.PersistAllJson(docs));
+        public async Task Sync()
+        {
+            await PullDisasters();
         }
-    }
+
+        public async Task PullDisasters()
+        {
+            var localDisasterIds = (await Tap2HelpService.GetDisasters()).Select(d => d.Id);
+            await PullService.Pull<Disaster>(true);
+            var currentDisasterIds = (await Tap2HelpService.GetDisasters()).Select(d => d.Id);
+            var removedDisasterIds = localDisasterIds.Except(currentDisasterIds);
+            foreach (var removedDisasterId in removedDisasterIds)
+            {
+                await Tap2HelpService.DeleteAssesments(removedDisasterId);
+            }
+        }
+    }    
 }

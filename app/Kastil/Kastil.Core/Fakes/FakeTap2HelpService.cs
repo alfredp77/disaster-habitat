@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Core.Services;
+using Kastil.Core.Utils;
 using Kastil.Shared.Models;
 using Attribute = Kastil.Shared.Models.Attribute;
 
@@ -139,7 +140,7 @@ namespace Kastil.Core.Fakes
         public Task Save(Shelter shelter)
         {
             _shelters[shelter.Id] = shelter;
-            return Task.Factory.StartNew(() => { });
+            return Asyncer.DoNothing();
         }
         public Task<IEnumerable<Shelter>> GetShelters()
         {
@@ -148,6 +149,13 @@ namespace Kastil.Core.Fakes
             return Task.FromResult(_shelters.Values.AsEnumerable());
         }
 
-        
+        public async Task DeleteAssesments(string disasterId)
+        {
+            var assesments = await GetAssesments(disasterId);
+            foreach (var assesment in assesments)
+            {
+                _assesments.Remove(assesment.Id);
+            }
+        }
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
+using Kastil.Shared.Models;
 using Moq;
 using NUnit.Framework;
 
@@ -10,51 +12,41 @@ namespace Kastil.Core.Tests.Services
     [TestFixture]
     public class SyncServiceTests : BaseTest
     {
-        private ISyncService _service;
-        private Connection _connection;
-        private Mock<IRestServiceCaller> _restServiceCaller;
-        private Mock<IPersistenceContextFactory> _persistenceContextFactory;
-        private Mock<IPersistenceContext<TestModel>> _persistenceContext;
-        private Mock<IJsonSerializer> _serializer;
+        private SyncService _syncService;
+        private Mock<IPushService> _pushService;
+        private Mock<IPullService> _pullService;
+        private Mock<ITap2HelpService> _tap2HelpService;
 
-        private string _json = "the json returned by backendless";
-        private List<KeyValuePair<string, string>> _kvps = new List<KeyValuePair<string, string>>();
         public override void CreateTestableObject()
         {
-            _service = new SyncService();
-            _connection = new Connection {AppId = "foo", SecretKey = "bar"};
+            _syncService = new SyncService();
+            _pushService = CreateMock<IPushService>();
+            _pullService = CreateMock<IPullService>();
+            _tap2HelpService = CreateMock<ITap2HelpService>();
 
-            _restServiceCaller = CreateMock<IRestServiceCaller>();
-            _persistenceContextFactory = CreateMock<IPersistenceContextFactory>();
-            _persistenceContext = CreateMock<IPersistenceContext<TestModel>>();
-            _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>("")).Returns(_persistenceContext.Object);
-            _serializer = CreateMock<IJsonSerializer>();
-
-            _restServiceCaller.Setup(c => c.Get(Connection.GenerateGetUrl<TestModel>(), _connection.Headers))
-                .ReturnsAsync(_json);
-            _serializer.Setup(s => s.ParseArray(_json, "data", "id"))
-                .Returns(_kvps);
-
-            Ioc.RegisterSingleton(_connection);
-            Ioc.RegisterSingleton(_restServiceCaller.Object);
-            Ioc.RegisterSingleton(_persistenceContextFactory.Object);
-            Ioc.RegisterSingleton(_serializer.Object);
+            Ioc.RegisterSingleton(_pushService.Object);
+            Ioc.RegisterSingleton(_pullService.Object);
+            Ioc.RegisterSingleton(_tap2HelpService.Object);
         }
 
         [Test]
-        public async Task Should_Persist_All_Json_Without_Wiping_Existing_Data()
-        {            
-            await _service.Sync<TestModel>();
-            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
-            _persistenceContext.Verify(c => c.DeleteAll(), Times.Never);
-        }
-
-        [Test]
-        public async Task Should_Persist_All_Json_And_Wipe_Existing_Data()
+        public async Task Should_Clean_Assesments_From_Removed_Disasters()
         {
-            await _service.Sync<TestModel>(true);
-            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
-            _persistenceContext.Verify(c => c.DeleteAll(), Times.Once);
+            var disaster1 = new Disaster { Id = "x" };
+            var disaster2 = new Disaster { Id = "y" };
+            var disaster3 = new Disaster { Id = "z" };
+            var disaster4 = new Disaster { Id = "a" };
+            var localDisasters = new List<Disaster> {disaster1, disaster2 ,disaster3};
+            var incomingDisasters = new List<Disaster> {disaster1, disaster4};
+            _tap2HelpService.SetupSequence(s => s.GetDisasters())
+                .ReturnsAsync(localDisasters.AsEnumerable())
+                .ReturnsAsync(incomingDisasters.AsEnumerable());
+
+            await _syncService.PullDisasters();
+
+            _pullService.Verify(p => p.Pull<Disaster>(true), Times.Once);
+            _tap2HelpService.Verify(s => s.DeleteAssesments(disaster2.Id), Times.Once);
+            _tap2HelpService.Verify(s => s.DeleteAssesments(disaster3.Id), Times.Once);
         }
     }
 }

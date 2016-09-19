@@ -57,6 +57,13 @@ namespace Kastil.Core.Services
             FileStore.EnsureFolderExists(DataFolder);
         }
 
+        public void Delete(T document)
+        {
+            var path = GetPath(document.Id);
+            if (FileStore.Exists(path))
+                FileStore.DeleteFile(path);
+        }
+
         public void PersistJson(string id, string json)
         {
             var path = GetPath(id);
