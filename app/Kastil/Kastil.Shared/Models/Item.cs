@@ -10,7 +10,7 @@ namespace Kastil.Shared.Models
     {
         public string DisasterId { get; set; }
         public string Name { get; set; }
-        public Location Location { get; set; }
+        public string Location { get; set; }
         public List<Attribute> Attributes { get; set; } = new List<Attribute>();
     }
 }

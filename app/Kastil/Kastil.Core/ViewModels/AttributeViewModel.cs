@@ -2,16 +2,25 @@
 
 namespace Kastil.Core.ViewModels
 {
-    public class AttributeViewModel
+    public class AttributeViewModel : BaseViewModel
     {
-        private readonly Attribute _attribute;
+        public Attribute Attribute { get; }
 
         public AttributeViewModel(Attribute attribute)
         {
-            _attribute = attribute;
+            Attribute = attribute;
         }
 
-        public string AttributeName => _attribute.Key;
-        public string AttributeValue => _attribute.Value;
+        public string Name => Attribute.Key;
+
+        public string AttributeValue
+        {
+            get { return Attribute.Value; }
+            set
+            {
+                Attribute.Value = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

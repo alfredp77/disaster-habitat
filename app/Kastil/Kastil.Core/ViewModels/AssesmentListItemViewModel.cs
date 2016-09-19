@@ -25,7 +25,7 @@ namespace Kastil.Core.ViewModels
             get
             {
                 // can do custom info here
-                return Value.Location.Name;
+                return Value.Location;
             }
         }
        

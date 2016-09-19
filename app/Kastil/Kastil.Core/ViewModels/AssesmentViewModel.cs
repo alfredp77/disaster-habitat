@@ -11,33 +11,31 @@ namespace Kastil.Core.ViewModels
 {
     public class AssesmentViewModel : BaseViewModel
     {
-        public AssesmentViewModel()
-        {
-            Attributes = new ObservableRangeCollection<AttributeViewModel>();
-        }
-
         private Assesment _assesment;
-        private Assesment Assesment
+
+        private string _name;
+        public string Name
         {
-            get { return _assesment; }
-            set
-            {
-                _assesment = value;
-                RaisePropertyChanged("AssesmentName");
-                RaisePropertyChanged("AssestmentLocation");
-            }
+            get { return _name; }
+            set { _name = value; RaisePropertyChanged(); }
         }
 
-        public string AssestmentName => Assesment.Name;
-        public string AssestmentLocation => Assesment.Location.Name;
-        public ObservableRangeCollection<AttributeViewModel> Attributes { get; }
-        public string AssesmentId { get; private set; }
-        public string DisasterId { get; private set; }
+        private string _location;
+        public string Location
+        {
+            get { return _location; }
+            set { _location = value; RaisePropertyChanged(); }
+        }
 
+
+        public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
+
+        private string _assesmentId;
+        private string _disasterId;
         public void Init(string disasterId, string assesmentId)
         {
-            DisasterId = disasterId;
-            AssesmentId = assesmentId;
+            _disasterId = disasterId;
+            _assesmentId = assesmentId;
         }
 
         public Task Initialize()
@@ -52,36 +50,26 @@ namespace Kastil.Core.ViewModels
             dialog.ShowLoading(Messages.General.Loading);
             try
             {
-                InitValue(DisasterId, AssesmentId);
+                var service = Resolve<ITap2HelpService>();
+                var assesment = await service.GetAssesment(_disasterId, _assesmentId);
+                if (assesment != null)
+                {
+                    Name = assesment.Name;
+                    Location = assesment.Location;
+                    Attributes.AddRange(assesment.Attributes.Select(a => new AttributeViewModel(a)));
+                }
             }
             catch (Exception ex)
             {
                 dialog.HideLoading();
                 Mvx.Trace("Unable to load Assessment, exception: {0}", ex);
                 await dialog.AlertAsync("Unable to load Assessment. Please try again");
+                Close();
             }
             finally
             {
                 dialog.HideLoading();
             }
         }
-
-        private async void InitValue(string disasterId, string assesmentId)
-        {
-            if (disasterId == null || assesmentId == null)
-            {
-                Assesment = new Assesment();
-                return;
-            }
-            var disasterService = Resolve<ITap2HelpService>();
-            Assesment =  await disasterService.GetAssesment(disasterId, assesmentId);
-            if (Assesment != null)
-            {
-                Attributes.AddRange(Assesment.Attributes.Select(a => new AttributeViewModel(a)));
-            }
-        }
-
-        
-       
     }
 }

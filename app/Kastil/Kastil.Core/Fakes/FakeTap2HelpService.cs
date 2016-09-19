@@ -81,11 +81,11 @@ namespace Kastil.Core.Fakes
             foreach (var disasterId in _disasters.Keys)
             {
                 var attributes = await GetRandomAssesmentAttr();
-                var assesment1 = new Assesment { Id = count.ToString(), Location= new Location() { Name = "Location " + count.ToString() }, DisasterId = disasterId, Name = "Assesment " + count.ToString(), Attributes = attributes.ToList() };
+                var assesment1 = new Assesment { Id = count.ToString(), Location= "Location " + count, DisasterId = disasterId, Name = "Assesment " + count, Attributes = attributes.ToList() };
                 count++;
                 await Save(assesment1);
                 attributes = await GetRandomAssesmentAttr();
-                var assesment2 = new Assesment { Id = count.ToString(), Location = new Location() { Name = "Location " + count.ToString() }, DisasterId = disasterId, Name = "Assesment " + count.ToString(), Attributes = attributes.ToList() };
+                var assesment2 = new Assesment { Id = count.ToString(), Location = "Location " + count, DisasterId = disasterId, Name = "Assesment " + count, Attributes = attributes.ToList() };
                 await Save(assesment2);
                 count ++;
             }
