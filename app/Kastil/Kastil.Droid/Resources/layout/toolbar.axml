@@ -10,7 +10,7 @@
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
       <LinearLayout
         style="@style/header_bar"
-        android:gravity="left"
+		android:layout_width="fill_parent"
 		android:background="?attr/colorPrimary">
         <Button
             android:id="@+id/menu_button_left"
@@ -20,6 +20,7 @@
             android:paddingLeft="18dp"
             android:layout_height="40dp"
             android:layout_marginBottom="0.0dp"
+			android:gravity="left"
             android:background="@android:color/transparent" />
         <TextView
             android:id="@+id/custom_title"
@@ -34,7 +35,7 @@
             android:drawableRight="@drawable/ButtonAdd"
             android:paddingRight="18dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="0.0dp"
+            android:layout_marginBottom="0.0dp"			
             android:background="@android:color/transparent" />
     </LinearLayout>
 

@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\DisastersViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\SheltersViewModel.cs" />
+    <Compile Include="ViewModels\SyncViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

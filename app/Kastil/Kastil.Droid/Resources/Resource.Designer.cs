@@ -2714,7 +2714,10 @@ namespace Kastil.Droid
 			public const int support_simple_spinner_dropdown_item = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public const int toolbar = 2130903101;
+			public const int SyncView = 2130903101;
+			
+			// aapt resource value: 0x7f03003e
+			public const int toolbar = 2130903102;
 			
 			static Layout()
 			{

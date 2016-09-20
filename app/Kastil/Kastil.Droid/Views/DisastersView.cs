@@ -4,7 +4,7 @@ using Kastil.Core.ViewModels;
 
 namespace Kastil.Droid.Views
 {
-    [Activity(Label = "Home")]
+    [Activity(Label = "Disasters")]
     public class DisastersView : BaseView
     {
         protected override int LayoutResource => Resource.Layout.DisastersView;
@@ -14,11 +14,6 @@ namespace Kastil.Droid.Views
             base.OnCreate(bundle);
             var vm = (DisastersViewModel) ViewModel;
             vm.Initialize();
-        }
-
-        protected override void SetupToolbar()
-        {
-            // do nothing
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Kastil.Core.Services
         private IPullService PullService => Resolve<IPullService>();
         private IPushService PushService => Resolve<IPushService>();
 
-        public async Task Sync()
+        public async Task Sync(string staffCode)
         {
             await PullDisasters();
         }

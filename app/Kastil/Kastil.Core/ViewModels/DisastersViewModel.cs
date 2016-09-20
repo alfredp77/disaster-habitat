@@ -24,12 +24,9 @@ namespace Kastil.Core.ViewModels
 
         public async Task Initialize()
         {
-            _nextPage = 0;
             Items.Clear();
             await Load();
         }
-
-        private int _nextPage;
 
         private async Task Load()
         {
@@ -55,53 +52,7 @@ namespace Kastil.Core.ViewModels
             {
                 dialog.HideLoading();
             }
-        }
-
-        MvxAsyncCommand _refreshCommand;
-        public MvxAsyncCommand RefreshCommand
-        {
-            get
-            {
-                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(DoRefreshCommand);
-                return _refreshCommand;
-            }
-        }
-
-        private async Task DoRefreshCommand()
-        {
-            IsLoading = true;
-            try
-            {
-                await Initialize();
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get { return _isLoading; }
-            set { SetProperty(ref _isLoading, value); }
-        }
-
-        MvxAsyncCommand _loadMoreCommand;
-        public MvxAsyncCommand LoadMoreCommand
-        {
-            get
-            {
-                _loadMoreCommand = _loadMoreCommand ?? new MvxAsyncCommand(DoLoadMoreCommand);
-                return _loadMoreCommand;
-            }
-        }
-
-        private Task DoLoadMoreCommand()
-        {
-            _nextPage++;
-            return Load();
-        }
+        }       
 
 		MvxCommand<DisasterListItemViewModel> _disasterSelectedCommand;
 		public MvxCommand<DisasterListItemViewModel> DisasterSelectedCommand {
@@ -131,5 +82,9 @@ namespace Kastil.Core.ViewModels
 			ShowViewModel<SheltersViewModel> (new { disasterId = disaster.Id });
 		}
 
-	}
+        protected override async Task DoSettingCommand()
+        {
+            ShowViewModel<SyncViewModel>();
+        }
+    }
 }

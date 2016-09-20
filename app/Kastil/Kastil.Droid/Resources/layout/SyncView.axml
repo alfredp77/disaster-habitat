@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar_layout">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/content_frame"
+        android:layout_below="@id/toolbar_layout"
+        android:orientation="vertical"
+        android:windowNoTitle="true"
+        android:layout_width="fill_parent"
+        android:layout_height="620dp"
+        android:background="@color/gray_ededed">
+        <LinearLayout
+            android:padding="0.5dp"
+            android:background="@drawable/button_rounded"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent">
+            <EditText
+                android:id="@+id/StaffCode"
+                app:MvxBind="Text StaffCode"
+                android:hint="Enter your staff code to sync data"
+                android:textColorHint="@color/gray_bcbcbc"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:background="@android:color/white"
+                android:singleLine="true"
+                android:imeOptions="actionNext" />
+        </LinearLayout>
+        <Button
+            android:layout_marginTop="28dp"
+            android:layout_gravity="center"
+            android:background="@color/blue_007aff"
+            android:layout_width="233dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:text="Sync"
+            app:MvxBind="Click SyncCommand"
+            android:id="@+id/button1"
+            android:textSize="17dp"
+            android:textColor="@android:color/white"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_marginLeft="0.0dp" />
+    </LinearLayout>
+</RelativeLayout>

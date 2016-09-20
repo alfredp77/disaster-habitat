@@ -18,13 +18,9 @@ namespace Kastil.iOS.Views
 
             _tableSource = new CustomTableViewSource(disastersTable, DisasterItemCell.Identifier);
             disastersTable.Source = _tableSource;
-            _refreshControl = new MvxUIRefreshControl();
-            disastersTable.AddSubview(_refreshControl);
 
             var set = this.CreateBindingSet<DisastersView, DisastersViewModel>();
             set.Bind(_tableSource).To(vm => vm.Items);
-            set.Bind(_refreshControl).For(r => r.RefreshCommand).To(vm => vm.RefreshCommand);
-            set.Bind(_refreshControl).For(r => r.IsRefreshing).To(vm => vm.IsLoading);
 
             set.Apply();
 

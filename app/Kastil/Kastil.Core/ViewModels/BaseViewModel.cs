@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Kastil.Core.Services;
+using Kastil.Core.Utils;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -70,22 +71,9 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        protected virtual async Task DoSettingCommand()
+        protected virtual Task DoSettingCommand()
         {
-			var dialog = Resolve<IUserDialogs> ();
-            if (await dialog.ConfirmAsync(Messages.General.SynchronizeData))
-            {
-                dialog.ShowLoading(Messages.General.Syncing);
-                try
-                {
-                    var service = Resolve<ISyncService>();
-                    await service.Sync();
-                }
-                finally
-                {
-                    dialog.HideLoading();
-                }
-            }
+            return Asyncer.DoNothing();
         }
 
 

@@ -4,6 +4,6 @@ namespace Kastil.Core.Services
 {
     public interface ISyncService
     {
-        Task Sync();
+        Task Sync(string staffCode);
     }
 }

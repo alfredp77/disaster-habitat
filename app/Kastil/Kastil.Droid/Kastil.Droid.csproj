@@ -221,6 +221,7 @@
     <Compile Include="Views\SheltersView.cs" />
     <Compile Include="Views\AssesmentListView.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
+    <Compile Include="Views\SyncView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -251,6 +252,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AttributeView.axml" />
+    <AndroidResource Include="Resources\layout\SyncView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
