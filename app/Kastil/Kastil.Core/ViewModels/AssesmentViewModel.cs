@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Acr.UserDialogs;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
 using Kastil.Shared.Models;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
@@ -27,6 +29,27 @@ namespace Kastil.Core.ViewModels
             set { _location = value; RaisePropertyChanged(); }
         }
 
+        public ICommand AddAttributeCommand => new MvxCommand<AssesmentViewModel>(DoAddAttrCommand);
+
+        private void DoAddAttrCommand(AssesmentViewModel obj)
+        {
+           ShowViewModel<EditAttributeViewModel>(new { disasterId = _disasterId, assesmentId = _assesmentId});
+        }
+
+        MvxCommand<AttributeViewModel> _attributeSelectedCommand;
+        public MvxCommand<AttributeViewModel> AttributeSelectedCommand
+        {
+            get
+            {
+                _attributeSelectedCommand = _attributeSelectedCommand ?? new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
+                return _attributeSelectedCommand;
+            }
+        }
+
+        private void DoAttributeSelectedCommand(AttributeViewModel obj)
+        {
+            ShowViewModel<EditAttributeViewModel>(new { disasterId= _disasterId, assesmentId= _assesmentId, attributeName = obj.AttributeName, attributeValue = obj.AttributeValue});
+        }
 
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
 
@@ -40,8 +63,7 @@ namespace Kastil.Core.ViewModels
 
         public Task Initialize()
         {
-            Attributes.Clear();
-            return Load();
+            return Refresh();
         }
 
         private async Task Load()
@@ -54,6 +76,7 @@ namespace Kastil.Core.ViewModels
                 var assesment = await service.GetAssesment(_disasterId, _assesmentId);
                 if (assesment != null)
                 {
+                    _assesment = assesment;
                     Name = assesment.Name;
                     Location = assesment.Location;
                     Attributes.AddRange(assesment.Attributes.Select(a => new AttributeViewModel(a)));
@@ -70,6 +93,12 @@ namespace Kastil.Core.ViewModels
             {
                 dialog.HideLoading();
             }
+        }
+
+        public Task Refresh()
+        {
+            Attributes.Clear();
+            return Load();
         }
     }
 }

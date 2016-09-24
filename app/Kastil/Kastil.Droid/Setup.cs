@@ -9,6 +9,8 @@ using MvvmCross.Platform.Platform;
 using Kastil.Core.Services;
 using Kastil.PlatformSpecific.Shared;
 using Kastil.Core.Utils;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Kastil.Droid
 {
@@ -34,6 +36,12 @@ namespace Kastil.Droid
 			Mvx.RegisterSingleton<IRestServiceCaller> (() => new RestServiceCaller());			
             Mvx.RegisterSingleton(FolderProviderFactory.Create);
             base.InitializeFirstChance();
+        }
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            MvxAppCompatSetupHelper.FillTargetFactories(registry);
+            base.FillTargetFactories(registry);
         }
     }
 }

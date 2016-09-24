@@ -27,7 +27,7 @@ namespace Kastil.Core.ViewModels
             Items.Clear();
             await Load();
         }
-
+        
         private async Task Load()
         {
             var dialog = Resolve<IUserDialogs>();

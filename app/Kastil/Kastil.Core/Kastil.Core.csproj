@@ -36,7 +36,6 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Connection.cs" />
-    <Compile Include="Connection.Details.cs" />
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
     <Compile Include="Fakes\FakePullService.cs" />
     <Compile Include="Fakes\FakePushService.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
+    <Compile Include="ViewModels\EditAttributeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\SheltersViewModel.cs" />
     <Compile Include="ViewModels\SyncViewModel.cs" />
@@ -100,6 +100,10 @@
       <HintPath>..\packages\MvvmCross.Platform.4.2.3\lib\portable-net45+win+wpa81+wp80\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvvmCross.Plugins.File, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.File.4.2.3\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.File.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MvvmCross.Plugins.Visibility, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.2.3\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.Visibility.dll</HintPath>
       <Private>True</Private>
@@ -115,9 +119,6 @@
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Plugins.File">
-      <HintPath>..\packages\MvvmCross.Plugin.File.4.2.3\lib\portable-net45+win+wpa81+wp80\MvvmCross.Plugins.File.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

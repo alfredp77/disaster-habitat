@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="10dp"
         android:padding="10dp"
-        app:MvxBind="Text AssestmentName"
+        app:MvxBind="Text Name"
+        android:background="?attr/colorPrimary" 
         android:id="@+id/assesmentName" />
     <LinearLayout
         android:orientation="horizontal"
@@ -26,19 +26,34 @@
             android:id="@+id/textView2"
             android:layout_marginRight="0.0dp" />
         <TextView
-            app:MvxBind="Text AssestmentLocation"
+            app:MvxBind="Text Location"
             android:id="@+id/assesmentLocation"
             android:layout_width="fill_parent"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:text="Assestment attribute :"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentLeft="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:id="@+id/textView23" />
+    <Button
+            android:id="@+id/addAttrButton"
+            android:layout_alignParentRight="true"
+            app:MvxBind="Click AddAttributeCommand"
+            android:drawableRight="@drawable/ButtonAdd"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent" />
+  </RelativeLayout>
+    
     <Mvx.MvxListView
         android:background="@color/gray_ededed"
         android:id="@+id/assesmentAttributes"
@@ -48,7 +63,7 @@
         android:divider="@color/gray_dddddd"
         android:dividerHeight="1dp"
         android:cacheColorHint="#00000000"
-        app:MvxBind="ItemsSource Attributes"
+        app:MvxBind="ItemsSource Attributes; ItemClick AttributeSelectedCommand"
         app:MvxItemTemplate="@layout/attributeview"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="0.0dp" />

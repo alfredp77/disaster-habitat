@@ -11,7 +11,7 @@ namespace Kastil.Core.ViewModels
             Attribute = attribute;
         }
 
-        public string Name => Attribute.Key;
+        public string AttributeName => Attribute.Key;
 
         public string AttributeValue
         {

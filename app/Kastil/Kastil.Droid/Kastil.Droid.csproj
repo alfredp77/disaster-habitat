@@ -217,6 +217,7 @@
     <Compile Include="Views\AssesmentView.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\DisastersView.cs" />
+    <Compile Include="Views\EditAttributeView.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\SheltersView.cs" />
     <Compile Include="Views\AssesmentListView.cs" />
@@ -255,6 +256,7 @@
     <AndroidResource Include="Resources\layout\SyncView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditAttributeView.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
