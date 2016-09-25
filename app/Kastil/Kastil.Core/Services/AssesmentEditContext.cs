@@ -12,13 +12,13 @@ namespace Kastil.Core.Services
     {
         private readonly ITap2HelpService _tap2HelpService;
 
-        public AssesmentEditContext(Assesment assesment, ITap2HelpService tap2HelpService)
+        public AssesmentEditContext(Assessment assessment, ITap2HelpService tap2HelpService)
         {
-            Assesment = assesment;
+            Assessment = assessment;
             _tap2HelpService = tap2HelpService;
         }
 
-        public Assesment Assesment { get; }
+        public Assessment Assessment { get; }
 
         public void AddOrUpdateAttribute(string attributeName, string attributeValue)
         {
@@ -27,10 +27,10 @@ namespace Kastil.Core.Services
 
         public void DeleteAttribute(string attributeName)
         {
-            var attributes = Assesment.Attributes;
+            var attributes = Assessment.Attributes;
             attributes.Remove(attributes.Single(attr => attr.Key == attributeName));
         }
 
-        public IEnumerable<Attribute> Attributes => Assesment.Attributes;
+        public IEnumerable<Attribute> Attributes => Assessment.Attributes;
     }
 }

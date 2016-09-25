@@ -83,9 +83,9 @@ namespace Kastil.Core.ViewModels
             _disasterId = disasterId;
             _assessmentId = assessmentId;
             var service = Resolve<ITap2HelpService>();
-            _assesment = await service.GetAssesment(_disasterId, _assesmentId);
-            Items = (await service.GetAssesmentAttributes()).Select(attribute => new SpinnerItem(attribute.Key)).ToList();
-            Name = _assesment.Name;
+            _assessment = await service.GetAssessment(_disasterId, _assessmentId);
+            Items = (await service.GetAssessmentAttributes()).Select(attribute => new SpinnerItem(attribute.Key)).ToList();
+            Name = _assessment.Name;
             if (attributeName == null || attributeValue == null)
             {
                 EditMode = false;
