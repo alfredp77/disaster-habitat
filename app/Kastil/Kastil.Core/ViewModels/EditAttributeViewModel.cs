@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,9 +83,9 @@ namespace Kastil.Core.ViewModels
             _disasterId = disasterId;
             _assessmentId = assessmentId;
             var service = Resolve<ITap2HelpService>();
-            _assessment = await service.GetAssessment(_disasterId, _assessmentId);
-            Items = (from attribute in await service.GetAssessmentAttributes() select new SpinnerItem(attribute.Key)).ToList();
-            Name = _assessment.Name;
+            _assesment = await service.GetAssesment(_disasterId, _assesmentId);
+            Items = (await service.GetAssesmentAttributes()).Select(attribute => new SpinnerItem(attribute.Key)).ToList();
+            Name = _assesment.Name;
             if (attributeName == null || attributeValue == null)
             {
                 EditMode = false;
