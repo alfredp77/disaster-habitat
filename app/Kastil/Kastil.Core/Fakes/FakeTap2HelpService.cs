@@ -39,7 +39,7 @@ namespace Kastil.Core.Fakes
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3} as IEnumerable<Attribute>);
         }
 
-        public Task<IEnumerable<Attribute>> GetAssesmentAttributes()
+        public Task<IEnumerable<Attribute>> GetAssessmentAttributes()
         {
             var attr1 = new Attribute { Category = "1", Id = "1", Key = "Number of Shelter Kits"};
             var attr2 = new Attribute { Category = "1", Id = "2", Key = "Number of Hygiene Kits" };
@@ -50,24 +50,24 @@ namespace Kastil.Core.Fakes
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6 } as IEnumerable<Attribute>);
         }
 
-        private readonly Dictionary<string, Dictionary<string, Assesment>> _assesments = new Dictionary<string, Dictionary<string, Assesment>>();
-        public Task Save(Assesment assesment)
+        private readonly Dictionary<string, Dictionary<string, Assessment>> _assessments = new Dictionary<string, Dictionary<string, Assessment>>();
+        public Task Save(Assessment assessment)
         {
-            Dictionary<string, Assesment> assesmentPerDisaster;
-             _assesments.TryGetValue(assesment.DisasterId, out assesmentPerDisaster);
+            Dictionary<string, Assessment> assessmentPerDisaster;
+             _assessments.TryGetValue(assessment.DisasterId, out assessmentPerDisaster);
 
-            if(assesmentPerDisaster== null)
+            if(assessmentPerDisaster== null)
             {
-                _assesments[assesment.DisasterId] = new Dictionary<string, Assesment>();
+                _assessments[assessment.DisasterId] = new Dictionary<string, Assessment>();
             }
-            assesmentPerDisaster = _assesments[assesment.DisasterId];
-            assesmentPerDisaster[assesment.Id] = assesment;
+            assessmentPerDisaster = _assessments[assessment.DisasterId];
+            assessmentPerDisaster[assessment.Id] = assessment;
             return Task.Factory.StartNew(() => { });
         }
 
-        private async Task<IEnumerable<Attribute>>  GetRandomAssesmentAttr()
+        private async Task<IEnumerable<Attribute>>  GetRandomAssessmentAttr()
         {
-            var attributes = await GetAssesmentAttributes();
+            var attributes = await GetAssessmentAttributes();
             var rnd = new Random();
             foreach (var attr in attributes)
             {
@@ -76,62 +76,62 @@ namespace Kastil.Core.Fakes
             return attributes;
         }
 
-        private async void InitFakeAssesments()
+        private async void InitFakeAssessments()
         {
             var count = 1;
             foreach (var disasterId in _disasters.Keys)
             {
-                var attributes = await GetRandomAssesmentAttr();
-                var assesment1 = new Assesment { Id = count.ToString(), Location= "Location " + count, DisasterId = disasterId, Name = "Assesment " + count, Attributes = attributes.ToList() };
+                var attributes = await GetRandomAssessmentAttr();
+                var assessment1 = new Assessment { Id = count.ToString(), Location= "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 count++;
-                await Save(assesment1);
-                attributes = await GetRandomAssesmentAttr();
-                var assesment2 = new Assesment { Id = count.ToString(), Location = "Location " + count, DisasterId = disasterId, Name = "Assesment " + count, Attributes = attributes.ToList() };
-                await Save(assesment2);
+                await Save(assessment1);
+                attributes = await GetRandomAssessmentAttr();
+                var assessment2 = new Assessment { Id = count.ToString(), Location = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                await Save(assessment2);
                 count ++;
             }
         }
 
-        public async Task<IEnumerable<Assesment>> GetAssesments()
+        public async Task<IEnumerable<Assessment>> GetAssessments()
         {
-            if (_assesments.Count == 0)
+            if (_assessments.Count == 0)
             {
-                InitFakeAssesments();
+                InitFakeAssessments();
             }
             
-            var items = new List<Assesment>();
-            foreach(var perEvent in _assesments.Values)
+            var items = new List<Assessment>();
+            foreach(var perEvent in _assessments.Values)
             {
                 items.AddRange(perEvent.Values);
             }
             return items;
         }
 
-        public Task<IEnumerable<Assesment>> GetAssesments(string disasterId)
+        public Task<IEnumerable<Assessment>> GetAssessments(string disasterId)
         {
-            if (_assesments.Count == 0)
+            if (_assessments.Count == 0)
             {
-                InitFakeAssesments();
+                InitFakeAssessments();
             }
 
-            Dictionary<string, Assesment> perDisaster;
-            _assesments.TryGetValue(disasterId, out perDisaster);
+            Dictionary<string, Assessment> perDisaster;
+            _assessments.TryGetValue(disasterId, out perDisaster);
 
-            return Task.FromResult(perDisaster == null ? new List<Assesment>().AsEnumerable() : perDisaster.Values.AsEnumerable());
+            return Task.FromResult(perDisaster == null ? new List<Assessment>().AsEnumerable() : perDisaster.Values.AsEnumerable());
         }
 
-        public Task<Assesment> GetAssesment(string disasterId, string assesmentId)
+        public Task<Assessment> GetAssessment(string disasterId, string assessmentId)
         {
-            Dictionary<string, Assesment> assesmentPerDisaster;
-            _assesments.TryGetValue(disasterId, out assesmentPerDisaster);
+            Dictionary<string, Assessment> assessmentPerDisaster;
+            _assessments.TryGetValue(disasterId, out assessmentPerDisaster);
 
-            if (assesmentPerDisaster == null)
+            if (assessmentPerDisaster == null)
             {
-                return Task.FromResult<Assesment>(null);
+                return Task.FromResult<Assessment>(null);
             }
 
-            Assesment result;
-            assesmentPerDisaster.TryGetValue(assesmentId, out result);
+            Assessment result;
+            assessmentPerDisaster.TryGetValue(assessmentId, out result);
             return Task.FromResult(result);
         }
 
@@ -149,12 +149,12 @@ namespace Kastil.Core.Fakes
             return Task.FromResult(_shelters.Values.AsEnumerable());
         }
 
-        public async Task DeleteAssesments(string disasterId)
+        public async Task DeleteAssessments(string disasterId)
         {
-            var assesments = await GetAssesments(disasterId);
-            foreach (var assesment in assesments)
+            var assessments = await GetAssessments(disasterId);
+            foreach (var assessment in assessments)
             {
-                _assesments.Remove(assesment.Id);
+                _assessments.Remove(assessment.Id);
             }
         }
     }

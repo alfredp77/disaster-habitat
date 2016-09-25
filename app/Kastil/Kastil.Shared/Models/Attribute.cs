@@ -14,7 +14,7 @@ namespace Kastil.Shared.Models
     {
     }
 
-    public class AssesmentAttribute : Attribute
+    public class AssessmentAttribute : Attribute
     {
     }
 

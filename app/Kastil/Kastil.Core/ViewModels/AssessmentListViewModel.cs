@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssesmentListViewModel : BaseViewModel
+    public class AssessmentListViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<AssesmentListItemViewModel> Items { get; } = new ObservableRangeCollection<AssesmentListItemViewModel> ();
+        public ObservableRangeCollection<AssessmentListItemViewModel> Items { get; } = new ObservableRangeCollection<AssessmentListItemViewModel> ();
 
         public string DisasterId { get; set; }
 
-        public AssesmentListViewModel()
+        public AssessmentListViewModel()
         {
 			AllowAddCommand = true; 
         }
@@ -40,10 +40,10 @@ namespace Kastil.Core.ViewModels
             var disasterService = Resolve<ITap2HelpService>();
             try
             {
-                var assessments = await disasterService.GetAssesments(DisasterId);
+                var assessments = await disasterService.GetAssessments(DisasterId);
                 if (assessments != null)
                 {
-                    Items.AddRange(assessments.Select(d => new AssesmentListItemViewModel(d)));
+                    Items.AddRange(assessments.Select(d => new AssessmentListItemViewModel(d)));
                 }
             }
             catch (Exception ex)
@@ -88,20 +88,20 @@ namespace Kastil.Core.ViewModels
             set { SetProperty(ref _isLoading, value); }
         }
 
-        MvxCommand<AssesmentListItemViewModel> _assessmentSelectedCommand;
-        public MvxCommand<AssesmentListItemViewModel> AssessmentSelectedCommand
+        MvxCommand<AssessmentListItemViewModel> _assessmentSelectedCommand;
+        public MvxCommand<AssessmentListItemViewModel> AssessmentSelectedCommand
         {
             get
             {
-                _assessmentSelectedCommand = _assessmentSelectedCommand ?? new MvxCommand<AssesmentListItemViewModel>(DoAssessmentSelectedCommand);
+                _assessmentSelectedCommand = _assessmentSelectedCommand ?? new MvxCommand<AssessmentListItemViewModel>(DoAssessmentSelectedCommand);
                 return _assessmentSelectedCommand;
             }
         }
 
 
-        private void DoAssessmentSelectedCommand(AssesmentListItemViewModel itemVm)
+        private void DoAssessmentSelectedCommand(AssessmentListItemViewModel itemVm)
         {
-            ShowViewModel<AssesmentViewModel>(new { disasterId = itemVm.DisasterId, assesmentId = itemVm.AssesmentId });
+            ShowViewModel<AssessmentViewModel>(new { disasterId = itemVm.DisasterId, assessmentId = itemVm.AssessmentId });
         }
     }
 }

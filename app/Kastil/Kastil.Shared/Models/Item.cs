@@ -4,7 +4,7 @@ using Kastil.Core.Services;
 namespace Kastil.Shared.Models
 {
     /// <summary>
-    /// Since Assesment and Shelter have same attributes, let's call it as Item for now.
+    /// Since Assessment and Shelter have same attributes, let's call it as Item for now.
     /// </summary>
     public abstract class Item : BaseModel
     {

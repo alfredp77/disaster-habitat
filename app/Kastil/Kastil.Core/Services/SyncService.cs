@@ -23,7 +23,7 @@ namespace Kastil.Core.Services
             var removedDisasterIds = localDisasterIds.Except(currentDisasterIds);
             foreach (var removedDisasterId in removedDisasterIds)
             {
-                await Tap2HelpService.DeleteAssesments(removedDisasterId);
+                await Tap2HelpService.DeleteAssessments(removedDisasterId);
             }
         }
     }    

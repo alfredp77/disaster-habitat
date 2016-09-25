@@ -30,7 +30,7 @@ namespace Kastil.Core.Tests.Services
         }
 
         [Test]
-        public async Task Should_Clean_Assesments_From_Removed_Disasters()
+        public async Task Should_Clean_Assessments_From_Removed_Disasters()
         {
             var disaster1 = new Disaster { Id = "x" };
             var disaster2 = new Disaster { Id = "y" };
@@ -45,8 +45,8 @@ namespace Kastil.Core.Tests.Services
             await _syncService.PullDisasters();
 
             _pullService.Verify(p => p.Pull<Disaster>(true), Times.Once);
-            _tap2HelpService.Verify(s => s.DeleteAssesments(disaster2.Id), Times.Once);
-            _tap2HelpService.Verify(s => s.DeleteAssesments(disaster3.Id), Times.Once);
+            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster2.Id), Times.Once);
+            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster3.Id), Times.Once);
         }
     }
 }

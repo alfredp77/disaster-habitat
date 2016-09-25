@@ -15,11 +15,11 @@ namespace Kastil.Core.ViewModels
     public class EditAttributeViewModel : BaseViewModel
     {
         private string _disasterId;
-        private string _assesmentId;
+        private string _assessmentId;
         private string _name;
         private string _attributeValue;
         private string _originalValue;
-        private Assesment _assesment;
+        private Assessment _assessment;
 
         public class SpinnerItem
         {
@@ -78,14 +78,14 @@ namespace Kastil.Core.ViewModels
 
         public string ButtonText => EditMode ? "Update" : "Add";
 
-        public async void Init(string disasterId , string assesmentId, string attributeName, string attributeValue)
+        public async void Init(string disasterId , string assessmentId, string attributeName, string attributeValue)
         {
             _disasterId = disasterId;
-            _assesmentId = assesmentId;
+            _assessmentId = assessmentId;
             var service = Resolve<ITap2HelpService>();
-            _assesment = await service.GetAssesment(_disasterId, _assesmentId);
-            Items = (from attribute in await service.GetAssesmentAttributes() select new SpinnerItem(attribute.Key)).ToList();
-            Name = _assesment.Name;
+            _assessment = await service.GetAssessment(_disasterId, _assessmentId);
+            Items = (from attribute in await service.GetAssessmentAttributes() select new SpinnerItem(attribute.Key)).ToList();
+            Name = _assessment.Name;
             if (attributeName == null || attributeValue == null)
             {
                 EditMode = false;
@@ -107,10 +107,10 @@ namespace Kastil.Core.ViewModels
 
         private void DoDeleteAttrCommand(EditAttributeViewModel obj)
         {
-            var attributes = _assesment.Attributes;
+            var attributes = _assessment.Attributes;
             attributes.Remove(attributes.Single(attr => attr.Key == SelectedItem.Caption && attr.Value == _originalValue));
 
-            SaveAssesment();
+            SaveAssessment();
             Close();
         }
 
@@ -123,7 +123,7 @@ namespace Kastil.Core.ViewModels
         private void DoAddAttrCommand(EditAttributeViewModel obj)
         {
             
-            var attributes = _assesment.Attributes;
+            var attributes = _assessment.Attributes;
             if (EditMode)
             {
                 UpdateAttr(attributes);
@@ -133,14 +133,14 @@ namespace Kastil.Core.ViewModels
                 AddAttr(attributes);
             }
 
-            SaveAssesment();
+            SaveAssessment();
             Close();
         }
 
-        private async void SaveAssesment()
+        private async void SaveAssessment()
         {
             var service = Resolve<ITap2HelpService>();
-            await service.Save(_assesment);
+            await service.Save(_assessment);
         }
 
         private void UpdateAttr(List<Attribute> attributes)

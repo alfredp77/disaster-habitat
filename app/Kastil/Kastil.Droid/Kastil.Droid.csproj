@@ -18,7 +18,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <DevInstrumentationEnabled>True</DevInstrumentationEnabled>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
@@ -214,13 +214,13 @@
     <Compile Include="RestServiceCaller.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
-    <Compile Include="Views\AssesmentView.cs" />
+    <Compile Include="Views\AssessmentView.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Views\EditAttributeView.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\SheltersView.cs" />
-    <Compile Include="Views\AssesmentListView.cs" />
+    <Compile Include="Views\AssessmentListView.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Views\SyncView.cs" />
   </ItemGroup>
@@ -243,13 +243,13 @@
     <AndroidResource Include="Resources\layout\SheltersView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssesmentListView.axml">
+    <AndroidResource Include="Resources\layout\AssessmentListView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssesmentItemCell.axml">
+    <AndroidResource Include="Resources\layout\AssessmentItemCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssesmentView.axml">
+    <AndroidResource Include="Resources\layout\AssessmentView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AttributeView.axml" />

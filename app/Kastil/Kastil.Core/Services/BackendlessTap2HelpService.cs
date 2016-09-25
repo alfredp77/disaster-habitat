@@ -18,22 +18,22 @@ namespace Kastil.Core.Services
             return Asyncer.Async(context.LoadAll);
         }
 
-        public Task<IEnumerable<Assesment>> GetAssesments()
+        public Task<IEnumerable<Assessment>> GetAssessments()
         {
-            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            var context = PersistenceContextFactory.CreateFor<Assessment>();
             return Asyncer.Async(context.LoadAll);
         }
 
-        public Task<IEnumerable<Assesment>> GetAssesments(string disasterId)
+        public Task<IEnumerable<Assessment>> GetAssessments(string disasterId)
         {
-            var context = PersistenceContextFactory.CreateFor<Assesment>();
+            var context = PersistenceContextFactory.CreateFor<Assessment>();
             return Asyncer.Async(() => context.LoadAll().Where(a => a.DisasterId == disasterId));
         }
 
-        public Task<Assesment> GetAssesment(string disasterId, string assesmentId)
+        public Task<Assessment> GetAssessment(string disasterId, string assessmentId)
         {
-            var context = PersistenceContextFactory.CreateFor<Assesment>();
-            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(a => a.DisasterId == disasterId && a.Id == assesmentId));
+            var context = PersistenceContextFactory.CreateFor<Assessment>();
+            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(a => a.DisasterId == disasterId && a.Id == assessmentId));
         }
 
         public Task<IEnumerable<Shelter>> GetShelters()
@@ -48,16 +48,16 @@ namespace Kastil.Core.Services
             return await Asyncer.Async(context.LoadAll);
         }
 
-        public async Task<IEnumerable<Attribute>> GetAssesmentAttributes()
+        public async Task<IEnumerable<Attribute>> GetAssessmentAttributes()
         {
-            var context = PersistenceContextFactory.CreateFor<AssesmentAttribute>();
+            var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
             return await Asyncer.Async(context.LoadAll);
         }
 
-        public Task Save(Assesment assesment)
+        public Task Save(Assessment assessment)
         {
-            var context = PersistenceContextFactory.CreateFor<Assesment>();
-            return Asyncer.Async(() => context.Save(assesment));
+            var context = PersistenceContextFactory.CreateFor<Assessment>();
+            return Asyncer.Async(() => context.Save(assessment));
         }
 
         public Task Save(Shelter shelter)
@@ -66,13 +66,13 @@ namespace Kastil.Core.Services
             return Asyncer.Async(() => context.Save(shelter));
         }
 
-        public async Task DeleteAssesments(string disasterId)
+        public async Task DeleteAssessments(string disasterId)
         {
-            var context = PersistenceContextFactory.CreateFor<Assesment>();
-            var assesments = await GetAssesments(disasterId);
-            foreach (var assesment in assesments)
+            var context = PersistenceContextFactory.CreateFor<Assessment>();
+            var assessments = await GetAssessments(disasterId);
+            foreach (var assessment in assessments)
             {
-                await Asyncer.Async(() => context.Delete(assesment));
+                await Asyncer.Async(() => context.Delete(assessment));
             }
         }
     }

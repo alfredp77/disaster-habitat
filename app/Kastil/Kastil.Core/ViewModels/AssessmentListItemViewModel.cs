@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssesmentListItemViewModel: BaseViewModel
+    public class AssessmentListItemViewModel: BaseViewModel
     {
-        public AssesmentListItemViewModel(Assesment value)
+        public AssessmentListItemViewModel(Assessment value)
         {
             Value = value;
         }
 
-        public Assesment Value { get; }
+        public Assessment Value { get; }
 
         public string DisasterId => Value.DisasterId;
-        public string AssesmentId => Value.Id;
+        public string AssessmentId => Value.Id;
 
         public string Text => Value.Name;
         public string ShortDescription

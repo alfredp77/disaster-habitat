@@ -7,16 +7,16 @@ namespace Kastil.Core.Services
     public interface ITap2HelpService
     {
         Task<IEnumerable<Disaster>> GetDisasters();
-        Task<IEnumerable<Assesment>> GetAssesments();
-        Task<IEnumerable<Assesment>> GetAssesments(string disasterId);
-        Task<Assesment> GetAssesment(string disasterId, string assesmentId);
+        Task<IEnumerable<Assessment>> GetAssessments();
+        Task<IEnumerable<Assessment>> GetAssessments(string disasterId);
+        Task<Assessment> GetAssessment(string disasterId, string assessmentId);
         Task<IEnumerable<Shelter>> GetShelters();
         Task<IEnumerable<Attribute>> GetShelterAttributes();
-        Task<IEnumerable<Attribute>> GetAssesmentAttributes();
+        Task<IEnumerable<Attribute>> GetAssessmentAttributes();
 
-        Task Save(Assesment assesment);
+        Task Save(Assessment assessment);
         Task Save(Shelter shelter);
 
-        Task DeleteAssesments(string disasterId);
+        Task DeleteAssessments(string disasterId);
     }
 }

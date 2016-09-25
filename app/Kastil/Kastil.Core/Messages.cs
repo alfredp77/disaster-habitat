@@ -20,7 +20,7 @@
 
         public static class DisasterMenu
         {
-            public const string Assesment = "Assesment";
+            public const string Assessment = "Assessment";
             public const string Shelters = "Shelters";
         }
     }

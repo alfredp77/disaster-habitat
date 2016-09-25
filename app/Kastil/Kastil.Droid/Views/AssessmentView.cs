@@ -4,22 +4,22 @@ using Kastil.Core.ViewModels;
 
 namespace Kastil.Droid.Views
 {
-    [Activity(Label = "Assesment")]
-    public class AssesmentView : BaseView
+    [Activity(Label = "Assessment")]
+    public class AssessmentView : BaseView
     {
-        protected override int LayoutResource => Resource.Layout.AssesmentView;
+        protected override int LayoutResource => Resource.Layout.AssessmentView;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            var vm = (AssesmentViewModel)ViewModel;
+            var vm = (AssessmentViewModel)ViewModel;
             vm.Initialize();
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            var vm = (AssesmentViewModel)ViewModel;
+            var vm = (AssessmentViewModel)ViewModel;
             vm.Refresh();
         }
 

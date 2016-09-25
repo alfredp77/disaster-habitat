@@ -13,7 +13,7 @@
         android:padding="10dp"
         app:MvxBind="Text Name"
         android:background="?attr/colorPrimary" 
-        android:id="@+id/assesmentName" />
+        android:id="@+id/assessmentName" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_marginRight="0.0dp" />
         <TextView
             app:MvxBind="Text Location"
-            android:id="@+id/assesmentLocation"
+            android:id="@+id/assessmentLocation"
             android:layout_width="fill_parent"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content" />
@@ -56,7 +56,7 @@
     
     <Mvx.MvxListView
         android:background="@color/gray_ededed"
-        android:id="@+id/assesmentAttributes"
+        android:id="@+id/assessmentAttributes"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

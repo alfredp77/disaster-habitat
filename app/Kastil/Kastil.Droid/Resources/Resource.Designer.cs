@@ -2106,16 +2106,16 @@ namespace Kastil.Droid
 			public const int always = 2131099680;
 			
 			// aapt resource value: 0x7f060073
-			public const int assesmentAttributes = 2131099763;
+			public const int assessmentAttributes = 2131099763;
 			
 			// aapt resource value: 0x7f060070
-			public const int assesmentLocation = 2131099760;
+			public const int assessmentLocation = 2131099760;
 			
 			// aapt resource value: 0x7f06006e
-			public const int assesmentName = 2131099758;
+			public const int assessmentName = 2131099758;
 			
 			// aapt resource value: 0x7f06006d
-			public const int assesmentTable = 2131099757;
+			public const int assessmentTable = 2131099757;
 			
 			// aapt resource value: 0x7f06007f
 			public const int attrValue = 2131099775;
@@ -2624,13 +2624,13 @@ namespace Kastil.Droid
 			public const int abc_select_dialog_material = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int AssesmentItemCell = 2130903065;
+			public const int AssessmentItemCell = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int AssesmentListView = 2130903066;
+			public const int AssessmentListView = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int AssesmentView = 2130903067;
+			public const int AssessmentView = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
 			public const int AttributeView = 2130903068;

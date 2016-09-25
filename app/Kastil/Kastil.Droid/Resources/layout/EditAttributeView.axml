@@ -12,7 +12,7 @@
         android:padding="10dp"
         app:MvxBind="Text Name"
         android:background="?attr/colorPrimary"
-        android:id="@+id/assesmentName" />
+        android:id="@+id/assessmentName" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

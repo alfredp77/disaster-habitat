@@ -65,16 +65,16 @@ namespace Kastil.Core.ViewModels
 		private void DoDisasterSelectedCommand (DisasterListItemViewModel itemVm)
 		{
 			var actionSheetConfig = new ActionSheetConfig ();
-			actionSheetConfig.Add (Messages.DisasterMenu.Assesment, () => DoShowAssesment(itemVm.Value));
+			actionSheetConfig.Add (Messages.DisasterMenu.Assessment, () => DoShowAssessment(itemVm.Value));
 			actionSheetConfig.Add (Messages.DisasterMenu.Shelters, () => DoShowShelters(itemVm.Value));
 
 			var dialog = Resolve<IUserDialogs> ();
 			dialog.ActionSheet (actionSheetConfig);
 		}
 
-		private void DoShowAssesment(Disaster disaster)
+		private void DoShowAssessment(Disaster disaster)
 		{
-			ShowViewModel<AssesmentListViewModel> (new { disasterId = disaster.Id });
+			ShowViewModel<AssessmentListViewModel> (new { disasterId = disaster.Id });
 		}
 
 		private void DoShowShelters (Disaster disaster)

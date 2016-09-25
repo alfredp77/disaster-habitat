@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Connection.cs" />
+    <Compile Include="Connection.Details.cs" />
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
     <Compile Include="Fakes\FakePullService.cs" />
     <Compile Include="Fakes\FakePushService.cs" />
@@ -63,9 +64,9 @@
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
-    <Compile Include="ViewModels\AssesmentViewModel.cs" />
-    <Compile Include="ViewModels\AssesmentListItemViewModel.cs" />
-    <Compile Include="ViewModels\AssesmentListViewModel.cs" />
+    <Compile Include="ViewModels\AssessmentViewModel.cs" />
+    <Compile Include="ViewModels\AssessmentListItemViewModel.cs" />
+    <Compile Include="ViewModels\AssessmentListViewModel.cs" />
     <Compile Include="ViewModels\AttributeViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
