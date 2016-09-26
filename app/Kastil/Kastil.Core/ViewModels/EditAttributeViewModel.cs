@@ -43,7 +43,20 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        public bool EditMode { get; private set; }
+        private bool _editMode;
+        public bool EditMode
+        {
+            get { return _editMode; }
+            private set 
+            {
+                if (_editMode != value)
+                {
+                    _editMode = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         private List<SpinnerItem> _items;
         public List<SpinnerItem> Items
         {
