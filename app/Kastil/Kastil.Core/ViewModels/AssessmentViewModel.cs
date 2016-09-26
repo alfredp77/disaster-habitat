@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
-using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -13,8 +12,6 @@ namespace Kastil.Core.ViewModels
 {
     public class AssessmentViewModel : BaseViewModel
     {
-        private Assessment _assessment;
-
         private string _name;
         public string Name
         {
@@ -29,37 +26,49 @@ namespace Kastil.Core.ViewModels
             set { _location = value; RaisePropertyChanged(); }
         }
 
-        public ICommand AddAttributeCommand => new MvxCommand<AssessmentViewModel>(DoAddAttrCommand);
-
-        private void DoAddAttrCommand(AssessmentViewModel obj)
+        public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
+        private void DoAddAttrCommand()
         {
-           ShowViewModel<EditAttributeViewModel>(new { disasterId = _disasterId, assessmentId = _assessmentId});
+            var context = Resolve<IAssessmentEditContext>();
+            context.SelectedAttribute = null;
+            ShowViewModel<EditAttributeViewModel>();
         }
 
-        MvxCommand<AttributeViewModel> _attributeSelectedCommand;
-        public MvxCommand<AttributeViewModel> AttributeSelectedCommand
+        public MvxCommand<AttributeViewModel> AttributeSelectedCommand => new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
+        private void DoAttributeSelectedCommand(AttributeViewModel obj)
         {
-            get
+            var context = Resolve<IAssessmentEditContext>();
+            context.SelectedAttribute = obj.Attribute;
+            ShowViewModel<EditAttributeViewModel>();
+        }
+
+        public MvxAsyncCommand SaveCommand => new MvxAsyncCommand(DoSaveCommand);
+        private async Task DoSaveCommand()
+        {
+            var dialog = Resolve<IUserDialogs>();
+            dialog.ShowLoading(Messages.General.Saving);
+
+            try
             {
-                _attributeSelectedCommand = _attributeSelectedCommand ?? new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
-                return _attributeSelectedCommand;
+                var context = Resolve<IAssessmentEditContext>();
+                await context.CommitChanges();
+                dialog.ShowSuccess(Messages.General.AssessmentSaved);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                dialog.HideLoading();
+                Mvx.Trace("Unable to save Assessment, exception: {0}", ex);
+                await dialog.AlertAsync("Unable to save Assessment. Please try again");
+                Close();
+            }
+            finally
+            {
+                dialog.HideLoading();
             }
         }
 
-        private void DoAttributeSelectedCommand(AttributeViewModel obj)
-        {
-            ShowViewModel<EditAttributeViewModel>(new { disasterId= _disasterId, assessmentId= _assessmentId, attributeName = obj.AttributeName, attributeValue = obj.AttributeValue});
-        }
-
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
-
-        private string _assessmentId;
-        private string _disasterId;
-        public void Init(string disasterId, string assessmentId)
-        {
-            _disasterId = disasterId;
-            _assessmentId = assessmentId;
-        }
 
         public Task Initialize()
         {
@@ -72,11 +81,10 @@ namespace Kastil.Core.ViewModels
             dialog.ShowLoading(Messages.General.Loading);
             try
             {
-                var service = Resolve<ITap2HelpService>();
-                var assessment = await service.GetAssessment(_disasterId, _assessmentId);
+                var context = Resolve<IAssessmentEditContext>();
+                var assessment = context.Assessment;
                 if (assessment != null)
                 {
-                    _assessment = assessment;
                     Name = assessment.Name;
                     Location = assessment.Location;
                     Attributes.AddRange(assessment.Attributes.Select(a => new AttributeViewModel(a)));

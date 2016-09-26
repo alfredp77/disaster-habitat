@@ -14,8 +14,9 @@ namespace Kastil.Droid.Views
         {
             base.OnCreate(bundle);
             var vm = (EditAttributeViewModel)ViewModel;
-            var spinner = FindViewById<Spinner>(Resource.Id.attributeSpinner);
-            spinner.Enabled = !vm.EditMode;
+			vm.Initialize ().ContinueWith (_ => {
+				var spinner = FindViewById<Spinner> (Resource.Id.attributeSpinner);
+				spinner.Enabled = !vm.EditMode;});
         }
 
        

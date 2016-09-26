@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using Kastil.Core.Services;
-using Kastil.Core.Utils;
 using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
 using Attribute = Kastil.Shared.Models.Attribute;
@@ -14,21 +12,17 @@ namespace Kastil.Core.ViewModels
 {
     public class EditAttributeViewModel : BaseViewModel
     {
-        private string _disasterId;
-        private string _assessmentId;
         private string _name;
         private string _attributeValue;
-        private string _originalValue;
-        private Assessment _assessment;
 
         public class SpinnerItem
         {
-            public SpinnerItem(string caption)
+            public SpinnerItem(Attribute attribute)
             {
-                Caption = caption;
+                Attribute = attribute;
             }
-
-            public string Caption { get; }
+            public Attribute Attribute { get; }
+            public string Caption => Attribute.Key;
 
             public override string ToString()
             {
@@ -76,87 +70,63 @@ namespace Kastil.Core.ViewModels
             set { _attributeValue = value; RaisePropertyChanged();}
         }
 
-        public string ButtonText => EditMode ? "Update" : "Add";
+		private string _buttonText = "Add";
+        public string ButtonText 
+		{
+			get { return _buttonText; }
+			set { _buttonText = value; RaisePropertyChanged (); }
+		}
 
-        public async void Init(string disasterId , string assessmentId, string attributeName, string attributeValue)
+        public async Task Initialize()
         {
-            _disasterId = disasterId;
-            _assessmentId = assessmentId;
-            var service = Resolve<ITap2HelpService>();
-            _assessment = await service.GetAssessment(_disasterId, _assessmentId);
-            Items = (await service.GetAssessmentAttributes()).Select(attribute => new SpinnerItem(attribute.Key)).ToList();
-            Name = _assessment.Name;
-            if (attributeName == null || attributeValue == null)
-            {
-                EditMode = false;
-                return;
-            }
+			var dialogs = Resolve<IUserDialogs> ();
+			dialogs.ShowLoading (Messages.General.Loading);
+			try 
+			{
+				var context = Resolve<IAssessmentEditContext> ();
+				var assessment = context.Assessment;
+				Name = assessment.Name;
+				var service = Resolve<ITap2HelpService> ();
+				Items = (await service.GetAssessmentAttributes ()).Select (attribute => new SpinnerItem (attribute)).ToList ();
 
-            EditMode = true;
-            SelectedItem = new SpinnerItem(attributeName);
-            AttributeValue = attributeValue;
-            _originalValue = attributeValue;
-
+				if (context.SelectedAttribute != null) {
+					EditMode = true;
+					ButtonText = "Update";
+					SelectedItem = new SpinnerItem (context.SelectedAttribute);
+					AttributeValue = context.SelectedAttribute.Value;
+				}
+			} 
+			finally 
+			{
+				dialogs.HideLoading();
+			}
         }
 
-        public ICommand DeleteClickCommand => new MvxCommand<EditAttributeViewModel>(DoDeleteAttrCommand);
 
-        public ICommand AddClickCommand => new MvxCommand<EditAttributeViewModel>(DoAddAttrCommand);
+        public ICommand DeleteClickCommand => new MvxCommand(DoDeleteAttrCommand);
 
-        public ICommand CancelClickCommand => new MvxCommand<EditAttributeViewModel>(DoCancelAttrCommand);
+        public ICommand AddClickCommand => new MvxCommand(DoAddAttrCommand);
 
-        private void DoDeleteAttrCommand(EditAttributeViewModel obj)
+        public ICommand CancelClickCommand => new MvxCommand(DoCancelAttrCommand);
+
+        private void DoDeleteAttrCommand()
         {
-            var attributes = _assessment.Attributes;
-            attributes.Remove(attributes.Single(attr => attr.Key == SelectedItem.Caption && attr.Value == _originalValue));
-
-            SaveAssessment();
+            var context = Resolve<IAssessmentEditContext>();
+            context.DeleteAttribute(SelectedItem.Caption);
             Close();
         }
 
 
-        private void DoCancelAttrCommand(EditAttributeViewModel obj)
+        private void DoCancelAttrCommand()
         {
             Close();
         }
 
-        private void DoAddAttrCommand(EditAttributeViewModel obj)
+        private void DoAddAttrCommand()
         {
-            
-            var attributes = _assessment.Attributes;
-            if (EditMode)
-            {
-                UpdateAttr(attributes);
-            }
-            else
-            {
-                AddAttr(attributes);
-            }
-
-            SaveAssessment();
+            var context = Resolve<IAssessmentEditContext>();
+            context.AddOrUpdateAttribute(SelectedItem.Attribute, AttributeValue);
             Close();
-        }
-
-        private async void SaveAssessment()
-        {
-            var service = Resolve<ITap2HelpService>();
-            await service.Save(_assessment);
-        }
-
-        private void UpdateAttr(List<Attribute> attributes)
-        {
-            var attribute = attributes.Find(att => att.Key == SelectedItem.Caption && att.Value == _originalValue);
-            attribute.Value = AttributeValue;
-        }
-
-        private void AddAttr(List<Attribute> attributes)
-        {
-            var attribute = new Attribute
-            {
-                Key = SelectedItem.Caption,
-                Value = AttributeValue
-            };
-            attributes.Add(attribute);
         }
     }
 }

@@ -101,7 +101,9 @@ namespace Kastil.Core.ViewModels
 
         private void DoAssessmentSelectedCommand(AssessmentListItemViewModel itemVm)
         {
-            ShowViewModel<AssessmentViewModel>(new { disasterId = itemVm.DisasterId, assessmentId = itemVm.AssessmentId });
+            var context = Resolve<IAssessmentEditContext>();
+            context.Initialize(itemVm.Value);
+            ShowViewModel<AssessmentViewModel>();
         }
     }
 }

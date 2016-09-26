@@ -6,6 +6,8 @@
         {
             public const string Loading = "Loading";
 			public const string Syncing = "Syncing";
+            public const string Saving = "Saving";
+            public const string AssessmentSaved = "Assessment saved successfully";
             public const string SynchronizeData = "Synchronize data?";
             public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
         }
