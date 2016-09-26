@@ -6,6 +6,8 @@ using MvvmCross.Platform;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using MvvmCross.Plugins.Messenger;
+using Kastil.Core.Events;
 
 namespace Kastil.Core.ViewModels
 {
@@ -20,17 +22,30 @@ namespace Kastil.Core.ViewModels
 			AllowAddCommand = true; 
         }
 
+		public void Init (string disasterId)
+		{
+			DisasterId = disasterId;
+		}
+
+		private MvxSubscriptionToken editingDoneToken;
         public Task Initialize()
-        {
-            Items.Clear();
+        {            
+			var messenger = Resolve<IMvxMessenger> ();
+			editingDoneToken = messenger.Subscribe<EditingDoneEvent> (async e => await OnEditingDone(e));
             return Load();
         }
 
-        public void Init(string disasterId)
-        {
-            DisasterId = disasterId;
-        }
-
+		private async Task OnEditingDone (EditingDoneEvent evt)
+		{
+			if (evt.Sender is AssessmentViewModel)
+				await DoRefreshCommand();
+		}
+		        
+		protected override void Close()
+		{
+			editingDoneToken?.Dispose();
+			base.Close();
+		}
 
         private async Task Load()
         {
@@ -73,7 +88,8 @@ namespace Kastil.Core.ViewModels
             IsLoading = true;
             try
             {
-                await Initialize();
+				Items.Clear();
+                await Load();
             }
             finally
             {

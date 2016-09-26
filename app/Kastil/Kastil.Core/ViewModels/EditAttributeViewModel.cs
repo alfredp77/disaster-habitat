@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using Kastil.Core.Events;
 using Kastil.Core.Services;
 using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 using Attribute = Kastil.Shared.Models.Attribute;
 
 namespace Kastil.Core.ViewModels
@@ -126,6 +128,8 @@ namespace Kastil.Core.ViewModels
         {
             var context = Resolve<IAssessmentEditContext>();
             context.DeleteAttribute(SelectedItem.Caption);
+            var messenger = Resolve<IMvxMessenger>();
+            messenger.Publish(new EditingDoneEvent(this, EditAction.Delete));
             Close();
         }
 
@@ -139,6 +143,8 @@ namespace Kastil.Core.ViewModels
         {
             var context = Resolve<IAssessmentEditContext>();
             context.AddOrUpdateAttribute(SelectedItem.Attribute, AttributeValue);
+            var messenger = Resolve<IMvxMessenger>();
+            messenger.Publish(new EditingDoneEvent(this, EditAction.Edit));
             Close();
         }
     }

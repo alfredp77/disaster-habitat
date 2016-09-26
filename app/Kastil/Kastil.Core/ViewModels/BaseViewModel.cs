@@ -14,10 +14,11 @@ namespace Kastil.Core.ViewModels
             return Mvx.Resolve<TService>();
         }
 
-        protected void Close()
+        protected virtual void Close()
         {
             Close(this);
         }
+        
 
         MvxAsyncCommand _logoutCommand;
         public MvxAsyncCommand LogoutCommand
@@ -57,7 +58,7 @@ namespace Kastil.Core.ViewModels
 			return dialog.AlertAsync ("Test");
         }
 
-		public bool AllowSettingCommand { get; protected set; } = false;
+		public bool AllowSettingCommand { get; protected set; }
         MvxAsyncCommand _settingCommand;
         public MvxAsyncCommand SettingCommand
         {
@@ -78,5 +79,7 @@ namespace Kastil.Core.ViewModels
 
 
         public string Title { get; protected set; }
+
+
     }
 }

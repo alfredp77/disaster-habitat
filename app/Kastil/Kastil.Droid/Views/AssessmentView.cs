@@ -15,13 +15,5 @@ namespace Kastil.Droid.Views
             var vm = (AssessmentViewModel)ViewModel;
             vm.Initialize();
         }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            var vm = (AssessmentViewModel)ViewModel;
-            vm.Refresh();
-        }
-
     }
 }

@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using Kastil.Core.Events;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace Kastil.Core.ViewModels
 {
@@ -52,6 +54,8 @@ namespace Kastil.Core.ViewModels
             {
                 var context = Resolve<IAssessmentEditContext>();
                 await context.CommitChanges();
+				var messenger = Resolve<IMvxMessenger> ();
+				messenger.Publish (new EditingDoneEvent (this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.AssessmentSaved);
                 Close();
             }
@@ -68,11 +72,28 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
+		public MvxCommand CancelCommand => new MvxCommand (Close);
 
+        public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
+        
+		private MvxSubscriptionToken editingDoneToken;
         public Task Initialize()
         {
+            var messenger = Resolve<IMvxMessenger>();
+            editingDoneToken = messenger.Subscribe<EditingDoneEvent>(OnEditingDone);
             return Refresh();
+        }
+
+        private void OnEditingDone(EditingDoneEvent evt)
+        {
+			if (evt.Sender is EditAttributeViewModel)
+            	Refresh();
+        }
+
+        protected override void Close()
+        {
+            editingDoneToken?.Dispose();
+            base.Close();
         }
 
         private async Task Load()
@@ -108,5 +129,7 @@ namespace Kastil.Core.ViewModels
             Attributes.Clear();
             return Load();
         }
+
+        
     }
 }
