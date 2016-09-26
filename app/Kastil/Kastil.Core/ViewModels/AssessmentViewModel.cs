@@ -18,15 +18,64 @@ namespace Kastil.Core.ViewModels
         public string Name
         {
             get { return _name; }
-            set { _name = value; RaisePropertyChanged(); }
+            set
+            {
+                _name = value;
+                RaisePropertyChanged();
+                SaveName(_name);
+            }
+        }
+
+        private void SaveName(string name)
+        {
+            if (_editMode)
+                return;
+            var context = Resolve<IAssessmentEditContext>();
+            context.Assessment.Name = name;
         }
 
         private string _location;
         public string Location
         {
             get { return _location; }
-            set { _location = value; RaisePropertyChanged(); }
+            set
+            {
+                _location = value;
+                RaisePropertyChanged();
+                SaveLocation(_location);
+            }
         }
+
+        private void SaveLocation(string location)
+        {
+            if (_editMode)
+                return;
+            var context = Resolve<IAssessmentEditContext>();
+            context.Assessment.Location = location;
+        }
+
+        private bool _editMode;
+        
+
+        public bool EditMode
+        {
+            get {return _editMode;}
+            private set
+            {
+                _editMode = value;
+                RaisePropertyChanged("EditMode");
+                RaisePropertyChanged("AddMode");
+            }
+        }
+
+        private string _assessmentTitle;
+        public string AssessmentTitle
+        {
+            get { return _assessmentTitle; }
+            private set { _assessmentTitle = value; RaisePropertyChanged(); }
+        }
+
+        public bool AddMode => !EditMode;
 
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
         private void DoAddAttrCommand()
@@ -103,6 +152,7 @@ namespace Kastil.Core.ViewModels
             try
             {
                 var context = Resolve<IAssessmentEditContext>();
+                EditMode = !context.IsNew;
                 var assessment = context.Assessment;
                 if (assessment != null)
                 {
@@ -110,6 +160,8 @@ namespace Kastil.Core.ViewModels
                     Location = assessment.Location;
                     Attributes.AddRange(assessment.Attributes.Select(a => new AttributeViewModel(a)));
                 }
+                AssessmentTitle = EditMode ? Name : "New Assessment";
+
             }
             catch (Exception ex)
             {
@@ -129,7 +181,6 @@ namespace Kastil.Core.ViewModels
             Attributes.Clear();
             return Load();
         }
-
         
     }
 }

@@ -19,7 +19,8 @@ namespace Kastil.Core.ViewModels
 
         public AssessmentListViewModel()
         {
-			AllowAddCommand = true; 
+            Title = "Assessments";
+            AllowAddCommand = true; 
         }
 
 		public void Init (string disasterId)
@@ -120,6 +121,16 @@ namespace Kastil.Core.ViewModels
             var context = Resolve<IAssessmentEditContext>();
             context.Initialize(itemVm.Value);
             ShowViewModel<AssessmentViewModel>();
+        }
+
+        protected override Task DoAddCommand()
+        {
+            return Task.Run(() =>
+            {
+                var context = Resolve<IAssessmentEditContext>();
+                context.Initialize(disasterId:DisasterId);
+                ShowViewModel<AssessmentViewModel>();
+            });
         }
     }
 }

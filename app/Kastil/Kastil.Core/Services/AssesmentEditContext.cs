@@ -10,7 +10,7 @@ namespace Kastil.Core.Services
 {
     public interface IAssessmentEditContext
     {
-        void Initialize(Assessment assessment);
+        void Initialize(Assessment assessment=null,string disasterId=null);
         void AddOrUpdateAttribute(Attribute attribute, string value);
         void DeleteAttribute(string attributeName);
         Task CommitChanges();
@@ -27,12 +27,12 @@ namespace Kastil.Core.Services
         public Assessment Assessment { get; private set; }
         public bool IsNew { get; private set; }
 
-        public void Initialize(Assessment assessment = null)
+        public void Initialize(Assessment assessment = null, string disasterId=null)
         {
             IsNew = assessment == null;
 			if (assessment == null) 
 			{
-				Assessment = new Assessment { Id = Guid.NewGuid ().ToString () };
+				Assessment = new Assessment { Id = Guid.NewGuid ().ToString () , DisasterId = disasterId};
 			} 
 			else 
 			{
