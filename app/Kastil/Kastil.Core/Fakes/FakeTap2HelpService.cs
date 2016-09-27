@@ -107,17 +107,17 @@ namespace Kastil.Core.Fakes
             return items;
         }
 
-        public Task<IEnumerable<Assessment>> GetAssessments(string disasterId)
+        public async Task<IEnumerable<Assessment>> GetAssessments(string disasterId)
         {
             if (_assessments.Count == 0)
             {
-                InitFakeAssessments();
+                await InitFakeAssessments();
             }
 
             Dictionary<string, Assessment> perDisaster;
             _assessments.TryGetValue(disasterId, out perDisaster);
 
-            return Task.FromResult(perDisaster == null ? new List<Assessment>().AsEnumerable() : perDisaster.Values.AsEnumerable());
+            return perDisaster == null ? new List<Assessment>().AsEnumerable() : perDisaster.Values.AsEnumerable();
         }
 
         public Task<Assessment> GetAssessment(string disasterId, string assessmentId)

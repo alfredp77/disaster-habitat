@@ -96,6 +96,7 @@ namespace Kastil.Core.ViewModels
 
 		public bool AllowSettingCommand { get; protected set; }
         MvxAsyncCommand _settingCommand;
+
         public MvxAsyncCommand SettingCommand
         {
             get
@@ -113,9 +114,15 @@ namespace Kastil.Core.ViewModels
             return Asyncer.DoNothing();
         }
 
-
-        public string Title { get; protected set; }
-
-
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            protected set
+            {
+                _title = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

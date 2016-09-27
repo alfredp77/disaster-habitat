@@ -13,33 +13,25 @@ namespace Kastil.Core.ViewModels
 {
     public class AssessmentViewModel : BaseViewModel
     {
-        private string _name;
         public string Name
         {
-            get { return _name; }
+            get { return Context.Assessment.Name; }
             set
             {
-                _name = value;
+                Context.Assessment.Name = value;
+                Title = value;
                 RaisePropertyChanged();
             }
         }        
 
-        private string _location;
         public string Location
         {
-            get { return _location; }
+            get { return Context.Assessment.Location; }
             set
             {
-                _location = value;
+                Context.Assessment.Location = value;
                 RaisePropertyChanged();
             }
-        }
-
-        private string _assessmentTitle;
-        public string AssessmentTitle
-        {
-            get { return _assessmentTitle; }
-            private set { _assessmentTitle = value; RaisePropertyChanged(); }
         }
 
         private bool _editMode;
@@ -79,11 +71,8 @@ namespace Kastil.Core.ViewModels
 
             try
             {
-                var context = Resolve<IAssessmentEditContext>();
-                var assessment = context.Assessment;
-                assessment.Name = Name;
-                assessment.Location = Location;
-                await context.CommitChanges();
+                SetAssessmentProperties();
+                await Context.CommitChanges();
 				Publish(new EditingDoneEvent (this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.AssessmentSaved);
                 Close();
@@ -101,20 +90,29 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-		public MvxCommand CancelCommand => new MvxCommand (Close);
+        private IAssessmentEditContext Context => Resolve<IAssessmentEditContext>();
+
+        private void SetAssessmentProperties()
+        {
+            var assessment = Context.Assessment;
+            assessment.Name = Name;
+            assessment.Location = Location;
+        }
+
+        public MvxCommand CancelCommand => new MvxCommand (Close);
 
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
         
         public Task Initialize()
         {
-            Subscribe<EditingDoneEvent>(OnEditingDone);
-            return Refresh();
+            Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
+            return Load();
         }
 
-        private void OnEditingDone(EditingDoneEvent evt)
+        private async Task OnEditingDone(EditingDoneEvent evt)
         {
 			if (evt.Sender is EditAttributeViewModel)
-            	Refresh();
+            	await Load();
         }
 
         private async Task Load()
@@ -123,17 +121,14 @@ namespace Kastil.Core.ViewModels
             dialog.ShowLoading(Messages.General.Loading);
             try
             {
-                var context = Resolve<IAssessmentEditContext>();
-                EditMode = !context.IsNew;
-                var assessment = context.Assessment;
+                EditMode = !Context.IsNew;
+                var assessment = Context.Assessment;
                 if (assessment != null)
                 {
-                    Name = assessment.Name;
-                    Location = assessment.Location;
+                    Title = assessment.Name;
+                    Attributes.Clear();
                     Attributes.AddRange(assessment.Attributes.Select(a => new AttributeViewModel(a)));
                 }
-                AssessmentTitle = EditMode ? Name : "New Assessment";
-
             }
             catch (Exception ex)
             {
@@ -147,12 +142,5 @@ namespace Kastil.Core.ViewModels
                 dialog.HideLoading();
             }
         }
-
-        public Task Refresh()
-        {
-            Attributes.Clear();
-            return Load();
-        }
-        
     }
 }
