@@ -21,17 +21,8 @@ namespace Kastil.Core.ViewModels
             {
                 _name = value;
                 RaisePropertyChanged();
-                SaveName(_name);
             }
-        }
-
-        private void SaveName(string name)
-        {
-            if (_editMode)
-                return;
-            var context = Resolve<IAssessmentEditContext>();
-            context.Assessment.Name = name;
-        }
+        }        
 
         private string _location;
         public string Location
@@ -41,29 +32,6 @@ namespace Kastil.Core.ViewModels
             {
                 _location = value;
                 RaisePropertyChanged();
-                SaveLocation(_location);
-            }
-        }
-
-        private void SaveLocation(string location)
-        {
-            if (_editMode)
-                return;
-            var context = Resolve<IAssessmentEditContext>();
-            context.Assessment.Location = location;
-        }
-
-        private bool _editMode;
-        
-
-        public bool EditMode
-        {
-            get {return _editMode;}
-            private set
-            {
-                _editMode = value;
-                RaisePropertyChanged("EditMode");
-                RaisePropertyChanged("AddMode");
             }
         }
 
@@ -74,6 +42,17 @@ namespace Kastil.Core.ViewModels
             private set { _assessmentTitle = value; RaisePropertyChanged(); }
         }
 
+        private bool _editMode;
+        public bool EditMode
+        {
+            get { return _editMode; }
+            private set
+            {
+                _editMode = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged("AddMode");
+            }
+        }
         public bool AddMode => !EditMode;
 
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
@@ -101,6 +80,9 @@ namespace Kastil.Core.ViewModels
             try
             {
                 var context = Resolve<IAssessmentEditContext>();
+                var assessment = context.Assessment;
+                assessment.Name = Name;
+                assessment.Location = Location;
                 await context.CommitChanges();
 				Publish(new EditingDoneEvent (this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.AssessmentSaved);

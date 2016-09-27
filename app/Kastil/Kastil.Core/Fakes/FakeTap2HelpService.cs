@@ -76,7 +76,7 @@ namespace Kastil.Core.Fakes
             return attributes;
         }
 
-        private async void InitFakeAssessments()
+        private async Task InitFakeAssessments()
         {
             var count = 1;
             foreach (var disasterId in _disasters.Keys)
@@ -96,7 +96,7 @@ namespace Kastil.Core.Fakes
         {
             if (_assessments.Count == 0)
             {
-                InitFakeAssessments();
+                await InitFakeAssessments();
             }
             
             var items = new List<Assessment>();
