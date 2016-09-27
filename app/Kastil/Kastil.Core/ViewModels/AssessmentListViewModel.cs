@@ -28,11 +28,9 @@ namespace Kastil.Core.ViewModels
 			DisasterId = disasterId;
 		}
 
-		private MvxSubscriptionToken editingDoneToken;
         public Task Initialize()
         {            
-			var messenger = Resolve<IMvxMessenger> ();
-			editingDoneToken = messenger.Subscribe<EditingDoneEvent> (async e => await OnEditingDone(e));
+			Subscribe<EditingDoneEvent> (async e => await OnEditingDone(e));
             return Load();
         }
 
@@ -40,12 +38,6 @@ namespace Kastil.Core.ViewModels
 		{
 			if (evt.Sender is AssessmentViewModel)
 				await DoRefreshCommand();
-		}
-		        
-		protected override void Close()
-		{
-			editingDoneToken?.Dispose();
-			base.Close();
 		}
 
         private async Task Load()

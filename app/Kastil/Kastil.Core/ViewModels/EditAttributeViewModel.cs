@@ -128,8 +128,7 @@ namespace Kastil.Core.ViewModels
         {
             var context = Resolve<IAssessmentEditContext>();
             context.DeleteAttribute(SelectedItem.Caption);
-            var messenger = Resolve<IMvxMessenger>();
-            messenger.Publish(new EditingDoneEvent(this, EditAction.Delete));
+            Publish(new EditingDoneEvent(this, EditAction.Delete));
             Close();
         }
 
@@ -143,8 +142,7 @@ namespace Kastil.Core.ViewModels
         {
             var context = Resolve<IAssessmentEditContext>();
             context.AddOrUpdateAttribute(SelectedItem.Attribute, AttributeValue);
-            var messenger = Resolve<IMvxMessenger>();
-            messenger.Publish(new EditingDoneEvent(this, EditAction.Edit));
+            Publish(new EditingDoneEvent(this, EditAction.Edit));
             Close();
         }
     }

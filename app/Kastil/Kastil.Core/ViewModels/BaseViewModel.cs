@@ -1,9 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 
 namespace Kastil.Core.ViewModels
 {
@@ -14,8 +17,41 @@ namespace Kastil.Core.ViewModels
             return Mvx.Resolve<TService>();
         }
 
+        private readonly Dictionary<string, MvxSubscriptionToken> _eventTokens = new Dictionary<string, MvxSubscriptionToken>();
+
+        protected void Subscribe<T>(Action<T> handler) where T : MvxMessage
+        {
+            Unsubscribe<T>();
+            var key = typeof (T).FullName;
+            var messenger = Resolve<IMvxMessenger>();
+            var newToken = messenger.Subscribe(handler);
+            _eventTokens[key] = newToken;
+        }
+
+        protected void Unsubscribe<T>() where T : MvxMessage
+        {
+            var key = typeof(T).FullName;
+            MvxSubscriptionToken existing;
+            if (_eventTokens.TryGetValue(key, out existing))
+            {
+                existing.Dispose();
+                _eventTokens.Remove(key);
+            }
+        }
+
+        protected void Publish<T>(T evt) where T : MvxMessage
+        {
+            var messenger = Resolve<IMvxMessenger>();
+            messenger.Publish(evt);
+        }
+
         protected virtual void Close()
         {
+            foreach (var eventToken in _eventTokens.Values)
+            {
+                eventToken.Dispose();
+            }
+            _eventTokens.Clear();
             Close(this);
         }
         

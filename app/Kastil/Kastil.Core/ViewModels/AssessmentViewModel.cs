@@ -103,8 +103,7 @@ namespace Kastil.Core.ViewModels
             {
                 var context = Resolve<IAssessmentEditContext>();
                 await context.CommitChanges();
-				var messenger = Resolve<IMvxMessenger> ();
-				messenger.Publish (new EditingDoneEvent (this, EditAction.Edit));
+				Publish(new EditingDoneEvent (this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.AssessmentSaved);
                 Close();
             }
@@ -125,11 +124,9 @@ namespace Kastil.Core.ViewModels
 
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
         
-		private MvxSubscriptionToken editingDoneToken;
         public Task Initialize()
         {
-            var messenger = Resolve<IMvxMessenger>();
-            editingDoneToken = messenger.Subscribe<EditingDoneEvent>(OnEditingDone);
+            Subscribe<EditingDoneEvent>(OnEditingDone);
             return Refresh();
         }
 
@@ -137,12 +134,6 @@ namespace Kastil.Core.ViewModels
         {
 			if (evt.Sender is EditAttributeViewModel)
             	Refresh();
-        }
-
-        protected override void Close()
-        {
-            editingDoneToken?.Dispose();
-            base.Close();
         }
 
         private async Task Load()
