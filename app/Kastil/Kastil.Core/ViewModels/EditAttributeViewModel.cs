@@ -5,9 +5,7 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using Kastil.Core.Events;
 using Kastil.Core.Services;
-using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Plugins.Messenger;
 using Attribute = Kastil.Shared.Models.Attribute;
 
 namespace Kastil.Core.ViewModels

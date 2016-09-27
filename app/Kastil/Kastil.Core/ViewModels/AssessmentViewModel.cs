@@ -8,7 +8,6 @@ using Kastil.Core.Services;
 using Kastil.Core.Utils;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Plugins.Messenger;
 
 namespace Kastil.Core.ViewModels
 {
