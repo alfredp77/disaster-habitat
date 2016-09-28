@@ -32,7 +32,7 @@ namespace Kastil.Core.Services
             IsNew = assessment == null;
 			if (assessment == null) 
 			{
-				Assessment = new Assessment { Id = Guid.NewGuid ().ToString () , DisasterId = disasterId , Name= "New Assessment" };
+				Assessment = new Assessment { Id = Guid.NewGuid ().ToString () , DisasterId = disasterId };
 			} 
 			else 
 			{

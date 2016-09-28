@@ -15,18 +15,26 @@ namespace Kastil.Core.ViewModels
     {
         public string Name
         {
-            get { return Context.Assessment.Name; }
+            get
+            {
+                return Context.Assessment.Name;                
+            }
             set
             {
                 Context.Assessment.Name = value;
-                Title = value;
+                SetTitle();
                 RaisePropertyChanged();
             }
         }        
 
         public string Location
         {
-            get { return Context.Assessment.Location; }
+            get
+            {
+                var location = Context.Assessment.Location;
+                return string.IsNullOrEmpty(location) && Context.IsNew ? location : $"({Messages.General.Unknown})";
+
+            }
             set
             {
                 Context.Assessment.Location = value;
@@ -34,19 +42,8 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        private bool _editMode;
-        public bool EditMode
-        {
-            get { return _editMode; }
-            private set
-            {
-                _editMode = value;
-                RaisePropertyChanged();
-                RaisePropertyChanged("AddMode");
-            }
-        }
-        public bool AddMode => !EditMode;
-
+        public bool AddMode => Context.IsNew;
+        
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
         private void DoAddAttrCommand()
         {
@@ -121,11 +118,10 @@ namespace Kastil.Core.ViewModels
             dialog.ShowLoading(Messages.General.Loading);
             try
             {
-                EditMode = !Context.IsNew;
                 var assessment = Context.Assessment;
                 if (assessment != null)
                 {
-                    Title = assessment.Name;
+                    SetTitle();
                     Attributes.Clear();
                     Attributes.AddRange(assessment.Attributes.Select(a => new AttributeViewModel(a)));
                 }
@@ -141,6 +137,11 @@ namespace Kastil.Core.ViewModels
             {
                 dialog.HideLoading();
             }
+        }
+
+        private void SetTitle()
+        {
+            Title = string.IsNullOrEmpty(Name) ? Messages.General.DefaultNewAssessmentName : Name;
         }
     }
 }

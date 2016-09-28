@@ -213,6 +213,7 @@
     <Compile Include="Bootstrap\VisibilityPluginBootstrap.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="PlatformSpecific\EditTextEnabledValueConverter.cs" />
     <Compile Include="PlatformSpecific\MvxSwipeRefreshLayout.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

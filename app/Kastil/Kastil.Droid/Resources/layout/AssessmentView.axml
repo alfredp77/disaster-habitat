@@ -14,42 +14,14 @@
 	</android.support.design.widget.AppBarLayout>
     <LinearLayout
         android:orientation="vertical"
+		android:layout_below="@id/toolbar_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_alignParentTop="true">
+        android:layout_marginLeft="5dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                app:MvxBind="Text AssessmentTitle"
-                android:background="?attr/colorPrimary"
-                android:id="@+id/assessmentTitle" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="Location :"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView2"
-                    app:MvxBind="Visibility Visibility(EditMode)"
-                    android:layout_marginRight="0.0dp" />
-                <TextView
-                    app:MvxBind="Text Location;Visibility Visibility(EditMode)"
-                    android:id="@+id/assessmentLocation"
-                    android:layout_width="fill_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
             <EditText
                 android:id="@+id/AssesmentName"
                 app:MvxBind="Text Name;Visibility Visibility(AddMode)"
@@ -62,9 +34,17 @@
                 android:background="@android:color/white"
                 android:singleLine="true"
                 android:imeOptions="actionNext" />
+            <TextView
+                android:text="Location :"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                app:MvxBind="Visibility InvertedVisibility(AddMode)"
+                android:layout_marginRight="0.0dp" />
             <EditText
                 android:id="@+id/AssesmentLocation"
-                app:MvxBind="Text Location;Visibility Visibility(AddMode)"
+                app:MvxBind="Text Location;InputType EditTextEnabled(AddMode)"
                 android:hint="Enter Assesment Location"
                 android:textColorHint="@color/gray_bcbcbc"
                 android:padding="10dp"
@@ -99,7 +79,7 @@
             android:background="@color/gray_ededed"
             android:id="@+id/assessmentAttributes"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:divider="@color/gray_dddddd"
             android:dividerHeight="1dp"
@@ -108,27 +88,29 @@
             app:MvxItemTemplate="@layout/attributeview"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="0.0dp" />
-    </LinearLayout>
+        <LinearLayout
+	        android:orientation="horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="bottom"
+	        android:layout_alignParentBottom="true">
+	        <Button
+	            android:id="@+id/save"
+				      android:text="Save"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            app:MvxBind="Click SaveCommand" />        
+	        <Button
+	            android:id="@+id/cancel"
+				      android:text="Cancel"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            app:MvxBind="Click CancelCommand"/>
+    	</LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:id="@+id/save"
-			      android:text="Save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:MvxBind="Click SaveCommand" />        
-        <Button
-            android:id="@+id/cancel"
-			      android:text="Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:MvxBind="Click CancelCommand"/>
-    </LinearLayout>
+
+	</LinearLayout>
+
 
 
 </RelativeLayout>
