@@ -32,7 +32,11 @@ namespace Kastil.Core.ViewModels
             get
             {
                 var location = Context.Assessment.Location;
-                return string.IsNullOrEmpty(location) && Context.IsNew ? location : $"({Messages.General.Unknown})";
+				if (Context.IsNew)
+					return location;
+				if (string.IsNullOrEmpty (location))
+					return $"({Messages.General.Unknown}";
+				return location;
 
             }
             set

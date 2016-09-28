@@ -9,8 +9,8 @@ namespace Kastil.Droid.PlatformSpecific
     {
         protected override InputTypes Convert(bool value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value)
-                return InputTypes.ClassNumber | InputTypes.NumberFlagDecimal | InputTypes.NumberFlagSigned;
+			if (value)
+				return InputTypes.ClassText;
 
             return InputTypes.Null;
         }
