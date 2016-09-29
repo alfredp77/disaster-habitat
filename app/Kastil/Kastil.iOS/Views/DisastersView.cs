@@ -21,6 +21,7 @@ namespace Kastil.iOS.Views
 
             var set = this.CreateBindingSet<DisastersView, DisastersViewModel>();
             set.Bind(_tableSource).To(vm => vm.Items);
+            set.Bind(_tableSource).For(t => t.SelectionChangedCommand).To(vm => vm.DisasterSelectedCommand);
 
             set.Apply();
 

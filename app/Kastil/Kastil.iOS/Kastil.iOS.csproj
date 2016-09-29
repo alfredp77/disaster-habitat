@@ -20,8 +20,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>i386</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -126,6 +127,11 @@
     </ImageAsset>
     <InterfaceDefinition Include="Views\DisastersView.xib" />
     <InterfaceDefinition Include="Views\DisasterItemCell.xib" />
+    <InterfaceDefinition Include="Views\SyncView.xib" />
+    <Compile Include="Views\SyncView.cs" />
+    <Compile Include="Views\SyncView.designer.cs">
+      <DependentUpon>SyncView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
@@ -228,5 +234,6 @@
       <Name>Kastil.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

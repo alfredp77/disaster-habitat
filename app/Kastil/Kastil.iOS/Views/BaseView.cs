@@ -12,6 +12,8 @@ namespace Kastil.iOS.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+			NavigationController.NavigationBar.Translucent = false;
+			EdgesForExtendedLayout = UIKit.UIRectEdge.Top;
             CreateNavBarItems();
         }
 

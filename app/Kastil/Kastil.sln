@@ -24,6 +24,7 @@ Global
 		Kastil.Shared\Kastil.Shared.projitems*{184536f0-432d-4c97-9342-ae97a6cd230a}*SharedItemsImports = 13
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{e033292c-1101-44f4-867d-083ef8db215f}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{fa8740a9-ab9f-4e80-9abb-1c0b97f6debd}*SharedItemsImports = 4
+		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{eb7592b4-6689-4d9d-8dc0-f42726b1271d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

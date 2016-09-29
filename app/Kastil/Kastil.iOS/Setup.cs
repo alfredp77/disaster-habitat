@@ -1,4 +1,6 @@
 using Acr.UserDialogs;
+using Kastil.Core.Services;
+using Kastil.PlatformSpecific.Shared;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
@@ -33,6 +35,8 @@ namespace Kastil.iOS
         protected override void InitializeFirstChance()
         {
             Mvx.RegisterType<IUserDialogs>(() => new UserDialogsImpl());
+            Mvx.RegisterSingleton<IRestServiceCaller>(() => new RestServiceCaller());
+            Mvx.RegisterSingleton(FolderProviderFactory.Create);
             base.InitializeFirstChance();
         }
     }
