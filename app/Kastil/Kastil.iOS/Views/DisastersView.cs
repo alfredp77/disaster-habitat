@@ -18,7 +18,7 @@ namespace Kastil.iOS.Views
             _tableSource = new CustomTableViewSource(disastersTable, DisasterItemCell.Identifier);
             disastersTable.Source = _tableSource;
 
-            var set = this.CreateBindingSet<DisastersView, DisastersViewModel>();
+            var set = CreateBindingSet<DisastersView>();
             set.Bind(_tableSource).To(vm => vm.Items);
             set.Bind(_tableSource).For(t => t.SelectionChangedCommand).To(vm => vm.DisasterSelectedCommand);
 

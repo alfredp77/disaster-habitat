@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Kastil.Core.ViewModels;
 using Kastil.iOS.PlatformSpecific;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 
 namespace Kastil.iOS.Views
@@ -16,6 +17,14 @@ namespace Kastil.iOS.Views
 			EdgesForExtendedLayout = UIKit.UIRectEdge.Top;
             CreateNavBarItems();
         }
+
+		protected MvxFluentBindingDescriptionSet<TView, T> CreateBindingSet<TView> () where TView : BaseView<T>
+		{
+			var theView = this as TView;
+			var set = theView.CreateBindingSet<TView, T>();
+			set.Bind().For(v => v.Title).To (vm => vm.Title);
+			return set;
+		}
 
         private void CreateNavBarItems()
         {
