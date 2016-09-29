@@ -7,8 +7,7 @@ namespace Kastil.iOS.Views
 {
     public partial class DisastersView : BaseView<DisastersViewModel>
     {
-        private CustomTableViewSource _tableSource;
-        private MvxUIRefreshControl _refreshControl;
+        private CustomTableViewSource _tableSource;        
 
         public override void ViewDidLoad()
         {

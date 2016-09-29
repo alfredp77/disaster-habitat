@@ -132,6 +132,16 @@
     <Compile Include="Views\SyncView.designer.cs">
       <DependentUpon>SyncView.cs</DependentUpon>
     </Compile>
+    <InterfaceDefinition Include="Views\AssessmentListView.xib" />
+    <Compile Include="Views\AssessmentListView.cs" />
+    <Compile Include="Views\AssessmentListView.designer.cs">
+      <DependentUpon>AssessmentListView.cs</DependentUpon>
+    </Compile>
+    <InterfaceDefinition Include="Views\AssessmentListItemCell.xib" />
+    <Compile Include="Views\AssessmentListItemCell.cs" />
+    <Compile Include="Views\AssessmentListItemCell.designer.cs">
+      <DependentUpon>AssessmentListItemCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
