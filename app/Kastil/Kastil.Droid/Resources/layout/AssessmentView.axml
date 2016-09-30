@@ -24,8 +24,7 @@
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/AssesmentName"
-                app:MvxBind="Text Name;Visibility Visibility(AddMode)"
-                android:hint="Enter Assesment Name"
+                app:MvxBind="Text Name;Visibility Visibility(AddMode);Hint NamePlaceholderText"
                 android:textColorHint="@color/gray_bcbcbc"
                 android:padding="10dp"
                 android:layout_height="fill_parent"
@@ -44,8 +43,7 @@
                 android:layout_marginRight="0.0dp" />
             <EditText
                 android:id="@+id/AssesmentLocation"
-                app:MvxBind="Text Location;InputType EditTextEnabled(AddMode)"
-                android:hint="Enter Assesment Location"
+                app:MvxBind="Text Location;InputType EditTextEnabled(AddMode);Hint LocationPlaceholderText"
                 android:textColorHint="@color/gray_bcbcbc"
                 android:padding="10dp"
                 android:layout_height="fill_parent"

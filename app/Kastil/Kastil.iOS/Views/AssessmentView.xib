@@ -64,16 +64,22 @@
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3N-In-99E">
                     <rect key="frame" x="0.0" y="538" width="375" height="65"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abv-ch-dT9">
-                            <rect key="frame" x="106" y="18" width="77" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abv-ch-dT9">
+                            <rect key="frame" x="65" y="18" width="77" height="30"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="77" id="GzR-Pg-snv"/>
+                            </constraints>
                             <state key="normal" title="Save">
                                 <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-cz-TTi">
-                            <rect key="frame" x="191" y="18" width="77" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-cz-TTi">
+                            <rect key="frame" x="243" y="18" width="77" height="30"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="77" id="Zg9-xD-rAF"/>
+                            </constraints>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -81,7 +87,11 @@
                     </subviews>
                     <color key="backgroundColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="DWZ-cz-TTi" secondAttribute="trailing" constant="55" id="0ev-k4-6lY"/>
+                        <constraint firstItem="DWZ-cz-TTi" firstAttribute="top" secondItem="C3N-In-99E" secondAttribute="top" constant="18" id="E14-gt-quH"/>
+                        <constraint firstItem="abv-ch-dT9" firstAttribute="leading" secondItem="C3N-In-99E" secondAttribute="leading" constant="41" id="EYu-aj-d3W"/>
                         <constraint firstAttribute="height" constant="92" id="Vcs-7B-QXA"/>
+                        <constraint firstItem="abv-ch-dT9" firstAttribute="top" secondItem="C3N-In-99E" secondAttribute="top" constant="18" id="x8f-Yw-d0a"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bu-C2-xnw">
