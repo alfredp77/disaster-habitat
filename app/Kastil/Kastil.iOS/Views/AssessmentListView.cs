@@ -13,12 +13,12 @@ namespace Kastil.iOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			SetUpTableView ();
+			SetUpTableView (assessmentList, AssessmentListItemCell.Nib, AssessmentListItemCell.Identifier);
 
 			_tableSource = new CustomTableViewSource (assessmentList, AssessmentListItemCell.Identifier);
 			assessmentList.Source = _tableSource;
 
-			var set = this.CreateBindingSet<AssessmentListView, AssessmentListViewModel> ();
+			var set = CreateBindingSet<AssessmentListView> ();
 			set.Bind (_tableSource).To (vm => vm.Items);
 			set.Bind (_tableSource).For (t => t.SelectionChangedCommand).To (vm => vm.AssessmentSelectedCommand);
 
@@ -27,15 +27,6 @@ namespace Kastil.iOS
 			assessmentList.ReloadData ();
 
 			ViewModel.Initialize ();
-		}
-
-		void SetUpTableView ()
-		{
-			assessmentList.TranslatesAutoresizingMaskIntoConstraints = false;
-			assessmentList.SeparatorStyle = UITableViewCellSeparatorStyle.None;
-			assessmentList.UserInteractionEnabled = true;
-
-			assessmentList.RegisterNibForCellReuse (AssessmentListItemCell.Nib, AssessmentListItemCell.Identifier);
 		}
 	}
 }

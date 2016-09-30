@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditAttributeView">
+            <connections>
+                <outlet property="cancelButton" destination="I16-yE-SGd" id="ky1-Gc-QmY"/>
+                <outlet property="deleteButton" destination="P0V-zP-U8x" id="1H5-Ky-Pqu"/>
+                <outlet property="nameField" destination="Gty-YX-SCI" id="Vjz-md-g50"/>
+                <outlet property="saveButton" destination="Oe1-PG-FD7" id="dJW-4t-F8a"/>
+                <outlet property="valueField" destination="ISd-di-JC1" id="XNM-XD-FJD"/>
+                <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBy-FP-DTS">
+                    <rect key="frame" x="8" y="8" width="53" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gty-YX-SCI">
+                    <rect key="frame" x="8" y="37" width="359" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ISd-di-JC1">
+                    <rect key="frame" x="8" y="116" width="359" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Value:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB0-9M-vif">
+                    <rect key="frame" x="8" y="87" width="53" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXv-Ig-Reg">
+                    <rect key="frame" x="0.0" y="538" width="375" height="65"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0V-zP-U8x">
+                            <rect key="frame" x="149" y="18" width="77" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="Delete">
+                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I16-yE-SGd">
+                            <rect key="frame" x="234" y="18" width="77" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oe1-PG-FD7">
+                            <rect key="frame" x="64" y="18" width="77" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="P0V-zP-U8x" firstAttribute="top" secondItem="lXv-Ig-Reg" secondAttribute="top" constant="18" id="G1B-8j-vF9"/>
+                        <constraint firstAttribute="height" constant="65" id="HXQ-Kq-hae"/>
+                        <constraint firstAttribute="trailing" secondItem="I16-yE-SGd" secondAttribute="trailing" constant="64" id="ao0-jV-CYT"/>
+                        <constraint firstItem="Oe1-PG-FD7" firstAttribute="top" secondItem="lXv-Ig-Reg" secondAttribute="top" constant="18" id="lvH-5P-wYv"/>
+                        <constraint firstItem="Oe1-PG-FD7" firstAttribute="leading" secondItem="lXv-Ig-Reg" secondAttribute="leading" constant="64" id="oj7-Kb-d18"/>
+                        <constraint firstItem="I16-yE-SGd" firstAttribute="top" secondItem="lXv-Ig-Reg" secondAttribute="top" constant="18" id="qH9-8q-Nrw"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lXv-Ig-Reg" secondAttribute="trailing" id="5Je-Z9-fJh"/>
+                <constraint firstAttribute="bottom" secondItem="lXv-Ig-Reg" secondAttribute="bottom" id="eIa-zU-Old"/>
+                <constraint firstItem="lXv-Ig-Reg" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="fm4-bA-5Aj"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="279.5" y="318.5"/>
+        </view>
+    </objects>
+</document>

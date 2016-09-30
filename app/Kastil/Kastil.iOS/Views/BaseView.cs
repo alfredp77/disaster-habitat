@@ -5,6 +5,7 @@ using Kastil.Core.ViewModels;
 using Kastil.iOS.PlatformSpecific;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
+using UIKit;
 
 namespace Kastil.iOS.Views
 {
@@ -33,6 +34,15 @@ namespace Kastil.iOS.Views
             if (ViewModel.AddCommand != null)
                 this.AddRightButton(ButtonTypes.Add, async (s, e) => await ViewModel.AddCommand.ExecuteAsync());
         }
+
+		protected virtual void SetUpTableView(UITableView tableView, UINib nib, string identifier)
+		{
+			tableView.TranslatesAutoresizingMaskIntoConstraints = false;
+			tableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			tableView.UserInteractionEnabled = true;
+
+			tableView.RegisterNibForCellReuse (nib, identifier);
+		}
 
     }
 }

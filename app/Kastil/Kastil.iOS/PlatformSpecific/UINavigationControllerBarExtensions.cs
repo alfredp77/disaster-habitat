@@ -64,4 +64,6 @@ namespace Kastil.iOS.PlatformSpecific
 		public static ButtonType Close = new ButtonType { Image = UIImage.FromBundle("NavigationClose") };
 		public static ButtonType Add = new ButtonType { Image = UIImage.FromBundle("NavigationAdd") };
     }
+
+	
 }

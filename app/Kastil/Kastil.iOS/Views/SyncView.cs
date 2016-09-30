@@ -10,7 +10,7 @@ namespace Kastil.iOS
 		{
 			base.ViewDidLoad ();
 
-			var set = this.CreateBindingSet<SyncView, SyncViewModel> ();
+			var set = CreateBindingSet<SyncView>();
 			set.Bind (syncButton).To (vm => vm.SyncCommand);
 			set.Bind (staffCode).To (vm => vm.StaffCode);
 			set.Apply ();

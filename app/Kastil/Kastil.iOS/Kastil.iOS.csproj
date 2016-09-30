@@ -147,6 +147,17 @@
     <Compile Include="Views\AssessmentView.designer.cs">
       <DependentUpon>AssessmentView.cs</DependentUpon>
     </Compile>
+    <InterfaceDefinition Include="Views\AttributeItemCell.xib" />
+    <Compile Include="Views\AttributeItemCell.cs" />
+    <Compile Include="Views\AttributeItemCell.designer.cs">
+      <DependentUpon>AttributeItemCell.cs</DependentUpon>
+    </Compile>
+    <InterfaceDefinition Include="Views\EditAttributeView.xib" />
+    <Compile Include="Views\EditAttributeView.cs" />
+    <Compile Include="Views\EditAttributeView.designer.cs">
+      <DependentUpon>EditAttributeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformSpecific\UITextFieldExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />

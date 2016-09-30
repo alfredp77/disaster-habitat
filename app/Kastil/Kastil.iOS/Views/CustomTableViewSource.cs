@@ -10,17 +10,21 @@ namespace Kastil.iOS.Views
     {
         private readonly string _cellIdentifier;
         private UITableViewCell _sizingCell;
+		private readonly UITableViewCellSelectionStyle _selectionStyle;
 
-        public CustomTableViewSource(UITableView tableView, string cellIdentifier)
+		public CustomTableViewSource(UITableView tableView, string cellIdentifier, 
+		                             UITableViewCellSelectionStyle selectionStyle = UITableViewCellSelectionStyle.Default)
             : base(tableView)
         {
-            _cellIdentifier = cellIdentifier;
+			_selectionStyle = selectionStyle;
+			_cellIdentifier = cellIdentifier;
         }
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var item = GetItemAt(indexPath);
             var cell = GetOrCreateCellFor(tableView, indexPath, item);
+			cell.SelectionStyle = _selectionStyle;
 
             var bindable = cell as IMvxDataConsumer;
             if (bindable != null)
