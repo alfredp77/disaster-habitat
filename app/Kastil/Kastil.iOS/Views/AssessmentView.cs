@@ -21,8 +21,10 @@ namespace Kastil.iOS
 
 			var set = CreateBindingSet<AssessmentView>();
 			set.Bind(nameField).For("Visibility").To(vm => vm.AddMode).WithConversion("Visibility");
+			set.Bind(nameField).For(f => f.Placeholder).To(vm => vm.NamePlaceholderText);
 			set.Bind(locationLabel).For("Visibility").To(vm => vm.AddMode).WithConversion("InvertedVisibility");
 			set.Bind(locationField).For(f => f.UserInteractionEnabled).To(vm => vm.AddMode);
+			set.Bind(locationField).For(f => f.Placeholder).To(vm => vm.LocationPlaceholderText);
 			set.Bind(nameField).To(vm => vm.Name);
 			set.Bind(locationField).To(vm => vm.Location);
 			set.Bind(addAttributeButton).To(vm => vm.AddAttributeCommand);

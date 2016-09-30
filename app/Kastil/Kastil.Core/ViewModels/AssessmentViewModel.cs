@@ -27,17 +27,16 @@ namespace Kastil.Core.ViewModels
             }
         }        
 
+		public string NamePlaceholderText 
+		{
+			get { return Messages.Placeholders.AssessmentName;}
+		}
+
         public string Location
         {
             get
             {
-                var location = Context.Assessment.Location;
-				if (Context.IsNew)
-					return location;
-				if (string.IsNullOrEmpty (location))
-					return $"({Messages.General.Unknown}";
-				return location;
-
+                return Context.Assessment.Location;
             }
             set
             {
@@ -45,6 +44,16 @@ namespace Kastil.Core.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+		public string LocationPlaceholderText 
+		{
+			get 
+			{
+				if (Context.IsNew)
+					return Messages.Placeholders.AssessmentLocation;
+				return Messages.General.Unknown;
+			}
+		}
 
         public bool AddMode => Context.IsNew;
         
