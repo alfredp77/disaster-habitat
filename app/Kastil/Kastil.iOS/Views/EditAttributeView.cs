@@ -28,6 +28,7 @@ namespace Kastil.iOS
 
 			ViewModel.Initialize();
 		}
+
 	}
 }
 

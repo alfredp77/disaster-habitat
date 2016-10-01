@@ -45,7 +45,7 @@ namespace Kastil.Core.ViewModels
             messenger.Publish(evt);
         }
 
-        protected virtual void Close()
+        public virtual void Close()
         {
             foreach (var eventToken in _eventTokens.Values)
             {
