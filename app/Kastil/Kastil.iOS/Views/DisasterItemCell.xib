@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,27 +15,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDZ-t3-ycC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Disaster Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYt-IK-Lb0">
-                                <rect key="frame" x="15" y="8" width="289" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbG-Ba-BmC">
-                                <rect key="frame" x="15" y="35" width="289" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbG-Ba-BmC">
+                        <rect key="frame" x="15" y="34" width="289" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Disaster Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYt-IK-Lb0">
+                        <rect key="frame" x="15" y="8" width="289" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="RYt-IK-Lb0" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="topMargin" id="Qek-2C-XW1"/>
+                    <constraint firstItem="AbG-Ba-BmC" firstAttribute="top" secondItem="RYt-IK-Lb0" secondAttribute="bottom" constant="5" id="Tgc-iT-Fnn"/>
+                    <constraint firstItem="AbG-Ba-BmC" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leadingMargin" constant="7" id="fiw-bv-5lK"/>
+                    <constraint firstItem="RYt-IK-Lb0" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leadingMargin" constant="7" id="s1f-iv-TqF"/>
+                </constraints>
             </tableViewCellContentView>
             <accessibility key="accessibilityConfiguration" identifier="DisasterItemCell"/>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="dateLabel" destination="AbG-Ba-BmC" id="0wR-9f-OJw"/>
                 <outlet property="nameLabel" destination="RYt-IK-Lb0" id="hHk-ny-T3D"/>
