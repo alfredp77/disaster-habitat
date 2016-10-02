@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MvvmCross.Plugins.Messenger;
 using Kastil.Core.Events;
+using Kastil.Shared.Models;
 
 namespace Kastil.Core.ViewModels
 {
@@ -106,7 +107,6 @@ namespace Kastil.Core.ViewModels
                 return _assessmentSelectedCommand;
             }
         }
-
 
         private void DoAssessmentSelectedCommand(AssessmentListItemViewModel itemVm)
         {

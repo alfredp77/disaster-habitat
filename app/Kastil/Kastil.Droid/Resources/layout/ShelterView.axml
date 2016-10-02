@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+	<android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar_layout">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            app:layout_scrollFlags="scroll|enterAlways" />
+	</android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:orientation="vertical"
+		    android:layout_below="@id/toolbar_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="5dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ShelterName"
+                app:MvxBind="Text Name;Visibility Visibility(AddMode)"
+                android:textColorHint="@color/gray_bcbcbc"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:background="@android:color/white"
+                android:singleLine="true"
+                android:imeOptions="actionNext" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:background="@android:color/white"
+                android:singleLine="true"
+                android:id="@+id/LocationName"
+                app:MvxBind="Text LocationName;Visibility InvertedVisibility(AddMode)" />            
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Assestment attribute :"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentLeft="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/textView23" />
+            <Button
+                android:id="@+id/addAttrButton"
+                android:layout_alignParentRight="true"
+                app:MvxBind="Click AddAttributeCommand"
+                android:drawableRight="@drawable/ButtonAdd"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent" />
+        </RelativeLayout>
+        <Mvx.MvxListView
+            android:background="@color/gray_ededed"
+            android:id="@+id/assessmentAttributes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:divider="@color/gray_dddddd"
+            android:dividerHeight="1dp"
+            android:cacheColorHint="#00000000"
+            app:MvxBind="ItemsSource Attributes; ItemClick AttributeSelectedCommand"
+            app:MvxItemTemplate="@layout/attributeview"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="0.0dp" />
+        <LinearLayout
+	        android:orientation="horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="bottom"
+	        android:layout_alignParentBottom="true">
+	        <Button
+	            android:id="@+id/save"
+				      android:text="Save"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            app:MvxBind="Click BackCommand" />  
+    	</LinearLayout>
+
+
+	</LinearLayout>
+
+
+
+</RelativeLayout>

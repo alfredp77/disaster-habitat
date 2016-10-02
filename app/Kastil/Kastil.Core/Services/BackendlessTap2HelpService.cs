@@ -42,6 +42,18 @@ namespace Kastil.Core.Services
             return Asyncer.Async(context.LoadAll);
         }
 
+        public Task<IEnumerable<Shelter>> GetShelters(string disasterId, string assessmentId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            return Asyncer.Async(() => context.LoadAll().Where(s => s.DisasterId == disasterId && s.AssessmentId == assessmentId));
+        }
+
+        public Task<Shelter> GetShelter(string shelterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.Id == shelterId));
+        }
+
         public async Task<IEnumerable<Attribute>> GetShelterAttributes()
         {
             var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
@@ -58,6 +70,11 @@ namespace Kastil.Core.Services
         {
             var context = PersistenceContextFactory.CreateFor<Assessment>();
             return Asyncer.Async(() => context.Save(assessment));
+        }
+
+        public Task Save(List<Shelter> shelters)
+        {
+            throw new NotImplementedException();
         }
 
         public Task Save(Shelter shelter)

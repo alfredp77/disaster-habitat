@@ -225,7 +225,8 @@
     <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Views\EditAttributeView.cs" />
     <Compile Include="Views\LoginView.cs" />
-    <Compile Include="Views\SheltersView.cs" />
+    <Compile Include="Views\ShelterView.cs" />
+    <Compile Include="Views\ShelterListView.cs" />
     <Compile Include="Views\AssessmentListView.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Views\SyncView.cs" />
@@ -246,7 +247,7 @@
     <AndroidResource Include="Resources\layout\DisasterItemCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\SheltersView.axml">
+    <AndroidResource Include="Resources\layout\ShelterListView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AssessmentListView.axml">
@@ -263,6 +264,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EditAttributeView.axml" />
+    <AndroidResource Include="Resources\layout\ShelterItemCell.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ShelterView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />

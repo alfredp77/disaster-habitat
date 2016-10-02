@@ -1,6 +1,7 @@
 using Kastil.Core.Fakes;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
+using Kastil.Shared.Models;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 
@@ -26,7 +27,10 @@ namespace Kastil.Core
             Mvx.RegisterSingleton(() => new Connection());
             Mvx.RegisterSingleton<IPersistenceContextFactory>(() => new FileBasedPersistenceContextFactory());
             Mvx.RegisterType<IJsonSerializer>(() => new JsonSerializer());
+            //Mvx.RegisterSingleton<IEditContext<Assessment>>(() => new AssesmentEditContext());
             Mvx.RegisterSingleton<IAssessmentEditContext>(() => new AssesmentEditContext());
+            //Mvx.RegisterSingleton<IEditContext<Shelter>>(() => new ShelterEditContext());
+            Mvx.RegisterSingleton<IShelterEditContext>(() => new ShelterEditContext());
         }
     }
 }

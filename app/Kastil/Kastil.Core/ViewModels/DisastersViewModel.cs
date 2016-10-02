@@ -79,7 +79,7 @@ namespace Kastil.Core.ViewModels
 
 		private void DoShowShelters (Disaster disaster)
 		{
-			ShowViewModel<SheltersViewModel> (new { disasterId = disaster.Id });
+			ShowViewModel<ShelterListViewModel> (new { disasterId = disaster.Id });
 		}
 
         protected override async Task DoSettingCommand()

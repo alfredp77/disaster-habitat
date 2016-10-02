@@ -31,7 +31,7 @@ namespace Kastil.Core.ViewModels
         {
             get
             {
-                var location = Context.Assessment.Location;
+                var location = Context.Assessment.LocationName;
 				if (Context.IsNew)
 					return location;
 				if (string.IsNullOrEmpty (location))
@@ -41,7 +41,7 @@ namespace Kastil.Core.ViewModels
             }
             set
             {
-                Context.Assessment.Location = value;
+                Context.Assessment.LocationName = value;
                 RaisePropertyChanged();
             }
         }
@@ -97,7 +97,7 @@ namespace Kastil.Core.ViewModels
         {
             var assessment = Context.Assessment;
             assessment.Name = Name;
-            assessment.Location = Location;
+            assessment.LocationName = Location;
         }
 
         public MvxCommand CancelCommand => new MvxCommand (Close);

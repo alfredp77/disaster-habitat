@@ -13,20 +13,33 @@
             app:layout_scrollFlags="scroll|enterAlways" />
     </android.support.design.widget.AppBarLayout>
     <kastil.droid.platformSpecific.MvxSwipeRefreshLayout
-        android:background="@color/gray_ededed"
+        android:id="@+id/shelterList"
+        android:background="#ededed"
         android:orientation="vertical"
         android:layout_below="@id/toolbar_layout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_weight = "1"
+        android:layout_height="wrap_content">
         <Mvx.MvxListView
-            android:background="@color/gray_ededed"
-            android:id="@+id/disasterTable"
+            android:background="#ededed"
+            android:id="@+id/sheltersTable"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:divider="@color/gray_dddddd"
+            android:divider="#dddddd"
             android:dividerHeight="1dp"
             android:cacheColorHint="#00000000"
+            app:MvxBind="ItemsSource Items; ItemClick ShelterSelectedCommand"
+            app:MvxItemTemplate="@layout/shelteritemcell"
             android:layout_marginBottom="0.0dp" />
     </kastil.droid.platformSpecific.MvxSwipeRefreshLayout>
+    <Button
+        android:id="@+id/attachToEvent"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_below="@+id/shelterList" 
+        android:text="Link to disaster incident"
+        android:textColor="#000"
+        app:MvxBind="Click LinkCommand"
+        android:textSize="12dp"
+        android:textStyle="bold" />
 </RelativeLayout>

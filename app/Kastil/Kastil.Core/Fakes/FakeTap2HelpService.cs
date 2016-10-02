@@ -18,10 +18,23 @@ namespace Kastil.Core.Fakes
             GenerateDisasters();
         }
 
+        #region Disaster incidents
         private void GenerateDisasters()
         {
-            var disaster1 = new Disaster { Id = Guid.NewGuid().ToString(), Name = "Typhoon Haiyan", DateWhen = new DateTimeOffset(2013, 11, 8, 0, 0, 0, TimeSpan.FromHours(8)) };
-            var disaster2 = new Disaster { Id = Guid.NewGuid().ToString(), Name = "Aceh Tsunami", DateWhen = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)) };
+            var disaster1 = new Disaster
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Typhoon Haiyan",
+                DateWhen = new DateTimeOffset(2013, 11, 8, 0, 0, 0, TimeSpan.FromHours(8)),
+                Location = new Location(14.599512, 120.984222) { Name = "Manila", Country = "Phillippines" }
+            };
+            var disaster2 = new Disaster
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Aceh Tsunami",
+                DateWhen = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)),
+                Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" }
+            };
             _disasters.Add(disaster1.Id, disaster1);
             _disasters.Add(disaster2.Id, disaster2);
         }
@@ -30,7 +43,9 @@ namespace Kastil.Core.Fakes
         {
             return Task.FromResult(_disasters.Values.AsEnumerable());
         }
+        #endregion
 
+        #region Attributes
         public Task<IEnumerable<Attribute>> GetShelterAttributes()
         {
             var attr1 = new Attribute { Category = "2", Id = "1", Key = "Hotlines" };
@@ -49,14 +64,27 @@ namespace Kastil.Core.Fakes
             var attr6 = new Attribute { Category = "1", Id = "6", Key = "Number of Hospitals" };
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6 } as IEnumerable<Attribute>);
         }
+        
+        private async Task<IEnumerable<Attribute>> GetRandomAttributes(bool forAssessment = true)
+        {
+            var attributes = forAssessment ? await GetAssessmentAttributes() : await GetShelterAttributes();
+            var rnd = new Random();
+            foreach (var attr in attributes)
+            {
+                attr.Value = rnd.Next(1, 100).ToString();
+            }
+            return attributes;
+        }
+        #endregion
 
+        #region Assessment
         private readonly Dictionary<string, Dictionary<string, Assessment>> _assessments = new Dictionary<string, Dictionary<string, Assessment>>();
         public Task Save(Assessment assessment)
         {
             Dictionary<string, Assessment> assessmentPerDisaster;
-             _assessments.TryGetValue(assessment.DisasterId, out assessmentPerDisaster);
+            _assessments.TryGetValue(assessment.DisasterId, out assessmentPerDisaster);
 
-            if(assessmentPerDisaster== null)
+            if (assessmentPerDisaster == null)
             {
                 _assessments[assessment.DisasterId] = new Dictionary<string, Assessment>();
             }
@@ -65,28 +93,17 @@ namespace Kastil.Core.Fakes
             return Task.Factory.StartNew(() => { });
         }
 
-        private async Task<IEnumerable<Attribute>>  GetRandomAssessmentAttr()
-        {
-            var attributes = await GetAssessmentAttributes();
-            var rnd = new Random();
-            foreach (var attr in attributes)
-            {
-                attr.Value = rnd.Next(1, 100).ToString();
-            }
-            return attributes;
-        }
-
         private async Task InitFakeAssessments()
         {
             var count = 1;
             foreach (var disasterId in _disasters.Keys)
             {
-                var attributes = await GetRandomAssessmentAttr();
-                var assessment1 = new Assessment { Id = count.ToString(), Location= "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                var attributes = await GetRandomAttributes();
+                var assessment1 = new Assessment { Id = count.ToString(), LocationName= "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 count++;
                 await Save(assessment1);
-                attributes = await GetRandomAssessmentAttr();
-                var assessment2 = new Assessment { Id = count.ToString(), Location = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                attributes = await GetRandomAttributes();
+                var assessment2 = new Assessment { Id = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 await Save(assessment2);
                 count ++;
             }
@@ -135,20 +152,6 @@ namespace Kastil.Core.Fakes
             return Task.FromResult(result);
         }
 
-
-        private readonly Dictionary<string, Shelter> _shelters = new Dictionary<string, Shelter>();
-        public Task Save(Shelter shelter)
-        {
-            _shelters[shelter.Id] = shelter;
-            return Asyncer.DoNothing();
-        }
-        public Task<IEnumerable<Shelter>> GetShelters()
-        {
-            var shelter = new Shelter {Id = "1", Name = "Shelter 1"};
-            Save(shelter);
-            return Task.FromResult(_shelters.Values.AsEnumerable());
-        }
-
         public async Task DeleteAssessments(string disasterId)
         {
             var assessments = await GetAssessments(disasterId);
@@ -157,5 +160,97 @@ namespace Kastil.Core.Fakes
                 _assessments.Remove(assessment.Id);
             }
         }
+        #endregion
+
+        #region Shelter
+        private readonly List<Shelter> _shelters = new List<Shelter>();
+        public Task Save(List<Shelter> shelters)
+        {
+            _shelters.AddRange(shelters);
+            return Asyncer.DoNothing();
+        }
+
+        public Task Save(Shelter shelter)
+        {
+            shelter.VerifiedOn = DateTime.MaxValue;
+            _shelters.Add(shelter);
+            return Asyncer.DoNothing();
+        }
+
+        private async Task InitFakeShelters()
+        {
+            var attributes = await GetRandomAttributes(false);
+
+            _shelters.Add(new Shelter
+            {
+                Id = "1",
+                Name = "Manila Shelter 1",
+                VerifiedOn = new DateTime(2016, 01, 01),
+                Location = new Location(14.599512, 120.984222) { Name = "Manila", Country = "Phillippines" },
+                Attributes = attributes.ToList()
+            });
+
+            _shelters.Add(new Shelter
+            {
+                Id = "2",
+                Name = "Aceh Shelter 1",
+                VerifiedOn = new DateTime(2016, 01, 01),
+                Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" },
+                Attributes = attributes.ToList()
+            });
+
+            _shelters.Add(new Shelter
+            {
+                Id = "3",
+                Name = "Aceh Shelter 2",
+                VerifiedOn = new DateTime(2016, 01, 01),
+                Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" },
+                AssessmentId = "1",
+                Attributes = attributes.ToList()
+            });
+        }
+        
+        public async Task<IEnumerable<Shelter>> GetShelters()
+        {
+            if (_shelters.Count == 0)
+            {
+                await InitFakeShelters();
+            }
+
+            return _shelters.AsEnumerable();
+        }
+
+        public async Task<IEnumerable<Shelter>> GetShelters(string disasterId, string assessmentId)
+        {
+            if (_shelters.Count == 0)
+                await InitFakeShelters();
+            
+            if (!string.IsNullOrEmpty(assessmentId))
+                return _shelters.Where(s => s.AssessmentId == assessmentId);
+
+            if (!string.IsNullOrEmpty(disasterId))
+            {
+                var shelters = _shelters.Where(s => s.DisasterId == disasterId).ToList();
+                if (shelters.Any())
+                    return shelters;
+
+                var disasters = await GetDisasters();
+                var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
+                return _shelters.Where(s => s.Location.Country == disasterLocation.Country);
+            }
+
+            return new List<Shelter>();
+        }
+
+        public Task<Shelter> GetShelter(string shelterId)
+        {
+            Shelter result = null;
+            if (!string.IsNullOrWhiteSpace(shelterId))
+                result = _shelters.FirstOrDefault(s => s.Id == shelterId);
+
+            return result != null ? Task.FromResult(result) : Task.FromResult<Shelter>(null);
+        }
+        #endregion
+
     }
 }

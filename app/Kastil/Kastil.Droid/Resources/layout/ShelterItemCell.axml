@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/pure_white">
+    <CheckBox
+      android:id="@+id/chkSelect"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_alignParentLeft="true"
+      app:MvxBind="Checked IsChecked; Click ItemChecked"/>
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/chkSelect"
+        android:layout_toEndOf="@+id/chkSelect"
+        android:layout_marginLeft="12dp"
+        android:text="Shelter Name"
+        app:MvxBind="Text Text" />
+
+      <TextView
+        android:id="@+id/txtLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_a3a3a3"
+        android:layout_below="@+id/txtName"
+        android:layout_toRightOf="@+id/chkSelect"
+        android:layout_toEndOf="@+id/chkSelect"
+        android:textSize="12dp"
+        android:layout_marginLeft="12dp"
+        android:text="Shelter Location"
+        app:MvxBind="Text LocationName" />
+</RelativeLayout>

@@ -3,10 +3,11 @@ using Kastil.Core.ViewModels;
 using Kastil.iOS.PlatformSpecific;
 using Kastil.iOS.Views;
 using UIKit;
+using Kastil.Shared.Models;
 
 namespace Kastil.iOS
 {
-	public partial class EditAttributeView : BaseView<EditAttributeViewModel>
+	public partial class EditAttributeView : BaseView<EditAttributeViewModel<Item>>
 	{
 		public override void ViewDidLoad()
 		{

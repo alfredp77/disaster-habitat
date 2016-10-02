@@ -7,10 +7,11 @@ using Kastil.Core.Events;
 using Kastil.Core.Services;
 using MvvmCross.Core.ViewModels;
 using Attribute = Kastil.Shared.Models.Attribute;
+using Kastil.Shared.Models;
 
 namespace Kastil.Core.ViewModels
 {
-    public class EditAttributeViewModel : BaseViewModel
+    public class EditAttributeViewModel : BaseViewModel 
     {
         private string _name;
         private string _attributeValue;
@@ -97,8 +98,9 @@ namespace Kastil.Core.ViewModels
 			try 
 			{
 				var context = Resolve<IAssessmentEditContext> ();
-				var assessment = context.Assessment;
-				Name = assessment.Name;
+
+				var item = context.Assessment;
+				Name = item.Name;
 				var service = Resolve<ITap2HelpService> ();
 				Items = (await service.GetAssessmentAttributes ()).Select (attribute => new SpinnerItem (attribute)).ToList ();
 

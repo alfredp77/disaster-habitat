@@ -6,7 +6,7 @@ namespace Kastil.Shared.Models
     public class Disaster : BaseModel
     {
         public string Name { get; set; }
-        public string Location { get; set; }
+        public Location Location { get; set; }
         private long When { get; set; }
         [JsonIgnore]
         public DateTimeOffset DateWhen
