@@ -27,24 +27,33 @@ namespace Kastil.Core.ViewModels
             }
         }        
 
+		public string NamePlaceholderText 
+		{
+			get { return Messages.Placeholders.AssessmentName;}
+		}
+
         public string Location
         {
             get
             {
-                var location = Context.Assessment.LocationName;
-				if (Context.IsNew)
-					return location;
-				if (string.IsNullOrEmpty (location))
-					return $"({Messages.General.Unknown}";
-				return location;
-
+                return Context.Assessment.Location;
             }
             set
             {
-                Context.Assessment.LocationName = value;
+                Context.Assessment.Location = value;
                 RaisePropertyChanged();
             }
         }
+
+		public string LocationPlaceholderText 
+		{
+			get 
+			{
+				if (Context.IsNew)
+					return Messages.Placeholders.AssessmentLocation;
+				return Messages.General.Unknown;
+			}
+		}
 
         public bool AddMode => Context.IsNew;
         

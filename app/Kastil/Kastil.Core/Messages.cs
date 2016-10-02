@@ -16,6 +16,12 @@
             public const string Unknown = "Unknown";
         }
 
+		public static class Placeholders
+		{
+			public const string AssessmentName = "Enter assessment name";
+			public const string AssessmentLocation = "Enter assessment location";
+		}
+
         public static class Login
         {
             public const string PleaseKeyInYourStaffCode = "Please key in your staff code";
