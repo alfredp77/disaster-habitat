@@ -36,11 +36,11 @@ namespace Kastil.Core.ViewModels
         {
             get
             {
-                return Context.Assessment.Location;
+                return Context.Assessment.LocationName;
             }
             set
             {
-                Context.Assessment.Location = value;
+                Context.Assessment.LocationName = value;
                 RaisePropertyChanged();
             }
         }
