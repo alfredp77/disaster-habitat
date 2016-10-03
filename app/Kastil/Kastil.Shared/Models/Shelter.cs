@@ -1,5 +1,6 @@
 using Kastil.Core.Utils;
 using System;
+using Newtonsoft.Json;
 
 namespace Kastil.Shared.Models
 {
@@ -7,7 +8,13 @@ namespace Kastil.Shared.Models
     {
         public string AssessmentId { get; set; }
         public Location Location { get; set; }
-        public DateTime VerifiedOn { get; set; }
+
+		private long VerifiedOn { get; set; }
+		[JsonIgnore]
+		public DateTimeOffset? DateVerifiedOn {
+			get { return VerifiedOn.AsDateTimeOffset(); }
+			set { VerifiedOn = value.AsUtcTicks(); }
+		}
 
         public double DistanceFromLocation (Location location)
         {

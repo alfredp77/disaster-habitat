@@ -1,4 +1,5 @@
 using System;
+using Kastil.Core.Utils;
 using Newtonsoft.Json;
 
 namespace Kastil.Shared.Models
@@ -9,15 +10,10 @@ namespace Kastil.Shared.Models
         public Location Location { get; set; }
         private long When { get; set; }
         [JsonIgnore]
-        public DateTimeOffset DateWhen
+        public DateTimeOffset? DateWhen
         {
-            get
-            {
-                if (When == 0)
-                    return DateTimeOffset.UtcNow;
-                return new DateTimeOffset(When, TimeSpan.Zero);
-            }
-            set { When = value.UtcTicks; }
+            get { return When.AsDateTimeOffset(); }
+			set { When = value.AsUtcTicks(); }
         }
     }
 }

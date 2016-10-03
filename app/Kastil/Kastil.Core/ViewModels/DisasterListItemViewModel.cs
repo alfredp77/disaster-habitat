@@ -16,7 +16,7 @@ namespace Kastil.Core.ViewModels
         public Disaster Value { get; }
 
         public string Text => Value.Name;
-        public DateTimeOffset When => Value.DateWhen;
+        public DateTimeOffset? When => Value.DateWhen;
 
     }
 }

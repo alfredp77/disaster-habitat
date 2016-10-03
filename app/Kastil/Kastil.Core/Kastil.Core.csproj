@@ -82,6 +82,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ShelterListViewModel.cs" />
     <Compile Include="ViewModels\SyncViewModel.cs" />
+    <Compile Include="Utils\DateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
