@@ -31,6 +31,14 @@ namespace Kastil.iOS.Views
             {
                 SetDataContext(bindable, item);
             }
+			if (indexPath.Row % 2 == 0) 
+			{				
+				cell.ContentView.BackgroundColor = UIColor.FromRGB(0, 180, 180);
+			} 
+			else 
+			{
+				cell.ContentView.BackgroundColor = UIColor.FromRGB(180, 180, 0);
+			}
             return cell;
         }
 

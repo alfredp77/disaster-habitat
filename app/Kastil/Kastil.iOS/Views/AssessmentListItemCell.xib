@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,25 +15,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PHM-1A-gWk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Assessment Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyd-5L-YfY">
-                                <rect key="frame" x="15" y="8" width="289" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcI-Hs-JcV">
-                                <rect key="frame" x="15" y="35" width="289" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assessment Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyd-5L-YfY">
+                        <rect key="frame" x="16" y="8" width="289" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcI-Hs-JcV">
+                        <rect key="frame" x="16" y="34" width="289" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="tcI-Hs-JcV" secondAttribute="trailing" constant="7" id="8rG-PB-XLg"/>
+                    <constraint firstItem="tcI-Hs-JcV" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leadingMargin" constant="8" id="9rD-uJ-3Zx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fyd-5L-YfY" secondAttribute="trailing" constant="7" id="G7S-o4-B2f"/>
+                    <constraint firstItem="tcI-Hs-JcV" firstAttribute="top" secondItem="fyd-5L-YfY" secondAttribute="bottom" constant="5" id="YFL-To-wt4"/>
+                    <constraint firstItem="fyd-5L-YfY" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leadingMargin" constant="8" id="Yw6-j6-ZTS"/>
+                    <constraint firstItem="fyd-5L-YfY" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="topMargin" id="k5z-Br-13O"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="locationLabel" destination="tcI-Hs-JcV" id="kgq-CV-IJb"/>
