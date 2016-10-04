@@ -8,12 +8,5 @@ namespace Kastil.Droid.Views
     public class AssessmentView : BaseView
     {
         protected override int LayoutResource => Resource.Layout.AssessmentView;
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            var vm = (AssessmentViewModel)ViewModel;
-            vm.Initialize();
-        }
     }
 }

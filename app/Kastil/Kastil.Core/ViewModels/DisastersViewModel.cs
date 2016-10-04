@@ -22,10 +22,10 @@ namespace Kastil.Core.ViewModels
         }
 
 
-        public async Task Initialize()
+        public override Task Initialize()
         {
             Items.Clear();
-            await Load();
+            return Load();
         }
         
         private async Task Load()

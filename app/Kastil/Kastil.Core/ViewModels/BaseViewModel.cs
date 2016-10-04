@@ -17,6 +17,11 @@ namespace Kastil.Core.ViewModels
             return Mvx.Resolve<TService>();
         }
 
+		public virtual async Task Initialize()
+		{ 
+			
+		}
+
         private readonly Dictionary<string, MvxSubscriptionToken> _eventTokens = new Dictionary<string, MvxSubscriptionToken>();
 
         protected void Subscribe<T>(Action<T> handler) where T : MvxMessage

@@ -113,7 +113,7 @@ namespace Kastil.Core.ViewModels
 
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
         
-        public Task Initialize()
+        public override Task Initialize()
         {
             Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
             return Load();

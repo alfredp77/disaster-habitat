@@ -30,7 +30,7 @@ namespace Kastil.Core.ViewModels
             DisasterId = disasterId;
         }
 
-        public Task Initialize()
+        public override Task Initialize()
         {
             Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
             return Load();

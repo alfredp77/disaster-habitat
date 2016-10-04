@@ -91,7 +91,7 @@ namespace Kastil.Core.ViewModels
 			set { _buttonText = value; RaisePropertyChanged (); }
 		}
 
-        public async Task Initialize()
+        public override async Task Initialize()
         {
 			var dialogs = Resolve<IUserDialogs> ();
 			dialogs.ShowLoading (Messages.General.Loading);

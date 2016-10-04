@@ -9,15 +9,6 @@ namespace Kastil.Droid.Views
     public class EditAttributeView : BaseView 
     {
         protected override int LayoutResource => Resource.Layout.EditAttributeView;
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            var vm = (EditAttributeViewModel)ViewModel;
-			vm.Initialize ().ContinueWith (_ => {
-				var spinner = FindViewById<Spinner> (Resource.Id.attributeSpinner);
-				spinner.Enabled = !vm.EditMode;});
-        }
     }
 }
 

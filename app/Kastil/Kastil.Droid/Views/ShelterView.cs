@@ -10,13 +10,6 @@ namespace Kastil.Droid
     public class ShelterView : BaseView
     {
         protected override int LayoutResource => Resource.Layout.ShelterView;
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            var vm = (ShelterViewModel)ViewModel;
-            vm.Initialize();
-        }
     }
 }
 
