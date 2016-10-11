@@ -18,6 +18,7 @@ namespace Kastil.Core.Services
         void Initialize(Shelter item = null, string disasterId = null);
         void AddOrUpdateAttribute(Attribute attribute, string value);
         void DeleteAttribute(string attributeName);
+        Task DeleteShelter();
         Task CommitChanges();
     }
 
@@ -75,6 +76,12 @@ namespace Kastil.Core.Services
                 _attributesMap.Remove(attributeName);
                 Item.Attributes.Remove(attr);
             }
+        }
+
+        public async Task DeleteShelter()
+        {
+            var service = Resolve<ITap2HelpService>();
+            await service.DeleteShelter(Item.Id);
         }
 
         public async Task CommitChanges()

@@ -1,4 +1,6 @@
 ﻿using Kastil.Shared.Models;
+using MvvmCross.Core.ViewModels;
+using System.Windows.Input;
 
 namespace Kastil.Core.ViewModels
 {
@@ -27,6 +29,18 @@ namespace Kastil.Core.ViewModels
                 RaisePropertyChanged(() => IsChecked);
             }
         }
+
+        public ICommand ItemChecked
+        {
+            get
+            {
+                return new MvxCommand(() =>
+                {
+                    var isChecked = IsChecked;
+                });
+            }
+        }
+
 
     }
 }

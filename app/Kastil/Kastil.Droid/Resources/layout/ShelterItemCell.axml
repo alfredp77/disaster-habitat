@@ -10,6 +10,8 @@
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
       android:layout_alignParentLeft="true"
+      android:focusable="false"
+      android:focusableInTouchMode="false"
       app:MvxBind="Checked IsChecked; Click ItemChecked"/>
     <TextView
         android:id="@+id/txtName"

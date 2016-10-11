@@ -12,6 +12,7 @@ namespace Kastil.Core.Fakes
     public class FakeTap2HelpService : ITap2HelpService
     {
         private readonly Dictionary<string, Disaster> _disasters = new Dictionary<string, Disaster>();
+        private string _acehDisasterId = Guid.NewGuid().ToString();
 
         public FakeTap2HelpService()
         {
@@ -30,7 +31,7 @@ namespace Kastil.Core.Fakes
             };
             var disaster2 = new Disaster
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = _acehDisasterId,
                 Name = "Aceh Tsunami",
                 DateWhen = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)),
                 Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" }
@@ -170,9 +171,16 @@ namespace Kastil.Core.Fakes
             return Asyncer.DoNothing();
         }
 
+        public Task DeleteShelter(string shelterId)
+        {
+            _shelters.RemoveAll(s => shelterId == s.Id);
+            
+            return Asyncer.DoNothing();
+        }
+
         public Task Save(Shelter shelter)
         {
-            shelter.DateVerifiedOn = null;
+            shelter.DateVerifiedOn = DateTime.Now;
             _shelters.Add(shelter);
             return Asyncer.DoNothing();
         }
@@ -205,7 +213,7 @@ namespace Kastil.Core.Fakes
                 Name = "Aceh Shelter 2",
                 DateVerifiedOn = new DateTimeOffset(2016, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" },
-                AssessmentId = "1",
+                DisasterId = _acehDisasterId,
                 Attributes = attributes.ToList()
             });
         }
@@ -220,11 +228,11 @@ namespace Kastil.Core.Fakes
             return _shelters.AsEnumerable();
         }
 
-        public async Task<IEnumerable<Shelter>> GetShelters(string disasterId, string assessmentId)
+        public async Task<IEnumerable<Shelter>> GetSheltersLinkedToDisaster(string disasterId, string assessmentId)
         {
             if (_shelters.Count == 0)
                 await InitFakeShelters();
-            
+
             if (!string.IsNullOrEmpty(assessmentId))
                 return _shelters.Where(s => s.AssessmentId == assessmentId);
 
@@ -233,13 +241,19 @@ namespace Kastil.Core.Fakes
                 var shelters = _shelters.Where(s => s.DisasterId == disasterId).ToList();
                 if (shelters.Any())
                     return shelters;
-
-                var disasters = await GetDisasters();
-                var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
-                return _shelters.Where(s => s.Location.Country == disasterLocation.Country);
             }
 
             return new List<Shelter>();
+        }
+
+        public async Task<IEnumerable<Shelter>> GetSheltersAvailableForDisaster(string disasterId)
+        {
+            if (_shelters.Count == 0)
+                await InitFakeShelters();
+
+            var disasters = await GetDisasters();
+            var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
+            return _shelters.Any() ? _shelters.Where(s => string.IsNullOrEmpty(s.DisasterId) && s.Location.Country == disasterLocation.Country) : new List<Shelter>();
         }
 
         public Task<Shelter> GetShelter(string shelterId)

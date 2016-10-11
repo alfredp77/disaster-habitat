@@ -6,6 +6,7 @@ using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace Kastil.Core.ViewModels
 {
     public class ShelterListViewModel : BaseViewModel
     {
+        IEnumerable<Shelter> _previouslyLinkedShelters;
+
         public ObservableRangeCollection<ShelterListItemViewModel> Items { get; } = new ObservableRangeCollection<ShelterListItemViewModel>();
 
         public string DisasterId { get; set; }
@@ -50,9 +53,15 @@ namespace Kastil.Core.ViewModels
             var disasterService = Resolve<ITap2HelpService>();
             try
             {
-                var shelters = await disasterService.GetShelters(DisasterId, "");
-                if (shelters != null)
-                    Items.AddRange(shelters.Select(s => new ShelterListItemViewModel(s)));
+                _previouslyLinkedShelters = await disasterService.GetSheltersLinkedToDisaster(DisasterId, "");
+                if (_previouslyLinkedShelters != null)
+                    Items.AddRange(_previouslyLinkedShelters.Select(s => new ShelterListItemViewModel(s) { IsChecked = true }));
+
+                var availableShelters = await disasterService.GetSheltersAvailableForDisaster(DisasterId);
+                if (availableShelters != null)
+                    Items.AddRange(availableShelters.Select(s => new ShelterListItemViewModel(s) { IsChecked = false }));
+
+                Items.OrderBy(s => s.IsChecked).ThenBy(s => s.LocationName);
             }
             catch (Exception ex)
             {
@@ -106,8 +115,24 @@ namespace Kastil.Core.ViewModels
 
             try
             {
-                SetShelterProperties();
-                await _context.CommitChanges();
+                foreach(var shelter in Items)
+                {
+                    _context.Initialize(shelter.Value);
+                    if (_previouslyLinkedShelters != null && _previouslyLinkedShelters.Any(s => s.Id == shelter.ShelterId))
+                    {
+                        if (!shelter.IsChecked)
+                            await _context.DeleteShelter();
+
+                        continue;
+                    }
+
+                    if (shelter.IsChecked)
+                    {
+                        _context.Item.DisasterId = DisasterId;
+                        await _context.CommitChanges();
+                    }
+                }                
+                
                 Publish(new EditingDoneEvent(this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.ShelterSaved);
                 Close();
@@ -123,11 +148,6 @@ namespace Kastil.Core.ViewModels
             {
                 dialog.HideLoading();
             }
-        }
-
-        private void SetShelterProperties()
-        {
-            //TODO: ForEach Selected Shelter... Associate DisasterId with this Shelter
         }
 
         MvxCommand<ShelterListItemViewModel> _shelterSelectedCommand;

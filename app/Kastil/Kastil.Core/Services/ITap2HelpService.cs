@@ -13,7 +13,8 @@ namespace Kastil.Core.Services
         Task<Assessment> GetAssessment(string disasterId, string assessmentId);
 
         Task<IEnumerable<Shelter>> GetShelters();
-        Task<IEnumerable<Shelter>> GetShelters(string disasterId, string assessmentId);
+        Task<IEnumerable<Shelter>> GetSheltersLinkedToDisaster(string disasterId, string assessmentId);
+        Task<IEnumerable<Shelter>> GetSheltersAvailableForDisaster(string disasterId);
         Task<Shelter> GetShelter(string shelterId);
 
         Task<IEnumerable<Attribute>> GetShelterAttributes();
@@ -24,5 +25,6 @@ namespace Kastil.Core.Services
         Task Save(List<Shelter> shelters);
 
         Task DeleteAssessments(string disasterId);
+        Task DeleteShelter(string shelterId);
     }
 }

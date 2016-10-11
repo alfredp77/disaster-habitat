@@ -26,5 +26,6 @@ namespace Kastil.Shared.Models
             get { return Location != null ? Location.Name + ", " + Location.Country : LocationName; }
             set { LocationName = value; }
         }
+
     }
 }

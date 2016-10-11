@@ -46,23 +46,8 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        public bool AddMode => _context.IsNew;
-        
-        public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
-        private void DoAddAttrCommand()
-        {
-            var context = Resolve<IShelterEditContext>();
-            context.SelectedAttribute = null;
-            ShowViewModel<EditAttributeViewModel>();
-        }
-
-        public MvxCommand<AttributeViewModel> AttributeSelectedCommand => new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
-        private void DoAttributeSelectedCommand(AttributeViewModel obj)
-        {
-            var context = Resolve<IShelterEditContext>();
-            context.SelectedAttribute = obj.Attribute;
-            ShowViewModel<EditAttributeViewModel>();
-        }
+        public bool AddMode => false;        
+               
 
         public MvxAsyncCommand SaveCommand => new MvxAsyncCommand(DoSaveCommand);
         private async Task DoSaveCommand()
@@ -74,7 +59,6 @@ namespace Kastil.Core.ViewModels
             {
                 SetShelterProperties();
                 await _context.CommitChanges();
-				Publish(new EditingDoneEvent (this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.ShelterSaved);
                 Close();
             }
@@ -106,14 +90,7 @@ namespace Kastil.Core.ViewModels
         
         public override Task Initialize()
         {
-            Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
             return Load();
-        }
-
-        private async Task OnEditingDone(EditingDoneEvent evt)
-        {
-			if (evt.Sender is EditAttributeViewModel)
-            	await Load();
         }
 
         private async Task Load()

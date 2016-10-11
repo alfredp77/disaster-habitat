@@ -42,7 +42,7 @@ namespace Kastil.Core.Services
             return Asyncer.Async(context.LoadAll);
         }
 
-        public Task<IEnumerable<Shelter>> GetShelters(string disasterId, string assessmentId)
+        public Task<IEnumerable<Shelter>> GetSheltersLinkedToDisaster(string disasterId, string assessmentId)
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
 
@@ -54,13 +54,18 @@ namespace Kastil.Core.Services
                 var shelters = context.LoadAll().Where(s => s.DisasterId == disasterId).ToList();
                 if (shelters.Any())
                     return Asyncer.Async(() => shelters.AsEnumerable());
-
-                var disasters = GetDisasters().Result;
-                var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
-                return Asyncer.Async(() => context.LoadAll().Where(s => s.Location.Country == disasterLocation.Country));
             }
 
-            return Asyncer.Async(() => context.LoadAll().Where(s => s.DisasterId == disasterId && s.AssessmentId == assessmentId));
+            return Asyncer.Async(context.LoadAll);
+        }
+
+        public async Task<IEnumerable<Shelter>> GetSheltersAvailableForDisaster(string disasterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            var disasters = GetDisasters().Result;
+            var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
+
+            return await Asyncer.Async(() => context.LoadAll().Where(s => string.IsNullOrEmpty(s.DisasterId) && s.Location.Country == disasterLocation.Country));
         }
 
         public Task<Shelter> GetShelter(string shelterId)
@@ -105,6 +110,26 @@ namespace Kastil.Core.Services
             foreach (var assessment in assessments)
             {
                 await Asyncer.Async(() => context.Delete(assessment));
+            }
+        }
+
+        public async Task DeleteShelter(string shelterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            var shelters = await GetShelters();
+            foreach (var shelter in shelters.Where(s => shelterId == s.Id))
+            {
+                await Asyncer.Async(() => context.Delete(shelter));
+            }
+        }
+
+        public async Task DeleteShelters(List<string> shelterIds)
+        {
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            var shelters = await GetShelters();
+            foreach (var shelter in shelters.Where(s => shelterIds.Contains(s.Id)))
+            {
+                await Asyncer.Async(() => context.Delete(shelter));
             }
         }
     }
