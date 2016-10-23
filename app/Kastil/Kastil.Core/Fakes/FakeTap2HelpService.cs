@@ -228,32 +228,24 @@ namespace Kastil.Core.Fakes
             return _shelters.AsEnumerable();
         }
 
-        public async Task<IEnumerable<Shelter>> GetSheltersLinkedToDisaster(string disasterId, string assessmentId)
+        public async Task<IEnumerable<Shelter>> GetShelters(string disasterId)
         {
             if (_shelters.Count == 0)
-                await InitFakeShelters();
-
-            if (!string.IsNullOrEmpty(assessmentId))
-                return _shelters.Where(s => s.AssessmentId == assessmentId);
-
-            if (!string.IsNullOrEmpty(disasterId))
             {
-                var shelters = _shelters.Where(s => s.DisasterId == disasterId).ToList();
-                if (shelters.Any())
-                    return shelters;
+                await InitFakeShelters();
             }
-
-            return new List<Shelter>();
+            
+            return _shelters.Where(s => s.DisasterId == disasterId).AsEnumerable();
         }
 
-        public async Task<IEnumerable<Shelter>> GetSheltersAvailableForDisaster(string disasterId)
+        public async Task<Shelter> GetShelter(string disasterId, string shelterId)
         {
             if (_shelters.Count == 0)
+            {
                 await InitFakeShelters();
+            }
 
-            var disasters = await GetDisasters();
-            var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
-            return _shelters.Any() ? _shelters.Where(s => string.IsNullOrEmpty(s.DisasterId) && s.Location.Country == disasterLocation.Country) : new List<Shelter>();
+            return _shelters.FirstOrDefault(s => s.DisasterId == disasterId && s.Id == shelterId);
         }
 
         public Task<Shelter> GetShelter(string shelterId)

@@ -11,36 +11,12 @@ namespace Kastil.Core.ViewModels
             Value = value;
         }
 
-        public Shelter Value { get; }
+        public Shelter Value { get; set; }
 
         public string DisasterId => Value.DisasterId;
         public string AssessmentId => Value.AssessmentId;
         public string ShelterId => Value.Id;
         public string Text => Value.Name;
         public string LocationName => Value.LocationName;
-
-        private bool _isChecked;
-        public bool IsChecked
-        {
-            get { return _isChecked; }
-            set
-            {
-                _isChecked = value;
-                RaisePropertyChanged(() => IsChecked);
-            }
-        }
-
-        public ICommand ItemChecked
-        {
-            get
-            {
-                return new MvxCommand(() =>
-                {
-                    var isChecked = IsChecked;
-                });
-            }
-        }
-
-
     }
 }

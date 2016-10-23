@@ -1,51 +1,24 @@
 using Acr.UserDialogs;
-using Kastil.Core.Events;
 using Kastil.Core.Services;
 using Kastil.Core.Utils;
-using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Kastil.Core.ViewModels
 {
-    public class ShelterListViewModel : BaseViewModel
+    public class ShelterListViewModel : ItemListViewModel<ShelterListItemViewModel>
     {
-        IEnumerable<Shelter> _previouslyLinkedShelters;
-
-        public ObservableRangeCollection<ShelterListItemViewModel> Items { get; } = new ObservableRangeCollection<ShelterListItemViewModel>();
-
-        public string DisasterId { get; set; }
-        public string AssessmentId { get; set; }
-        public bool Selected { get; set; }
-
         public ShelterListViewModel()
         {
             Title = "Shelters";
             AllowAddCommand = true;
+            Items = new ObservableRangeCollection<ShelterListItemViewModel>();
         }
 
-        public void Init(string disasterId)
-        {
-            DisasterId = disasterId;
-        }
-
-        public override Task Initialize()
-        {
-            Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
-            return Load();
-        }
-
-        private async Task OnEditingDone(EditingDoneEvent evt)
-        {
-            if (evt.Sender is ShelterViewModel)
-                await DoRefreshCommand();
-        }
-
-        private async Task Load()
+        protected override async Task Load()
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);
@@ -53,96 +26,17 @@ namespace Kastil.Core.ViewModels
             var disasterService = Resolve<ITap2HelpService>();
             try
             {
-                _previouslyLinkedShelters = await disasterService.GetSheltersLinkedToDisaster(DisasterId, "");
-                if (_previouslyLinkedShelters != null)
-                    Items.AddRange(_previouslyLinkedShelters.Select(s => new ShelterListItemViewModel(s) { IsChecked = true }));
-
-                var availableShelters = await disasterService.GetSheltersAvailableForDisaster(DisasterId);
-                if (availableShelters != null)
-                    Items.AddRange(availableShelters.Select(s => new ShelterListItemViewModel(s) { IsChecked = false }));
-
-                Items.OrderBy(s => s.IsChecked).ThenBy(s => s.LocationName);
-            }
-            catch (Exception ex)
-            {
-                dialog.HideLoading();
-                Mvx.Trace("Unable to load Shelters, exception: {0}", ex);
-                await dialog.AlertAsync("Unable to load Shelters. Please try again");
-            }
-            finally
-            {
-                dialog.HideLoading();
-            }
-        }
-
-        MvxAsyncCommand _refreshCommand;
-        public MvxAsyncCommand RefreshCommand
-        {
-            get
-            {
-                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(DoRefreshCommand);
-                return _refreshCommand;
-            }
-        }
-
-        private async Task DoRefreshCommand()
-        {
-            IsLoading = true;
-            try
-            {
-                Items.Clear();
-                await Load();
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get { return _isLoading; }
-            set { SetProperty(ref _isLoading, value); }
-        }
-
-        private IShelterEditContext _context => Resolve<IShelterEditContext>();
-        public MvxAsyncCommand LinkCommand => new MvxAsyncCommand(DoLinkCommand);
-        private async Task DoLinkCommand()
-        {
-            var dialog = Resolve<IUserDialogs>();
-            dialog.ShowLoading(Messages.General.Saving);
-
-            try
-            {
-                foreach(var shelter in Items)
+                var shelters = await disasterService.GetShelters(DisasterId);
+                if (shelters != null)
                 {
-                    _context.Initialize(shelter.Value);
-                    if (_previouslyLinkedShelters != null && _previouslyLinkedShelters.Any(s => s.Id == shelter.ShelterId))
-                    {
-                        if (!shelter.IsChecked)
-                            await _context.DeleteShelter();
-
-                        continue;
-                    }
-
-                    if (shelter.IsChecked)
-                    {
-                        _context.Item.DisasterId = DisasterId;
-                        await _context.CommitChanges();
-                    }
-                }                
-                
-                Publish(new EditingDoneEvent(this, EditAction.Edit));
-                dialog.ShowSuccess(Messages.General.ShelterSaved);
-                Close();
+                    Items.AddRange(shelters.Select(s => new ShelterListItemViewModel(s)));
+                }
             }
             catch (Exception ex)
             {
                 dialog.HideLoading();
-                Mvx.Trace("Unable to link Shelters to Disaster, exception: {0}", ex);
-                await dialog.AlertAsync("Unable to link Shelters to Disaster. Please try again");
-                Close();
+                Mvx.Trace("Unable to load Shelter list, exception: {0}", ex);
+                await dialog.AlertAsync("Unable to load Shelter list. Please try again");
             }
             finally
             {
@@ -155,12 +49,12 @@ namespace Kastil.Core.ViewModels
         {
             get
             {
-                _shelterSelectedCommand = _shelterSelectedCommand ?? new MvxCommand<ShelterListItemViewModel>(OnShelterSelectedCommand);
+                _shelterSelectedCommand = _shelterSelectedCommand ?? new MvxCommand<ShelterListItemViewModel>(DoShelterSelectedCommand);
                 return _shelterSelectedCommand;
             }
         }
-        
-        private void OnShelterSelectedCommand(ShelterListItemViewModel itemVm)
+
+        private void DoShelterSelectedCommand(ShelterListItemViewModel itemVm)
         {
             var context = Resolve<IShelterEditContext>();
             context.Initialize(itemVm.Value);

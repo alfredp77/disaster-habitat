@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Assestment attribute :"
+                android:text="Assessment attribute :"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_alignParentLeft="true"
                 android:layout_width="match_parent"
@@ -105,10 +105,5 @@
 	            android:layout_height="wrap_content"
 	            app:MvxBind="Click CancelCommand"/>
     	</LinearLayout>
-
-
 	</LinearLayout>
-
-
-
 </RelativeLayout>

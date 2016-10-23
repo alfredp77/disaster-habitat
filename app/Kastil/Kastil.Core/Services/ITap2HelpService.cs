@@ -13,8 +13,8 @@ namespace Kastil.Core.Services
         Task<Assessment> GetAssessment(string disasterId, string assessmentId);
 
         Task<IEnumerable<Shelter>> GetShelters();
-        Task<IEnumerable<Shelter>> GetSheltersLinkedToDisaster(string disasterId, string assessmentId);
-        Task<IEnumerable<Shelter>> GetSheltersAvailableForDisaster(string disasterId);
+        Task<IEnumerable<Shelter>> GetShelters(string disasterId);
+        Task<Shelter> GetShelter(string disasterId, string shelterId);
         Task<Shelter> GetShelter(string shelterId);
 
         Task<IEnumerable<Attribute>> GetShelterAttributes();

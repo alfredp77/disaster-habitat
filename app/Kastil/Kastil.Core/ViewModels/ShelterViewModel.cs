@@ -17,37 +17,61 @@ namespace Kastil.Core.ViewModels
         {
             get
             {
-                return _context.Item.Name;                
+                return Context.Item.Name;
             }
             set
             {
-                _context.Item.Name = value;
+                Context.Item.Name = value;
                 SetTitle();
-                RaisePropertyChanged();
-            }
-        }        
-
-        public string LocationName
-        {
-            get
-            {
-                var location = _context.Item.LocationName;
-				if (_context.IsNew)
-					return location;
-				if (string.IsNullOrEmpty (location))
-					return $"({Messages.General.Unknown}";
-				return location;
-
-            }
-            set
-            {
-                _context.Item.LocationName = value;
                 RaisePropertyChanged();
             }
         }
 
-        public bool AddMode => false;        
-               
+        public string NamePlaceholderText
+        {
+            get { return Messages.Placeholders.ShelterName; }
+        }
+
+        public string Location
+        {
+            get
+            {
+                return Context.Item.LocationName;
+            }
+            set
+            {
+                Context.Item.LocationName = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string LocationPlaceholderText
+        {
+            get
+            {
+                if (Context.IsNew)
+                    return Messages.Placeholders.ShelterLocation;
+                return Messages.General.Unknown;
+            }
+        }
+
+        public bool AddMode => Context.IsNew;
+
+        public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
+        private void DoAddAttrCommand()
+        {
+            var context = Resolve<IShelterEditContext>();
+            context.SelectedAttribute = null;
+            ShowViewModel<EditAttributeViewModel>();
+        }
+
+        public MvxCommand<AttributeViewModel> AttributeSelectedCommand => new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
+        private void DoAttributeSelectedCommand(AttributeViewModel obj)
+        {
+            var context = Resolve<IShelterEditContext>();
+            context.SelectedAttribute = obj.Attribute;
+            ShowViewModel<EditAttributeViewModel>();
+        }
 
         public MvxAsyncCommand SaveCommand => new MvxAsyncCommand(DoSaveCommand);
         private async Task DoSaveCommand()
@@ -58,7 +82,8 @@ namespace Kastil.Core.ViewModels
             try
             {
                 SetShelterProperties();
-                await _context.CommitChanges();
+                await Context.CommitChanges();
+                Publish(new EditingDoneEvent(this, EditAction.Edit));
                 dialog.ShowSuccess(Messages.General.ShelterSaved);
                 Close();
             }
@@ -75,22 +100,29 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        private IShelterEditContext _context => Resolve<IShelterEditContext>();
+        private IShelterEditContext Context => Resolve<IShelterEditContext>();
 
         private void SetShelterProperties()
         {
-            var shelter = _context.Item;
+            var shelter = Context.Item;
             shelter.Name = Name;
-            shelter.LocationName = LocationName;
+            shelter.LocationName = Location;
         }
 
-        public MvxCommand CancelCommand => new MvxCommand (Close);
+        public MvxCommand CancelCommand => new MvxCommand(Close);
 
         public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
-        
+
         public override Task Initialize()
         {
+            Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
             return Load();
+        }
+
+        private async Task OnEditingDone(EditingDoneEvent evt)
+        {
+            if (evt.Sender is EditAttributeViewModel)
+                await Load();
         }
 
         private async Task Load()
@@ -99,7 +131,7 @@ namespace Kastil.Core.ViewModels
             dialog.ShowLoading(Messages.General.Loading);
             try
             {
-                var shelter = _context.Item;
+                var shelter = Context.Item;
                 if (shelter != null)
                 {
                     SetTitle();

@@ -69,6 +69,7 @@
     <Compile Include="Utils\DistanceCalculator.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
+    <Compile Include="ViewModels\ItemListViewModel.cs" />
     <Compile Include="ViewModels\ShelterViewModel.cs" />
     <Compile Include="ViewModels\ShelterListItemViewModel.cs" />
     <Compile Include="ViewModels\AssessmentViewModel.cs" />

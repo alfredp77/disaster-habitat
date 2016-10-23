@@ -20,7 +20,9 @@
 		{
 			public const string AssessmentName = "Enter assessment name";
 			public const string AssessmentLocation = "Enter assessment location";
-		}
+            public const string ShelterName = "Enter shelter name";
+            public const string ShelterLocation = "Enter shelter location";
+        }
 
         public static class Login
         {
