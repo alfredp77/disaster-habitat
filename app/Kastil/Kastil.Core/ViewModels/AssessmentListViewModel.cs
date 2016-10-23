@@ -12,36 +12,16 @@ using Kastil.Shared.Models;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssessmentListViewModel : BaseViewModel
+    public class AssessmentListViewModel : ItemListViewModel<AssessmentListItemViewModel>
     {
-        public ObservableRangeCollection<AssessmentListItemViewModel> Items { get; } = new ObservableRangeCollection<AssessmentListItemViewModel> ();
-
-        public string DisasterId { get; set; }
-
         public AssessmentListViewModel()
         {
             Title = "Assessments";
-            AllowAddCommand = true; 
+            AllowAddCommand = true;
+            Items = new ObservableRangeCollection<AssessmentListItemViewModel>();
         }
-
-		public void Init (string disasterId)
-		{
-			DisasterId = disasterId;
-		}
-
-        public override Task Initialize()
-        {            
-			Subscribe<EditingDoneEvent> (async e => await OnEditingDone(e));
-            return Load();
-        }
-
-		private async Task OnEditingDone (EditingDoneEvent evt)
-		{
-			if (evt.Sender is AssessmentViewModel)
-				await DoRefreshCommand();
-		}
-
-        private async Task Load()
+        
+        protected override async Task Load()
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);
@@ -65,37 +45,6 @@ namespace Kastil.Core.ViewModels
             {
                 dialog.HideLoading();
             }
-        }
-
-        MvxAsyncCommand _refreshCommand;
-        public MvxAsyncCommand RefreshCommand
-        {
-            get
-            {
-                _refreshCommand = _refreshCommand ?? new MvxAsyncCommand(DoRefreshCommand);
-                return _refreshCommand;
-            }
-        }
-
-        private async Task DoRefreshCommand()
-        {
-            IsLoading = true;
-            try
-            {
-				Items.Clear();
-                await Load();
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get { return _isLoading; }
-            set { SetProperty(ref _isLoading, value); }
         }
 
         MvxCommand<AssessmentListItemViewModel> _assessmentSelectedCommand;
