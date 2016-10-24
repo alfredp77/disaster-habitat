@@ -38,20 +38,20 @@ namespace Kastil.Core.Services
             _attributesMap = Item.Attributes.ToDictionary(k => k.Key);
         }
 
-        public void Initialize(Shelter Shelter = null, string disasterId=null)
+        public void Initialize(Shelter shelter = null, string disasterId=null)
         {
-            IsNew = Shelter == null;
-			if (Shelter == null) 
+            IsNew = shelter == null;
+			if (shelter == null) 
 			{
-				Shelter = new Shelter { Id = Guid.NewGuid ().ToString () , DisasterId = disasterId };
+                Item = new Shelter { Id = Guid.NewGuid().ToString(), DisasterId = disasterId };
 			} 
 			else 
 			{
 				var serializer = Resolve<IJsonSerializer>();
-				Shelter = serializer.Clone(Shelter);
+                Item = serializer.Clone(shelter);
 			}
             
-            _attributesMap = Shelter.Attributes.ToDictionary(k => k.Key);
+            _attributesMap = Item.Attributes.ToDictionary(k => k.Key);
         }
 
         public void AddOrUpdateAttribute(Attribute attribute, string value)

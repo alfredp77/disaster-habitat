@@ -180,7 +180,6 @@ namespace Kastil.Core.Fakes
 
         public Task Save(Shelter shelter)
         {
-            shelter.DateVerifiedOn = DateTime.Now;
             _shelters.Add(shelter);
             return Asyncer.DoNothing();
         }
@@ -193,8 +192,7 @@ namespace Kastil.Core.Fakes
             {
                 Id = "1",
                 Name = "Manila Shelter 1",
-				DateVerifiedOn = new DateTimeOffset(2016, 1, 1,0,0,0, TimeSpan.Zero),
-                Location = new Location(14.599512, 120.984222) { Name = "Manila", Country = "Phillippines" },
+                LocationName = "Manila, Phillippines",
                 Attributes = attributes.ToList()
             });
 
@@ -202,8 +200,7 @@ namespace Kastil.Core.Fakes
             {
                 Id = "2",
                 Name = "Aceh Shelter 1",
-                DateVerifiedOn = new DateTimeOffset(2016, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" },
+                LocationName = "Banda Aceh, Indonesia",
                 Attributes = attributes.ToList()
             });
 
@@ -211,8 +208,7 @@ namespace Kastil.Core.Fakes
             {
                 Id = "3",
                 Name = "Aceh Shelter 2",
-                DateVerifiedOn = new DateTimeOffset(2016, 1, 1, 0, 0, 0, TimeSpan.Zero),
-                Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" },
+                LocationName = "Banda Aceh, Indonesia",
                 DisasterId = _acehDisasterId,
                 Attributes = attributes.ToList()
             });

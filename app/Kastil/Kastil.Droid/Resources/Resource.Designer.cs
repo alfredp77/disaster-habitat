@@ -2011,8 +2011,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f020052
 			public const int MenuSetting = 2130837586;
 			
-			// aapt resource value: 0x7f020056
-			public const int notification_template_icon_bg = 2130837590;
+			// aapt resource value: 0x7f020057
+			public const int notification_template_icon_bg = 2130837591;
 			
 			// aapt resource value: 0x7f020053
 			public const int roundedbg = 2130837587;
@@ -2022,6 +2022,9 @@ namespace Kastil.Droid
 			
 			// aapt resource value: 0x7f020055
 			public const int splash = 2130837589;
+			
+			// aapt resource value: 0x7f020056
+			public const int T2H_Icon = 2130837590;
 			
 			static Drawable()
 			{
@@ -2050,9 +2053,6 @@ namespace Kastil.Droid
 			
 			// aapt resource value: 0x7f06009b
 			public const int ShelterLocation = 2131099803;
-			
-			// aapt resource value: 0x7f06009a
-			public const int ShelterName = 2131099802;
 			
 			// aapt resource value: 0x7f06008a
 			public const int StaffCode = 2131099786;
@@ -2407,6 +2407,9 @@ namespace Kastil.Droid
 			
 			// aapt resource value: 0x7f06009c
 			public const int shelterAttributes = 2131099804;
+			
+			// aapt resource value: 0x7f06009a
+			public const int shelterName = 2131099802;
 			
 			// aapt resource value: 0x7f060099
 			public const int shelterTable = 2131099801;

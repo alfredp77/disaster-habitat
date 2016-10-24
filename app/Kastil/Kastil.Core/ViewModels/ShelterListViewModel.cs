@@ -57,7 +57,7 @@ namespace Kastil.Core.ViewModels
         private void DoShelterSelectedCommand(ShelterListItemViewModel itemVm)
         {
             var context = Resolve<IShelterEditContext>();
-            context.Initialize(itemVm.Value);
+            context.Initialize(itemVm.Value, DisasterId);
             ShowViewModel<ShelterViewModel>();
         }
 

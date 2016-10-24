@@ -51,10 +51,7 @@ namespace Kastil.Core.Services
         public async Task<IEnumerable<Shelter>> GetShelters(string disasterId)
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
-            var disasters = GetDisasters().Result;
-            var disasterLocation = disasters.First(d => d.Id == disasterId).Location;
-
-            return await Asyncer.Async(() => context.LoadAll().Where(s => string.IsNullOrEmpty(s.DisasterId) && s.Location.Country == disasterLocation.Country));
+            return await Asyncer.Async(() => context.LoadAll().Where(s => s.DisasterId == disasterId));
         }
 
         public Task<Shelter> GetShelter(string shelterId)

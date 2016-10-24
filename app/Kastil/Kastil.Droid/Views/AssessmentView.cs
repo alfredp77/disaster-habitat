@@ -1,6 +1,4 @@
 ﻿using Android.App;
-using Android.OS;
-using Kastil.Core.ViewModels;
 
 namespace Kastil.Droid.Views
 {

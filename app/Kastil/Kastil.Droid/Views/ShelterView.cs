@@ -1,10 +1,7 @@
 ﻿using System;
 using Android.App;
-using Kastil.Droid.Views;
-using Android.OS;
-using Kastil.Core.ViewModels;
 
-namespace Kastil.Droid
+namespace Kastil.Droid.Views
 {
     [Activity(Label = "Shelter")]
     public class ShelterView : BaseView

@@ -297,6 +297,7 @@
     <AndroidResource Include="Resources\drawable\button_rounded.xml" />
     <AndroidResource Include="Resources\drawable\MenuSetting.png" />
     <AndroidResource Include="Resources\drawable\ButtonAdd.png" />
+    <AndroidResource Include="Resources\drawable\T2H_Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kastil.Core\Kastil.Core.csproj">
