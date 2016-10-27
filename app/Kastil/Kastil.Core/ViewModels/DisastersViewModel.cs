@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Kastil.Common.Services;
+using Kastil.Common.Utils;
+using Kastil.Common.ViewModels;
 using Kastil.Core.Services;
-using Kastil.Core.Utils;
 using Kastil.Shared.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -32,10 +34,10 @@ namespace Kastil.Core.ViewModels
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);
-
-            var disasterService = Resolve<ITap2HelpService>();
             try
             {
+            	var disasterService = Resolve<ITap2HelpService>();
+
                 var disasters = await disasterService.GetDisasters();
                 if (disasters != null)
                 {

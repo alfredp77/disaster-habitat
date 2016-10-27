@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Kastil.Common.Services;
 using Kastil.Core.Services;
-using Kastil.Core.Utils;
 using Kastil.Shared.Models;
 using Moq;
 using NUnit.Framework;

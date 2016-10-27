@@ -35,40 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Connection.cs" />
-    <Compile Include="Connection.Details.cs" />
     <Compile Include="Events\EditingDoneEvent.cs" />
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
-    <Compile Include="Fakes\FakePullService.cs" />
-    <Compile Include="Fakes\FakePushService.cs" />
-    <Compile Include="Fakes\FakeSyncService.cs" />
-    <Compile Include="FolderProvider.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IEditContext.cs" />
     <Compile Include="Services\ShelterEditContext.cs" />
     <Compile Include="Services\AssesmentEditContext.cs" />
-    <Compile Include="Services\BackendlessTap2HelpService.cs" />
-    <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Fakes\FakeTap2HelpService.cs" />
-    <Compile Include="Fakes\FakeUserService.cs" />
-    <Compile Include="Services\FileBasedPersistenceContext.cs" />
-    <Compile Include="Services\FileBasedPersistenceContextFactory.cs" />
-    <Compile Include="Services\IPersistenceContext.cs" />
-    <Compile Include="Services\IPersistenceContextFactory.cs" />
-    <Compile Include="Services\IPushService.cs" />
-    <Compile Include="Services\IRestServiceCaller.cs" />
-    <Compile Include="Services\IPullService.cs" />
-    <Compile Include="Services\ISyncService.cs" />
-    <Compile Include="Services\ITap2HelpService.cs" />
-    <Compile Include="Services\PullService.cs" />
-    <Compile Include="Services\PushService.cs" />
-    <Compile Include="Services\SyncService.cs" />
-    <Compile Include="Services\UserService.cs" />
-    <Compile Include="Utils\Asyncer.cs" />
-    <Compile Include="Utils\DistanceCalculator.cs" />
-    <Compile Include="Utils\JsonSerializer.cs" />
-    <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\ItemListViewModel.cs" />
     <Compile Include="ViewModels\ShelterViewModel.cs" />
     <Compile Include="ViewModels\ShelterListItemViewModel.cs" />
@@ -76,14 +48,11 @@
     <Compile Include="ViewModels\AssessmentListItemViewModel.cs" />
     <Compile Include="ViewModels\AssessmentListViewModel.cs" />
     <Compile Include="ViewModels\AttributeViewModel.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
     <Compile Include="ViewModels\EditAttributeViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ShelterListViewModel.cs" />
     <Compile Include="ViewModels\SyncViewModel.cs" />
-    <Compile Include="Utils\DateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -139,8 +108,16 @@
     <None Include="packages.config" />
     <None Include="SampleData\disas.json" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="..\Kastil.Shared\Kastil.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\Kastil.Common\Kastil.Common.csproj">
+      <Project>{d3d728d0-075f-4c31-8b0c-809f4cdf46b3}</Project>
+      <Name>Kastil.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fakes\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

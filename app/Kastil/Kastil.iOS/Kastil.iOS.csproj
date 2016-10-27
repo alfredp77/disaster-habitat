@@ -103,10 +103,6 @@
     <Compile Include="Views\DisastersView.designer.cs">
       <DependentUpon>DisastersView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.cs" />
-    <Compile Include="Views\LoginView.designer.cs">
-      <DependentUpon>LoginView.cs</DependentUpon>
-    </Compile>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config">
@@ -255,6 +251,10 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Kastil.Common\Kastil.Common.csproj">
+      <Project>{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}</Project>
+      <Name>Kastil.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kastil.Core\Kastil.Core.csproj">
       <Project>{31d7792c-8339-4c32-8c91-123c9b248b83}</Project>
       <Name>Kastil.Core</Name>

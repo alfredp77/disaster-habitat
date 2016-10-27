@@ -1,8 +1,6 @@
 using System;
-using System.Threading.Tasks;
-using Acr.UserDialogs;
+using Kastil.Common.ViewModels;
 using Kastil.Shared.Models;
-using MvvmCross.Core.ViewModels;
 
 namespace Kastil.Core.ViewModels
 {

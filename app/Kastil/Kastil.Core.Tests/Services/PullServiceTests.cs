@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Kastil.Common;
+using Kastil.Common.Services;
+using Kastil.Common.Utils;
 using Kastil.Core.Services;
-using Kastil.Core.Utils;
 using Moq;
 using NUnit.Framework;
 

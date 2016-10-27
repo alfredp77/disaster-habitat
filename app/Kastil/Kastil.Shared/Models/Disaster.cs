@@ -1,5 +1,5 @@
 using System;
-using Kastil.Core.Utils;
+using Kastil.Common.Utils;
 using Newtonsoft.Json;
 
 namespace Kastil.Shared.Models

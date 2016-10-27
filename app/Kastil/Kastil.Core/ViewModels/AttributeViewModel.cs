@@ -1,4 +1,5 @@
-﻿using Kastil.Shared.Models;
+﻿using Kastil.Common.ViewModels;
+using Kastil.Shared.Models;
 
 namespace Kastil.Core.ViewModels
 {

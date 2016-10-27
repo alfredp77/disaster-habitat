@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Kastil.Common.ViewModels;
 using Kastil.Core.ViewModels;
 using Kastil.iOS.PlatformSpecific;
 using MvvmCross.Binding.BindingContext;

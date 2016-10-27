@@ -1,4 +1,4 @@
-using Kastil.Core.Utils;
+using Kastil.Common.Utils;
 using MvvmCross.Platform;
 
 namespace Kastil.Shared.Models

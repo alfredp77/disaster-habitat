@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Kastil.Common.Services;
 using Kastil.Core.Services;
 
 namespace Kastil.PlatformSpecific.Shared

@@ -1,5 +1,6 @@
 using Acr.UserDialogs;
 using Android.Content;
+using Kastil.Common.Services;
 using Kastil.Core;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
@@ -8,7 +9,6 @@ using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
 using Kastil.Core.Services;
 using Kastil.PlatformSpecific.Shared;
-using Kastil.Core.Utils;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat;
 

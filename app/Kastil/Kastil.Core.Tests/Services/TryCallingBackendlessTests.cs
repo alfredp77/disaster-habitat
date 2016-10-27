@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Kastil.Common;
 using Kastil.PlatformSpecific.Shared;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;

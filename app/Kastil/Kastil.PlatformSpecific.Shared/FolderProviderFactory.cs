@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Kastil.Core;
+using Kastil.Common;
 
 namespace Kastil.PlatformSpecific.Shared
 {

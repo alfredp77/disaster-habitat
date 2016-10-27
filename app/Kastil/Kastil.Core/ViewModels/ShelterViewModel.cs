@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using Kastil.Common.Utils;
+using Kastil.Common.ViewModels;
 using Kastil.Core.Events;
 using Kastil.Core.Services;
-using Kastil.Core.Utils;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 

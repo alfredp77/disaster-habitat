@@ -17,13 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kastil.Core.Tests", "Kastil
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Kastil.PlatformSpecific.Shared", "Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.shproj", "{12B98F90-3B56-483C-AC55-952D17D1F66B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kastil.Common", "Kastil.Common\Kastil.Common.csproj", "{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Kastil.Shared\Kastil.Shared.projitems*{31d7792c-8339-4c32-8c91-123c9b248b83}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{12b98f90-3b56-483c-ac55-952d17d1f66b}*SharedItemsImports = 13
 		Kastil.Shared\Kastil.Shared.projitems*{184536f0-432d-4c97-9342-ae97a6cd230a}*SharedItemsImports = 13
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{e033292c-1101-44f4-867d-083ef8db215f}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{fa8740a9-ab9f-4e80-9abb-1c0b97f6debd}*SharedItemsImports = 4
+		Kastil.Shared\Kastil.Shared.projitems*{d3d728d0-075f-4c31-8b0c-809f4cdf46b3}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{eb7592b4-6689-4d9d-8dc0-f42726b1271d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,30 @@ Global
 		{FA8740A9-AB9F-4E80-9ABB-1C0B97F6DEBD}.Release|iPhone.Build.0 = Release|Any CPU
 		{FA8740A9-AB9F-4E80-9ABB-1C0B97F6DEBD}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{FA8740A9-AB9F-4E80-9ABB-1C0B97F6DEBD}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Release|iPhone.Build.0 = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D3D728D0-075F-4C31-8B0C-809F4CDF46B3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

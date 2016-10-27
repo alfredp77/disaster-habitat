@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Kastil.Core.Utils;
+using Kastil.Common.Services;
+using Kastil.Common.Utils;
 using Kastil.Shared.Models;
 using Attribute = Kastil.Shared.Models.Attribute;
 
