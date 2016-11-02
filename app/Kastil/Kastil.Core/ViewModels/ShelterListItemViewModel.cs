@@ -1,6 +1,4 @@
-﻿using Kastil.Shared.Models;
-using MvvmCross.Core.ViewModels;
-using System.Windows.Input;
+﻿using Kastil.Common.Models;
 using Kastil.Common.ViewModels;
 
 namespace Kastil.Core.ViewModels

@@ -1,7 +1,6 @@
 using Android.OS;
 using Android.Support.V7.Widget;
 using Kastil.Common.ViewModels;
-using Kastil.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Kastil.Droid.Views

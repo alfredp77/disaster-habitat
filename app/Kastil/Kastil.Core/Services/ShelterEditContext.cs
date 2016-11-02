@@ -4,30 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
-using Kastil.Shared.Models;
-using Attribute = Kastil.Shared.Models.Attribute;
+using Kastil.Common.Models;
+using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Core.Services
 {
-    public interface IShelterEditContext
+    public interface IShelterEditContext : IItemEditContext
     {
         Shelter Item { get; }
-        Attribute SelectedAttribute { get; set; }
-        bool IsNew { get; }
-
         void Initialize(string disasterId = null);
         void Initialize(Shelter item = null, string disasterId = null);
-        void AddOrUpdateAttribute(Attribute attribute, string value);
-        void DeleteAttribute(string attributeName);
         Task DeleteShelter();
-        Task CommitChanges();
     }
 
     public class ShelterEditContext : BaseService, IShelterEditContext
     {
         private Dictionary<string, Attribute> _attributesMap;        
         public Attribute SelectedAttribute { get; set; }
-
         public Shelter Item { get; private set; }
         public bool IsNew { get; private set; }
 

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Kastil.Common.Models;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
-using Kastil.Shared.Models;
-using Attribute = Kastil.Shared.Models.Attribute;
+using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Common.Fakes
 {
@@ -26,15 +26,21 @@ namespace Kastil.Common.Fakes
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "Typhoon Haiyan",
+                Description = "Disaster 1 happened in the interior areas of the country1 and every help is appreciated.",
+                GiveUrl = "",
+                ImageUrl = "",
                 DateWhen = new DateTimeOffset(2013, 11, 8, 0, 0, 0, TimeSpan.FromHours(8)),
-                Location = new Location(14.599512, 120.984222) { Name = "Manila", Country = "Phillippines" }
+                Location = "Manila, Phillippines"
             };
             var disaster2 = new Disaster
             {
                 Id = _acehDisasterId,
                 Name = "Aceh Tsunami",
+                Description = "Disaster happened in the coastal areas of the country2 and every help is appreciated.",
+                GiveUrl = "",
+                ImageUrl = "",
                 DateWhen = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)),
-                Location = new Location(5.54829, 95.323756) { Name = "Banda Aceh", Country = "Indonesia" }
+                Location = "Banda Aceh, Indonesia"
             };
             _disasters.Add(disaster1.Id, disaster1);
             _disasters.Add(disaster2.Id, disaster2);
@@ -65,7 +71,12 @@ namespace Kastil.Common.Fakes
             var attr6 = new Attribute { Category = "1", Id = "6", Key = "Number of Hospitals" };
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6 } as IEnumerable<Attribute>);
         }
-        
+
+        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Item
+        {
+            return item.GetType() == typeof(Assessment) ? GetAssessmentAttributes() : GetShelterAttributes();
+        }
+
         private async Task<IEnumerable<Attribute>> GetRandomAttributes(bool forAssessment = true)
         {
             var attributes = forAssessment ? await GetAssessmentAttributes() : await GetShelterAttributes();
@@ -180,7 +191,12 @@ namespace Kastil.Common.Fakes
 
         public Task Save(Shelter shelter)
         {
-            _shelters.Add(shelter);
+            var matchingShelter = _shelters.FirstOrDefault(s => s.Id == shelter.Id);
+            if (matchingShelter != null) 
+                _shelters[_shelters.IndexOf(matchingShelter)] = shelter;
+            else
+                _shelters.Add(shelter);
+
             return Asyncer.DoNothing();
         }
 
@@ -251,6 +267,36 @@ namespace Kastil.Common.Fakes
                 result = _shelters.FirstOrDefault(s => s.Id == shelterId);
 
             return result != null ? Task.FromResult(result) : Task.FromResult<Shelter>(null);
+        }
+        #endregion
+
+        #region Disaster Aids
+        private readonly List<DisasterIncidentAid> _disasterIncidentAids = new List<DisasterIncidentAid>();
+        private void GenerateAidForDisasterIncident()
+        {
+            if (!_disasters.Any())
+                GenerateDisasters();
+
+            foreach (var incident in _disasters)
+            {
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$10", DisplayText = "Weekly ration for 2 people." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$10", DisplayText = "100 bricks." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$10", DisplayText = "Weekly Provisions for a person." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$20", DisplayText = "Weekly ration for 4 people." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$20", DisplayText = "1000 bricks." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$20", DisplayText = "Weekly Provisions for a person." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$50", DisplayText = "Monthly ration for 2 people." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$50", DisplayText = "Weekly Provisions for 2 people." });
+                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$100", DisplayText = "Monthly ration for 4 people." });
+            }
+        }
+
+        public Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId)
+        {
+            if (!_disasterIncidentAids.Any())
+                GenerateAidForDisasterIncident();
+
+            return Task.FromResult(_disasterIncidentAids.Where(d => d.DisasterId == disasterId));
         }
         #endregion
 

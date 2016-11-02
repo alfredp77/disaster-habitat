@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Services;
 using Kastil.Core.Services;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 using Moq;
 using NUnit.Framework;
 

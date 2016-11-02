@@ -165,51 +165,51 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Acr.UserDialogs.6.2.0\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
+      <HintPath>..\packages\Acr.UserDialogs.6.2.6\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Acr.UserDialogs.6.2.0\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
+      <HintPath>..\packages\Acr.UserDialogs.6.2.6\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Binding.4.3.0\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Binding.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Binding.4.3.0\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Core.4.3.0\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Core.4.3.0\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Binding.4.3.0\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Platform.4.3.0\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Platform.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Platform.4.3.0\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.Messenger, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Plugin.Messenger.4.2.3\lib\Xamarin.iOS10\MvvmCross.Plugins.Messenger.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Plugin.Messenger.4.3.0\lib\Xamarin.iOS10\MvvmCross.Plugins.Messenger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.Visibility, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.2.3\lib\Xamarin.iOS10\MvvmCross.Plugins.Visibility.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.3.0\lib\Xamarin.iOS10\MvvmCross.Plugins.Visibility.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvmCross.Plugins.Visibility.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.2.3\lib\Xamarin.iOS10\MvvmCross.Plugins.Visibility.iOS.dll</HintPath>
+      <HintPath>..\packages\MvvmCross.Plugin.Visibility.4.3.0\lib\Xamarin.iOS10\MvvmCross.Plugins.Visibility.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MvvX.Plugins.CouchBaseLite, Version=2.2.0.21350, Culture=neutral, processorArchitecture=MSIL">

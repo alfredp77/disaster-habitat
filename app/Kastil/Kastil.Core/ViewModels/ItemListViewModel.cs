@@ -1,20 +1,12 @@
-﻿using Acr.UserDialogs;
-using Kastil.Core.Events;
-using Kastil.Core.Services;
-using Kastil.Shared.Models;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
+using Kastil.Core.Events;
+using MvvmCross.Core.ViewModels;
 
 namespace Kastil.Core.ViewModels
 {
-    public class ItemListViewModel<T> : BaseViewModel where T : BaseViewModel
+    public class ItemListViewModel<T> : BaseViewModel 
     {
         public ObservableRangeCollection<T> Items { get; set; }
         public string DisasterId { get; set; }

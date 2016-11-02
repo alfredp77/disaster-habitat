@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
-using Kastil.Core.Services;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -22,7 +20,6 @@ namespace Kastil.Core.ViewModels
             Title = "Disasters";
 			AllowSettingCommand = true;
         }
-
 
         public override Task Initialize()
         {
@@ -58,7 +55,8 @@ namespace Kastil.Core.ViewModels
 
 		MvxCommand<DisasterListItemViewModel> _disasterSelectedCommand;
 		public MvxCommand<DisasterListItemViewModel> DisasterSelectedCommand {
-			get {
+			get
+            {
 				_disasterSelectedCommand = _disasterSelectedCommand ?? new MvxCommand<DisasterListItemViewModel>(DoDisasterSelectedCommand);
 				return _disasterSelectedCommand;
 			}

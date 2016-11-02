@@ -18,11 +18,11 @@ namespace Kastil.Core.ViewModels
         {
             get
             {
-                return Context.Assessment.Name;                
+                return Context.Item.Name;                
             }
             set
             {
-                Context.Assessment.Name = value;
+                Context.Item.Name = value;
                 SetTitle();
                 RaisePropertyChanged();
             }
@@ -37,11 +37,11 @@ namespace Kastil.Core.ViewModels
         {
             get
             {
-                return Context.Assessment.LocationName;
+                return Context.Item.LocationName;
             }
             set
             {
-                Context.Assessment.LocationName = value;
+                Context.Item.LocationName = value;
                 RaisePropertyChanged();
             }
         }
@@ -61,17 +61,15 @@ namespace Kastil.Core.ViewModels
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
         private void DoAddAttrCommand()
         {
-            var context = Resolve<IAssessmentEditContext>();
-            context.SelectedAttribute = null;
-            ShowViewModel<EditAttributeViewModel>();
+            Context.SelectedAttribute = null;
+            ShowViewModel<EditAssessmentAttributeViewModel>();
         }
 
         public MvxCommand<AttributeViewModel> AttributeSelectedCommand => new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
         private void DoAttributeSelectedCommand(AttributeViewModel obj)
         {
-            var context = Resolve<IAssessmentEditContext>();
-            context.SelectedAttribute = obj.Attribute;
-            ShowViewModel<EditAttributeViewModel>();
+            Context.SelectedAttribute = obj.Attribute;
+            ShowViewModel<EditAssessmentAttributeViewModel>();
         }
 
         public MvxAsyncCommand SaveCommand => new MvxAsyncCommand(DoSaveCommand);
@@ -105,7 +103,7 @@ namespace Kastil.Core.ViewModels
 
         private void SetAssessmentProperties()
         {
-            var assessment = Context.Assessment;
+            var assessment = Context.Item;
             assessment.Name = Name;
             assessment.LocationName = Location;
         }
@@ -122,7 +120,7 @@ namespace Kastil.Core.ViewModels
 
         private async Task OnEditingDone(EditingDoneEvent evt)
         {
-			if (evt.Sender is EditAttributeViewModel)
+			if (evt.Sender is EditAssessmentAttributeViewModel)
             	await Load();
         }
 
@@ -132,7 +130,7 @@ namespace Kastil.Core.ViewModels
             dialog.ShowLoading(Messages.General.Loading);
             try
             {
-                var assessment = Context.Assessment;
+                var assessment = Context.Item;
                 if (assessment != null)
                 {
                     SetTitle();

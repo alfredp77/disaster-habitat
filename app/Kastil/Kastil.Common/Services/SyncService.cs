@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 
 namespace Kastil.Common.Services
 {

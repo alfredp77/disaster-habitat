@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Utils;
-using Kastil.Shared.Models;
-using Attribute = Kastil.Shared.Models.Attribute;
+using Kastil.Common.Models;
+using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Common.Services
 {
@@ -58,6 +58,11 @@ namespace Kastil.Common.Services
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
             return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.Id == shelterId));
+        }
+
+        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Item
+        {
+            return item.GetType() == typeof(Assessment) ? GetAssessmentAttributes() : GetShelterAttributes();
         }
 
         public async Task<IEnumerable<Attribute>> GetShelterAttributes()
@@ -117,6 +122,12 @@ namespace Kastil.Common.Services
             {
                 await Asyncer.Async(() => context.Delete(shelter));
             }
+        }
+
+        public Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId)
+        {
+            //TODO: GetDisasterAidItems
+            return null;
         }
     }
 }

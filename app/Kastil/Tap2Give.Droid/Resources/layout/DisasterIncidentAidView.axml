@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  
+      <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:MvxBind="Text Name"
+        android:textSize="18sp" />
+      
+    <RelativeLayout  
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:padding="3dp">    
+     <ImageView
+        android:id="@+id/imgIncident"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/icon"
+        android:scaleType="fitXY"
+        app:MvxBind="ImageUrl ImageUrl"/>
+    
+      <TextView
+          android:id="@+id/description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentRight="true"
+          android:layout_toRightOf="@+id/imgIncident"
+          android:textColor="#a3a3a3"
+          android:maxLines="6"
+          android:singleLine="false"
+          app:MvxBind="Text Description"
+          android:textSize="16sp" />
+  
+    </RelativeLayout>
+  
+      <TextView
+        android:id="@+id/selectDonation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:MvxBind="Text SelectText"
+        android:textSize="18sp" />
+
+      <Mvx.MvxListView
+        android:background="#ededed"
+        android:id="@+id/donationAmounts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:dividerHeight="0.5dp"
+        android:cacheColorHint="#00000000"
+        app:MvxBind="ItemsSource AidValues"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="0.0dp" />
+
+  <Button
+    android:id="@+id/cancel"
+    android:text="Cancel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:MvxBind="Click CancelCommand" />
+
+  <Button
+	      android:id="@+id/proceedToDonate"
+				android:text="Proceed to donate"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      app:MvxBind="Click DonateCommand" />  
+
+</LinearLayout>

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Kastil.Common.Utils;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 using MvvmCross.Plugins.File;
 
 namespace Kastil.Common.Services

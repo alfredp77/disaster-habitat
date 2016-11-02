@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Kastil.Common.Fakes;
 using Kastil.Core.Services;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 using NUnit.Core;
 using NUnit.Framework;
 

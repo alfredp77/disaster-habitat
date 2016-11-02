@@ -7,9 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
-using MvvmCross.Plugins.Messenger;
-using Kastil.Core.Events;
-using Kastil.Shared.Models;
 
 namespace Kastil.Core.ViewModels
 {

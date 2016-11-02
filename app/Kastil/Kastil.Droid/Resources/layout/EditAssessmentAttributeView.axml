@@ -17,17 +17,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatSpinner
-            android:id="@+id/attributeSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40dp"
-            app:MvxBind="ItemsSource Items;SelectedItem SelectedItem" />
-        <EditText
-            android:id="@+id/attrValue"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            app:MvxBind="Text AttributeValue" />
+      <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatSpinner
+          android:id="@+id/attributeSpinner"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="40dp"
+          app:MvxBind="ItemsSource Items;SelectedItem SelectedItem; Visibility InvertedVisibility(EditMode)" />
+      <TextView
+          android:id="@+id/attributeName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="40dp"
+          app:MvxBind="Text AttributeText; Visibility Visibility(EditMode)"/>
+      <EditText
+          android:id="@+id/attrValue"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          app:MvxBind="Text AttributeValue" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

@@ -1,6 +1,6 @@
 using System;
 using Kastil.Common.ViewModels;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 
 namespace Kastil.Core.ViewModels
 {

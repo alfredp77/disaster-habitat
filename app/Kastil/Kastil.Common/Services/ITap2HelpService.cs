@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 
 namespace Kastil.Common.Services
 {
@@ -17,6 +17,7 @@ namespace Kastil.Common.Services
         Task<Shelter> GetShelter(string disasterId, string shelterId);
         Task<Shelter> GetShelter(string shelterId);
 
+        Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Item;
         Task<IEnumerable<Attribute>> GetShelterAttributes();
         Task<IEnumerable<Attribute>> GetAssessmentAttributes();
 
@@ -26,5 +27,7 @@ namespace Kastil.Common.Services
 
         Task DeleteAssessments(string disasterId);
         Task DeleteShelter(string shelterId);
+
+        Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId);        
     }
 }

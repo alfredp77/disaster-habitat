@@ -1,4 +1,4 @@
-﻿using Kastil.Shared.Models;
+﻿using Kastil.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

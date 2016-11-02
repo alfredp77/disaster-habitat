@@ -1,4 +1,4 @@
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 
 namespace Kastil.Common.Services
 {

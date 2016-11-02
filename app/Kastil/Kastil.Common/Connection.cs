@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Kastil.Shared.Models;
+using Kastil.Common.Models;
 
 namespace Kastil.Common
 {

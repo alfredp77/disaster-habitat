@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        app:MvxBind="Text Name"
+        android:background="?attr/colorPrimary"
+        android:id="@+id/assessmentName" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatSpinner
+          android:id="@+id/attributeSpinner"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="40dp"
+          app:MvxBind="ItemsSource Items;SelectedItem SelectedItem; Visibility InvertedVisibility(EditMode)" />
+      <TextView
+          android:id="@+id/attributeName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="40dp"
+          app:MvxBind="Text AttributeText; Visibility Visibility(EditMode)"/>
+      <EditText
+          android:id="@+id/attrValue"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          app:MvxBind="Text AttributeValue" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <Button
+            android:id="@+id/addOrUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:MvxBind="Click AddClickCommand;Text ButtonText" />
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:MvxBind="Click DeleteClickCommand; Visibility Visibility(EditMode)"
+            android:text="Delete"/>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:MvxBind="Click CancelClickCommand"
+            android:text="Cancel" />
+    </LinearLayout>
+</LinearLayout>
