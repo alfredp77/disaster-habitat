@@ -9,9 +9,8 @@ namespace Tap2Give.Core
     public static class Messages
     {
         public const string Loading = "Loading..";
-
-        public const string AmountToDonate = "Select amount you wish to donate:";
-
+        public const string MainTitle = "Seeking help for..";
+        public const string AmountToDonate = "Here is what you will help achieve:";
         public const string DefaultLocation = "Unknown location";
     }
 }

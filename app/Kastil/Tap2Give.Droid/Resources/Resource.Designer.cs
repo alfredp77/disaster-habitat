@@ -2270,8 +2270,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f020059
 			public const int navigation_empty_icon = 2130837593;
 			
-			// aapt resource value: 0x7f02005d
-			public const int notification_template_icon_bg = 2130837597;
+			// aapt resource value: 0x7f02005e
+			public const int notification_template_icon_bg = 2130837598;
 			
 			// aapt resource value: 0x7f02005a
 			public const int roundedbg = 2130837594;
@@ -2281,6 +2281,9 @@ namespace Tap2Give.Droid
 			
 			// aapt resource value: 0x7f02005c
 			public const int splash = 2130837596;
+			
+			// aapt resource value: 0x7f02005d
+			public const int T2H_Icon = 2130837597;
 			
 			static Drawable()
 			{
@@ -2406,9 +2409,6 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f06004f
 			public const int contentPanel = 2131099727;
 			
-			// aapt resource value: 0x7f060084
-			public const int content_frame = 2131099780;
-			
 			// aapt resource value: 0x7f060055
 			public const int custom = 2131099733;
 			
@@ -2444,6 +2444,9 @@ namespace Tap2Give.Droid
 			
 			// aapt resource value: 0x7f060010
 			public const int disableHome = 2131099664;
+			
+			// aapt resource value: 0x7f060085
+			public const int disasterTable = 2131099781;
 			
 			// aapt resource value: 0x7f06007c
 			public const int donationAmounts = 2131099772;
@@ -2586,8 +2589,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060059
 			public const int radio = 2131099737;
 			
-			// aapt resource value: 0x7f060085
-			public const int recyclerView = 2131099781;
+			// aapt resource value: 0x7f060084
+			public const int refresher = 2131099780;
 			
 			// aapt resource value: 0x7f060033
 			public const int right = 2131099699;

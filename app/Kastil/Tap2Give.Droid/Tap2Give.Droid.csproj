@@ -271,6 +271,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
     <AndroidResource Include="Resources\drawable\splash.png" />
+    <AndroidResource Include="Resources\drawable\T2H_Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kastil.Common\Kastil.Common.csproj">

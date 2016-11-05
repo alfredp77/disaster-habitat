@@ -17,6 +17,7 @@ namespace Tap2Give.Core.ViewModels
 
         public override Task Initialize()
         {
+            Title = Messages.MainTitle;
             return LoadIncidents();
         }
 

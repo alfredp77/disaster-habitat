@@ -26,21 +26,21 @@ namespace Kastil.Common.Fakes
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "Typhoon Haiyan",
-                Description = "Disaster 1 happened in the interior areas of the country1 and every help is appreciated.",
-                GiveUrl = "",
-                ImageUrl = "",
+                Description = "Typhoon Haiyan, known as Super Typhoon Yolanda in the Philippines, was one of the most intense tropical cyclones on record, which devastated portions of Southeast Asia, particularly the Philippines.",
+                GiveUrl = "http://www.give2habitat.org/member/t/thenpdgroup",
+                ImageUrl = "https://api.backendless.com/4ED00D7B-240E-B654-FF92-8E5E8C6F0100/v1/files/disasterIncidentImages/typhoon-haiyan.jpg",
                 DateWhen = new DateTimeOffset(2013, 11, 8, 0, 0, 0, TimeSpan.FromHours(8)),
                 Location = "Manila, Phillippines"
             };
             var disaster2 = new Disaster
             {
                 Id = _acehDisasterId,
-                Name = "Aceh Tsunami",
-                Description = "Disaster happened in the coastal areas of the country2 and every help is appreciated.",
-                GiveUrl = "",
-                ImageUrl = "",
-                DateWhen = new DateTimeOffset(2004, 12, 24, 0, 0, 0, TimeSpan.FromHours(7)),
-                Location = "Banda Aceh, Indonesia"
+                Name = "Habitat for Humanity Singapore Responds to Nepal Earthquake 2015",
+                Description = "Nepal was hit by a 7.8 magnitude earthquake on April 25 causing massive damage and high loss of life, followed by major aftershocks on April 26 causing further destruction. As of June 8, Habitat has built 21 demonstration temporary shelters in Kavre and Sindhupalchowk districts to show affected communities how to effectively use materials from a temporary shelter kit. Habitat staff and volunteers have also distributed more than 1,600 kits in worst-hit Kavre, Gorkha, Dhading, and Sindhupalchowk.",
+                GiveUrl = "http://www.give2habitat.org/singapore/nepaleq2015",
+                ImageUrl = "https://api.backendless.com/4ED00D7B-240E-B654-FF92-8E5E8C6F0100/v1/files/disasterIncidentImages/nepal_quake.png",
+                DateWhen = new DateTimeOffset(2015, 04, 25, 0, 0, 0, TimeSpan.FromHours(7)),
+                Location = "Namche Bazar, Nepal"
             };
             _disasters.Add(disaster1.Id, disaster1);
             _disasters.Add(disaster2.Id, disaster2);
@@ -58,12 +58,12 @@ namespace Kastil.Common.Fakes
             var attr1 = new Attribute { Category = "2", Id = "1", Key = "Hotlines" };
             var attr2 = new Attribute { Category = "2", Id = "2", Key = "Available Capacity" };
             var attr3 = new Attribute { Category = "2", Id = "3", Key = "Others" };
-            return Task.FromResult(new List<Attribute> { attr1, attr2, attr3} as IEnumerable<Attribute>);
+            return Task.FromResult(new List<Attribute> { attr1, attr2, attr3 } as IEnumerable<Attribute>);
         }
 
         public Task<IEnumerable<Attribute>> GetAssessmentAttributes()
         {
-            var attr1 = new Attribute { Category = "1", Id = "1", Key = "Number of Shelter Kits"};
+            var attr1 = new Attribute { Category = "1", Id = "1", Key = "Number of Shelter Kits" };
             var attr2 = new Attribute { Category = "1", Id = "2", Key = "Number of Hygiene Kits" };
             var attr3 = new Attribute { Category = "1", Id = "3", Key = "Number of Host Families" };
             var attr4 = new Attribute { Category = "1", Id = "4", Key = "Number of Evacuation Centers" };
@@ -111,13 +111,13 @@ namespace Kastil.Common.Fakes
             foreach (var disasterId in _disasters.Keys)
             {
                 var attributes = await GetRandomAttributes();
-                var assessment1 = new Assessment { Id = count.ToString(), LocationName= "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                var assessment1 = new Assessment { Id = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 count++;
                 await Save(assessment1);
                 attributes = await GetRandomAttributes();
                 var assessment2 = new Assessment { Id = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 await Save(assessment2);
-                count ++;
+                count++;
             }
         }
 
@@ -127,9 +127,9 @@ namespace Kastil.Common.Fakes
             {
                 await InitFakeAssessments();
             }
-            
+
             var items = new List<Assessment>();
-            foreach(var perEvent in _assessments.Values)
+            foreach (var perEvent in _assessments.Values)
             {
                 items.AddRange(perEvent.Values);
             }
@@ -185,14 +185,14 @@ namespace Kastil.Common.Fakes
         public Task DeleteShelter(string shelterId)
         {
             _shelters.RemoveAll(s => shelterId == s.Id);
-            
+
             return Asyncer.DoNothing();
         }
 
         public Task Save(Shelter shelter)
         {
             var matchingShelter = _shelters.FirstOrDefault(s => s.Id == shelter.Id);
-            if (matchingShelter != null) 
+            if (matchingShelter != null)
                 _shelters[_shelters.IndexOf(matchingShelter)] = shelter;
             else
                 _shelters.Add(shelter);
@@ -229,7 +229,7 @@ namespace Kastil.Common.Fakes
                 Attributes = attributes.ToList()
             });
         }
-        
+
         public async Task<IEnumerable<Shelter>> GetShelters()
         {
             if (_shelters.Count == 0)
@@ -246,7 +246,7 @@ namespace Kastil.Common.Fakes
             {
                 await InitFakeShelters();
             }
-            
+
             return _shelters.Where(s => s.DisasterId == disasterId).AsEnumerable();
         }
 
@@ -272,7 +272,7 @@ namespace Kastil.Common.Fakes
 
         #region Disaster Aids
         private readonly List<DisasterIncidentAid> _disasterIncidentAids = new List<DisasterIncidentAid>();
-        private void GenerateAidForDisasterIncident()
+        private void GenerateAidForDisasterIncidents()
         {
             if (!_disasters.Any())
                 GenerateDisasters();
@@ -294,7 +294,7 @@ namespace Kastil.Common.Fakes
         public Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId)
         {
             if (!_disasterIncidentAids.Any())
-                GenerateAidForDisasterIncident();
+                GenerateAidForDisasterIncidents();
 
             return Task.FromResult(_disasterIncidentAids.Where(d => d.DisasterId == disasterId));
         }
