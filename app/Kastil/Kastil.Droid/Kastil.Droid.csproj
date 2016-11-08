@@ -249,13 +249,12 @@
     <Compile Include="Views\AssessmentView.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\DisastersView.cs" />
-    <Compile Include="Views\EditShelterAttributeView.cs" />
-    <Compile Include="Views\EditAssessmentAttributeView.cs" />
     <Compile Include="Views\LoginView.cs" />
     <Compile Include="Views\ShelterView.cs" />
     <Compile Include="Views\ShelterListView.cs" />
     <Compile Include="Views\AssessmentListView.cs" />
     <Compile Include="Views\SyncView.cs" />
+    <Compile Include="Views\EditAttributedItemView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -289,14 +288,13 @@
     <AndroidResource Include="Resources\layout\SyncView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\EditShelterAttributeView.axml" />
     <AndroidResource Include="Resources\layout\ShelterItemCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ShelterView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\EditAssessmentAttributeView.axml">
+    <AndroidResource Include="Resources\layout\EditAttributedItemView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

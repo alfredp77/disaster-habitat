@@ -9,6 +9,7 @@
             public const string Saving = "Saving";
             public const string AssessmentSaved = "Assessment saved successfully";
             public const string ShelterSaved = "Shelter saved successfully";
+            public const string SavedSuccessfully = "saved successfully";
             public const string SynchronizeData = "Synchronize data?";
             public const string SomethingWentWrongPleaseTryAgain = "Something went wrong. Please try again.";
             public const string DefaultNewAssessmentName = "New Assessment";

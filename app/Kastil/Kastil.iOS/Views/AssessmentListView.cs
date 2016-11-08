@@ -1,8 +1,5 @@
-﻿using System;
-using Kastil.Core.ViewModels;
+﻿using Kastil.Core.ViewModels;
 using Kastil.iOS.Views;
-using MvvmCross.Binding.BindingContext;
-using UIKit;
 
 namespace Kastil.iOS
 {
@@ -20,7 +17,7 @@ namespace Kastil.iOS
 
 			var set = CreateBindingSet<AssessmentListView> ();
 			set.Bind (_tableSource).To (vm => vm.Items);
-			set.Bind (_tableSource).For (t => t.SelectionChangedCommand).To (vm => vm.AssessmentSelectedCommand);
+			set.Bind (_tableSource).For (t => t.SelectionChangedCommand).To (vm => vm.ItemSelectedCommand);
 
 			set.Apply ();
 

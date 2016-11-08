@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Input;
+using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
 using MvvmCross.Core.ViewModels;

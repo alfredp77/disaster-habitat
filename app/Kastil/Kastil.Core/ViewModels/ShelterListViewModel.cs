@@ -1,73 +1,42 @@
-using Acr.UserDialogs;
 using Kastil.Core.Services;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Kastil.Common.Models;
 using Kastil.Common.Services;
-using Kastil.Common.Utils;
 
 namespace Kastil.Core.ViewModels
 {
-    public class ShelterListViewModel : ItemListViewModel<ShelterListItemViewModel>
+    public class ShelterListViewModel : ItemListViewModel
     {
-        public ShelterListViewModel()
+        private readonly ShelterEditContext _context;
+
+        public ShelterListViewModel(ShelterEditContext context)
         {
+            _context = context;
             Title = "Shelters";
             AllowAddCommand = true;
-            Items = new ObservableRangeCollection<ShelterListItemViewModel>();
         }
 
-        protected override async Task Load()
+        protected override void DoItemSelectedCommand(AttributedListItemViewModel itemVm)
         {
-            var dialog = Resolve<IUserDialogs>();
-            dialog.ShowLoading(Messages.General.Loading);
-
-            var disasterService = Resolve<ITap2HelpService>();
-            try
-            {
-                var shelters = await disasterService.GetShelters(DisasterId);
-                if (shelters != null)
-                {
-                    Items.AddRange(shelters.Select(s => new ShelterListItemViewModel(s)));
-                }
-            }
-            catch (Exception ex)
-            {
-                dialog.HideLoading();
-                Mvx.Trace("Unable to load Shelter list, exception: {0}", ex);
-                await dialog.AlertAsync("Unable to load Shelter list. Please try again");
-            }
-            finally
-            {
-                dialog.HideLoading();
-            }
-        }
-
-        MvxCommand<ShelterListItemViewModel> _shelterSelectedCommand;
-        public MvxCommand<ShelterListItemViewModel> ShelterSelectedCommand
-        {
-            get
-            {
-                _shelterSelectedCommand = _shelterSelectedCommand ?? new MvxCommand<ShelterListItemViewModel>(DoShelterSelectedCommand);
-                return _shelterSelectedCommand;
-            }
-        }
-
-        private void DoShelterSelectedCommand(ShelterListItemViewModel itemVm)
-        {
-            var context = Resolve<IShelterEditContext>();
-            context.Initialize(itemVm.Value, DisasterId);
+            var shelter = (Shelter)itemVm.Value;
+            _context.Initialize(shelter, DisasterId);
             ShowViewModel<ShelterViewModel>();
         }
+
+        protected override async Task<IEnumerable<Item>> GetItems()
+        {
+            var service = Resolve<ITap2HelpService>();
+            return await service.GetShelters(DisasterId);
+        }
+
+        protected override string ItemType => typeof (Shelter).Name;        
 
         protected override Task DoAddCommand()
         {
             return Task.Run(() =>
             {
-                var context = Resolve<IShelterEditContext>();
-                context.Initialize(disasterId: DisasterId);
+                _context.Initialize(disasterId: DisasterId);
                 ShowViewModel<ShelterViewModel>();
             });
         }

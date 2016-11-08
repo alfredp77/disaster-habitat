@@ -1,16 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Acr.UserDialogs;
+using Kastil.Common.Models;
+using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
 using Kastil.Core.Events;
+using Kastil.Core.Services;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
 {
-    public class ItemListViewModel<T> : BaseViewModel 
+    public abstract class ItemListViewModel : BaseViewModel 
     {
-        public ObservableRangeCollection<T> Items { get; set; }
-        public string DisasterId { get; set; }
-
+		public ObservableRangeCollection<AttributedListItemViewModel> Items { get; } = new ObservableRangeCollection<AttributedListItemViewModel>();
+        public string DisasterId { get; private set; }
+        
         public void Init(string disasterId)
         {
             DisasterId = disasterId;
@@ -22,9 +30,28 @@ namespace Kastil.Core.ViewModels
             return Load();
         }
 
-        protected virtual async Task Load()
+        protected async Task Load()
         {
-            
+            var dialog = Resolve<IUserDialogs>();
+            dialog.ShowLoading(Messages.General.Loading);            
+            try
+            {
+                var rawItems = await GetItems();
+                if (rawItems != null)
+                {
+                    Items.AddRange(rawItems.Select(s => new AttributedListItemViewModel(s)));
+                }
+            }
+            catch (Exception ex)
+            {
+                dialog.HideLoading();
+                Mvx.Trace($"Unable to load {ItemType} list, exception: {ex}");
+                await dialog.AlertAsync($"Unable to load {ItemType} list. Please try again");
+            }
+            finally
+            {
+                dialog.HideLoading();
+            }
         }
 
         private async Task OnEditingDone(EditingDoneEvent evt)
@@ -63,5 +90,21 @@ namespace Kastil.Core.ViewModels
             get { return _isLoading; }
             set { SetProperty(ref _isLoading, value); }
         }
+
+        MvxCommand<AttributedListItemViewModel> _itemSelectedCommand;
+        public MvxCommand<AttributedListItemViewModel> ItemSelectedCommand
+        {
+            get
+            {
+                _itemSelectedCommand = _itemSelectedCommand ?? new MvxCommand<AttributedListItemViewModel>(DoItemSelectedCommand);
+                return _itemSelectedCommand;
+            }
+        }
+
+        protected abstract void DoItemSelectedCommand(AttributedListItemViewModel itemVm);
+        
+        protected abstract Task<IEnumerable<Item>> GetItems();
+        protected abstract string ItemType { get; }
+
     }
 }

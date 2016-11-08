@@ -12,7 +12,7 @@ namespace Kastil.Common.ViewModels
     public abstract class BaseViewModel : MvxViewModel
     {
         protected TService Resolve<TService>() where TService : class
-        {
+        {            
             return Mvx.Resolve<TService>();
         }
 

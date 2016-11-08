@@ -17,4 +17,19 @@ namespace Kastil.Core.ViewModels
         public string Text => Value.Name;
         public string LocationName => Value.LocationName;
     }
+
+    public class AttributedListItemViewModel : BaseViewModel
+    {
+        public AttributedListItemViewModel(Item value)
+        {
+            Value = value;
+        }
+
+        public Item Value { get; }
+
+        public string DisasterId => Value.DisasterId;
+        public string ShelterId => Value.Id;
+        public string Text => Value.Name;
+        public string LocationName => Value.LocationName;
+    }
 }

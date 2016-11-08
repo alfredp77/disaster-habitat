@@ -27,7 +27,7 @@
           android:id="@+id/attributeName"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textSize="40dp"
+          android:textSize="20dp"
           app:MvxBind="Text AttributeText; Visibility Visibility(EditMode)"/>
       <EditText
           android:id="@+id/attrValue"

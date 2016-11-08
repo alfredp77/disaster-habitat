@@ -88,17 +88,8 @@ namespace Tap2Give.Core.ViewModels
         {
             try
             {
-                PluginLoader.Instance.EnsureLoaded();
                 var task = Mvx.Resolve<IMvxWebBrowserTask>();
-                task.ShowWebPage(DisasterIncident.GiveUrl);
-
-                /*
-                //TODO: Start Browser with the Value.GiveUrl
-                var uri = Android.Net.Uri.Parse(Value.GiveUrl);
-                var intent = new Intent(Intent.ActionView, uri);
-                StartActivity(intent);
-                */
-
+                task.ShowWebPage(DisasterIncident.GiveUrl);                
             }
             catch (Exception ex)
             {

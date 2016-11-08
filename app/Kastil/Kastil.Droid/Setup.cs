@@ -1,5 +1,6 @@
 using Acr.UserDialogs;
 using Android.Content;
+using Android.Views;
 using Kastil.Common.Services;
 using Kastil.Core;
 using MvvmCross.Droid.Platform;
@@ -8,9 +9,15 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Platform;
 using Kastil.Core.Services;
+using Kastil.Core.ViewModels;
+using Kastil.Droid.Views;
 using Kastil.PlatformSpecific.Shared;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
+using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform.IoC;
 
 namespace Kastil.Droid
 {
@@ -42,6 +49,14 @@ namespace Kastil.Droid
         {
             MvxAppCompatSetupHelper.FillTargetFactories(registry);
             base.FillTargetFactories(registry);
+        }
+
+        protected override void InitializeViewLookup()
+        {
+            base.InitializeViewLookup();
+            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();            
+            viewsContainer.Add(typeof(EditAssessmentAttributeViewModel), typeof(EditAttributedItemView));
+            viewsContainer.Add(typeof(EditShelterAttributeViewModel), typeof(EditAttributedItemView));
         }
     }
 }
