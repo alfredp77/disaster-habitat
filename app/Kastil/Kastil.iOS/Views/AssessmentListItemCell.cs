@@ -22,9 +22,9 @@ namespace Kastil.iOS
 		private void Initialize ()
 		{
 			this.DelayBind (() => {
-				var set = this.CreateBindingSet<AssessmentListItemCell, AssessmentListItemViewModel> ();
+				var set = this.CreateBindingSet<AssessmentListItemCell, AttributedListItemViewModel> ();
 				set.Bind (nameLabel).To (vm => vm.Text);
-				set.Bind (locationLabel).To (vm => vm.ShortDescription);
+				set.Bind (locationLabel).To (vm => vm.LocationName);
 				set.Apply ();
 			});
 		}

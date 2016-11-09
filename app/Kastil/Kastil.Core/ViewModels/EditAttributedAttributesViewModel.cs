@@ -11,7 +11,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace Kastil.Core.ViewModels
 {
-    public abstract class EditAttributedItemViewModel : BaseViewModel
+    public abstract class EditAttributedAttributesViewModel : BaseViewModel
     {
         private IItemEditContext _context;
         private string _name;
@@ -21,7 +21,7 @@ namespace Kastil.Core.ViewModels
         private List<SpinnerItem> _items;
         private string _buttonText = "Add";
 
-        protected EditAttributedItemViewModel(IItemEditContext context)
+        protected EditAttributedAttributesViewModel(IItemEditContext context)
         {
             _context = context;
         }

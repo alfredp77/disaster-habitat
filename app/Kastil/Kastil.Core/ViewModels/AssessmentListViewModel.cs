@@ -6,7 +6,7 @@ using Kastil.Common.Services;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssessmentListViewModel : ItemListViewModel
+    public class AssessmentListViewModel : AttributedListViewModel
     {
         private readonly AssessmentEditContext _context;
 
@@ -24,7 +24,7 @@ namespace Kastil.Core.ViewModels
             ShowViewModel<AssessmentViewModel>();
         }
 
-        protected override async Task<IEnumerable<Item>> GetItems()
+        protected override async Task<IEnumerable<Attributed>> GetItems()
         {
             var service = Resolve<ITap2HelpService>();
             return await service.GetAssessments(DisasterId);

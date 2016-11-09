@@ -54,9 +54,13 @@ namespace Kastil.Droid
         protected override void InitializeViewLookup()
         {
             base.InitializeViewLookup();
-            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();            
-            viewsContainer.Add(typeof(EditAssessmentAttributeViewModel), typeof(EditAttributedItemView));
-            viewsContainer.Add(typeof(EditShelterAttributeViewModel), typeof(EditAttributedItemView));
+            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+            viewsContainer.Add(typeof(AssessmentViewModel), typeof(AttributedView));
+            viewsContainer.Add(typeof(ShelterViewModel), typeof(AttributedView));
+            viewsContainer.Add(typeof(AssessmentListViewModel), typeof(AttributedListView));
+            viewsContainer.Add(typeof(ShelterListViewModel), typeof(AttributedListView));
+            viewsContainer.Add(typeof(EditAssessmentAttributeViewModel), typeof(EditAttributedView));
+            viewsContainer.Add(typeof(EditShelterAttributeViewModel), typeof(EditAttributedView));
         }
     }
 }

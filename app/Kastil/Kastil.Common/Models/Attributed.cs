@@ -2,10 +2,7 @@
 
 namespace Kastil.Common.Models
 {
-    /// <summary>
-    /// Since Assessment and Shelter have same attributes, let's call it as Item for now.
-    /// </summary>
-    public abstract class Item : BaseModel
+    public abstract class Attributed : BaseModel
     {
         public string DisasterId { get; set; }
         public string Name { get; set; }

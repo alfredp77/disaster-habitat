@@ -6,7 +6,7 @@ using Kastil.Common.Services;
 
 namespace Kastil.Core.ViewModels
 {
-    public class ShelterListViewModel : ItemListViewModel
+    public class ShelterListViewModel : AttributedListViewModel
     {
         private readonly ShelterEditContext _context;
 
@@ -24,7 +24,7 @@ namespace Kastil.Core.ViewModels
             ShowViewModel<ShelterViewModel>();
         }
 
-        protected override async Task<IEnumerable<Item>> GetItems()
+        protected override async Task<IEnumerable<Attributed>> GetItems()
         {
             var service = Resolve<ITap2HelpService>();
             return await service.GetShelters(DisasterId);

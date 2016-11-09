@@ -4,7 +4,7 @@ using Kastil.Core.Services;
 
 namespace Kastil.Core.ViewModels
 {
-    public class ShelterViewModel : AttributedItemViewModel
+    public class ShelterViewModel : AttributedViewModel
     {
         public ShelterViewModel(ShelterEditContext context) : base(context)
         {

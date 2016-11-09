@@ -246,15 +246,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
-    <Compile Include="Views\AssessmentView.cs" />
+    <Compile Include="Views\AttributedView.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Views\LoginView.cs" />
-    <Compile Include="Views\ShelterView.cs" />
-    <Compile Include="Views\ShelterListView.cs" />
-    <Compile Include="Views\AssessmentListView.cs" />
+    <Compile Include="Views\AttributedListView.cs" />
     <Compile Include="Views\SyncView.cs" />
-    <Compile Include="Views\EditAttributedItemView.cs" />
+    <Compile Include="Views\EditAttributedView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -272,29 +270,20 @@
     <AndroidResource Include="Resources\layout\DisasterItemCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ShelterListView.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssessmentListView.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssessmentItemCell.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AssessmentView.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\AttributeView.axml" />
     <AndroidResource Include="Resources\layout\SyncView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ShelterItemCell.axml">
+    <AndroidResource Include="Resources\layout\EditAttributedView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\ShelterView.axml">
+    <AndroidResource Include="Resources\layout\AttributedItemCell.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\EditAttributedItemView.axml">
+    <AndroidResource Include="Resources\layout\AttributedView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AttributedListView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

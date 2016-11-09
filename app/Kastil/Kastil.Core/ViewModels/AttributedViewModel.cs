@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
@@ -14,11 +12,11 @@ using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
 {
-    public abstract class AttributedItemViewModel : BaseViewModel
+    public abstract class AttributedViewModel : BaseViewModel
     {
         private IItemEditContext _context;
 
-        protected AttributedItemViewModel(IItemEditContext context)
+        protected AttributedViewModel(IItemEditContext context)
         {
             _context = context;
         }
@@ -66,8 +64,8 @@ namespace Kastil.Core.ViewModels
 			NavigateToEditScreen();
         }
 
-        public MvxCommand<AttributeViewModel> AttributeSelectedCommand => new MvxCommand<AttributeViewModel>(DoAttributeSelectedCommand);
-        private void DoAttributeSelectedCommand(AttributeViewModel obj)
+        public MvxCommand<AttributeListItemViewModel> AttributeSelectedCommand => new MvxCommand<AttributeListItemViewModel>(DoAttributeSelectedCommand);
+        private void DoAttributeSelectedCommand(AttributeListItemViewModel obj)
         {
             _context.SelectedAttribute = obj.Attribute;
 			NavigateToEditScreen();
@@ -102,7 +100,7 @@ namespace Kastil.Core.ViewModels
 
         
         public MvxCommand CancelCommand => new MvxCommand(Close);
-        public ObservableRangeCollection<AttributeViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeViewModel>();
+        public ObservableRangeCollection<AttributeListItemViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeListItemViewModel>();
 
         public override Task Initialize()
         {
@@ -112,7 +110,7 @@ namespace Kastil.Core.ViewModels
 
         private async Task OnEditingDone(EditingDoneEvent evt)
         {
-            if (evt.Sender is EditAttributedItemViewModel)
+            if (evt.Sender is EditAttributedAttributesViewModel)
                 await Load();
         }
         		
@@ -124,7 +122,7 @@ namespace Kastil.Core.ViewModels
             {
                 SetTitle();
                 Attributes.Clear();
-                Attributes.AddRange(_context.Attributes.Select(a => new AttributeViewModel(a)));
+                Attributes.AddRange(_context.Attributes.Select(a => new AttributeListItemViewModel(a)));
             }
             catch (Exception ex)
             {

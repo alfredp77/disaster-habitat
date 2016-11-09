@@ -14,7 +14,7 @@ using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
 {
-    public abstract class ItemListViewModel : BaseViewModel 
+    public abstract class AttributedListViewModel : BaseViewModel 
     {
 		public ObservableRangeCollection<AttributedListItemViewModel> Items { get; } = new ObservableRangeCollection<AttributedListItemViewModel>();
         public string DisasterId { get; private set; }
@@ -103,7 +103,7 @@ namespace Kastil.Core.ViewModels
 
         protected abstract void DoItemSelectedCommand(AttributedListItemViewModel itemVm);
         
-        protected abstract Task<IEnumerable<Item>> GetItems();
+        protected abstract Task<IEnumerable<Attributed>> GetItems();
         protected abstract string ItemType { get; }
 
     }

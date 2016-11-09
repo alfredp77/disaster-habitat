@@ -43,12 +43,12 @@
     <Compile Include="Fakes\FakeSyncService.cs" />
     <Compile Include="Fakes\FakeTap2HelpService.cs" />
     <Compile Include="FolderProvider.cs" />
-    <Compile Include="Models\Assesment.cs" />
+    <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Attribute.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Disaster.cs" />
     <Compile Include="Models\DisasterIncidentAid.cs" />
-    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Attributed.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Shelter.cs" />
     <Compile Include="Models\User.cs" />

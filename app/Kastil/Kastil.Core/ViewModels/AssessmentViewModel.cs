@@ -3,7 +3,7 @@ using Kastil.Core.Services;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AssessmentViewModel : AttributedItemViewModel
+    public class AssessmentViewModel : AttributedViewModel
     {
         public AssessmentViewModel(AssessmentEditContext context) : base(context)
         {

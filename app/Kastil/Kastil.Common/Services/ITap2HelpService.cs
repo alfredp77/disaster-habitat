@@ -17,7 +17,7 @@ namespace Kastil.Common.Services
         Task<Shelter> GetShelter(string disasterId, string shelterId);
         Task<Shelter> GetShelter(string shelterId);
 
-        Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Item;
+        Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Attributed;
         Task<IEnumerable<Attribute>> GetShelterAttributes();
         Task<IEnumerable<Attribute>> GetAssessmentAttributes();
 

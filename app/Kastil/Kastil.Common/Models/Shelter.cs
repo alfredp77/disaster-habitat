@@ -1,7 +1,7 @@
 
 namespace Kastil.Common.Models
 {
-    public class Shelter : Item
+    public class Shelter : Attributed
     {
 		
     }

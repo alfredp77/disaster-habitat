@@ -60,7 +60,7 @@ namespace Kastil.Common.Services
             return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.Id == shelterId));
         }
 
-        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Item
+        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Attributed
         {
             return item.GetType() == typeof(Assessment) ? GetAssessmentAttributes() : GetShelterAttributes();
         }

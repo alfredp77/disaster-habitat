@@ -72,7 +72,7 @@ namespace Kastil.Common.Fakes
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6 } as IEnumerable<Attribute>);
         }
 
-        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Item
+        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Attributed
         {
             return item.GetType() == typeof(Assessment) ? GetAssessmentAttributes() : GetShelterAttributes();
         }

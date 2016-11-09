@@ -22,7 +22,7 @@ namespace Kastil.Core.Services
     }
     
 
-    public abstract class ItemEditContext<T> : BaseService, IItemEditContext where T : Item
+    public abstract class ItemEditContext<T> : BaseService, IItemEditContext where T : Attributed
     {
         private Dictionary<string, Attribute> _attributesMap;
         public Attribute SelectedAttribute { get; set; }

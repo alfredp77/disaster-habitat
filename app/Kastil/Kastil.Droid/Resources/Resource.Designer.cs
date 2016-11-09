@@ -2266,9 +2266,6 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f06000c
 			public const int MvxBindingTagUnique = 2131099660;
 			
-			// aapt resource value: 0x7f0600a1
-			public const int ShelterLocation = 2131099809;
-			
 			// aapt resource value: 0x7f060090
 			public const int StaffCode = 2131099792;
 			
@@ -2413,8 +2410,8 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060054
 			public const int customPanel = 2131099732;
 			
-			// aapt resource value: 0x7f0600a4
-			public const int custom_title = 2131099812;
+			// aapt resource value: 0x7f0600a0
+			public const int custom_title = 2131099808;
 			
 			// aapt resource value: 0x7f06005e
 			public const int decor_content_parent = 2131099742;
@@ -2530,11 +2527,11 @@ namespace Kastil.Droid
 			// aapt resource value: 0x7f060095
 			public const int media_actions = 2131099797;
 			
-			// aapt resource value: 0x7f0600a3
-			public const int menu_button_left = 2131099811;
+			// aapt resource value: 0x7f06009f
+			public const int menu_button_left = 2131099807;
 			
-			// aapt resource value: 0x7f0600a5
-			public const int menu_button_right = 2131099813;
+			// aapt resource value: 0x7f0600a1
+			public const int menu_button_right = 2131099809;
 			
 			// aapt resource value: 0x7f060020
 			public const int middle = 2131099680;
@@ -2631,15 +2628,6 @@ namespace Kastil.Droid
 			
 			// aapt resource value: 0x7f06006e
 			public const int select_dialog_listview = 2131099758;
-			
-			// aapt resource value: 0x7f0600a2
-			public const int shelterAttributes = 2131099810;
-			
-			// aapt resource value: 0x7f0600a0
-			public const int shelterName = 2131099808;
-			
-			// aapt resource value: 0x7f06009f
-			public const int shelterTable = 2131099807;
 			
 			// aapt resource value: 0x7f060058
 			public const int shortcut = 2131099736;
@@ -2881,13 +2869,13 @@ namespace Kastil.Droid
 			public const int abc_select_dialog_material = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int AssessmentItemCell = 2130903066;
+			public const int AttributedItemCell = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int AssessmentListView = 2130903067;
+			public const int AttributedListView = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int AssessmentView = 2130903068;
+			public const int AttributedView = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
 			public const int AttributeView = 2130903069;
@@ -2938,7 +2926,7 @@ namespace Kastil.Droid
 			public const int DisastersView = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public const int EditAttributedItemView = 2130903085;
+			public const int EditAttributedView = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
 			public const int loading = 2130903086;
@@ -2986,25 +2974,16 @@ namespace Kastil.Droid
 			public const int select_dialog_singlechoice_material = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public const int ShelterItemCell = 2130903101;
+			public const int SplashScreen = 2130903101;
 			
 			// aapt resource value: 0x7f03003e
-			public const int ShelterListView = 2130903102;
+			public const int support_simple_spinner_dropdown_item = 2130903102;
 			
 			// aapt resource value: 0x7f03003f
-			public const int ShelterView = 2130903103;
+			public const int SyncView = 2130903103;
 			
 			// aapt resource value: 0x7f030040
-			public const int SplashScreen = 2130903104;
-			
-			// aapt resource value: 0x7f030041
-			public const int support_simple_spinner_dropdown_item = 2130903105;
-			
-			// aapt resource value: 0x7f030042
-			public const int SyncView = 2130903106;
-			
-			// aapt resource value: 0x7f030043
-			public const int toolbar = 2130903107;
+			public const int toolbar = 2130903104;
 			
 			static Layout()
 			{

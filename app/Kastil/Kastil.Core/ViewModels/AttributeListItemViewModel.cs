@@ -3,11 +3,11 @@ using Kastil.Common.Models;
 
 namespace Kastil.Core.ViewModels
 {
-    public class AttributeViewModel : BaseViewModel
+    public class AttributeListItemViewModel : BaseViewModel
     {
         public Attribute Attribute { get; }
 
-        public AttributeViewModel(Attribute attribute)
+        public AttributeListItemViewModel(Attribute attribute)
         {
             Attribute = attribute;
         }

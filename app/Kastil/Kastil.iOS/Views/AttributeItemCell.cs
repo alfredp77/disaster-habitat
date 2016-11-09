@@ -22,7 +22,7 @@ namespace Kastil.iOS
 		private void Initialize ()
 		{
 			this.DelayBind (() => {
-				var set = this.CreateBindingSet<AttributeItemCell, AttributeViewModel> ();
+				var set = this.CreateBindingSet<AttributeItemCell, AttributeListItemViewModel> ();
 				set.Bind (nameLabel).To (vm => vm.AttributeName);
 				set.Bind (valueLabel).To (vm => vm.AttributeValue);
 				set.Apply ();
