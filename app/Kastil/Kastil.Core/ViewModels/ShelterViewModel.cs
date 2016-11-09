@@ -15,7 +15,7 @@ namespace Kastil.Core.ViewModels
         public override string ItemType => typeof (Shelter).Name;
         protected override void NavigateToEditScreen()
         {
-            throw new NotImplementedException();
+			ShowViewModel<EditShelterAttributeViewModel>();
         }
     }
 }
