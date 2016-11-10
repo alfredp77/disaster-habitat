@@ -13,7 +13,7 @@ namespace Tap2Give.Core.ViewModels
 {
     public class DisasterIncidentsViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<DisasterIncidentViewModel> DisasterIncidents { get; set; }
+		public ObservableRangeCollection<DisasterIncidentViewModel> DisasterIncidents { get; } = new ObservableRangeCollection<DisasterIncidentViewModel>();
 
         public override Task Initialize()
         {

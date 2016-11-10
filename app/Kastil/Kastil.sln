@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tap2Give.Core", "Tap2Give.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tap2Give.Droid", "Tap2Give.Droid\Tap2Give.Droid.csproj", "{0E76DB77-E26E-491A-B7CF-F2F748A04181}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tap2Help", "Tap2Help", "{4E62C38F-5319-4F1C-BC96-7ADB825EFAC0}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{12b98f90-3b56-483c-ac55-952d17d1f66b}*SharedItemsImports = 13

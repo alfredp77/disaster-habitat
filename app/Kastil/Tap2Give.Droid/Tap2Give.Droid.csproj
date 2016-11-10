@@ -222,10 +222,10 @@
     <Compile Include="ViewHolders\DisasterIncidentViewHolder.cs" />
     <Compile Include="Views\BindableProgress.cs" />
     <Compile Include="Views\DisasterIncidentAidView.cs" />
-    <Compile Include="Views\Setup.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\BaseView.cs" />
     <Compile Include="Views\DisasterIncidentsView.cs" />
+    <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -281,6 +281,7 @@
       <Name>Tap2Give.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems" Label="Shared" Condition="Exists('..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
