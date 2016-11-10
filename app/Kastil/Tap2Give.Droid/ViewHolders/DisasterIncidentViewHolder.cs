@@ -28,7 +28,7 @@ namespace Tap2Give.Droid.ViewHolders
 
             this.DelayBind(() =>
             {
-                var set = this.CreateBindingSet<DisasterIncidentViewHolder, DisasterIncidentViewModel>();
+                var set = this.CreateBindingSet<DisasterIncidentViewHolder, DisasterListItemViewModel>();
                 set.Bind(this.textView).To(x => x.Name);
 
                 set.Apply();

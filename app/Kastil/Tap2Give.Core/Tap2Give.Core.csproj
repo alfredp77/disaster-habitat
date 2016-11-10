@@ -37,9 +37,10 @@
     <Compile Include="App.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\DisasterIncidentAidViewModel.cs" />
-    <Compile Include="ViewModels\DisasterIncidentsViewModel.cs" />
-    <Compile Include="ViewModels\DisasterIncidentViewModel.cs" />
+    <Compile Include="Services\DisasterContext.cs" />
+    <Compile Include="ViewModels\DisasterDetailsViewModel.cs" />
+    <Compile Include="ViewModels\DisastersViewModel.cs" />
+    <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

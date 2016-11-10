@@ -2922,13 +2922,13 @@ namespace Tap2Give.Droid
 			public const int design_text_input_password_icon = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int DisasterIncidentAidView = 2130903079;
+			public const int DisasterDetailsView = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int DisasterIncidentListItem = 2130903080;
+			public const int DisasterListItem = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int DisasterIncidentsView = 2130903081;
+			public const int DisastersView = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
 			public const int loading = 2130903082;

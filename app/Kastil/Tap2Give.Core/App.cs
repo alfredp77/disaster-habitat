@@ -5,6 +5,7 @@ using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
+using Tap2Give.Core.Services;
 
 namespace Tap2Give.Core
 {
@@ -21,10 +22,11 @@ namespace Tap2Give.Core
 
 
             Mvx.RegisterSingleton(() => new Connection());
+            Mvx.RegisterSingleton<IDisasterContext>(() => new DisasterContext());
 			Mvx.RegisterSingleton<IPersistenceContextFactory>(() => new FileBasedPersistenceContextFactory());
 			Mvx.RegisterType<IJsonSerializer>(() => new JsonSerializer());
 
-            RegisterAppStart<ViewModels.DisasterIncidentsViewModel>();
+            RegisterAppStart<ViewModels.DisastersViewModel>();
         }
     }
 }

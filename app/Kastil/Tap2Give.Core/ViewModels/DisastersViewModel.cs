@@ -8,12 +8,13 @@ using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using Tap2Give.Core.Services;
 
 namespace Tap2Give.Core.ViewModels
 {
-    public class DisasterIncidentsViewModel : BaseViewModel
+    public class DisastersViewModel : BaseViewModel
     {
-		public ObservableRangeCollection<DisasterIncidentViewModel> DisasterIncidents { get; } = new ObservableRangeCollection<DisasterIncidentViewModel>();
+		public ObservableRangeCollection<DisasterListItemViewModel> DisasterIncidents { get; } = new ObservableRangeCollection<DisasterListItemViewModel>();
 
         public override Task Initialize()
         {
@@ -32,7 +33,7 @@ namespace Tap2Give.Core.ViewModels
                 var disasters = await disasterService.GetDisasters();
                 if (disasters != null)
                 {
-                    DisasterIncidents.AddRange(disasters.Select(d => new DisasterIncidentViewModel(d)));
+                    DisasterIncidents.AddRange(disasters.Select(d => new DisasterListItemViewModel(d)));
                 }
             }
             catch (Exception ex)
@@ -47,17 +48,19 @@ namespace Tap2Give.Core.ViewModels
             }
         }
 
-        public MvxCommand<DisasterIncidentViewModel> IncidentSelectedCommand 
+        public MvxCommand<DisasterListItemViewModel> ShowDetailsCommand 
         {
             get
             {
-                return new MvxCommand<DisasterIncidentViewModel>(d => ShowViewModel<DisasterIncidentAidViewModel>(d.Value));
+                return new MvxCommand<DisasterListItemViewModel>(DoShowDetails);
             }
         }
 
-        private void DoShowIncidentAid(Disaster disaster)
+		private void DoShowDetails(DisasterListItemViewModel selectedItem)
         {
-            ShowViewModel<DisasterIncidentAidViewModel>(disaster);
+            var disasterContext = Resolve<IDisasterContext>();
+            disasterContext.Initialize(selectedItem.Value);
+            ShowViewModel<DisasterDetailsViewModel>();
         }
     }
 }

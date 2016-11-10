@@ -221,10 +221,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewHolders\DisasterIncidentViewHolder.cs" />
     <Compile Include="Views\BindableProgress.cs" />
-    <Compile Include="Views\DisasterIncidentAidView.cs" />
+    <Compile Include="Views\DisasterDetailsView.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\BaseView.cs" />
-    <Compile Include="Views\DisasterIncidentsView.cs" />
+    <Compile Include="Views\DisastersView.cs" />
     <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,14 +235,14 @@
     <AndroidResource Include="Resources\layout\toolbar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\DisasterIncidentsView.axml">
+    <AndroidResource Include="Resources\layout\DisastersView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
-    <AndroidResource Include="Resources\layout\DisasterIncidentAidView.axml">
+    <AndroidResource Include="Resources\layout\DisasterDetailsView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\DisasterIncidentListItem.axml">
+    <AndroidResource Include="Resources\layout\DisasterListItem.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

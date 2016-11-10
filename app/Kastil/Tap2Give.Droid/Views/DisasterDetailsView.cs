@@ -14,8 +14,8 @@ using Android.Widget;
 namespace Tap2Give.Droid.Views
 {
     [Activity(Label = "Disaster Aid")]
-    public class DisasterIncidentAidView : BaseView
+    public class DisasterDetailsView : BaseView
     {
-        protected override int LayoutResource => Resource.Layout.DisasterIncidentAidView;
+        protected override int LayoutResource => Resource.Layout.DisasterDetailsView;
     }
 }

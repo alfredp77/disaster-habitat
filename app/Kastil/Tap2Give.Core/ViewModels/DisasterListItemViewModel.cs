@@ -3,9 +3,9 @@ using Kastil.Common.Models;
 
 namespace Tap2Give.Core.ViewModels
 {
-    public class DisasterIncidentViewModel
+    public class DisasterListItemViewModel
     {
-        public DisasterIncidentViewModel(Disaster value)
+        public DisasterListItemViewModel(Disaster value)
         {
             Value = value;
         }
