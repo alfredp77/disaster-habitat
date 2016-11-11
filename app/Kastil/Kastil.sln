@@ -28,6 +28,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{12b98f90-3b56-483c-ac55-952d17d1f66b}*SharedItemsImports = 13
+		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{9900a6e6-0aca-44da-9324-2de090a07a68}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{e033292c-1101-44f4-867d-083ef8db215f}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{0e76db77-e26e-491a-b7cf-f2f748a04181}*SharedItemsImports = 4
 		Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems*{fa8740a9-ab9f-4e80-9abb-1c0b97f6debd}*SharedItemsImports = 4

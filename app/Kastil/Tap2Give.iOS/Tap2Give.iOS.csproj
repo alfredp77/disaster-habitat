@@ -20,7 +20,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>i386</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -91,19 +91,24 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Views\BaseView.cs" />
+    <Compile Include="Views\DisastersView.cs" />
+    <Compile Include="Views\DisastersView.designer.cs">
+      <DependentUpon>DisastersView.cs</DependentUpon>
+    </Compile>
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="Views\DisastersView.xib" />
+    <InterfaceDefinition Include="Views\DisasterItemCell.xib" />
+    <Compile Include="Views\DisasterItemCell.cs" />
+    <Compile Include="Views\DisasterItemCell.designer.cs">
+      <DependentUpon>DisasterItemCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomTableViewSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\FirstView.designer.cs">
-      <DependentUpon>FirstView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FirstView.cs" />
-    <InterfaceDefinition Include="Views\FirstView.storyboard">
-      <SubType>Designer</SubType>
-    </InterfaceDefinition>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
   </ItemGroup>
   <ItemGroup>
@@ -184,10 +189,16 @@
     <Content Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Kastil.Common\Kastil.Common.csproj">
+      <Project>{d3d728d0-075f-4c31-8b0c-809f4cdf46b3}</Project>
+      <Name>Kastil.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tap2Give.Core\Tap2Give.Core.csproj">
       <Project>{f5c6d19d-5e82-4d28-b378-ebd2a9f09918}</Project>
       <Name>Tap2Give.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <Import Project="..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

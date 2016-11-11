@@ -15,6 +15,7 @@ namespace Tap2Give.Core.ViewModels
         public string Name => Value.Name;
         public string Location => Value.Location;
         public string Description => Value.Description;
+		public string ImageUrl => Value.ImageUrl;
         public DateTimeOffset? When => Value.DateWhen;
         public string ImageUrl => Value.ImageUrl;
     }
