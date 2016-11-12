@@ -29,7 +29,6 @@
          android:layout_alignParentLeft="true"
          android:layout_below="@+id/incidentName"
          android:padding="2dp"
-         android:src="@drawable/icon"
          app:MvxBind="ImageUrl ImageUrl"
          android:scaleType="fitXY"/>
 

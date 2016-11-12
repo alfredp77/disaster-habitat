@@ -33,6 +33,13 @@ namespace Tap2Give.Core.ViewModels
             private set { _description = value; RaisePropertyChanged(); }
         }
 
+        private string _location;
+        public string Location
+        {
+            get { return _location; }
+            private set { _location = value; RaisePropertyChanged(); }
+        }
+
         private string _imageUrl;
         public string ImageUrl
         {
@@ -40,16 +47,8 @@ namespace Tap2Give.Core.ViewModels
             private set { _imageUrl = value; RaisePropertyChanged(); }
         }
 
-
         public ObservableRangeCollection<DisasterIncidentAid> DisasterAidItems { get; } = new ObservableRangeCollection<DisasterIncidentAid>();
-
-        public List<string> AidValues
-        {
-            get
-            {
-                return DisasterAidItems.GroupBy(d => d.DollarValue).Select(g => GetDollarValue(g.Key, g.ToList())).ToList();            
-            }
-        }
+        public ObservableRangeCollection<string> AidValues { get; } = new ObservableRangeCollection<string>();
 
         private string GetDollarValue(string key, List<DisasterIncidentAid> textForValue)
         {
@@ -73,13 +72,17 @@ namespace Tap2Give.Core.ViewModels
             Name = _disaster.Name;
             Description = _disaster.Description;
             ImageUrl = _disaster.ImageUrl;
-
+            Location = _disaster.Location;
 
             var tapToGiveService = Resolve<ITap2HelpService>();
             try
             {
                 var incidentAids = await tapToGiveService.GetAidsForDisaster(_disaster.Id);
+                DisasterAidItems.Clear();
                 DisasterAidItems.AddRange(incidentAids);
+
+                AidValues.Clear();
+                AidValues.AddRange(DisasterAidItems.GroupBy(d => d.DollarValue).Select(g => GetDollarValue(g.Key, g.ToList())).ToList());
             }
             catch (Exception ex)
             {

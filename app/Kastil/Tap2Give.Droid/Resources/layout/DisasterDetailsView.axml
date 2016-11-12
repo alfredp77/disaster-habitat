@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-  
+    android:layout_height="match_parent"
+    android:padding="4dp">  
       <TextView
         android:id="@+id/title"
         android:layout_width="fill_parent"
@@ -12,42 +12,50 @@
         android:text=""
         app:MvxBind="Text Name"
         android:textSize="18sp" />
+
+  <TextView
+    android:id="@+id/location"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    app:MvxBind="Text Location"
+    android:textSize="16sp" />
       
-    <RelativeLayout  
+  <RelativeLayout  
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:padding="3dp">    
-     <ImageView
-        android:id="@+id/imgIncident"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/icon"
-        android:scaleType="fitXY"
-        app:MvxBind="ImageUrl ImageUrl"/>
+      android:padding="3dp">
+    <Mvx.MvxImageView
+       android:id="@+id/imgIncident"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:layout_alignParentLeft="true"
+       android:padding="2dp"
+       app:MvxBind="ImageUrl ImageUrl"
+       android:scaleType="fitXY"/>
     
-      <TextView
-          android:id="@+id/description"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentTop="true"
-          android:layout_alignParentRight="true"
-          android:layout_toRightOf="@+id/imgIncident"
-          android:textColor="#a3a3a3"
-          android:maxLines="6"
-          android:singleLine="false"
-          app:MvxBind="Text Description"
-          android:textSize="16sp" />
-  
-    </RelativeLayout>
-  
-      <TextView
-        android:id="@+id/selectDonation"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        app:MvxBind="Text SelectText"
-        android:textSize="18sp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/imgIncident"
+        android:textColor="#a3a3a3"
+        android:maxLines="6"
+        android:singleLine="false"
+        app:MvxBind="Text Description"
+        android:textSize="14sp" />
+  
+  </RelativeLayout>
+
+  <TextView
+    android:id="@+id/selectDonation"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    app:MvxBind="Text SelectText"
+    android:textSize="16sp" />
 
       <Mvx.MvxListView
         android:background="#ededed"
@@ -62,18 +70,35 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="0.0dp" />
 
-  <Button
-    android:id="@+id/cancel"
-    android:text="Cancel"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:MvxBind="Click CancelCommand" />
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-  <Button
+    <Button
+      android:id="@+id/cancel"
+      android:text="Cancel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:MvxBind="Click CancelCommand"
+      android:layout_alignParentLeft="true"
+      android:layout_toLeftOf="@+id/centerPoint" />
+
+    <TextView
+        android:id="@+id/centerPoint"
+        android:text=""
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
+    <Button
 	      android:id="@+id/proceedToDonate"
 				android:text="Proceed to donate"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      app:MvxBind="Click DonateCommand" />  
+	      app:MvxBind="Click DonateCommand"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/centerPoint" />
+
+  </RelativeLayout>
 
 </LinearLayout>
