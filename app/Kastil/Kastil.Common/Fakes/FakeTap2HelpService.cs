@@ -35,8 +35,8 @@ namespace Kastil.Common.Fakes
             var disaster2 = new Disaster
             {
                 Id = _acehDisasterId,
-                Name = "Habitat for Humanity Singapore Responds to Nepal Earthquake 2015",
-                Description = "Nepal was hit by a 7.8 magnitude earthquake on April 25 causing massive damage and high loss of life, followed by major aftershocks on April 26 causing further destruction. As of June 8, Habitat has built 21 demonstration temporary shelters in Kavre and Sindhupalchowk districts to show affected communities how to effectively use materials from a temporary shelter kit. Habitat staff and volunteers have also distributed more than 1,600 kits in worst-hit Kavre, Gorkha, Dhading, and Sindhupalchowk.",
+                Name = "Nepal Earthquake 2015",
+                Description = "Nepal was hit by a 7.8 magnitude earthquake on April 25 2015, causing massive damage and high loss of life, followed by major aftershocks on April 26 causing further destruction. As of June 8, Habitat has built 21 demonstration temporary shelters in Kavre and Sindhupalchowk districts to show affected communities how to effectively use materials from a temporary shelter kit. Habitat staff and volunteers have also distributed more than 1,600 kits in worst-hit Kavre, Gorkha, Dhading, and Sindhupalchowk.",
                 GiveUrl = "http://www.give2habitat.org/singapore/nepaleq2015",
                 ImageUrl = "https://api.backendless.com/4ED00D7B-240E-B654-FF92-8E5E8C6F0100/v1/files/disasterIncidentImages/nepal_quake.png",
                 DateWhen = new DateTimeOffset(2015, 04, 25, 0, 0, 0, TimeSpan.FromHours(7)),

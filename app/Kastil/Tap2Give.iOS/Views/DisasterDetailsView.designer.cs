@@ -13,6 +13,9 @@ namespace Tap2Give.iOS.Views
 	partial class DisasterDetailsView
 	{
 		[Outlet]
+		UIKit.UITableView aidTable { get; set; }
+
+		[Outlet]
 		UIKit.UITextView disasterDescription { get; set; }
 
 		[Outlet]
@@ -23,9 +26,14 @@ namespace Tap2Give.iOS.Views
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (donateButton != null) {
-				donateButton.Dispose ();
-				donateButton = null;
+			if (aidTable != null) {
+				aidTable.Dispose ();
+				aidTable = null;
+			}
+
+			if (disasterDescription != null) {
+				disasterDescription.Dispose ();
+				disasterDescription = null;
 			}
 
 			if (disasterImage != null) {
@@ -33,9 +41,9 @@ namespace Tap2Give.iOS.Views
 				disasterImage = null;
 			}
 
-			if (disasterDescription != null) {
-				disasterDescription.Dispose ();
-				disasterDescription = null;
+			if (donateButton != null) {
+				donateButton.Dispose ();
+				donateButton = null;
 			}
 		}
 	}
