@@ -19,7 +19,7 @@ namespace Tap2Give.iOS.Views
 
 			var set = CreateBindingSet<DisastersView>();
 			set.Bind(_tableSource).To(vm => vm.DisasterIncidents);
-			//set.Bind(_tableSource).For(t => t.SelectionChangedCommand).To(vm => vm.ShowDetailsCommand);
+			set.Bind(_tableSource).For(t => t.SelectionChangedCommand).To(vm => vm.ShowDetailsCommand);
 
 			set.Apply();
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DisasterDetailsView">
+            <connections>
+                <outlet property="disasterDescription" destination="8XO-UM-qqs" id="BYL-Nv-WV3"/>
+                <outlet property="disasterImage" destination="UFx-Nx-Tyl" id="fo8-I3-BAh"/>
+                <outlet property="donateButton" destination="FTa-7T-hUp" id="jfb-Yx-Mob"/>
+                <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTa-7T-hUp">
+                    <rect key="frame" x="0.0" y="594" width="375" height="73"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Verdana-BoldItalic" family="Verdana" pointSize="24"/>
+                    <state key="normal" title="Donate Now">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MH-eC-sWf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UFx-Nx-Tyl">
+                            <rect key="frame" x="-82" y="0.0" width="538" height="593"/>
+                        </imageView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" text="abcd" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XO-UM-qqs">
+                            <rect key="frame" x="8" y="8" width="359" height="264"/>
+                            <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="UFx-Nx-Tyl" firstAttribute="top" secondItem="8MH-eC-sWf" secondAttribute="top" id="0Br-K4-RJu"/>
+                        <constraint firstItem="8XO-UM-qqs" firstAttribute="top" secondItem="8MH-eC-sWf" secondAttribute="top" constant="8" id="0WZ-KF-SYt"/>
+                        <constraint firstItem="UFx-Nx-Tyl" firstAttribute="leading" secondItem="8MH-eC-sWf" secondAttribute="leading" constant="-82" id="2pt-Wh-7Mb"/>
+                        <constraint firstItem="8XO-UM-qqs" firstAttribute="leading" secondItem="8MH-eC-sWf" secondAttribute="leading" constant="8" id="ABd-9w-tD2"/>
+                        <constraint firstAttribute="bottom" secondItem="UFx-Nx-Tyl" secondAttribute="bottom" id="D81-Ue-nPN"/>
+                        <constraint firstAttribute="trailing" secondItem="UFx-Nx-Tyl" secondAttribute="trailing" constant="-81" id="ek1-nr-vgA"/>
+                        <constraint firstAttribute="trailing" secondItem="8XO-UM-qqs" secondAttribute="trailing" constant="8" id="ucm-ek-qSQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="FTa-7T-hUp" secondAttribute="trailing" id="B4u-XZ-EDf"/>
+                <constraint firstAttribute="trailing" secondItem="8MH-eC-sWf" secondAttribute="trailing" id="CZm-pu-SgD"/>
+                <constraint firstAttribute="bottom" secondItem="FTa-7T-hUp" secondAttribute="bottom" id="Jmm-yz-qiX"/>
+                <constraint firstItem="8MH-eC-sWf" firstAttribute="top" secondItem="2" secondAttribute="top" id="ZYd-GB-bCc"/>
+                <constraint firstAttribute="bottom" secondItem="8MH-eC-sWf" secondAttribute="bottom" constant="74" id="jtE-ng-fOr"/>
+                <constraint firstItem="FTa-7T-hUp" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="nQM-qR-qR6"/>
+                <constraint firstItem="8MH-eC-sWf" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="ph6-YV-6ru"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="59.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

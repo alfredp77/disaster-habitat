@@ -87,6 +87,7 @@
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\WebBrowserPluginBootstrap.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
@@ -106,6 +107,12 @@
       <DependentUpon>DisasterItemCell.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomTableViewSource.cs" />
+    <InterfaceDefinition Include="Views\DisasterDetailsView.xib" />
+    <Compile Include="Views\DisasterDetailsView.cs" />
+    <Compile Include="Views\DisasterDetailsView.designer.cs">
+      <DependentUpon>DisasterDetailsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlatformSpecific\UINavigationControllerBarExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
@@ -172,6 +179,14 @@
       <HintPath>..\packages\MvvmCross.Plugin.Messenger.4.3.0\lib\Xamarin.iOS10\MvvmCross.Plugins.Messenger.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvvmCross.Plugins.WebBrowser, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.WebBrowser.4.3.0\lib\Xamarin.iOS10\MvvmCross.Plugins.WebBrowser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvvmCross.Plugins.WebBrowser.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Plugin.WebBrowser.4.3.0\lib\Xamarin.iOS10\MvvmCross.Plugins.WebBrowser.iOS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
       <Private>True</Private>
@@ -199,6 +214,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PlatformSpecific\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\ButtonAdd.png" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\ButtonAdd%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationClose.imageset\Close%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationClose.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationDone.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationDone.imageset\Done%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\MenuSetting.png" />
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSetting.imageset\MenuSetting%402x.png" />
+  </ItemGroup>
   <Import Project="..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

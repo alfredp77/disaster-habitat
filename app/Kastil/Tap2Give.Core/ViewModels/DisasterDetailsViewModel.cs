@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,16 +23,15 @@ namespace Tap2Give.Core.ViewModels
         public string Name
         {
             get { return _name; }
-            private set { _name = value; RaisePropertyChanged(); }
+            set { _name = value; RaisePropertyChanged(); }
         }
 
-        private string _description;
+        private string _description = "abc";
         public string Description
         {
             get { return _description; }
-            private set { _description = value; RaisePropertyChanged(); }
+            set { _description = value; RaisePropertyChanged(); }
         }
-
         private string _location;
         public string Location
         {
@@ -40,13 +39,13 @@ namespace Tap2Give.Core.ViewModels
             private set { _location = value; RaisePropertyChanged(); }
         }
 
+
         private string _imageUrl;
         public string ImageUrl
         {
             get { return _imageUrl; }
-            private set { _imageUrl = value; RaisePropertyChanged(); }
+            set { _imageUrl = value; RaisePropertyChanged(); }
         }
-
         public ObservableRangeCollection<DisasterIncidentAid> DisasterAidItems { get; } = new ObservableRangeCollection<DisasterIncidentAid>();
         public ObservableRangeCollection<string> AidValues { get; } = new ObservableRangeCollection<string>();
 
@@ -116,4 +115,5 @@ namespace Tap2Give.Core.ViewModels
         }
     }
 }
+
 
