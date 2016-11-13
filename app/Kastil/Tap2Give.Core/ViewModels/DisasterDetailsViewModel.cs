@@ -67,8 +67,8 @@ namespace Tap2Give.Core.ViewModels
 
             var context = Resolve<IDisasterContext>();
             _disaster = context.Disaster;
-            Title = Name;
             Name = _disaster.Name;
+			Title = Name;
             Description = _disaster.Description;
             ImageUrl = _disaster.ImageUrl;
             Location = _disaster.Location;
