@@ -1,4 +1,4 @@
-﻿// WARNING
+// WARNING
 //
 // This file has been generated automatically by Xamarin Studio to store outlets and
 // actions made in the UI designer. If it is removed, they will be lost.
@@ -13,7 +13,7 @@ namespace Tap2Give.iOS.Views
 	partial class DisasterItemCell
 	{
 		[Outlet]
-		UIKit.UILabel disasterDescription { get; set; }
+		UIKit.UITextView disasterDescription { get; set; }
 
 		[Outlet]
 		UIKit.UIImageView disasterImage { get; set; }
@@ -23,6 +23,11 @@ namespace Tap2Give.iOS.Views
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (disasterDescription != null) {
+				disasterDescription.Dispose ();
+				disasterDescription = null;
+			}
+
 			if (disasterImage != null) {
 				disasterImage.Dispose ();
 				disasterImage = null;
@@ -31,11 +36,6 @@ namespace Tap2Give.iOS.Views
 			if (disasterName != null) {
 				disasterName.Dispose ();
 				disasterName = null;
-			}
-
-			if (disasterDescription != null) {
-				disasterDescription.Dispose ();
-				disasterDescription = null;
 			}
 		}
 	}
