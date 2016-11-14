@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DisasterDetailsView">
             <connections>
-                <outlet property="aidTable" destination="dNK-G6-VhG" id="7OH-bg-TqR"/>
+                <outlet property="aidDetails" destination="NmN-sa-nff" id="E3O-9h-cCn"/>
                 <outlet property="disasterDescription" destination="8XO-UM-qqs" id="BYL-Nv-WV3"/>
                 <outlet property="disasterImage" destination="UFx-Nx-Tyl" id="fo8-I3-BAh"/>
                 <outlet property="donateButton" destination="FTa-7T-hUp" id="jfb-Yx-Mob"/>
@@ -46,24 +46,25 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-G6-VhG">
-                            <rect key="frame" x="8" y="296" width="359" height="289"/>
-                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </tableView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" text="abcd" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NmN-sa-nff">
+                            <rect key="frame" x="8" y="307" width="359" height="264"/>
+                            <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="UFx-Nx-Tyl" firstAttribute="top" secondItem="8MH-eC-sWf" secondAttribute="top" id="0Br-K4-RJu"/>
                         <constraint firstItem="8XO-UM-qqs" firstAttribute="top" secondItem="8MH-eC-sWf" secondAttribute="top" constant="8" id="0WZ-KF-SYt"/>
                         <constraint firstItem="UFx-Nx-Tyl" firstAttribute="leading" secondItem="8MH-eC-sWf" secondAttribute="leading" constant="-82" id="2pt-Wh-7Mb"/>
-                        <constraint firstAttribute="trailing" secondItem="dNK-G6-VhG" secondAttribute="trailing" constant="8" id="5W5-JF-a8v"/>
-                        <constraint firstItem="dNK-G6-VhG" firstAttribute="top" secondItem="8XO-UM-qqs" secondAttribute="bottom" constant="24" id="93q-hK-iaq"/>
+                        <constraint firstItem="NmN-sa-nff" firstAttribute="top" secondItem="8XO-UM-qqs" secondAttribute="bottom" constant="35" id="3i1-vB-jcY"/>
+                        <constraint firstItem="NmN-sa-nff" firstAttribute="leading" secondItem="8MH-eC-sWf" secondAttribute="leading" constant="8" id="4zW-kW-0nJ"/>
                         <constraint firstItem="8XO-UM-qqs" firstAttribute="leading" secondItem="8MH-eC-sWf" secondAttribute="leading" constant="8" id="ABd-9w-tD2"/>
                         <constraint firstAttribute="bottom" secondItem="UFx-Nx-Tyl" secondAttribute="bottom" id="D81-Ue-nPN"/>
-                        <constraint firstItem="dNK-G6-VhG" firstAttribute="leading" secondItem="8MH-eC-sWf" secondAttribute="leading" constant="8" id="Y4F-Q7-nSx"/>
                         <constraint firstAttribute="trailing" secondItem="UFx-Nx-Tyl" secondAttribute="trailing" constant="-81" id="ek1-nr-vgA"/>
-                        <constraint firstAttribute="bottom" secondItem="dNK-G6-VhG" secondAttribute="bottom" constant="8" id="hFj-sF-m0E"/>
                         <constraint firstAttribute="trailing" secondItem="8XO-UM-qqs" secondAttribute="trailing" constant="8" id="ucm-ek-qSQ"/>
+                        <constraint firstAttribute="trailing" secondItem="NmN-sa-nff" secondAttribute="trailing" constant="8" id="z3M-nE-f2u"/>
                     </constraints>
                 </view>
             </subviews>

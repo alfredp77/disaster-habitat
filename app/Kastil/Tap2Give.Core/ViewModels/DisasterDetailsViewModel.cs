@@ -39,6 +39,11 @@ namespace Tap2Give.Core.ViewModels
             private set { _location = value; RaisePropertyChanged(); }
         }
 
+		private string _aidDetails;
+		public string AidDetails {
+			get { return _aidDetails; }
+			private set { _aidDetails = value; RaisePropertyChanged(); }
+		}
 
         private string _imageUrl;
         public string ImageUrl
@@ -78,6 +83,7 @@ namespace Tap2Give.Core.ViewModels
                 AidValues.Clear();
                 AidValues.AddRange(DisasterAidItems.GroupBy(d => d.DollarValue)
 				                   .Select(GetDollarValue));
+				AidDetails = string.Join(Environment.NewLine, AidValues);
             }
             catch (Exception ex)
             {
