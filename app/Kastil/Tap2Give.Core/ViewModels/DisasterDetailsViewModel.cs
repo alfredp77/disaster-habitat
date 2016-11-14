@@ -49,11 +49,6 @@ namespace Tap2Give.Core.ViewModels
         public ObservableRangeCollection<DisasterIncidentAid> DisasterAidItems { get; } = new ObservableRangeCollection<DisasterIncidentAid>();
         public ObservableRangeCollection<string> AidValues { get; } = new ObservableRangeCollection<string>();
 
-        private string GetDollarValue(string key, List<DisasterIncidentAid> textForValue)
-        {
-            return key + " - " + textForValue[_random.Next(textForValue.Count)];
-        }
-
         public override Task Initialize()
         {
             return Load();
@@ -81,7 +76,8 @@ namespace Tap2Give.Core.ViewModels
                 DisasterAidItems.AddRange(incidentAids);
 
                 AidValues.Clear();
-                AidValues.AddRange(DisasterAidItems.GroupBy(d => d.DollarValue).Select(g => GetDollarValue(g.Key, g.ToList())).ToList());
+                AidValues.AddRange(DisasterAidItems.GroupBy(d => d.DollarValue)
+				                   .Select(GetDollarValue));
             }
             catch (Exception ex)
             {
@@ -95,6 +91,13 @@ namespace Tap2Give.Core.ViewModels
                 dialog.HideLoading();
             }
         }
+
+		private string GetDollarValue(IEnumerable<DisasterIncidentAid> aidDetails)
+		{
+			var asList = aidDetails.ToList();
+			var aidDetail = asList[_random.Next(asList.Count)];
+			return $"{aidDetail.DollarValue} - {aidDetail.DisplayText}";
+		}
 
         public MvxCommand CancelCommand => new MvxCommand(Close);
 
