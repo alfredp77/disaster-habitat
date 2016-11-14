@@ -4,51 +4,61 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="cxk-wN-pdQ" customClass="DisasterItemCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="190" id="cxk-wN-pdQ" customClass="DisasterItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cxk-wN-pdQ" id="YTl-1W-gDM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="179.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disaster Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCR-LN-RxN">
-                        <rect key="frame" x="8" y="8" width="304" height="17"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Disaster description" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbB-JC-JRf">
-                        <rect key="frame" x="8" y="28" width="304" height="144"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaE-Js-33R">
-                        <rect key="frame" x="16" y="35" width="79" height="76"/>
-                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KF4-BF-yQU">
+                        <rect key="frame" x="0.0" y="9.5" width="320" height="180"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disaster Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCR-LN-RxN">
+                                <rect key="frame" x="8" y="8" width="304" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Disaster description" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbB-JC-JRf">
+                                <rect key="frame" x="8" y="28" width="304" height="144"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaE-Js-33R">
+                                <rect key="frame" x="8" y="27.5" width="79" height="76"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sbB-JC-JRf" firstAttribute="top" secondItem="KF4-BF-yQU" secondAttribute="top" constant="28" id="02h-fj-0eh"/>
+                            <constraint firstItem="bCR-LN-RxN" firstAttribute="leading" secondItem="KF4-BF-yQU" secondAttribute="leading" constant="8" id="9hx-8I-Qq0"/>
+                            <constraint firstAttribute="trailing" secondItem="sbB-JC-JRf" secondAttribute="trailing" constant="8" id="II2-ca-E83"/>
+                            <constraint firstAttribute="trailing" secondItem="bCR-LN-RxN" secondAttribute="trailing" constant="8" id="KXh-4l-wbA"/>
+                            <constraint firstItem="sbB-JC-JRf" firstAttribute="leading" secondItem="KF4-BF-yQU" secondAttribute="leading" constant="8" id="NQQ-IN-hK1"/>
+                            <constraint firstItem="bCR-LN-RxN" firstAttribute="top" secondItem="KF4-BF-yQU" secondAttribute="top" constant="8" id="eOU-oW-RBw"/>
+                            <constraint firstItem="DaE-Js-33R" firstAttribute="top" secondItem="KF4-BF-yQU" secondAttribute="top" constant="28" id="iic-25-h2Q"/>
+                            <constraint firstItem="DaE-Js-33R" firstAttribute="leading" secondItem="KF4-BF-yQU" secondAttribute="leading" constant="8" id="pza-qf-ZuU"/>
+                            <constraint firstAttribute="bottom" secondItem="sbB-JC-JRf" secondAttribute="bottom" constant="8" id="sUr-Of-GeZ"/>
+                        </constraints>
+                    </view>
                 </subviews>
-                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="sbB-JC-JRf" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="28" id="6Cl-ma-fQH"/>
-                    <constraint firstAttribute="bottom" secondItem="sbB-JC-JRf" secondAttribute="bottom" constant="7.5" id="Bof-Ij-sNH"/>
-                    <constraint firstItem="bCR-LN-RxN" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leadingMargin" id="MRH-Vg-Bdj"/>
-                    <constraint firstAttribute="trailing" secondItem="sbB-JC-JRf" secondAttribute="trailing" constant="8" id="Rvy-mj-1zq"/>
-                    <constraint firstItem="bCR-LN-RxN" firstAttribute="trailing" secondItem="YTl-1W-gDM" secondAttribute="trailingMargin" id="hgB-Un-iZg"/>
-                    <constraint firstItem="DaE-Js-33R" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="topMargin" constant="27" id="isJ-JG-Jnp"/>
-                    <constraint firstAttribute="trailing" secondItem="sbB-JC-JRf" secondAttribute="trailing" constant="8" id="j78-qi-Pyv"/>
-                    <constraint firstItem="sbB-JC-JRf" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="8" id="svv-SB-rQy"/>
-                    <constraint firstItem="DaE-Js-33R" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leadingMargin" constant="8" id="wiS-Gj-ZeT"/>
-                    <constraint firstItem="bCR-LN-RxN" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="topMargin" id="xED-lY-NIW"/>
+                    <constraint firstAttribute="bottom" secondItem="KF4-BF-yQU" secondAttribute="bottom" id="1ff-ac-2H9"/>
+                    <constraint firstAttribute="trailing" secondItem="KF4-BF-yQU" secondAttribute="trailing" id="77A-oB-I2T"/>
+                    <constraint firstItem="KF4-BF-yQU" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" id="P4J-mY-w7I"/>
+                    <constraint firstItem="KF4-BF-yQU" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="9.5" id="wI1-ht-wFF"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="disasterDescription" destination="sbB-JC-JRf" id="Cib-Lt-9Py"/>
                 <outlet property="disasterImage" destination="DaE-Js-33R" id="o40-Y1-I4z"/>
