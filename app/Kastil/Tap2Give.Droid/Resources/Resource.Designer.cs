@@ -2355,6 +2355,9 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060017
 			public const int add = 2131099671;
 			
+			// aapt resource value: 0x7f06007e
+			public const int aidValues = 2131099774;
+			
 			// aapt resource value: 0x7f06004e
 			public const int alertTitle = 2131099726;
 			
@@ -2376,8 +2379,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060049
 			public const int buttonPanel = 2131099721;
 			
-			// aapt resource value: 0x7f06007e
-			public const int cancel = 2131099774;
+			// aapt resource value: 0x7f06007f
+			public const int cancel = 2131099775;
 			
 			// aapt resource value: 0x7f06008c
 			public const int cancel_action = 2131099788;
@@ -2385,8 +2388,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f06002e
 			public const int center = 2131099694;
 			
-			// aapt resource value: 0x7f06007f
-			public const int centerPoint = 2131099775;
+			// aapt resource value: 0x7f060080
+			public const int centerPoint = 2131099776;
 			
 			// aapt resource value: 0x7f06002f
 			public const int center_horizontal = 2131099695;
@@ -2427,8 +2430,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060045
 			public const int default_activity_button = 2131099717;
 			
-			// aapt resource value: 0x7f06007b
-			public const int description = 2131099771;
+			// aapt resource value: 0x7f06007c
+			public const int description = 2131099772;
 			
 			// aapt resource value: 0x7f060070
 			public const int design_bottom_sheet = 2131099760;
@@ -2450,9 +2453,6 @@ namespace Tap2Give.Droid
 			
 			// aapt resource value: 0x7f060086
 			public const int disasterTable = 2131099782;
-			
-			// aapt resource value: 0x7f06007d
-			public const int donationAmounts = 2131099773;
 			
 			// aapt resource value: 0x7f060062
 			public const int edit_query = 2131099746;
@@ -2505,14 +2505,14 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060044
 			public const int image = 2131099716;
 			
-			// aapt resource value: 0x7f06007a
-			public const int imgIncident = 2131099770;
-			
-			// aapt resource value: 0x7f060081
-			public const int incidentCardView = 2131099777;
+			// aapt resource value: 0x7f06007b
+			public const int imgIncident = 2131099771;
 			
 			// aapt resource value: 0x7f060082
-			public const int incidentName = 2131099778;
+			public const int incidentCardView = 2131099778;
+			
+			// aapt resource value: 0x7f060083
+			public const int incidentName = 2131099779;
 			
 			// aapt resource value: 0x7f060096
 			public const int info = 2131099798;
@@ -2544,8 +2544,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f06008a
 			public const int loadingProgressWheel = 2131099786;
 			
-			// aapt resource value: 0x7f060079
-			public const int location = 2131099769;
+			// aapt resource value: 0x7f060084
+			public const int location = 2131099780;
 			
 			// aapt resource value: 0x7f06008e
 			public const int media_actions = 2131099790;
@@ -2580,8 +2580,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060036
 			public const int pin = 2131099702;
 			
-			// aapt resource value: 0x7f060080
-			public const int proceedToDonate = 2131099776;
+			// aapt resource value: 0x7f060081
+			public const int proceedToDonate = 2131099777;
 			
 			// aapt resource value: 0x7f060006
 			public const int progress_circular = 2131099654;
@@ -2646,8 +2646,8 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f06006d
 			public const int search_voice_btn = 2131099757;
 			
-			// aapt resource value: 0x7f06007c
-			public const int selectDonation = 2131099772;
+			// aapt resource value: 0x7f06007d
+			public const int selectDonation = 2131099773;
 			
 			// aapt resource value: 0x7f06006e
 			public const int select_dialog_listview = 2131099758;
@@ -2730,11 +2730,11 @@ namespace Tap2Give.Droid
 			// aapt resource value: 0x7f060098
 			public const int toolbar = 2131099800;
 			
-			// aapt resource value: 0x7f060084
-			public const int toolbar_container = 2131099780;
+			// aapt resource value: 0x7f06007a
+			public const int toolbar_container = 2131099770;
 			
-			// aapt resource value: 0x7f060083
-			public const int toolbar_layout = 2131099779;
+			// aapt resource value: 0x7f060079
+			public const int toolbar_layout = 2131099769;
 			
 			// aapt resource value: 0x7f060027
 			public const int top = 2131099687;
