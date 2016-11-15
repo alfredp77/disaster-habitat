@@ -6,14 +6,14 @@ using UIKit;
 
 namespace Tap2Give.iOS.Views
 {
-	public class CustomTableViewSource : MvxTableViewSource
+	public class CustomTableViewSource : MvxTableViewSource, ITableCellListener
 	{
 		private readonly string _cellIdentifier;
 		private UITableViewCell _sizingCell;
 		private readonly UITableViewCellSelectionStyle _selectionStyle;
 
 		public CustomTableViewSource(UITableView tableView, string cellIdentifier,
-									 UITableViewCellSelectionStyle selectionStyle = UITableViewCellSelectionStyle.Default)
+									 UITableViewCellSelectionStyle selectionStyle = UITableViewCellSelectionStyle.None)
 			: base(tableView)
 		{
 			_selectionStyle = selectionStyle;
@@ -31,7 +31,12 @@ namespace Tap2Give.iOS.Views
 				SetDataContext(bindable, item);
 			}
 
-			return cell;
+		    var listenable = cell as IListenableCell;
+		    if (listenable != null)
+		    {
+		        listenable.CellListener = this;
+		    }
+		    return cell;
 		}
 
 		protected virtual void SetDataContext(IMvxDataConsumer bindable, object dataContext)
@@ -70,5 +75,10 @@ namespace Tap2Give.iOS.Views
 				_sizingCell = TableView.DequeueReusableCell(_cellIdentifier);
 			return _sizingCell;
 		}
+
+	    public void CellSelected(object vm)
+	    {
+	        SelectionChangedCommand?.Execute(vm);
+	    }
 	}
 }

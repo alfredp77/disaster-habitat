@@ -13,6 +13,12 @@ namespace Tap2Give.iOS.Views
 	partial class DisasterItemCell
 	{
 		[Outlet]
+		UIKit.UIButton cellSelectedButton { get; set; }
+
+		[Outlet]
+		UIKit.UIView container { get; set; }
+
+		[Outlet]
 		UIKit.UITextView disasterDescription { get; set; }
 
 		[Outlet]
@@ -23,6 +29,16 @@ namespace Tap2Give.iOS.Views
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (cellSelectedButton != null) {
+				cellSelectedButton.Dispose ();
+				cellSelectedButton = null;
+			}
+
+			if (container != null) {
+				container.Dispose ();
+				container = null;
+			}
+
 			if (disasterDescription != null) {
 				disasterDescription.Dispose ();
 				disasterDescription = null;
