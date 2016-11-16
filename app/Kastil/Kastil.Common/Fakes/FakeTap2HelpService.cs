@@ -25,7 +25,7 @@ namespace Kastil.Common.Fakes
             var disaster1 = new Disaster
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "Typhoon Haiyan",
+				Name = "Typhoon Haiyan (F)",
                 Description = "Typhoon Haiyan, known as Super Typhoon Yolanda in the Philippines, was one of the most intense tropical cyclones on record, which devastated portions of Southeast Asia, particularly the Philippines.",
                 GiveUrl = "http://www.give2habitat.org/member/t/thenpdgroup",
                 ImageUrl = "https://api.backendless.com/4ED00D7B-240E-B654-FF92-8E5E8C6F0100/v1/files/disasterIncidentImages/typhoon-haiyan.jpg",
@@ -35,7 +35,7 @@ namespace Kastil.Common.Fakes
             var disaster2 = new Disaster
             {
                 Id = _acehDisasterId,
-                Name = "Nepal Earthquake 2015",
+				Name = "Nepal Earthquake 2015 (F)",
                 Description = "Nepal was hit by a 7.8 magnitude earthquake on April 25 2015, causing massive damage and high loss of life, followed by major aftershocks on April 26 causing further destruction. As of June 8, Habitat has built 21 demonstration temporary shelters in Kavre and Sindhupalchowk districts to show affected communities how to effectively use materials from a temporary shelter kit. Habitat staff and volunteers have also distributed more than 1,600 kits in worst-hit Kavre, Gorkha, Dhading, and Sindhupalchowk.",
                 GiveUrl = "http://www.give2habitat.org/singapore/nepaleq2015",
                 ImageUrl = "https://api.backendless.com/4ED00D7B-240E-B654-FF92-8E5E8C6F0100/v1/files/disasterIncidentImages/nepal_quake.png",
@@ -269,36 +269,6 @@ namespace Kastil.Common.Fakes
             return result != null ? Task.FromResult(result) : Task.FromResult<Shelter>(null);
         }
         #endregion
-
-        #region Disaster Aids
-        private readonly List<DisasterIncidentAid> _disasterIncidentAids = new List<DisasterIncidentAid>();
-        private void GenerateAidForDisasterIncidents()
-        {
-            if (!_disasters.Any())
-                GenerateDisasters();
-
-            foreach (var incident in _disasters)
-            {
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$10", DisplayText = "Weekly ration for 2 people." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$10", DisplayText = "100 bricks." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$10", DisplayText = "Weekly Provisions for a person." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$20", DisplayText = "Weekly ration for 4 people." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$20", DisplayText = "1000 bricks." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$20", DisplayText = "Weekly Provisions for a person." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$50", DisplayText = "Monthly ration for 2 people." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$50", DisplayText = "Weekly Provisions for 2 people." });
-                _disasterIncidentAids.Add(new DisasterIncidentAid { DisasterId = incident.Key, DollarValue = "$100", DisplayText = "Monthly ration for 4 people." });
-            }
-        }
-
-        public Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId)
-        {
-            if (!_disasterIncidentAids.Any())
-                GenerateAidForDisasterIncidents();
-
-            return Task.FromResult(_disasterIncidentAids.Where(d => d.DisasterId == disasterId));
-        }
-        #endregion
-
+       
     }
 }

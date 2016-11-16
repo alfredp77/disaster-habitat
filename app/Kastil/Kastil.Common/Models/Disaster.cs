@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Kastil.Common.Utils;
 using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@ namespace Kastil.Common.Models
         public string Description { get; set; }
         public string GiveUrl { get; set; }
         public string ImageUrl { get; set; }
-        //public string LocationName { get { return Location != null ? Location.Name + ", " + Location.Country : "Unknown location"; } }
+        public List<DisasterAid> DisasterAids { get; set; }
 
         [JsonIgnore]
         public DateTimeOffset? DateWhen

@@ -253,3 +253,6 @@ paket-files/
 ignore-this-folder
 Connection.Details.cs
 /app/Kastil/Kastil.Droid/Kastil.Droid.csproj.bak
+app/Kastil/Tap2Give.iOS/Resources/Images.xcassets/NavigationAdd.imageset/Thumbs.db
+app/Kastil/Tap2Give.iOS/Resources/Images.xcassets/NavigationClose.imageset/Thumbs.db
+app/Kastil/Tap2Give.iOS/Resources/Images.xcassets/NavigationMenuSetting.imageset/Thumbs.db

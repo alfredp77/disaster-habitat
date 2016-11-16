@@ -27,7 +27,5 @@ namespace Kastil.Common.Services
 
         Task DeleteAssessments(string disasterId);
         Task DeleteShelter(string shelterId);
-
-        Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId);        
     }
 }

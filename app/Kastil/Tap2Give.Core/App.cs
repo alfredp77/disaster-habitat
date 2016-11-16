@@ -14,12 +14,17 @@ namespace Tap2Give.Core
         public override void Initialize()
         {
             CreatableTypes(typeof(ITap2HelpService).GetTypeInfo().Assembly)
-				.InNamespace(typeof(FakeTap2HelpService).Namespace) // uncomment this line to use the fakes instead                
-																	//.InNamespace(typeof(ITap2HelpService).Namespace)      // comment this line when using fakes
+				//.InNamespace(typeof(FakeTap2HelpService).Namespace) // uncomment this line to use the fakes instead                
+				.InNamespace(typeof(ITap2HelpService).Namespace)      // comment this line when using fakes
 				.EndingWith("Service")
 				.AsInterfaces()
 				.RegisterAsLazySingleton();
 
+			CreatableTypes()
+				.InNamespace(typeof(ITap2GiveService).Namespace)
+				.EndingWith("Service")
+				.AsInterfaces()
+				.RegisterAsLazySingleton();
 
             Mvx.RegisterSingleton(() => new Connection());
             Mvx.RegisterSingleton<IDisasterContext>(() => new DisasterContext());

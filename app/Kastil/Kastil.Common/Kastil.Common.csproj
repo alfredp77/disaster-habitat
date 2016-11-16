@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="Connection.Details.cs" />
     <Compile Include="Fakes\FakePullService.cs" />
     <Compile Include="Fakes\FakePushService.cs" />
     <Compile Include="Fakes\FakeSyncService.cs" />
@@ -47,10 +48,11 @@
     <Compile Include="Models\Attribute.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Disaster.cs" />
-    <Compile Include="Models\DisasterIncidentAid.cs" />
+    <Compile Include="Models\DisasterAid.cs" />
     <Compile Include="Models\Attributed.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Shelter.cs" />
+    <Compile Include="Models\SyncInfo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BackendlessTap2HelpService.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="Utils\SpinnerItem.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

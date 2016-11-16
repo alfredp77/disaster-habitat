@@ -38,6 +38,7 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DisasterContext.cs" />
+    <Compile Include="Services\Tap2GiveService.cs" />
     <Compile Include="ViewModels\DisasterDetailsViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />

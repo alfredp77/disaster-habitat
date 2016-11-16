@@ -51,7 +51,6 @@ namespace Tap2Give.Core.ViewModels
             get { return _imageUrl; }
             set { _imageUrl = value; RaisePropertyChanged(); }
         }
-        public ObservableRangeCollection<DisasterIncidentAid> DisasterAidItems { get; } = new ObservableRangeCollection<DisasterIncidentAid>();
         public ObservableRangeCollection<string> AidValues { get; } = new ObservableRangeCollection<string>();
 
         public override Task Initialize()
@@ -73,16 +72,13 @@ namespace Tap2Give.Core.ViewModels
             ImageUrl = _disaster.ImageUrl;
             Location = _disaster.Location;
 
-            var tapToGiveService = Resolve<ITap2HelpService>();
             try
             {
-                var incidentAids = await tapToGiveService.GetAidsForDisaster(_disaster.Id);
-                DisasterAidItems.Clear();
-                DisasterAidItems.AddRange(incidentAids);
-
                 AidValues.Clear();
-                AidValues.AddRange(DisasterAidItems.GroupBy(d => d.DollarValue)
-				                   .Select(GetDollarValue));
+                AidValues.AddRange(_disaster.DisasterAids.GroupBy(d => d.DollarValue)                                   
+				                   .Select(g => new { value = g.Key.GetTrailingNumbers(), displayText = GetDonationDisplayText(g) })
+                                   .OrderBy(g => g.value)
+                                   .Select(g => g.displayText));
 				AidDetails = string.Join(Environment.NewLine, AidValues);
             }
             catch (Exception ex)
@@ -98,11 +94,11 @@ namespace Tap2Give.Core.ViewModels
             }
         }
 
-		private string GetDollarValue(IEnumerable<DisasterIncidentAid> aidDetails)
+		private string GetDonationDisplayText(IEnumerable<DisasterAid> aidDetails)
 		{
 			var asList = aidDetails.ToList();
 			var aidDetail = asList[_random.Next(asList.Count)];
-			return $"{aidDetail.DollarValue} - {aidDetail.DisplayText}";
+			return $"{aidDetail.DollarValue} - {aidDetail.Description}";
 		}
 
         public MvxCommand CancelCommand => new MvxCommand(Close);

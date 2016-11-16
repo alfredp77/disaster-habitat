@@ -27,13 +27,14 @@ namespace Tap2Give.Core.ViewModels
             var dialog = Mvx.Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.Loading);
 
-            var disasterService = Mvx.Resolve<ITap2HelpService>();
+            var disasterService = Mvx.Resolve<ITap2GiveService>();
             try
             {
-                var disasters = await disasterService.GetDisasters();
+                var disasters = await disasterService.GetDisasters(true);
                 if (disasters != null)
                 {
-                    DisasterIncidents.AddRange(disasters.Select(d => new DisasterListItemViewModel(d)));
+					DisasterIncidents.AddRange(disasters.Where(d => !string.IsNullOrEmpty(d.GiveUrl))
+					                           .Select(d => new DisasterListItemViewModel(d)));
                 }
             }
             catch (Exception ex)

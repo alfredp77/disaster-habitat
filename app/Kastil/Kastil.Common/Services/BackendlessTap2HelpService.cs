@@ -124,7 +124,7 @@ namespace Kastil.Common.Services
             }
         }
 
-        public Task<IEnumerable<DisasterIncidentAid>> GetAidsForDisaster(string disasterId)
+        public Task<IEnumerable<DisasterAid>> GetAidsForDisaster(string disasterId)
         {
             //TODO: GetDisasterAidItems
             return null;
