@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         app:MvxBind="BackgroundDrawable ImageUrl"
+		android:id="@+id/disasterDetails"
         android:layout_below="@id/toolbar_layout">
       <Mvx.MvxImageView
             android:id="@+id/imgIncident"
@@ -64,7 +65,8 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+		android:layout_below="@id/disasterDetails">
         <Button
             android:id="@+id/cancel"
             android:text="Cancel"
