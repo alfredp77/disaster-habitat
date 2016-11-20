@@ -60,6 +60,7 @@ namespace Kastil.Common.ViewModels
         }
         
 		public bool AllowAddCommand { get; protected set;}
+        public bool AllowCancelCommand { get; protected set; } = false;
 
         MvxAsyncCommand _addCommand;
         public MvxAsyncCommand AddCommand

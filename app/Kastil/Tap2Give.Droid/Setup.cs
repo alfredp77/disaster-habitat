@@ -9,6 +9,8 @@ using Kastil.PlatformSpecific.Shared;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platform.Droid.Platform;
+using Tap2Give.Droid.Bindings;
+using Android.Widget;
 
 namespace Tap2Give.Droid
 {
@@ -36,10 +38,11 @@ namespace Tap2Give.Droid
 			base.InitializeFirstChance();
 		}
 
-		protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
 		{
 			MvxAppCompatSetupHelper.FillTargetFactories(registry);
 			base.FillTargetFactories(registry);
-		}
+            registry.RegisterFactory(new MvxCustomBindingFactory<RelativeLayout>("LayoutBackgroundBinding", (view) => new LayoutBackgroundBinding(view)));
+        }
     }
 }

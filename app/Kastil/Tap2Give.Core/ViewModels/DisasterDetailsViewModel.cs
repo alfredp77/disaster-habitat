@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Kastil.Common.Models;
-using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
 using MvvmCross.Core.ViewModels;
@@ -17,8 +16,8 @@ namespace Tap2Give.Core.ViewModels
     public class DisasterDetailsViewModel : BaseViewModel
     {
         private static readonly Random _random = new Random();
-
         public string SelectText => Messages.AmountToDonate;
+
         private string _name;
         public string Name
         {
@@ -68,6 +67,7 @@ namespace Tap2Give.Core.ViewModels
             _disaster = context.Disaster;
             Name = _disaster.Name;
 			Title = Name;
+            AllowCancelCommand = true;
             Description = _disaster.Description;
             ImageUrl = _disaster.ImageUrl;
             Location = _disaster.Location;

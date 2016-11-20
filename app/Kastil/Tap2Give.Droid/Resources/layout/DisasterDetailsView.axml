@@ -18,15 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        app:MvxBind="BackgroundDrawable ImageUrl"
-		android:id="@+id/disasterDetails"
+        app:MvxBind="BackgroundImage ImageUrl"
+		    android:id="@+id/disasterDetails"
         android:layout_below="@id/toolbar_layout">
       <Mvx.MvxImageView
             android:id="@+id/imgIncident"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
-            android:padding="2dp"
             app:MvxBind="ImageUrl ImageUrl"
             android:scaleType="fitXY" />
         <TextView
@@ -63,31 +62,17 @@
             app:MvxBind="Text AidDetails"
             android:textSize="16sp" />
     </RelativeLayout>
-    <RelativeLayout
+    <Button
+        android:id="@+id/proceedToDonate"
+        android:text="Donate Now"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-		android:layout_below="@id/disasterDetails">
-        <Button
-            android:id="@+id/cancel"
-            android:text="Cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:MvxBind="Click CancelCommand"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/centerPoint" />
-        <TextView
-            android:id="@+id/centerPoint"
-            android:text=""
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true" />
-        <Button
-            android:id="@+id/proceedToDonate"
-            android:text="Proceed to donate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:MvxBind="Click DonateCommand"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/centerPoint" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        app:MvxBind="Click DonateCommand"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:background="@color/primary"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/centerPoint" />
 </RelativeLayout>
