@@ -5,7 +5,7 @@ using UIKit;
 
 namespace Kastil.iOS
 {
-	public partial class AssessmentView : BaseView<AssessmentViewModel>
+	public partial class AssessmentView : BaseView<AttributedViewModel>
 	{		
 		private CustomTableViewSource _tableSource;
 
@@ -15,8 +15,7 @@ namespace Kastil.iOS
 
 			SetUpTableView (attributesList, AttributeItemCell.Nib, AttributeItemCell.Identifier);
 
-			_tableSource = new CustomTableViewSource(attributesList, AttributeItemCell.Identifier, 
-			                                         UITableViewCellSelectionStyle.None);
+			_tableSource = new CustomTableViewSource(attributesList, AttributeItemCell.Identifier);
 			attributesList.Source = _tableSource;
 
 			var set = CreateBindingSet<AssessmentView>();
@@ -35,9 +34,7 @@ namespace Kastil.iOS
 			set.Bind(_tableSource).For(t => t.SelectionChangedCommand).To(vm => vm.AttributeSelectedCommand);
 			set.Apply();
 
-			attributesList.ReloadData();
-
-			ViewModel.Initialize();
+			ViewModel.Initialize().ContinueWith(_ => attributesList.ReloadData());
 		}
 	}
 }

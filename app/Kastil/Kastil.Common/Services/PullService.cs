@@ -15,7 +15,7 @@ namespace Kastil.Common.Services
         {
             var url = Connection.GenerateGetUrl<T>();
             var json = await Caller.Get(url, Connection.Headers);
-            var docs = Serializer.ParseArray(json, "data", "id");
+            var docs = Serializer.ParseArray(json, "data", "objectId");
 
             var context = PersistenceContextFactory.CreateFor<T>();
             if (clear)

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AssessmentView">
@@ -19,7 +23,8 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="2">
-            <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xj-UY-d0w">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
@@ -40,11 +45,11 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZV-0C-v77">
                             <rect key="frame" x="9" y="12" width="78" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.9746201657458563" green="0.9746201657458563" blue="0.9746201657458563" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.9746201657458563" green="0.9746201657458563" blue="0.9746201657458563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="R2o-P6-pM6" firstAttribute="top" secondItem="3Xj-UY-d0w" secondAttribute="top" constant="8" id="6Yt-H4-1HS"/>
                         <constraint firstItem="tGB-1n-Jol" firstAttribute="top" secondItem="AZV-0C-v77" secondAttribute="bottom" constant="9" id="Rrb-WR-B0e"/>
@@ -57,35 +62,35 @@
                         <constraint firstItem="R2o-P6-pM6" firstAttribute="leading" secondItem="3Xj-UY-d0w" secondAttribute="leading" constant="9" id="tYB-0r-7FG"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="29R-Fp-pUp">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="29R-Fp-pUp">
                     <rect key="frame" x="0.0" y="141" width="375" height="389"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3N-In-99E">
                     <rect key="frame" x="0.0" y="538" width="375" height="65"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abv-ch-dT9">
                             <rect key="frame" x="65" y="18" width="77" height="30"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="77" id="GzR-Pg-snv"/>
                             </constraints>
                             <state key="normal" title="Save">
-                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWZ-cz-TTi">
                             <rect key="frame" x="243" y="18" width="77" height="30"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="77" id="Zg9-xD-rAF"/>
                             </constraints>
                             <state key="normal" title="Cancel">
-                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.97462016569999999" green="0.97462016569999999" blue="0.97462016569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="DWZ-cz-TTi" secondAttribute="trailing" constant="55" id="0ev-k4-6lY"/>
                         <constraint firstItem="DWZ-cz-TTi" firstAttribute="top" secondItem="C3N-In-99E" secondAttribute="top" constant="18" id="E14-gt-quH"/>
@@ -94,12 +99,12 @@
                         <constraint firstItem="abv-ch-dT9" firstAttribute="top" secondItem="C3N-In-99E" secondAttribute="top" constant="18" id="x8f-Yw-d0a"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Bu-C2-xnw">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Bu-C2-xnw">
                     <rect key="frame" x="0.0" y="100" width="375" height="33"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bos-nh-VZb">
                             <rect key="frame" x="332" y="2" width="35" height="31"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" image="NavigationAdd"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Attributes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5S-n0-DKR">
@@ -109,8 +114,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="33" id="Z69-qw-rFa"/>
                         <constraint firstAttribute="trailing" secondItem="bos-nh-VZb" secondAttribute="trailing" constant="8" id="beQ-dr-uK9"/>
                         <constraint firstItem="m5S-n0-DKR" firstAttribute="leading" secondItem="6Bu-C2-xnw" secondAttribute="leading" constant="9" id="n6Z-WL-mA4"/>
                         <constraint firstItem="bos-nh-VZb" firstAttribute="top" secondItem="6Bu-C2-xnw" secondAttribute="top" constant="2" id="ozv-tf-ylW"/>
@@ -118,7 +124,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="C3N-In-99E" secondAttribute="bottom" id="8d2-LD-hbl"/>
                 <constraint firstAttribute="trailing" secondItem="3Xj-UY-d0w" secondAttribute="trailing" id="9eB-Oz-WUV"/>
@@ -136,11 +142,10 @@
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="279.5" y="316.5"/>
         </view>
     </objects>
     <resources>
-        <image name="NavigationAdd" width="31" height="31"/>
+        <image name="NavigationAdd" width="15" height="15"/>
     </resources>
 </document>

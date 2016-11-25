@@ -48,7 +48,7 @@ namespace Tap2Give.Core.Services
         private void UpdateLastDownloadDate()
         {
             var context = _persistenceContextFactory.CreateFor<SyncInfo>();
-            var syncInfo = new SyncInfo {Id = "x", LastSync = DateTimeOffset.UtcNow};
+            var syncInfo = new SyncInfo {ObjectId = "x", LastSync = DateTimeOffset.UtcNow};
             context.Save(syncInfo);
         }
     }

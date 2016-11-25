@@ -32,15 +32,15 @@ namespace Kastil.Core.Tests.Services
 
             _context = new FileBasedPersistenceContext<TestModel>(DATA_FOLDER, _serializer.Object, _fileStore.Object);
 
-            _tm1 = new TestModel { Id = "1", Name = "x" };
-            _tm2 = new TestModel { Id = "2", Name = "y" };
+            _tm1 = new TestModel { ObjectId = "1", Name = "x" };
+            _tm2 = new TestModel { ObjectId = "2", Name = "y" };
         }
 
 
         private string SetupFileStore(TestModel tm)
         {
             var fileName = Guid.NewGuid().ToString();
-            _fileStore.Setup(f => f.PathCombine(DATA_FOLDER, tm.Id))
+            _fileStore.Setup(f => f.PathCombine(DATA_FOLDER, tm.ObjectId))
                 .Returns(fileName);
             return fileName;
         }
@@ -148,7 +148,7 @@ namespace Kastil.Core.Tests.Services
             var fileName = SetupFileStore(_tm1);
             var json = SetupSerializer(_tm1);
 
-            _context.PersistJson(_tm1.Id, json);
+            _context.PersistJson(_tm1.ObjectId, json);
 
             _fileStore.Verify(f => f.WriteFile(fileName, json), Times.Once());
             _serializer.Verify(s => s.Serialize(_tm1), Times.Never);
@@ -163,7 +163,7 @@ namespace Kastil.Core.Tests.Services
             var fileName2 = SetupFileStore(_tm2);
             var json2 = SetupSerializer(_tm2);
 
-            _context.PersistAllJson(new [] { new KeyValuePair<string, string>(_tm1.Id, json1), new KeyValuePair<string, string>(_tm2.Id, json2) });
+            _context.PersistAllJson(new [] { new KeyValuePair<string, string>(_tm1.ObjectId, json1), new KeyValuePair<string, string>(_tm2.ObjectId, json2) });
 
             _fileStore.Verify(f => f.WriteFile(fileName1, json1), Times.Once());
             _fileStore.Verify(f => f.WriteFile(fileName2, json2), Times.Once());

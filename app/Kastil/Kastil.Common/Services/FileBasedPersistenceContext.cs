@@ -20,7 +20,7 @@ namespace Kastil.Common.Services
 
         public void Save(T document)
         {
-            var id = document.Id;
+            var id = document.ObjectId;
             var path = GetPath(id);
             FileStore.WriteFile(path, Serializer.Serialize(document));
         }
@@ -59,7 +59,7 @@ namespace Kastil.Common.Services
 
         public void Delete(T document)
         {
-            var path = GetPath(document.Id);
+            var path = GetPath(document.ObjectId);
             if (FileStore.Exists(path))
                 FileStore.DeleteFile(path);
         }

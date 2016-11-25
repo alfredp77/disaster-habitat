@@ -7,7 +7,7 @@ using Kastil.Common.Models;
 
 namespace Kastil.iOS
 {
-	public partial class EditAttributeView : BaseView<EditAssessmentAttributeViewModel>
+	public partial class EditAttributeView : BaseView<EditAttributedAttributesViewModel>
 	{
 		public override void ViewDidLoad()
 		{

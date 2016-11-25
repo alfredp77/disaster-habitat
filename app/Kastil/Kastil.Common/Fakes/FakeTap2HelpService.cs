@@ -24,7 +24,7 @@ namespace Kastil.Common.Fakes
         {
             var disaster1 = new Disaster
             {
-                Id = Guid.NewGuid().ToString(),
+                ObjectId = Guid.NewGuid().ToString(),
 				Name = "Typhoon Haiyan (F)",
                 Description = "Typhoon Haiyan, known as Super Typhoon Yolanda in the Philippines, was one of the most intense tropical cyclones on record, which devastated portions of Southeast Asia, particularly the Philippines.",
                 GiveUrl = "http://www.give2habitat.org/member/t/thenpdgroup",
@@ -34,7 +34,7 @@ namespace Kastil.Common.Fakes
             };
             var disaster2 = new Disaster
             {
-                Id = _acehDisasterId,
+                ObjectId = _acehDisasterId,
 				Name = "Nepal Earthquake 2015 (F)",
                 Description = "Nepal was hit by a 7.8 magnitude earthquake on April 25 2015, causing massive damage and high loss of life, followed by major aftershocks on April 26 causing further destruction. As of June 8, Habitat has built 21 demonstration temporary shelters in Kavre and Sindhupalchowk districts to show affected communities how to effectively use materials from a temporary shelter kit. Habitat staff and volunteers have also distributed more than 1,600 kits in worst-hit Kavre, Gorkha, Dhading, and Sindhupalchowk.",
                 GiveUrl = "http://www.give2habitat.org/singapore/nepaleq2015",
@@ -42,8 +42,8 @@ namespace Kastil.Common.Fakes
                 DateWhen = new DateTimeOffset(2015, 04, 25, 0, 0, 0, TimeSpan.FromHours(7)),
                 Location = "Namche Bazar, Nepal"
             };
-            _disasters.Add(disaster1.Id, disaster1);
-            _disasters.Add(disaster2.Id, disaster2);
+            _disasters.Add(disaster1.ObjectId, disaster1);
+            _disasters.Add(disaster2.ObjectId, disaster2);
         }
 
         public Task<IEnumerable<Disaster>> GetDisasters()
@@ -55,20 +55,20 @@ namespace Kastil.Common.Fakes
         #region Attributes
         public Task<IEnumerable<Attribute>> GetShelterAttributes()
         {
-            var attr1 = new Attribute { Category = "2", Id = "1", Key = "Hotlines" };
-            var attr2 = new Attribute { Category = "2", Id = "2", Key = "Available Capacity" };
-            var attr3 = new Attribute { Category = "2", Id = "3", Key = "Others" };
+            var attr1 = new Attribute { Category = "2", ObjectId = "1", Key = "Hotlines" };
+            var attr2 = new Attribute { Category = "2", ObjectId = "2", Key = "Available Capacity" };
+            var attr3 = new Attribute { Category = "2", ObjectId = "3", Key = "Others" };
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3 } as IEnumerable<Attribute>);
         }
 
         public Task<IEnumerable<Attribute>> GetAssessmentAttributes()
         {
-            var attr1 = new Attribute { Category = "1", Id = "1", Key = "Number of Shelter Kits" };
-            var attr2 = new Attribute { Category = "1", Id = "2", Key = "Number of Hygiene Kits" };
-            var attr3 = new Attribute { Category = "1", Id = "3", Key = "Number of Host Families" };
-            var attr4 = new Attribute { Category = "1", Id = "4", Key = "Number of Evacuation Centers" };
-            var attr5 = new Attribute { Category = "1", Id = "5", Key = "Hotlines" };
-            var attr6 = new Attribute { Category = "1", Id = "6", Key = "Number of Hospitals" };
+            var attr1 = new Attribute { Category = "1", ObjectId = "1", Key = "Number of Shelter Kits" };
+            var attr2 = new Attribute { Category = "1", ObjectId = "2", Key = "Number of Hygiene Kits" };
+            var attr3 = new Attribute { Category = "1", ObjectId = "3", Key = "Number of Host Families" };
+            var attr4 = new Attribute { Category = "1", ObjectId = "4", Key = "Number of Evacuation Centers" };
+            var attr5 = new Attribute { Category = "1", ObjectId = "5", Key = "Hotlines" };
+            var attr6 = new Attribute { Category = "1", ObjectId = "6", Key = "Number of Hospitals" };
             return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6 } as IEnumerable<Attribute>);
         }
 
@@ -101,7 +101,7 @@ namespace Kastil.Common.Fakes
                 _assessments[assessment.DisasterId] = new Dictionary<string, Assessment>();
             }
             assessmentPerDisaster = _assessments[assessment.DisasterId];
-            assessmentPerDisaster[assessment.Id] = assessment;
+            assessmentPerDisaster[assessment.ObjectId] = assessment;
             return Task.Factory.StartNew(() => { });
         }
 
@@ -111,11 +111,11 @@ namespace Kastil.Common.Fakes
             foreach (var disasterId in _disasters.Keys)
             {
                 var attributes = await GetRandomAttributes();
-                var assessment1 = new Assessment { Id = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                var assessment1 = new Assessment { ObjectId = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 count++;
                 await Save(assessment1);
                 attributes = await GetRandomAttributes();
-                var assessment2 = new Assessment { Id = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                var assessment2 = new Assessment { ObjectId = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 await Save(assessment2);
                 count++;
             }
@@ -169,7 +169,7 @@ namespace Kastil.Common.Fakes
             var assessments = await GetAssessments(disasterId);
             foreach (var assessment in assessments)
             {
-                _assessments.Remove(assessment.Id);
+                _assessments.Remove(assessment.ObjectId);
             }
         }
         #endregion
@@ -184,14 +184,14 @@ namespace Kastil.Common.Fakes
 
         public Task DeleteShelter(string shelterId)
         {
-            _shelters.RemoveAll(s => shelterId == s.Id);
+            _shelters.RemoveAll(s => shelterId == s.ObjectId);
 
             return Asyncer.DoNothing();
         }
 
         public Task Save(Shelter shelter)
         {
-            var matchingShelter = _shelters.FirstOrDefault(s => s.Id == shelter.Id);
+            var matchingShelter = _shelters.FirstOrDefault(s => s.ObjectId == shelter.ObjectId);
             if (matchingShelter != null)
                 _shelters[_shelters.IndexOf(matchingShelter)] = shelter;
             else
@@ -206,7 +206,7 @@ namespace Kastil.Common.Fakes
 
             _shelters.Add(new Shelter
             {
-                Id = "1",
+                ObjectId = "1",
                 Name = "Manila Shelter 1",
                 LocationName = "Manila, Phillippines",
                 Attributes = attributes.ToList()
@@ -214,7 +214,7 @@ namespace Kastil.Common.Fakes
 
             _shelters.Add(new Shelter
             {
-                Id = "2",
+                ObjectId = "2",
                 Name = "Aceh Shelter 1",
                 LocationName = "Banda Aceh, Indonesia",
                 Attributes = attributes.ToList()
@@ -222,7 +222,7 @@ namespace Kastil.Common.Fakes
 
             _shelters.Add(new Shelter
             {
-                Id = "3",
+                ObjectId = "3",
                 Name = "Aceh Shelter 2",
                 LocationName = "Banda Aceh, Indonesia",
                 DisasterId = _acehDisasterId,
@@ -257,14 +257,14 @@ namespace Kastil.Common.Fakes
                 await InitFakeShelters();
             }
 
-            return _shelters.FirstOrDefault(s => s.DisasterId == disasterId && s.Id == shelterId);
+            return _shelters.FirstOrDefault(s => s.DisasterId == disasterId && s.ObjectId == shelterId);
         }
 
         public Task<Shelter> GetShelter(string shelterId)
         {
             Shelter result = null;
             if (!string.IsNullOrWhiteSpace(shelterId))
-                result = _shelters.FirstOrDefault(s => s.Id == shelterId);
+                result = _shelters.FirstOrDefault(s => s.ObjectId == shelterId);
 
             return result != null ? Task.FromResult(result) : Task.FromResult<Shelter>(null);
         }

@@ -9,7 +9,7 @@ namespace Kastil.Core.Services
     {        
         protected override Assessment CreateItem(string disasterId)
         {
-            return new Assessment { Id = Guid.NewGuid().ToString(), DisasterId = disasterId };
+            return new Assessment { ObjectId = Guid.NewGuid().ToString(), DisasterId = disasterId };
         }
 
         public override async Task CommitChanges()

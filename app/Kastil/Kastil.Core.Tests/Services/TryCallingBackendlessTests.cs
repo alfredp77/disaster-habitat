@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common;
+using Kastil.Common.Services;
+using Kastil.Common.Utils;
 using Kastil.PlatformSpecific.Shared;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -25,7 +27,7 @@ namespace Kastil.Core.Tests.Services
             {
                 foreach (var x in dataProp.Value.Children())
                 {
-                    var id = x.Children<JProperty>().FirstOrDefault(c => c.Name == "id");
+                    var id = x.Children<JProperty>().FirstOrDefault(c => c.Name == "objectId");
                     if (id != null)
                     {
                         Console.WriteLine(id.Value + " " + x);
@@ -36,6 +38,23 @@ namespace Kastil.Core.Tests.Services
             {
                 Console.WriteLine("Didn't get anything back!");
             }
+        }
+
+        [Test]
+        public async Task LoginTest()
+        {
+            var jsonSerializer = new JsonSerializer();
+            var loginService = new LoginService(new Connection(), new RestServiceCaller(), jsonSerializer);
+            try
+            {
+                var user = await loginService.Login("alfred@baml.com1", "testing!123");
+                Console.WriteLine(jsonSerializer.Serialize(user));
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
         }
     }
 }

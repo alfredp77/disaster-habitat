@@ -12,6 +12,7 @@ namespace Kastil.Common.Services
     {
         private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
 
+
         public Task<IEnumerable<Disaster>> GetDisasters()
         {
             var context = PersistenceContextFactory.CreateFor<Disaster>();
@@ -33,7 +34,7 @@ namespace Kastil.Common.Services
         public Task<Assessment> GetAssessment(string disasterId, string assessmentId)
         {
             var context = PersistenceContextFactory.CreateFor<Assessment>();
-            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(a => a.DisasterId == disasterId && a.Id == assessmentId));
+            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(a => a.DisasterId == disasterId && a.ObjectId == assessmentId));
         }
 
         public Task<IEnumerable<Shelter>> GetShelters()
@@ -45,7 +46,7 @@ namespace Kastil.Common.Services
         public Task<Shelter> GetShelter(string disasterId, string shelterId)
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
-            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.Id == shelterId && s.DisasterId == disasterId));
+            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.ObjectId == shelterId && s.DisasterId == disasterId));
         }
 
         public async Task<IEnumerable<Shelter>> GetShelters(string disasterId)
@@ -57,7 +58,7 @@ namespace Kastil.Common.Services
         public Task<Shelter> GetShelter(string shelterId)
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
-            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.Id == shelterId));
+            return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.ObjectId == shelterId));
         }
 
         public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Attributed
@@ -108,7 +109,7 @@ namespace Kastil.Common.Services
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
             var shelters = await GetShelters();
-            foreach (var shelter in shelters.Where(s => shelterId == s.Id))
+            foreach (var shelter in shelters.Where(s => shelterId == s.ObjectId))
             {
                 await Asyncer.Async(() => context.Delete(shelter));
             }
@@ -118,7 +119,7 @@ namespace Kastil.Common.Services
         {
             var context = PersistenceContextFactory.CreateFor<Shelter>();
             var shelters = await GetShelters();
-            foreach (var shelter in shelters.Where(s => shelterIds.Contains(s.Id)))
+            foreach (var shelter in shelters.Where(s => shelterIds.Contains(s.ObjectId)))
             {
                 await Asyncer.Async(() => context.Delete(shelter));
             }

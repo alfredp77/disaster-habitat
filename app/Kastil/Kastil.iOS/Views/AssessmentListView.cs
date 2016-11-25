@@ -3,7 +3,7 @@ using Kastil.iOS.Views;
 
 namespace Kastil.iOS
 {
-	public partial class AssessmentListView : BaseView<AssessmentListViewModel>
+	public partial class AssessmentListView : BaseView<AttributedListViewModel>
 	{
 		private CustomTableViewSource _tableSource;
 

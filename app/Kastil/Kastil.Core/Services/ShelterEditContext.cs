@@ -9,7 +9,7 @@ namespace Kastil.Core.Services
     {        
         protected override Shelter CreateItem(string disasterId)
         {
-            return new Shelter { Id = Guid.NewGuid().ToString(), DisasterId = disasterId };
+            return new Shelter { ObjectId = Guid.NewGuid().ToString(), DisasterId = disasterId };
         }
 
         public override async Task CommitChanges()

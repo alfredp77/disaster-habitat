@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Kastil.Common.Utils;
 using NUnit.Framework;
 
-namespace Kastil.Common.Tests
+namespace Kastil.Common.Tests.Utils
 {
     [TestFixture]
     public class StringExtensionsTests

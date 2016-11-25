@@ -13,7 +13,9 @@ namespace Kastil.Common.Utils
         IEnumerable<KeyValuePair<string, string>> ParseArray(string json, string arrayPropertyName,
             string idPropertyName);
 
-        T Clone<T>(T o);        
+        T Clone<T>(T o);
+
+        Dictionary<string, string> AsDictionary(string json);
     }
 
     public class JsonSerializer : IJsonSerializer
@@ -50,5 +52,11 @@ namespace Kastil.Common.Utils
                 }
             }
         }
+
+        public Dictionary<string, string> AsDictionary(string json)
+        {
+            var obj = JObject.Parse(json);
+            return obj.Properties().ToDictionary(p => p.Name, p => p.Value.ToString());
+        } 
     }
 }

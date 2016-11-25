@@ -32,10 +32,10 @@ namespace Kastil.Core.Tests.Services
         [Test]
         public async Task Should_Clean_Assessments_From_Removed_Disasters()
         {
-            var disaster1 = new Disaster { Id = "x" };
-            var disaster2 = new Disaster { Id = "y" };
-            var disaster3 = new Disaster { Id = "z" };
-            var disaster4 = new Disaster { Id = "a" };
+            var disaster1 = new Disaster { ObjectId = "x" };
+            var disaster2 = new Disaster { ObjectId = "y" };
+            var disaster3 = new Disaster { ObjectId = "z" };
+            var disaster4 = new Disaster { ObjectId = "a" };
             var localDisasters = new List<Disaster> {disaster1, disaster2 ,disaster3};
             var incomingDisasters = new List<Disaster> {disaster1, disaster4};
             _tap2HelpService.SetupSequence(s => s.GetDisasters())
@@ -45,8 +45,8 @@ namespace Kastil.Core.Tests.Services
             await _syncService.PullDisasters();
 
             _pullService.Verify(p => p.Pull<Disaster>(true), Times.Once);
-            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster2.Id), Times.Once);
-            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster3.Id), Times.Once);
+            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster2.ObjectId), Times.Once);
+            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster3.ObjectId), Times.Once);
         }
     }
 }

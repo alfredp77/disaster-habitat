@@ -53,9 +53,9 @@ namespace Kastil.Core.Tests.Services
             var disasters = await _service.GetDisasters();
             foreach (var disaster in disasters)
             {
-                var assessments = await _service.GetAssessments(disaster.Id);
+                var assessments = await _service.GetAssessments(disaster.ObjectId);
                 Assert.That(assessments.Any());
-                Assert.True(assessments.All(a => a.DisasterId.Equals(disaster.Id)));
+                Assert.True(assessments.All(a => a.DisasterId.Equals(disaster.ObjectId)));
             }
         }
     }

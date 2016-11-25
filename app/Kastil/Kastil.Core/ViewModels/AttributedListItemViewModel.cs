@@ -13,7 +13,7 @@ namespace Kastil.Core.ViewModels
         public Attributed Value { get; }
 
         public string DisasterId => Value.DisasterId;
-        public string ShelterId => Value.Id;
+        public string ShelterId => Value.ObjectId;
         public string Text => Value.Name;
         public string LocationName => Value.LocationName;
     }
