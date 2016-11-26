@@ -4,6 +4,7 @@ using Kastil.iOS.PlatformSpecific;
 using Kastil.iOS.Views;
 using UIKit;
 using Kastil.Common.Models;
+using Kastil.Common.ValueConverter;
 
 namespace Kastil.iOS
 {
@@ -16,6 +17,7 @@ namespace Kastil.iOS
 			var set = CreateBindingSet<EditAttributedAttributesView>();
 			set.Bind(nameField).To(vm => vm.SelectedItem.Caption);
 			set.Bind(valueField).To(vm => vm.AttributeValue);
+			nameField.ShouldBeginEditing = (textField) => !ViewModel.EditMode;
 			nameField.ShouldChangeCharacters = (textField, range, replacementString) => false;
 
 			var pickerViewModel = nameField.CreatePicker();

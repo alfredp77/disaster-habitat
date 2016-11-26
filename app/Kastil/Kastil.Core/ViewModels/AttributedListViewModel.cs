@@ -103,7 +103,7 @@ namespace Kastil.Core.ViewModels
             var handler = context.CreateItemHandler(itemVm.Value);
 
             var editContext = Resolve<AttributedEditContext>();
-            await editContext.Initialize(handler);
+			await editContext.Initialize(handler);
             ShowViewModel<AttributedViewModel>();
         }
     }

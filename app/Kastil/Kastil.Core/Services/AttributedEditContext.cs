@@ -52,6 +52,8 @@ namespace Kastil.Core.Services
 
         public IEnumerable<Attribute> AvailableAttributes { get; private set; }
         public IAttributedItemHandler ItemHandler { get; private set; }
+		private List<Attribute> _allAttributes;
+
         public async Task Initialize(IAttributedItemHandler handler)
         {
             ItemHandler = handler;
@@ -60,24 +62,20 @@ namespace Kastil.Core.Services
 
             _attributesMap = Item.Attributes.ToDictionary(k => k.Key);
 
-            var availableAttributes = new List<Attribute>();
-
-            if (IsNew)
-            {
-                var serializer = Resolve<IJsonSerializer>();
-                var service = Resolve<ITap2HelpService>();
-                var allAttributes = (await service.GetAllAttributes()).ToList();
-                availableAttributes.AddRange(
-                    allAttributes.Where(attr => !_attributesMap.ContainsKey(attr.Key))
-                        .Select(attr => serializer.Clone(attr)));
-            }
-            else if (SelectedAttribute != null)
-            {
-                availableAttributes.Add(SelectedAttribute);
-            }
-            AvailableAttributes = availableAttributes;
-
+			var service = Resolve<ITap2HelpService>();
+			_allAttributes = (await service.GetAllAttributes()).ToList();
+			SetAvailableAttributes();
         }
+
+		private void SetAvailableAttributes()
+		{
+            var serializer = Resolve<IJsonSerializer>();
+			var availableAttributes = new List<Attribute>();
+			availableAttributes.AddRange(
+				_allAttributes.Where(attr => !_attributesMap.ContainsKey(attr.Key))
+					.Select(attr => serializer.Clone(attr)));
+			AvailableAttributes = availableAttributes;
+		}
 
         public void AddOrUpdateAttribute(Attribute attribute, string value)
         {
@@ -88,6 +86,7 @@ namespace Kastil.Core.Services
                 attr = serializer.Clone(attribute);
                 _attributesMap.Add(attribute.Key, attr);
                 Item.Attributes.Add(attr);
+				SetAvailableAttributes();
             }
 
             attr.Value = value;
@@ -100,6 +99,7 @@ namespace Kastil.Core.Services
             {
                 _attributesMap.Remove(attributeName);
                 Item.Attributes.Remove(attr);
+				SetAvailableAttributes();
             }
         }
 
