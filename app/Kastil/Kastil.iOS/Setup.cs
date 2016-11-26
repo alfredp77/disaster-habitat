@@ -42,17 +42,5 @@ namespace Kastil.iOS
             Mvx.RegisterSingleton(FolderProviderFactory.Create());
             base.InitializeFirstChance();
         }
-
-		protected override void InitializeViewLookup()
-		{
-			base.InitializeViewLookup();
-			var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-			viewsContainer.Add(typeof(AssessmentViewModel), typeof(AssessmentView));
-			viewsContainer.Add(typeof(ShelterViewModel), typeof(AssessmentView));
-			viewsContainer.Add(typeof(AssessmentListViewModel), typeof(AssessmentListView));
-			viewsContainer.Add(typeof(ShelterListViewModel), typeof(AssessmentListView));
-			viewsContainer.Add(typeof(EditAssessmentAttributeViewModel), typeof(EditAttributeView));
-			viewsContainer.Add(typeof(EditShelterAttributeViewModel), typeof(EditAttributeView));
-		}
     }
 }

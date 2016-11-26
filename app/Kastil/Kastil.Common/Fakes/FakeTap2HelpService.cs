@@ -9,7 +9,7 @@ using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Common.Fakes
 {
-    public class FakeTap2HelpService : ITap2HelpService
+    public class FakeTap2HelpService : BaseService, ITap2HelpService
     {
         private readonly Dictionary<string, Disaster> _disasters = new Dictionary<string, Disaster>();
         private string _acehDisasterId = Guid.NewGuid().ToString();
@@ -53,15 +53,7 @@ namespace Kastil.Common.Fakes
         #endregion
 
         #region Attributes
-        public Task<IEnumerable<Attribute>> GetShelterAttributes()
-        {
-            var attr1 = new Attribute { Category = "2", ObjectId = "1", Key = "Hotlines" };
-            var attr2 = new Attribute { Category = "2", ObjectId = "2", Key = "Available Capacity" };
-            var attr3 = new Attribute { Category = "2", ObjectId = "3", Key = "Others" };
-            return Task.FromResult(new List<Attribute> { attr1, attr2, attr3 } as IEnumerable<Attribute>);
-        }
-
-        public Task<IEnumerable<Attribute>> GetAssessmentAttributes()
+        public Task<IEnumerable<Attribute>> GetAllAttributes()
         {
             var attr1 = new Attribute { Category = "1", ObjectId = "1", Key = "Number of Shelter Kits" };
             var attr2 = new Attribute { Category = "1", ObjectId = "2", Key = "Number of Hygiene Kits" };
@@ -69,23 +61,28 @@ namespace Kastil.Common.Fakes
             var attr4 = new Attribute { Category = "1", ObjectId = "4", Key = "Number of Evacuation Centers" };
             var attr5 = new Attribute { Category = "1", ObjectId = "5", Key = "Hotlines" };
             var attr6 = new Attribute { Category = "1", ObjectId = "6", Key = "Number of Hospitals" };
-            return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6 } as IEnumerable<Attribute>);
+			var attr7 = new Attribute { Category = "1", ObjectId = "7", Key = "Available Capacity" };
+			var attr8 = new Attribute { Category = "1", ObjectId = "8", Key = "Others" };
+            return Task.FromResult(new List<Attribute> { attr1, attr2, attr3, attr4, attr5, attr6, attr7, attr8 } as IEnumerable<Attribute>);
         }
 
-        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Attributed
+        
+        private async Task<IEnumerable<Attribute>> GetRandomAttributes()
         {
-            return item.GetType() == typeof(Assessment) ? GetAssessmentAttributes() : GetShelterAttributes();
-        }
-
-        private async Task<IEnumerable<Attribute>> GetRandomAttributes(bool forAssessment = true)
-        {
-            var attributes = forAssessment ? await GetAssessmentAttributes() : await GetShelterAttributes();
+			var attributes = (await GetAllAttributes()).ToList();
+			var result = new List<Attribute>();
             var rnd = new Random();
+			var serializer = Resolve<IJsonSerializer>();
             foreach (var attr in attributes)
             {
-                attr.Value = rnd.Next(1, 100).ToString();
+				if (rnd.Next(0, 10) < 5) {
+					var newAttr = serializer.Clone(attr);
+					newAttr.ObjectId = Guid.NewGuid().ToString();
+					newAttr.Value = rnd.Next(1, 100).ToString();
+					result.Add(newAttr);
+				}
             }
-            return attributes;
+            return result;
         }
         #endregion
 
@@ -202,7 +199,7 @@ namespace Kastil.Common.Fakes
 
         private async Task InitFakeShelters()
         {
-            var attributes = await GetRandomAttributes(false);
+            var attributes = await GetRandomAttributes();
 
             _shelters.Add(new Shelter
             {

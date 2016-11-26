@@ -73,6 +73,7 @@
     <Compile Include="Utils\DateHelper.cs" />
     <Compile Include="Utils\DistanceCalculator.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />
+    <Compile Include="Utils\ModelExtensions.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="Utils\SpinnerItem.cs" />
     <Compile Include="Utils\StringExtensions.cs" />

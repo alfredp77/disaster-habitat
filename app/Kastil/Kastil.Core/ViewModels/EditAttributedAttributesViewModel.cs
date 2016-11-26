@@ -11,20 +11,14 @@ using MvvmCross.Core.ViewModels;
 
 namespace Kastil.Core.ViewModels
 {
-    public abstract class EditAttributedAttributesViewModel : BaseViewModel
+    public class EditAttributedAttributesViewModel : BaseViewModel
     {
-        private IItemEditContext _context;
         private string _name;
         private string _attributeValue;
         private string _attributeText;
         private bool _editMode;
         private List<SpinnerItem> _items;
         private string _buttonText = "Add";
-
-        protected EditAttributedAttributesViewModel(IItemEditContext context)
-        {
-            _context = context;
-        }
 
         public bool EditMode
         {
@@ -82,14 +76,16 @@ namespace Kastil.Core.ViewModels
 
         private void DoDeleteAttrCommand()
         {
-            _context.DeleteAttribute(SelectedItem.Caption);
+            var context = Resolve<AttributedEditContext>();
+            context.DeleteAttribute(SelectedItem.Caption);
             Publish(new EditingDoneEvent(this, EditAction.Delete));
             Close();
         }
 
         private void DoAddAttrCommand()
         {
-            _context.AddOrUpdateAttribute(SelectedItem.Attribute, AttributeValue);
+            var context = Resolve<AttributedEditContext>();
+            context.AddOrUpdateAttribute(SelectedItem.Attribute, AttributeValue);
             Publish(new EditingDoneEvent(this, EditAction.Edit));
             Close();
         }
@@ -98,18 +94,20 @@ namespace Kastil.Core.ViewModels
         {
             var dialogs = Resolve<IUserDialogs>();
             dialogs.ShowLoading(Messages.General.Loading);
+
+            var context = Resolve<AttributedEditContext>();
             try
             {
-                Name = _context.ItemName;
-                Items = _context.Attributes.Select(attribute => new SpinnerItem(attribute)).ToList();
+                Name = context.ItemName;
+                Items = context.AvailableAttributes.Select(attribute => new SpinnerItem(attribute)).ToList();
 
-                if (_context.SelectedAttribute != null)
+                if (context.SelectedAttribute != null)
                 {
                     EditMode = true;
                     ButtonText = "Update";
-                    SelectedItem = new SpinnerItem(_context.SelectedAttribute);
-                    AttributeText = _context.SelectedAttribute.Key;
-                    AttributeValue = _context.SelectedAttribute.Value;
+                    SelectedItem = new SpinnerItem(context.SelectedAttribute);
+                    AttributeText = context.SelectedAttribute.Key;
+                    AttributeValue = context.SelectedAttribute.Value;
                 }
             }
             finally

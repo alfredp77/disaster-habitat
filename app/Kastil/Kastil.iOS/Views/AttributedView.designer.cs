@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace Kastil.iOS
 {
-	[Register ("AssessmentView")]
-	partial class AssessmentView
+	[Register ("AttributedView")]
+	partial class AttributedView
 	{
 		[Outlet]
 		UIKit.UIButton addAttributeButton { get; set; }

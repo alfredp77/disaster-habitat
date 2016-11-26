@@ -60,24 +60,14 @@ namespace Kastil.Common.Services
             var context = PersistenceContextFactory.CreateFor<Shelter>();
             return Asyncer.Async(() => context.LoadAll().SingleOrDefault(s => s.ObjectId == shelterId));
         }
+		        
 
-        public Task<IEnumerable<Attribute>> GetAttributes<T>(T item) where T : Attributed
+        public async Task<IEnumerable<Attribute>> GetAllAttributes()
         {
-            return item.GetType() == typeof(Assessment) ? GetAssessmentAttributes() : GetShelterAttributes();
-        }
-
-        public async Task<IEnumerable<Attribute>> GetShelterAttributes()
-        {
-            var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
+            var context = PersistenceContextFactory.CreateFor<Attribute>();
             return await Asyncer.Async(context.LoadAll);
         }
-
-        public async Task<IEnumerable<Attribute>> GetAssessmentAttributes()
-        {
-            var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
-            return await Asyncer.Async(context.LoadAll);
-        }
-
+		       
         public Task Save(Assessment assessment)
         {
             var context = PersistenceContextFactory.CreateFor<Assessment>();

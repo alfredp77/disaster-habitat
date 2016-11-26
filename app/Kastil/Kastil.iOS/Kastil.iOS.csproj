@@ -109,7 +109,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <InterfaceDefinition Include="Views\LoginView.xib" />
     <ImageAsset Include="Resources\Images.xcassets\NavigationAdd.imageset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
@@ -129,30 +128,30 @@
     <Compile Include="Views\SyncView.designer.cs">
       <DependentUpon>SyncView.cs</DependentUpon>
     </Compile>
-    <InterfaceDefinition Include="Views\AssessmentListView.xib" />
-    <Compile Include="Views\AssessmentListView.cs" />
-    <Compile Include="Views\AssessmentListView.designer.cs">
-      <DependentUpon>AssessmentListView.cs</DependentUpon>
+    <InterfaceDefinition Include="Views\AttributedListView.xib" />
+    <Compile Include="Views\AttributedListView.cs" />
+    <Compile Include="Views\AttributedListView.designer.cs">
+      <DependentUpon>AttributedListView.cs</DependentUpon>
     </Compile>
-    <InterfaceDefinition Include="Views\AssessmentListItemCell.xib" />
-    <Compile Include="Views\AssessmentListItemCell.cs" />
-    <Compile Include="Views\AssessmentListItemCell.designer.cs">
-      <DependentUpon>AssessmentListItemCell.cs</DependentUpon>
+    <InterfaceDefinition Include="Views\AttributedListItemCell.xib" />
+    <Compile Include="Views\AttributedListItemCell.cs" />
+    <Compile Include="Views\AttributedListItemCell.designer.cs">
+      <DependentUpon>AttributedListItemCell.cs</DependentUpon>
     </Compile>
-    <InterfaceDefinition Include="Views\AssessmentView.xib" />
-    <Compile Include="Views\AssessmentView.cs" />
-    <Compile Include="Views\AssessmentView.designer.cs">
-      <DependentUpon>AssessmentView.cs</DependentUpon>
+    <InterfaceDefinition Include="Views\AttributedView.xib" />
+    <Compile Include="Views\AttributedView.cs" />
+    <Compile Include="Views\AttributedView.designer.cs">
+      <DependentUpon>AttributedView.cs</DependentUpon>
     </Compile>
     <InterfaceDefinition Include="Views\AttributeItemCell.xib" />
     <Compile Include="Views\AttributeItemCell.cs" />
     <Compile Include="Views\AttributeItemCell.designer.cs">
       <DependentUpon>AttributeItemCell.cs</DependentUpon>
     </Compile>
-    <InterfaceDefinition Include="Views\EditAttributeView.xib" />
-    <Compile Include="Views\EditAttributeView.cs" />
-    <Compile Include="Views\EditAttributeView.designer.cs">
-      <DependentUpon>EditAttributeView.cs</DependentUpon>
+    <InterfaceDefinition Include="Views\EditAttributedAttributesView.xib" />
+    <Compile Include="Views\EditAttributedAttributesView.cs" />
+    <Compile Include="Views\EditAttributedAttributesView.designer.cs">
+      <DependentUpon>EditAttributedAttributesView.cs</DependentUpon>
     </Compile>
     <Compile Include="PlatformSpecific\UITextFieldExtensions.cs" />
   </ItemGroup>

@@ -8,13 +8,13 @@ using UIKit;
 
 namespace Kastil.iOS
 {
-	public partial class AssessmentListItemCell : MvxTableViewCell
+	public partial class AttributedListItemCell : MvxTableViewCell
 	{
-		public const string Identifier = "AssessmentListItemCell";
+		public const string Identifier = "AttributedListItemCell";
 		public static readonly NSString Key = new NSString (Identifier);
 		public static readonly UINib Nib = UINib.FromName (Identifier, NSBundle.MainBundle);
 
-		public AssessmentListItemCell (IntPtr handle) : base(handle)
+		public AttributedListItemCell (IntPtr handle) : base(handle)
         {
 			Initialize ();
 		}
@@ -22,7 +22,7 @@ namespace Kastil.iOS
 		private void Initialize ()
 		{
 			this.DelayBind (() => {
-				var set = this.CreateBindingSet<AssessmentListItemCell, AttributedListItemViewModel> ();
+				var set = this.CreateBindingSet<AttributedListItemCell, AttributedListItemViewModel> ();
 				set.Bind (nameLabel).To (vm => vm.Text);
 				set.Bind (locationLabel).To (vm => vm.LocationName);
 				set.Apply ();

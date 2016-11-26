@@ -7,15 +7,13 @@ using Kastil.Common.Models;
 
 namespace Kastil.iOS
 {
-	public partial class EditAttributeView : BaseView<EditAttributedAttributesViewModel>
+	public partial class EditAttributedAttributesView : BaseView<EditAttributedAttributesViewModel>
 	{
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
-            //TODO: Sort out the Shelter or Assessment
-           
-			var set = CreateBindingSet<EditAttributeView>();
+			var set = CreateBindingSet<EditAttributedAttributesView>();
 			set.Bind(nameField).To(vm => vm.SelectedItem.Caption);
 			set.Bind(valueField).To(vm => vm.AttributeValue);
 			nameField.ShouldChangeCharacters = (textField, range, replacementString) => false;

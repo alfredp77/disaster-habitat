@@ -5,7 +5,7 @@ using UIKit;
 
 namespace Kastil.iOS
 {
-	public partial class AssessmentView : BaseView<AttributedViewModel>
+	public partial class AttributedView : BaseView<AttributedViewModel>
 	{		
 		private CustomTableViewSource _tableSource;
 
@@ -18,7 +18,7 @@ namespace Kastil.iOS
 			_tableSource = new CustomTableViewSource(attributesList, AttributeItemCell.Identifier);
 			attributesList.Source = _tableSource;
 
-			var set = CreateBindingSet<AssessmentView>();
+			var set = CreateBindingSet<AttributedView>();
 			set.Bind(nameField).For("Visibility").To(vm => vm.AddMode).WithConversion("Visibility");
 			set.Bind(nameField).For(f => f.Placeholder).To(vm => vm.NamePlaceholderText);
 			set.Bind(locationLabel).For("Visibility").To(vm => vm.AddMode).WithConversion("InvertedVisibility");

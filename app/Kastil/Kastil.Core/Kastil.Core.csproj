@@ -39,22 +39,21 @@
     <Compile Include="Events\PopToViewModelPresentationHint.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AssessmentEditContext.cs" />
-    <Compile Include="Services\IItemEditContext.cs" />
-    <Compile Include="Services\ShelterEditContext.cs" />
-    <Compile Include="ViewModels\AssessmentViewModel.cs" />
+    <Compile Include="Services\AssessmentItemHandler.cs" />
+    <Compile Include="Services\AssessmentListHandler.cs" />
+    <Compile Include="Services\AttributedEditContext.cs" />
+    <Compile Include="Services\AttributedListContext.cs" />
+    <Compile Include="Services\IAttributedListHandler.cs" />
+    <Compile Include="Services\IAttributedItemHandler.cs" />
+    <Compile Include="Services\ShelterItemHandler.cs" />
+    <Compile Include="Services\ShelterListHandler.cs" />
     <Compile Include="ViewModels\AttributedViewModel.cs" />
-    <Compile Include="ViewModels\EditAssessmentAttributeViewModel.cs" />
     <Compile Include="ViewModels\EditAttributedAttributesViewModel.cs" />
-    <Compile Include="ViewModels\EditShelterAttributeViewModel.cs" />
     <Compile Include="ViewModels\AttributedListViewModel.cs" />
     <Compile Include="ViewModels\AttributedListItemViewModel.cs" />
-    <Compile Include="ViewModels\AssessmentListViewModel.cs" />
     <Compile Include="ViewModels\AttributeListItemViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
-    <Compile Include="ViewModels\ShelterListViewModel.cs" />
-    <Compile Include="ViewModels\ShelterViewModel.cs" />
     <Compile Include="ViewModels\SyncViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@ using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
 using Kastil.Common.Models;
+using Kastil.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -74,12 +75,18 @@ namespace Kastil.Core.ViewModels
 
 		private void DoShowAssessment(Disaster disaster)
 		{
-			ShowViewModel<AssessmentListViewModel> (new { disasterId = disaster.ObjectId });
+		    var context = Resolve<AttributedListContext>();
+		    var handler = Resolve<AssessmentListHandler>();
+            context.Initialize(handler, disaster.ObjectId);
+			ShowViewModel<AttributedListViewModel>();
 		}
 
 		private void DoShowShelters (Disaster disaster)
 		{
-			ShowViewModel<ShelterListViewModel> (new { disasterId = disaster.ObjectId });
+            var context = Resolve<AttributedListContext>();
+            var handler = Resolve<ShelterListHandler>();
+            context.Initialize(handler, disaster.ObjectId);
+            ShowViewModel<AttributedListViewModel>();
 		}
 
         protected override async Task DoSettingCommand()

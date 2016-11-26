@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace Kastil.iOS
 {
-	[Register ("AssessmentListItemCell")]
-	partial class AssessmentListItemCell
+	[Register ("AttributedListItemCell")]
+	partial class AttributedListItemCell
 	{
 		[Outlet]
 		UIKit.UILabel locationLabel { get; set; }

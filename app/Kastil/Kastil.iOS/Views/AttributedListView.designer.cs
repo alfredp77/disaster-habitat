@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace Kastil.iOS
 {
-	[Register ("AssessmentListView")]
-	partial class AssessmentListView
+	[Register ("AttributedListView")]
+	partial class AttributedListView
 	{
 		[Outlet]
 		UIKit.UITableView assessmentList { get; set; }

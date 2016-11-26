@@ -12,63 +12,70 @@ using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
 {
-    public abstract class AttributedViewModel : BaseViewModel
+    public class AttributedViewModel : BaseViewModel
     {
-        private IItemEditContext _context;
-
-        protected AttributedViewModel(IItemEditContext context)
-        {
-            _context = context;
-        }
-
-
+        private string _name;
         public string Name
         {
             get
             {
-                return _context.ItemName;
+                return _name;
             }
             set
             {
-                _context.ItemName = value;
+                _name = value;
                 SetTitle();
                 RaisePropertyChanged();
             }
         }
 
-        public abstract string NamePlaceholderText { get; }
+        private string _namePlaceholderText;
+        public string NamePlaceholderText
+        {
+            get { return _namePlaceholderText; }
+            private set { _namePlaceholderText = value; RaisePropertyChanged();}
+        }
 
-
+        private string _location;
         public string Location
         {
-            get
-            {
-                return _context.ItemLocation;
-            }
+            get { return _location; }
             set
             {
-                _context.ItemLocation = value;
+                _location = value;
                 RaisePropertyChanged();
             }
         }
 
-        public abstract string LocationPlaceholderText { get; }
-        public abstract string ItemType { get; }
+        private string _locationPlaceholderText;
+        private bool _addMode;
 
-        public bool AddMode => _context.IsNew;
+        public string LocationPlaceholderText
+        {
+            get { return _locationPlaceholderText; }
+            private set { _locationPlaceholderText = value; RaisePropertyChanged(); }
+        }
+
+        public bool AddMode
+        {
+            get { return _addMode; }
+            private set { _addMode = value; RaisePropertyChanged();}
+        }
 
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
         private void DoAddAttrCommand()
         {
-            _context.SelectedAttribute = null;
-			NavigateToEditScreen();
+            var context = Resolve<AttributedEditContext>();
+            context.SelectedAttribute = null;
+            ShowViewModel<EditAttributedAttributesViewModel>();
         }
 
         public MvxCommand<AttributeListItemViewModel> AttributeSelectedCommand => new MvxCommand<AttributeListItemViewModel>(DoAttributeSelectedCommand);
         private void DoAttributeSelectedCommand(AttributeListItemViewModel obj)
         {
-            _context.SelectedAttribute = obj.Attribute;
-			NavigateToEditScreen();
+            var context = Resolve<AttributedEditContext>();
+            context.SelectedAttribute = obj.Attribute;
+            ShowViewModel<EditAttributedAttributesViewModel>();
         }
         
         public MvxAsyncCommand SaveCommand => new MvxAsyncCommand(DoSaveCommand);
@@ -76,19 +83,20 @@ namespace Kastil.Core.ViewModels
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Saving);
-        
+
+            var context = Resolve<AttributedEditContext>();
             try
             {
-                await _context.CommitChanges();
+                await context.CommitChanges();
                 Publish(new EditingDoneEvent(this, EditAction.Edit));
-                dialog.ShowSuccess($"{ItemType} {Messages.General.SavedSuccessfully}");
+                dialog.ShowSuccess($"{context.ItemType} {Messages.General.SavedSuccessfully}");
                 Close();
             }
             catch (Exception ex)
             {
                 dialog.HideLoading();
-                Mvx.Trace($"Unable to save {ItemType}, exception: {ex}");
-                await dialog.AlertAsync($"Unable to save {ItemType}. Please try again");
+                Mvx.Trace($"Unable to save {context.ItemType}, exception: {ex}");
+                await dialog.AlertAsync($"Unable to save {context.ItemType}. Please try again");
                 Close();
             }
             finally
@@ -118,11 +126,17 @@ namespace Kastil.Core.ViewModels
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);
+            var context = Resolve<AttributedEditContext>();
             try
             {
+                Name = context.ItemName;
+                Location = context.ItemLocation;
+                NamePlaceholderText = context.NamePlaceholderText;
+                LocationPlaceholderText = context.LocationPlaceholderText;
+                AddMode = context.IsNew;
                 SetTitle();
                 Attributes.Clear();
-                Attributes.AddRange(_context.Attributes.Select(a => new AttributeListItemViewModel(a)));
+                Attributes.AddRange(context.Attributes.Select(a => new AttributeListItemViewModel(a)));
             }
             catch (Exception ex)
             {
@@ -141,9 +155,5 @@ namespace Kastil.Core.ViewModels
         {
             Title = Name;
         }
-
-        protected abstract void NavigateToEditScreen();
-        
-
     }
 }

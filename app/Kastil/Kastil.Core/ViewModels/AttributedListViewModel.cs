@@ -14,15 +14,9 @@ using MvvmCross.Platform;
 
 namespace Kastil.Core.ViewModels
 {
-    public abstract class AttributedListViewModel : BaseViewModel 
+    public class AttributedListViewModel : BaseViewModel 
     {
 		public ObservableRangeCollection<AttributedListItemViewModel> Items { get; } = new ObservableRangeCollection<AttributedListItemViewModel>();
-        public string DisasterId { get; private set; }
-        
-        public void Init(string disasterId)
-        {
-            DisasterId = disasterId;
-        }
 
         public override Task Initialize()
         {
@@ -33,10 +27,12 @@ namespace Kastil.Core.ViewModels
         protected async Task Load()
         {
             var dialog = Resolve<IUserDialogs>();
-            dialog.ShowLoading(Messages.General.Loading);            
+            dialog.ShowLoading(Messages.General.Loading);
+
+            var context = Resolve<AttributedListContext>();
             try
             {
-                var rawItems = await GetItems();
+                var rawItems = await context.Load();
                 if (rawItems != null)
                 {
                     Items.AddRange(rawItems.Select(s => new AttributedListItemViewModel(s)));
@@ -45,8 +41,8 @@ namespace Kastil.Core.ViewModels
             catch (Exception ex)
             {
                 dialog.HideLoading();
-                Mvx.Trace($"Unable to load {ItemType} list, exception: {ex}");
-                await dialog.AlertAsync($"Unable to load {ItemType} list. Please try again");
+                Mvx.Trace($"Unable to load {context.ItemType} list, exception: {ex}");
+                await dialog.AlertAsync($"Unable to load {context.ItemType} list. Please try again");
             }
             finally
             {
@@ -56,7 +52,7 @@ namespace Kastil.Core.ViewModels
 
         private async Task OnEditingDone(EditingDoneEvent evt)
         {
-            if (evt.Sender is ShelterViewModel || evt.Sender is AssessmentViewModel)
+            if (evt.Sender is AttributedViewModel)
                 await DoRefreshCommand();
         }
 
@@ -91,20 +87,24 @@ namespace Kastil.Core.ViewModels
             set { SetProperty(ref _isLoading, value); }
         }
 
-        MvxCommand<AttributedListItemViewModel> _itemSelectedCommand;
-        public MvxCommand<AttributedListItemViewModel> ItemSelectedCommand
+        MvxAsyncCommand<AttributedListItemViewModel> _itemSelectedCommand;
+        public MvxAsyncCommand<AttributedListItemViewModel> ItemSelectedCommand
         {
             get
             {
-                _itemSelectedCommand = _itemSelectedCommand ?? new MvxCommand<AttributedListItemViewModel>(DoItemSelectedCommand);
+                _itemSelectedCommand = _itemSelectedCommand ?? new MvxAsyncCommand<AttributedListItemViewModel>(DoItemSelectedCommand);
                 return _itemSelectedCommand;
             }
         }
 
-        protected abstract void DoItemSelectedCommand(AttributedListItemViewModel itemVm);
-        
-        protected abstract Task<IEnumerable<Attributed>> GetItems();
-        protected abstract string ItemType { get; }
+        private async Task DoItemSelectedCommand(AttributedListItemViewModel itemVm)
+        {
+            var context = Resolve<AttributedListContext>();
+            var handler = context.CreateItemHandler(itemVm.Value);
 
+            var editContext = Resolve<AttributedEditContext>();
+            await editContext.Initialize(handler);
+            ShowViewModel<AttributedViewModel>();
+        }
     }
 }

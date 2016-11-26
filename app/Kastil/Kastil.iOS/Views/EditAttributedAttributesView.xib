@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditAttributeView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditAttributedAttributesView">
             <connections>
                 <outlet property="cancelButton" destination="I16-yE-SGd" id="ky1-Gc-QmY"/>
                 <outlet property="deleteButton" destination="P0V-zP-U8x" id="1H5-Ky-Pqu"/>

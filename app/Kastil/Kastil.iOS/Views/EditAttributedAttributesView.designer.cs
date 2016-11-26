@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace Kastil.iOS
 {
-	[Register ("EditAttributeView")]
-	partial class EditAttributeView
+	[Register ("EditAttributedAttributesView")]
+	partial class EditAttributedAttributesView
 	{
 		[Outlet]
 		UIKit.UIButton cancelButton { get; set; }
