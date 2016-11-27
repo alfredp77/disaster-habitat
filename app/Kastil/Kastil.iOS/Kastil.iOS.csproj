@@ -159,6 +159,8 @@
     </ImageAsset>
     <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-180x180.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-120x120.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchScreenImage.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchScreenImage.imageset\HabitatForHumanity.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
@@ -273,6 +275,9 @@
       <Project>{31d7792c-8339-4c32-8c91-123c9b248b83}</Project>
       <Name>Kastil.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images.xcassets\LaunchScreenImage.imageset\" />
   </ItemGroup>
   <Import Project="..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
