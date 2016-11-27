@@ -13,7 +13,7 @@ namespace Kastil.Common.Services
         
         public async Task Pull<T>(bool clear=false) where T : BaseModel
         {
-            var url = Connection.GenerateGetUrl<T>();
+            var url = Connection.GenerateTableUrl<T>();
             var json = await Caller.Get(url, Connection.Headers);
             var docs = Serializer.ParseArray(json, "data", "objectId");
 

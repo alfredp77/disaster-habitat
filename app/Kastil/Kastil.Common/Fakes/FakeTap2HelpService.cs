@@ -265,7 +265,16 @@ namespace Kastil.Common.Fakes
 
             return result != null ? Task.FromResult(result) : Task.FromResult<Shelter>(null);
         }
+
+        public async Task DeleteShelters(string disasterId)
+        {
+            var shelters = await GetShelters(disasterId);            
+            foreach (var shelter in shelters)
+            {
+                _shelters.Remove(shelter);
+            }
+        }
         #endregion
-       
+
     }
 }

@@ -24,4 +24,6 @@ namespace Kastil.Core.Events
         Edit,
         Delete        
     }
+
+	
 }

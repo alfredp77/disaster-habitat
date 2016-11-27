@@ -123,11 +123,6 @@
     </ImageAsset>
     <InterfaceDefinition Include="Views\DisastersView.xib" />
     <InterfaceDefinition Include="Views\DisasterItemCell.xib" />
-    <InterfaceDefinition Include="Views\SyncView.xib" />
-    <Compile Include="Views\SyncView.cs" />
-    <Compile Include="Views\SyncView.designer.cs">
-      <DependentUpon>SyncView.cs</DependentUpon>
-    </Compile>
     <InterfaceDefinition Include="Views\AttributedListView.xib" />
     <Compile Include="Views\AttributedListView.cs" />
     <Compile Include="Views\AttributedListView.designer.cs">
@@ -154,6 +149,11 @@
       <DependentUpon>EditAttributedAttributesView.cs</DependentUpon>
     </Compile>
     <Compile Include="PlatformSpecific\UITextFieldExtensions.cs" />
+    <InterfaceDefinition Include="Views\SyncView.xib" />
+    <Compile Include="Views\SyncView.cs" />
+    <Compile Include="Views\SyncView.designer.cs">
+      <DependentUpon>SyncView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />

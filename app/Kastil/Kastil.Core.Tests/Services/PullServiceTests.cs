@@ -32,7 +32,7 @@ namespace Kastil.Core.Tests.Services
             _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>()).Returns(_persistenceContext.Object);
             _serializer = CreateMock<IJsonSerializer>();
 
-            _restServiceCaller.Setup(c => c.Get(Connection.GenerateGetUrl<TestModel>(null), _connection.Headers))
+            _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(null), _connection.Headers))
                 .ReturnsAsync(_json);
             _serializer.Setup(s => s.ParseArray(_json, "data", "id"))
                 .Returns(_kvps);

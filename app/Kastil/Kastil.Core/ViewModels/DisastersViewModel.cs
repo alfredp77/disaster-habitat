@@ -9,6 +9,7 @@ using Kastil.Common.Models;
 using Kastil.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using Kastil.Core.Events;
 
 namespace Kastil.Core.ViewModels
 {
@@ -24,11 +25,25 @@ namespace Kastil.Core.ViewModels
 
         public override Task Initialize()
         {
-            Items.Clear();
-            return Load();
+			Subscribe<SyncCompletedEvent>(async e => await OnSyncCompleted(e));
+			return Reload();
         }
-        
-        private async Task Load()
+
+		private async Task OnSyncCompleted(SyncCompletedEvent evt)
+		{
+			if (evt.Successful) 
+			{
+				Items.Clear();
+				await Load();
+			}
+		}
+
+		private Task Reload()
+		{
+			Items.Clear();
+			return Load();
+		}
+		private async Task Load()
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);

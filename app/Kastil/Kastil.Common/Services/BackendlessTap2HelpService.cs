@@ -120,5 +120,15 @@ namespace Kastil.Common.Services
             //TODO: GetDisasterAidItems
             return null;
         }
+
+        public async Task DeleteShelters(string disasterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<Shelter>();
+            var shelters = await GetShelters(disasterId);
+            foreach (var shelter in shelters)
+            {
+                await Asyncer.Async(() => context.Delete(shelter));
+            }
+        }
     }
 }

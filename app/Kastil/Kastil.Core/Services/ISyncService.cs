@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 
-namespace Kastil.Common.Services
+namespace Kastil.Core.Services
 {
     public interface ISyncService
     {
-        Task Sync(string staffCode);
+        Task Sync(string userToken);
     }
 }

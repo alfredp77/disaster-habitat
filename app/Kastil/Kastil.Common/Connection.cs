@@ -24,7 +24,7 @@ namespace Kastil.Common
             {APPLICATION_TYPE_HEADER, REST}
         });
 
-        public static string GenerateGetUrl<T>(string tableName=null) where T : BaseModel
+        public static string GenerateTableUrl<T>(string tableName=null) where T : BaseModel
         {
 			if (tableName == null)
 				tableName = typeof(T).Name;

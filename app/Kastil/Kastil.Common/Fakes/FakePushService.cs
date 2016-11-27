@@ -7,7 +7,7 @@ namespace Kastil.Common.Fakes
 {
     public class FakePushService : IPushService
     {
-        public Task Push<T>(string tableName = null) where T : BaseModel
+        public Task Push<T>(string userToken, string tableName = null) where T : BaseModel
         {
             return Asyncer.DoNothing();
         }

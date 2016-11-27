@@ -27,7 +27,8 @@
 
         public static class Login
         {
-            public const string PleaseKeyInYourStaffCode = "Please key in your staff code";
+            public const string EmailIsRequired = "Email is required";
+            public const string PasswordIsRequired = "Password is required";
             public const string LoggingYouIn = "Logging you in";
             public const string LoggingYouOut = "Logging you out ...";
         }

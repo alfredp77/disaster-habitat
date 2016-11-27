@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Kastil.Common;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
+using Kastil.Core.Services;
 using Kastil.PlatformSpecific.Shared;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -47,7 +48,7 @@ namespace Kastil.Core.Tests.Services
             var loginService = new LoginService(new Connection(), new RestServiceCaller(), jsonSerializer);
             try
             {
-                var user = await loginService.Login("alfred@baml.com1", "testing!123");
+                var user = await loginService.Login("alfred@baml.com", "testing!123");
                 Console.WriteLine(jsonSerializer.Serialize(user));
             }
             catch (Exception ex)

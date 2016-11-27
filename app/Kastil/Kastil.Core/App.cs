@@ -1,10 +1,8 @@
 using System.Reflection;
 using Kastil.Common;
-using Kastil.Common.Fakes;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Core.Services;
-using Kastil.Common.Models;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 
@@ -15,8 +13,15 @@ namespace Kastil.Core
         public override void Initialize()
         {
             CreatableTypes(typeof(ITap2HelpService).GetTypeInfo().Assembly)
-                .InNamespace(typeof(FakeTap2HelpService).Namespace) // uncomment this line to use the fakes instead                
-                //.InNamespace(typeof(ITap2HelpService).Namespace)      // comment this line when using fakes
+//                .InNamespace(typeof(FakeTap2HelpService).Namespace) // uncomment this line to use the fakes instead                
+                .InNamespace(typeof(ITap2HelpService).Namespace)      // comment this line when using fakes
+                .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
+
+            CreatableTypes(typeof(ISyncService).GetTypeInfo().Assembly)
+                //                .InNamespace(typeof(FakeSyncService).Namespace) // uncomment this line to use the fakes instead                
+                .InNamespace(typeof(ISyncService).Namespace)      // comment this line when using fakes
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();

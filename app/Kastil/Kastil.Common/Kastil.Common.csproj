@@ -41,7 +41,6 @@
     <Compile Include="Connection.Details.cs" />
     <Compile Include="Fakes\FakePullService.cs" />
     <Compile Include="Fakes\FakePushService.cs" />
-    <Compile Include="Fakes\FakeSyncService.cs" />
     <Compile Include="Fakes\FakeTap2HelpService.cs" />
     <Compile Include="FolderProvider.cs" />
     <Compile Include="Models\Assessment.cs" />
@@ -64,11 +63,9 @@
     <Compile Include="Services\IPullService.cs" />
     <Compile Include="Services\IPushService.cs" />
     <Compile Include="Services\IRestServiceCaller.cs" />
-    <Compile Include="Services\ISyncService.cs" />
     <Compile Include="Services\ITap2HelpService.cs" />
     <Compile Include="Services\PullService.cs" />
     <Compile Include="Services\PushService.cs" />
-    <Compile Include="Services\SyncService.cs" />
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\DateHelper.cs" />
     <Compile Include="Utils\DistanceCalculator.cs" />

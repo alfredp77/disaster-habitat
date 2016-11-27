@@ -4,7 +4,6 @@ using Kastil.iOS.PlatformSpecific;
 using Kastil.iOS.Views;
 using UIKit;
 using Kastil.Common.Models;
-using Kastil.Common.ValueConverter;
 
 namespace Kastil.iOS
 {
