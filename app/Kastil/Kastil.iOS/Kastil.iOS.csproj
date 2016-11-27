@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchArch>i386</MtouchArch>
+    <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -154,6 +154,11 @@
     <Compile Include="Views\SyncView.designer.cs">
       <DependentUpon>SyncView.cs</DependentUpon>
     </Compile>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-180x180.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-120x120.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />

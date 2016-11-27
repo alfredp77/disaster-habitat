@@ -36,5 +36,7 @@
 	</array>
 	<key>CFBundleName</key>
 	<string>Tap2Help</string>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Images.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>

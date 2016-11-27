@@ -18,12 +18,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="5" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter your registered email address" fixedFrame="YES">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="5" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter your registered email address" misplaced="YES">
                     <rect key="frame" x="20" y="47" width="97" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <rect key="frame" x="20" y="47" width="335" height="30"/>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="20" y="47" width="97" height="30"/>
                         <mask key="constraints">
                             <include reference="15"/>
                         </mask>
@@ -37,12 +37,12 @@
                         </mask>
                     </variation>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="6" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter your password" fixedFrame="YES">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="6" translatesAutoresizingMaskIntoConstraints="NO" placeholder="Enter your password">
                     <rect key="frame" x="20" y="85" width="97" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <rect key="frame" x="20" y="85" width="335" height="30"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="20" y="85" width="97" height="30"/>
                         <mask key="constraints">
                             <include reference="18"/>
                         </mask>
@@ -56,7 +56,7 @@
                         </mask>
                     </variation>
                 </textField>
-                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="164" y="136" width="46" height="30"/>
                     <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                     <state key="normal" title="Sync">
@@ -97,8 +97,8 @@
                     <exclude reference="17"/>
                     <exclude reference="19"/>
                     <exclude reference="20"/>
-					<exclude reference="22"/>
-					<include reference="23"/>
+                    <exclude reference="22"/>
+                    <include reference="23"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -114,8 +114,8 @@
                     <include reference="17"/>
                     <include reference="19"/>
                     <include reference="20"/>
-					<include reference="22"/>
-					<include reference="23"/>
+                    <include reference="22"/>
+                    <include reference="23"/>
                 </mask>
             </variation>
             <constraints>
@@ -124,10 +124,10 @@
                 </constraint>
                 <constraint id="14" firstItem="5" firstAttribute="top" secondItem="2" secondAttribute="top" constant="47"/>
                 <constraint id="23" firstItem="2" firstAttribute="trailing" secondItem="5" secondAttribute="trailing" constant="20"/>
-				<constraint id="16" firstItem="2" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" constant="20"/>
+                <constraint id="16" firstItem="2" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" constant="20"/>
                 <constraint id="17" firstItem="6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="85"/>
-				<constraint id="22" firstItem="6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20">
-					<variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                <constraint id="22" firstItem="6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20">
+                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                 </constraint>
                 <constraint id="19" firstItem="7" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="164"/>
                 <constraint id="20" firstItem="7" firstAttribute="top" secondItem="2" secondAttribute="top" constant="136"/>
