@@ -7,7 +7,7 @@ namespace Kastil.Common.Fakes
 {
     public class FakePullService : IPullService
     {
-        public Task Pull<T>(bool clear = false) where T : BaseModel
+        public Task Pull<T>(string tableName=null) where T : BaseModel
         {
             return Asyncer.DoNothing();
         }

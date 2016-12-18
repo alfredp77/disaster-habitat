@@ -7,7 +7,7 @@ namespace Kastil.Core.Services
     public interface IAttributedListHandler
     {
         IAttributedItemHandler CreateItemHandler(Attributed item, string disasterId);
-        Task<IEnumerable<Attributed>> Load();
+        Task<IEnumerable<Attributed>> Load(string disasterId);
         string ItemType { get; }
     }
 }

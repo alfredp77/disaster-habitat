@@ -11,15 +11,14 @@ namespace Kastil.Common.Services
         private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
         private Connection Connection => Resolve<Connection>();
         
-        public async Task Pull<T>(bool clear=false) where T : BaseModel
+        public async Task Pull<T>(string tableName = null) where T : BaseModel
         {
-            var url = Connection.GenerateTableUrl<T>();
+			var url = string.IsNullOrEmpty(tableName) ? Connection.GenerateTableUrl<T>() : Connection.GenerateTableUrl(tableName);
             var json = await Caller.Get(url, Connection.Headers);
             var docs = Serializer.ParseArray(json, "data", "objectId");
 
             var context = PersistenceContextFactory.CreateFor<T>();
-            if (clear)
-                await Asyncer.Async(context.DeleteAll);
+            await Asyncer.Async(context.DeleteAll);
             await Asyncer.Async(() => context.PersistAllJson(docs));
         }        
     }

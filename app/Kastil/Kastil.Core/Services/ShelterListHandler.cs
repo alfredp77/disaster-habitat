@@ -13,10 +13,10 @@ namespace Kastil.Core.Services
             return new ShelterItemHandler(shelter, disasterId);
         }
 
-        public async Task<IEnumerable<Attributed>> Load()
+        public async Task<IEnumerable<Attributed>> Load(string disasterId)
         {
             var service = Resolve<ITap2HelpService>();
-            return await service.GetShelters();
+            return await service.GetShelters(disasterId);
         }
 
         public string ItemType => typeof(Shelter).Name;

@@ -31,7 +31,7 @@ namespace Kastil.iOS.Views
         private void CreateNavBarItems()
         {
 			if (ViewModel.SettingCommand != null)
-				this.AddLeftButton(ButtonTypes.Setting, async (s, e) => await ViewModel.SettingCommand.ExecuteAsync());
+				this.AddLeftButton(ButtonTypes.Sync, async (s, e) => await ViewModel.SettingCommand.ExecuteAsync());
 			else
 				this.AddLeftButton(ButtonTypes.Close, (s, e) => ViewModel.Close());
 			

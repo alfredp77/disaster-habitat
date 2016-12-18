@@ -21,7 +21,7 @@ namespace Kastil.Core.Services
 
         public Task<IEnumerable<Attributed>> Load()
         {
-            return ListHandler.Load();
+            return ListHandler.Load(DisasterId);
         }
 
         public string ItemType => ListHandler.ItemType;

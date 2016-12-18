@@ -18,7 +18,12 @@ namespace Kastil.Core.ViewModels
     {
 		public ObservableRangeCollection<AttributedListItemViewModel> Items { get; } = new ObservableRangeCollection<AttributedListItemViewModel>();
 
-        public override Task Initialize()
+		public AttributedListViewModel()
+		{
+			AllowAddCommand = true;
+		}
+
+		public override Task Initialize()
         {
             Subscribe<EditingDoneEvent>(async e => await OnEditingDone(e));
             return Load();
@@ -32,6 +37,7 @@ namespace Kastil.Core.ViewModels
             var context = Resolve<AttributedListContext>();
             try
             {
+				Title = $"{context.ItemType}s";
                 var rawItems = await context.Load();
                 if (rawItems != null)
                 {
@@ -100,11 +106,16 @@ namespace Kastil.Core.ViewModels
         private async Task DoItemSelectedCommand(AttributedListItemViewModel itemVm)
         {
             var context = Resolve<AttributedListContext>();
-            var handler = context.CreateItemHandler(itemVm.Value);
+            var handler = context.CreateItemHandler(itemVm?.Value);
 
             var editContext = Resolve<AttributedEditContext>();
 			await editContext.Initialize(handler);
             ShowViewModel<AttributedViewModel>();
         }
+
+		protected override Task DoAddCommand()
+		{
+			return DoItemSelectedCommand(null);
+		}
     }
 }

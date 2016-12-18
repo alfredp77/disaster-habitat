@@ -14,67 +14,62 @@ namespace Kastil.Core.ViewModels
 {
     public class AttributedViewModel : BaseViewModel
     {
-        private string _name;
+		private AttributedEditContext _context;
+		public AttributedViewModel()
+		{
+			_context = Resolve<AttributedEditContext>();
+		}
+
         public string Name
         {
             get
             {
-                return _name;
+                return _context.ItemName;
             }
             set
             {
-                _name = value;
+				_context.ItemName = value;
                 SetTitle();
                 RaisePropertyChanged();
             }
         }
 
-        private string _namePlaceholderText;
         public string NamePlaceholderText
         {
-            get { return _namePlaceholderText; }
-            private set { _namePlaceholderText = value; RaisePropertyChanged();}
+			get { return _context.ItemHandler.NamePlaceholderText; }
         }
 
-        private string _location;
         public string Location
         {
-            get { return _location; }
-            set
-            {
-                _location = value;
-                RaisePropertyChanged();
-            }
+			get { return _context.ItemLocation; }
+			set 
+			{
+				_context.ItemLocation = value;
+				RaisePropertyChanged();
+			}
         }
-
-        private string _locationPlaceholderText;
-        private bool _addMode;
 
         public string LocationPlaceholderText
         {
-            get { return _locationPlaceholderText; }
-            private set { _locationPlaceholderText = value; RaisePropertyChanged(); }
+			get { return _context.ItemHandler.LocationPlaceholderText; }
         }
 
         public bool AddMode
         {
-            get { return _addMode; }
-            private set { _addMode = value; RaisePropertyChanged();}
+			get { return _context.IsNew; }
         }
 
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
         private void DoAddAttrCommand()
         {
-            var context = Resolve<AttributedEditContext>();
-            context.SelectedAttribute = null;
+			_context.SelectedAttribute = null;
             ShowViewModel<EditAttributedAttributesViewModel>();
         }
 
         public MvxCommand<AttributeListItemViewModel> AttributeSelectedCommand => new MvxCommand<AttributeListItemViewModel>(DoAttributeSelectedCommand);
         private void DoAttributeSelectedCommand(AttributeListItemViewModel obj)
         {
-            var context = Resolve<AttributedEditContext>();
-            context.SelectedAttribute = obj.Attribute;
+			_context.SelectedAttribute = obj.Attribute;
             ShowViewModel<EditAttributedAttributesViewModel>();
         }
         
@@ -84,19 +79,18 @@ namespace Kastil.Core.ViewModels
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Saving);
 
-            var context = Resolve<AttributedEditContext>();
             try
             {
-                await context.CommitChanges();
+				await _context.CommitChanges();
                 Publish(new EditingDoneEvent(this, EditAction.Edit));
-                dialog.ShowSuccess($"{context.ItemType} {Messages.General.SavedSuccessfully}");
+				dialog.ShowSuccess($"{_context.ItemType} {Messages.General.SavedSuccessfully}");
                 Close();
             }
             catch (Exception ex)
             {
                 dialog.HideLoading();
-                Mvx.Trace($"Unable to save {context.ItemType}, exception: {ex}");
-                await dialog.AlertAsync($"Unable to save {context.ItemType}. Please try again");
+                Mvx.Trace($"Unable to save {_context.ItemType}, exception: {ex}");
+                await dialog.AlertAsync($"Unable to save {_context.ItemType}. Please try again");
                 Close();
             }
             finally
@@ -126,17 +120,11 @@ namespace Kastil.Core.ViewModels
         {
             var dialog = Resolve<IUserDialogs>();
             dialog.ShowLoading(Messages.General.Loading);
-            var context = Resolve<AttributedEditContext>();
             try
             {
-                Name = context.ItemName;
-                Location = context.ItemLocation;
-                NamePlaceholderText = context.NamePlaceholderText;
-                LocationPlaceholderText = context.LocationPlaceholderText;
-                AddMode = context.IsNew;
                 SetTitle();
                 Attributes.Clear();
-                Attributes.AddRange(context.Attributes.Select(a => new AttributeListItemViewModel(a)));
+				Attributes.AddRange(_context.Attributes.Select(a => new AttributeListItemViewModel(a)));
             }
             catch (Exception ex)
             {
@@ -153,7 +141,7 @@ namespace Kastil.Core.ViewModels
         
         private void SetTitle()
         {
-            Title = Name;
+			Title = string.IsNullOrEmpty(Name) ? "New Assessment" : Name;
         }
     }
 }

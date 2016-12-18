@@ -19,6 +19,11 @@ namespace Kastil.PlatformSpecific.Shared
             return await SendRequest(url, headers, "POST", payload);
         }
 
+		public async Task<string> Put(string url, Dictionary<string, string> headers, string payload)
+		{
+			return await SendRequest(url, headers, "PUT", payload);
+		}
+
         private async Task<string> SendRequest(string url, Dictionary<string, string> headers, string method,
             string payload=null)
         {

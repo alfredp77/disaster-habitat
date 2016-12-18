@@ -157,10 +157,27 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-180x180.png" />
-    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-120x120.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchScreenImage.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchScreenImage.imageset\HabitatForHumanity.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-180x180.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcon.appiconset\HabitatForHumanity-120x120.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\LaunchScreenImage.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\LaunchScreenImage.imageset\HabitatForHumanity.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSync.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSync.imageset\sync%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\NavigationMenuSync.imageset\sync.png">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
@@ -278,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Images.xcassets\LaunchScreenImage.imageset\" />
+    <Folder Include="Resources\Images.xcassets\NavigationMenuSync.imageset\" />
   </ItemGroup>
   <Import Project="..\Kastil.PlatformSpecific.Shared\Kastil.PlatformSpecific.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

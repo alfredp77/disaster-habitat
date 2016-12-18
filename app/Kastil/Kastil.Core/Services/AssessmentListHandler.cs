@@ -13,10 +13,10 @@ namespace Kastil.Core.Services
             return new AssessmentItemHandler(assessment, disasterId);
         }
 
-        public async Task<IEnumerable<Attributed>> Load()
+        public async Task<IEnumerable<Attributed>> Load(string disasterId)
         {
             var service = Resolve<ITap2HelpService>();
-            return await service.GetAssessments();
+            return await service.GetAssessments(disasterId);
         }
 
         public string ItemType => typeof (Assessment).Name;

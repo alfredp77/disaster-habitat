@@ -15,6 +15,7 @@ namespace Kastil.Common
         private static string CONTENT_TYPE_HEADER = "Content-Type";
         private static string CONTENT_TYPE = "application/json";
         private static string BASE_URL = "https://api.backendless.com/v1";
+		private static string BASE_NON_HTTPS_URL = "http://api.backendless.com/v1";
 
         private Dictionary<string, string> _headers; 
         public Dictionary<string, string> Headers => _headers ?? (_headers = new Dictionary<string, string>
@@ -24,11 +25,14 @@ namespace Kastil.Common
             {APPLICATION_TYPE_HEADER, REST}
         });
 
-        public static string GenerateTableUrl<T>(string tableName=null) where T : BaseModel
+        public static string GenerateTableUrl<T>(bool useHttps=true) where T : BaseModel
         {
-			if (tableName == null)
-				tableName = typeof(T).Name;
-            return $"{BASE_URL}/data/{tableName}";
+            return GenerateTableUrl(typeof (T).Name);
+        }
+
+        public static string GenerateTableUrl(string tableName, bool useHttps=true)
+        {
+			return $"{(useHttps ? BASE_URL : BASE_NON_HTTPS_URL)}/data/{tableName}";
         }
 
 		public static string LoginUrl => $"{BASE_URL}/users/login";

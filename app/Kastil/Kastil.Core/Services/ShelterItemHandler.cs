@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Kastil.Common.Models;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
+using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Core.Services
 {
@@ -27,6 +28,13 @@ namespace Kastil.Core.Services
             var service = Resolve<ITap2HelpService>();
             await service.Save(_shelter);
         }
+
+		public Attribute CreateAttributeFrom(Attribute source)
+		{
+			var serializer = Resolve<IJsonSerializer>();
+			var serialized = serializer.Serialize(source);
+			return serializer.Deserialize<ShelterAttribute>(serialized);
+		}
 
         public string NamePlaceholderText => "Enter shelter name";
         public string LocationPlaceholderText => "Where is this shelter located?";

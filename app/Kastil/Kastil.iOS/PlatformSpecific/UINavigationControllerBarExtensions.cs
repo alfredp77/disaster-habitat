@@ -58,6 +58,7 @@ namespace Kastil.iOS.PlatformSpecific
     public static class ButtonTypes
     {
 		public static ButtonType Setting = new ButtonType { Image = UIImage.FromBundle("NavigationMenuSetting")};
+		public static ButtonType Sync = new ButtonType { Image = UIImage.FromBundle("NavigationMenuSync") };
 		public static ButtonType Done = new ButtonType { Image = UIImage.FromBundle("NavigationDone") };
 		public static ButtonType Next = new ButtonType { Image = UIImage.FromBundle("NavigationDone") };
 		public static ButtonType Back = new ButtonType { Text = "Back" };

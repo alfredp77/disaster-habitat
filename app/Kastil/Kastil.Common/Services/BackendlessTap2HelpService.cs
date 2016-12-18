@@ -28,7 +28,8 @@ namespace Kastil.Common.Services
         public Task<IEnumerable<Assessment>> GetAssessments(string disasterId)
         {
             var context = PersistenceContextFactory.CreateFor<Assessment>();
-            return Asyncer.Async(() => context.LoadAll().Where(a => a.DisasterId == disasterId));
+			var assessments = context.LoadAll().ToList();
+			return Asyncer.Async(() => assessments.Where(a => a.DisasterId == disasterId));
         }
 
         public Task<Assessment> GetAssessment(string disasterId, string assessmentId)

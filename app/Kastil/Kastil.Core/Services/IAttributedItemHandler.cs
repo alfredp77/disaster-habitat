@@ -10,5 +10,6 @@ namespace Kastil.Core.Services
         string NamePlaceholderText { get; }
         string LocationPlaceholderText { get; }
         string ItemType { get; }
+		Attribute CreateAttributeFrom(Attribute source);
     }
 }

@@ -9,7 +9,6 @@ namespace Kastil.Common.Services
         void SaveAll(IEnumerable<T> documents);
         IEnumerable<T> LoadAll();
         void DeleteAll();
-        void PersistJson(string id, string json);
         void PersistAllJson(IEnumerable<KeyValuePair<string, string>> kvps);
         void Delete(T document);
     }

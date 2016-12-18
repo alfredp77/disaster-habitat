@@ -11,5 +11,10 @@ namespace Kastil.Common.Fakes
         {
             return Asyncer.DoNothing();
         }
+
+        public Task Push(string userToken, object o, string tableName)
+        {
+            return Asyncer.DoNothing();
+        }
     }
 }

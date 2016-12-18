@@ -32,7 +32,7 @@ namespace Tap2Give.Core.Services
             var lastDownload = GetLastDownloadDate();
             if (reload || (lastDownload.HasValue && DateTimeOffset.UtcNow.Subtract(lastDownload.Value).TotalDays >= 1))
             {
-                await _pullService.Pull<Disaster>(true);
+                await _pullService.Pull<Disaster>();
                 UpdateLastDownloadDate();
             }
             return await _service.GetDisasters();

@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Models;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
+using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Core.Services
 {
@@ -25,11 +27,11 @@ namespace Kastil.Core.Services
 
         public string ItemLocation
         {
-            get { return Item?.LocationName; }
+            get { return Item?.Location; }
             set
             {
                 if (Item != null)
-                    Item.LocationName = value;
+                    Item.Location = value;
             }
         }
 
@@ -82,8 +84,8 @@ namespace Kastil.Core.Services
             Attribute attr;
             if (!_attributesMap.TryGetValue(attribute.Key, out attr))
             {
-                var serializer = Resolve<IJsonSerializer>();
-                attr = serializer.Clone(attribute);
+				attr = ItemHandler.CreateAttributeFrom(attribute);
+                attr.ObjectId = null;
                 _attributesMap.Add(attribute.Key, attr);
                 Item.Attributes.Add(attr);
 				SetAvailableAttributes();
@@ -105,6 +107,8 @@ namespace Kastil.Core.Services
 
         public Task CommitChanges()
         {
+			if (Item.IsNew())
+				Item.StampNewId();
             return ItemHandler.CommitChanges();
         }
     }

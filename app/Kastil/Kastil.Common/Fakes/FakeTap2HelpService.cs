@@ -108,11 +108,11 @@ namespace Kastil.Common.Fakes
             foreach (var disasterId in _disasters.Keys)
             {
                 var attributes = await GetRandomAttributes();
-                var assessment1 = new Assessment { ObjectId = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                var assessment1 = new Assessment { ObjectId = count.ToString(), Location = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 count++;
                 await Save(assessment1);
                 attributes = await GetRandomAttributes();
-                var assessment2 = new Assessment { ObjectId = count.ToString(), LocationName = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
+                var assessment2 = new Assessment { ObjectId = count.ToString(), Location = "Location " + count, DisasterId = disasterId, Name = "Assessment " + count, Attributes = attributes.ToList() };
                 await Save(assessment2);
                 count++;
             }
@@ -205,7 +205,7 @@ namespace Kastil.Common.Fakes
             {
                 ObjectId = "1",
                 Name = "Manila Shelter 1",
-                LocationName = "Manila, Phillippines",
+                Location = "Manila, Phillippines",
                 Attributes = attributes.ToList()
             });
 
@@ -213,7 +213,7 @@ namespace Kastil.Common.Fakes
             {
                 ObjectId = "2",
                 Name = "Aceh Shelter 1",
-                LocationName = "Banda Aceh, Indonesia",
+                Location = "Banda Aceh, Indonesia",
                 Attributes = attributes.ToList()
             });
 
@@ -221,7 +221,7 @@ namespace Kastil.Common.Fakes
             {
                 ObjectId = "3",
                 Name = "Aceh Shelter 2",
-                LocationName = "Banda Aceh, Indonesia",
+                Location = "Banda Aceh, Indonesia",
                 DisasterId = _acehDisasterId,
                 Attributes = attributes.ToList()
             });

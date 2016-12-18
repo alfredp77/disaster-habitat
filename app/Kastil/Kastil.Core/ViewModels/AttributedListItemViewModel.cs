@@ -15,6 +15,6 @@ namespace Kastil.Core.ViewModels
         public string DisasterId => Value.DisasterId;
         public string ShelterId => Value.ObjectId;
         public string Text => Value.Name;
-        public string LocationName => Value.LocationName;
+        public string LocationName => Value.Location;
     }
 }

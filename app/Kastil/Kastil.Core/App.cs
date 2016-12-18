@@ -5,13 +5,15 @@ using Kastil.Common.Utils;
 using Kastil.Core.Services;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
+using Newtonsoft.Json;
+using JsonSerializer = Kastil.Common.Utils.JsonSerializer;
 
 namespace Kastil.Core
 {
     public class App : MvvmCross.Core.ViewModels.MvxApplication
     {
         public override void Initialize()
-        {
+        {            
             CreatableTypes(typeof(ITap2HelpService).GetTypeInfo().Assembly)
 //                .InNamespace(typeof(FakeTap2HelpService).Namespace) // uncomment this line to use the fakes instead                
                 .InNamespace(typeof(ITap2HelpService).Namespace)      // comment this line when using fakes
@@ -34,11 +36,13 @@ namespace Kastil.Core
         {
             Mvx.RegisterSingleton(() => new Connection());
             Mvx.RegisterSingleton<IPersistenceContextFactory>(() => new FileBasedPersistenceContextFactory());
-            Mvx.RegisterType<IJsonSerializer>(() => new JsonSerializer());
+            Mvx.RegisterType<IJsonSerializer>(() => new JsonSerializer(new AttributeJsonReader()));
             Mvx.RegisterSingleton(() => new AttributedEditContext());
             Mvx.RegisterSingleton(() => new AttributedListContext());
 			Mvx.RegisterSingleton(() => new AssessmentListHandler());
 			Mvx.RegisterSingleton(() => new ShelterListHandler());
+            Mvx.LazyConstructAndRegisterSingleton(() => new AssessmentPushService());
+            Mvx.LazyConstructAndRegisterSingleton(() => new ShelterPushService());
         }
     }
 }

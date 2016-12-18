@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Kastil.Common.Utils;
 using Kastil.Common.Models;
 using MvvmCross.Plugins.File;
@@ -27,7 +28,7 @@ namespace Kastil.Common.Services
 
         private string GetPath(string id)
         {
-            return FileStore.PathCombine(DataFolder, id.ToLowerInvariant());
+            return FileStore.PathCombine(DataFolder, $"{id.ToLowerInvariant()}.json");
         }
 
         public void SaveAll(IEnumerable<T> documents)
@@ -41,7 +42,7 @@ namespace Kastil.Common.Services
         public IEnumerable<T> LoadAll()
         {
             var files = FileStore.GetFilesIn(DataFolder);
-            foreach (var file in files)
+			foreach (var file in files.Where(f => f.EndsWith(".json")))
             {
                 string contents;
                 if (FileStore.TryReadTextFile(file, out contents))

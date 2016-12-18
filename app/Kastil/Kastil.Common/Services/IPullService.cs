@@ -5,6 +5,6 @@ namespace Kastil.Common.Services
 {
     public interface IPullService
     {
-        Task Pull<T>(bool clear=false) where T : BaseModel;
+        Task Pull<T>(string tableName=null) where T : BaseModel;
     }
 }
