@@ -50,6 +50,12 @@ namespace Kastil.Common.Fakes
         {
             return Task.FromResult(_disasters.Values.AsEnumerable());
         }
+
+        public Task<IEnumerable<DisasterAid>> GetDisasterAids(string disasterId)
+        {
+            return Task.FromResult(Enumerable.Empty<DisasterAid>());
+        }
+
         #endregion
 
         #region Attributes

@@ -19,6 +19,12 @@ namespace Kastil.Common.Services
             return Asyncer.Async(context.LoadAll);
         }
 
+        public Task<IEnumerable<DisasterAid>> GetDisasterAids(string disasterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<DisasterAid>();
+            return Asyncer.Async(() => context.LoadAll().Where(d => d.DisasterId == disasterId));
+        }
+
         public Task<IEnumerable<Assessment>> GetAssessments()
         {
             var context = PersistenceContextFactory.CreateFor<Assessment>();

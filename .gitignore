@@ -256,3 +256,4 @@ Connection.Details.cs
 app/Kastil/Tap2Give.iOS/Resources/Images.xcassets/NavigationAdd.imageset/Thumbs.db
 app/Kastil/Tap2Give.iOS/Resources/Images.xcassets/NavigationClose.imageset/Thumbs.db
 app/Kastil/Tap2Give.iOS/Resources/Images.xcassets/NavigationMenuSetting.imageset/Thumbs.db
+*.DS_Store

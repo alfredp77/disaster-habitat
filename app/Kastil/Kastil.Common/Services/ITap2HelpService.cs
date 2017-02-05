@@ -7,6 +7,7 @@ namespace Kastil.Common.Services
     public interface ITap2HelpService
     {
         Task<IEnumerable<Disaster>> GetDisasters();
+        Task<IEnumerable<DisasterAid>> GetDisasterAids(string disasterId);
 
         Task<IEnumerable<Assessment>> GetAssessments();
         Task<IEnumerable<Assessment>> GetAssessments(string disasterId);
