@@ -75,7 +75,7 @@ namespace Tap2Give.Core.ViewModels
             try
             {
                 AidValues.Clear();
-                AidValues.AddRange(_disaster.DisasterAids.GroupBy(d => d.DollarValue)                                   
+                AidValues.AddRange(context.DisasterAids.GroupBy(d => d.DollarValue)                                   
 				                   .Select(g => new { value = g.Key.GetTrailingNumbers(), displayText = GetDonationDisplayText(g) })
                                    .OrderBy(g => g.value)
                                    .Select(g => g.displayText));

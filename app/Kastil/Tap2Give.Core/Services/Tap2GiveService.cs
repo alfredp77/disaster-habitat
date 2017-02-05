@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Kastil.Common.Models;
 using Kastil.Common.Services;
+using Kastil.Common.Utils;
 using MvvmCross.Plugins.File;
 
 namespace Tap2Give.Core.Services
@@ -12,6 +13,7 @@ namespace Tap2Give.Core.Services
     public interface ITap2GiveService
     {
         Task<IEnumerable<Disaster>> GetDisasters(bool reload=false);
+        Task<IEnumerable<DisasterAid>> GetDisasterAids(string disasterId);
     }
 
     public class Tap2GiveService : BaseService, ITap2GiveService
@@ -36,6 +38,12 @@ namespace Tap2Give.Core.Services
                 UpdateLastDownloadDate();
             }
             return await _service.GetDisasters();
+        }
+
+        public Task<IEnumerable<DisasterAid>> GetDisasterAids(string disasterId)
+        {
+            var context = _persistenceContextFactory.CreateFor<DisasterAid>();
+            return Asyncer.Async(() => context.LoadAll().Where(d => d.DisasterId == disasterId));
         }
 
         private DateTimeOffset? GetLastDownloadDate()

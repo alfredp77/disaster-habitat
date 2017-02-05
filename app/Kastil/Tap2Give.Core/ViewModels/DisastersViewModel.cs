@@ -50,18 +50,18 @@ namespace Tap2Give.Core.ViewModels
             }
         }
 
-        public MvxCommand<DisasterListItemViewModel> ShowDetailsCommand 
+        public MvxAsyncCommand<DisasterListItemViewModel> ShowDetailsCommand 
         {
             get
             {
-                return new MvxCommand<DisasterListItemViewModel>(DoShowDetails);
+                return new MvxAsyncCommand<DisasterListItemViewModel>(DoShowDetails);
             }
         }
 
-		private void DoShowDetails(DisasterListItemViewModel selectedItem)
+		private async Task DoShowDetails(DisasterListItemViewModel selectedItem)
         {
             var disasterContext = Resolve<IDisasterContext>();
-            disasterContext.Initialize(selectedItem.Value);
+            await disasterContext.Initialize(selectedItem.Value);
             ShowViewModel<DisasterDetailsViewModel>();
         }
     }

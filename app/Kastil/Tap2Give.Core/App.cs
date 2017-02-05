@@ -26,7 +26,7 @@ namespace Tap2Give.Core
 				.AsInterfaces()
 				.RegisterAsLazySingleton();
 
-            Mvx.RegisterSingleton(() => new Connection());
+            Mvx.RegisterSingleton(() => new Connection());              
             Mvx.RegisterSingleton<IDisasterContext>(() => new DisasterContext());
 			Mvx.RegisterSingleton<IPersistenceContextFactory>(() => new FileBasedPersistenceContextFactory());
 			Mvx.RegisterType<IJsonSerializer>(() => new JsonSerializer());
