@@ -56,7 +56,7 @@ namespace Kastil.Common.Services
 
         private async Task SaveUpdatedItems(string userToken, List<T> updatedItems)
         {
-            var url = Connection.GenerateTableUrl(TableName);
+            var url = Connection.GenerateTableUrl(typeof(T).Name);
             var headers = new Dictionary<string, string>(Connection.Headers) { { "user-token", userToken } };
 
             var context = PersistenceContextFactory.CreateFor<T>();
@@ -83,7 +83,6 @@ namespace Kastil.Common.Services
         protected abstract string ToJson(IEnumerable<T> contents);        
         protected abstract string TagName { get; }
         protected abstract string AttributeTagName { get; }
-        protected abstract string TableName { get; }
 
         private async Task SaveResults(string disasterId, string jsonResult, Dictionary<string, List<T>> originalItemsMap)
         {
@@ -125,7 +124,6 @@ namespace Kastil.Common.Services
 
         protected override string TagName => "assessments";
         protected override string AttributeTagName => "AssessmentAttributes";
-        protected override string TableName => Assessment.BACKENDLESSCLASSNAME;
     }
 
     public class ShelterPushService : AttributedItemPushService<Shelter>
@@ -146,6 +144,5 @@ namespace Kastil.Common.Services
 
         protected override string TagName => "shelters";
         protected override string AttributeTagName => "shelterAttributes";
-        protected override string TableName => typeof(Shelter).Name;
     }
 }
