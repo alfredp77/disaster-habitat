@@ -33,14 +33,6 @@ namespace Kastil.Core.Tests.Services
         }
 
         [Test]
-        public async Task AttributesTest()
-        {
-            var assessments = await _service.GetAssessments();
-            var first = assessments.First();
-            Assert.That(first.Attributes.FirstOrDefault(), Is.Not.Null);
-        }
-
-        [Test]
         public async Task GetAllAssessmentIsWorking()
         {
             var assessments = await _service.GetAssessments();

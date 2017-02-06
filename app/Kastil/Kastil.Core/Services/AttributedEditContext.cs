@@ -11,8 +11,8 @@ namespace Kastil.Core.Services
 {
     public class AttributedEditContext : BaseService
     {
-        private Dictionary<string, Attribute> _attributesMap;
-        public Attribute SelectedAttribute { get; set; }
+        private Dictionary<string, ValuedAttribute> _attributesMap;
+        public ValuedAttribute SelectedAttribute { get; set; }
         public Attributed Item { get; private set; }
 
         public string ItemName
@@ -40,13 +40,14 @@ namespace Kastil.Core.Services
 
         public bool IsNew { get; private set; }
 
-        public IEnumerable<Attribute> Attributes
+        private List<ValuedAttribute> _modifiedAttributes;
+        public IEnumerable<ValuedAttribute> ValuedAttributes
         {
             get
             {
-                if (Item == null)
-                    return Enumerable.Empty<Attribute>();
-                return Item.Attributes.Select(a => a);
+                if (_modifiedAttributes == null)
+                    return Enumerable.Empty<ValuedAttribute>();
+                return _modifiedAttributes.Select(a => a);
             }
         }
 
@@ -62,10 +63,11 @@ namespace Kastil.Core.Services
             IsNew = handler.CurrentItem.IsNew();
             Item = handler.CurrentItem;
 
-            _attributesMap = Item.Attributes.ToDictionary(k => k.Key);
+            _modifiedAttributes = (await handler.GetAttributes()).ToList();
+            _attributesMap = _modifiedAttributes.ToDictionary(k => k.Key);
 
-			var service = Resolve<ITap2HelpService>();
-			_allAttributes = (await service.GetAllAttributes()).ToList();
+            var service = Resolve<ITap2HelpService>();
+            _allAttributes = (await service.GetAllAttributes()).ToList();
 			SetAvailableAttributes();
         }
 
@@ -81,35 +83,54 @@ namespace Kastil.Core.Services
 
         public void AddOrUpdateAttribute(Attribute attribute, string value)
         {
-            Attribute attr;
+            ValuedAttribute attr;
             if (!_attributesMap.TryGetValue(attribute.Key, out attr))
             {
 				attr = ItemHandler.CreateAttributeFrom(attribute);
                 attr.ObjectId = null;
                 _attributesMap.Add(attribute.Key, attr);
-                Item.Attributes.Add(attr);
+                _modifiedAttributes.RemoveAll(v => v.Key == attribute.Key);
+                _modifiedAttributes.Add(attr);
 				SetAvailableAttributes();
             }
 
             attr.Value = value;
         }
 
-        public void DeleteAttribute(string attributeName)
+        public void DeleteAttribute(string key)
         {
-            Attribute attr;
-            if (_attributesMap.TryGetValue(attributeName, out attr))
+            ValuedAttribute attr;
+            if (_attributesMap.TryGetValue(key, out attr))
             {
-                _attributesMap.Remove(attributeName);
-                Item.Attributes.Remove(attr);
-				SetAvailableAttributes();
+                _attributesMap.Remove(key);
+                _modifiedAttributes.RemoveAll(v => v.Key == key);
+                SetAvailableAttributes();
             }
         }
 
-        public Task CommitChanges()
+        public async Task CommitChanges()
         {
 			if (Item.IsNew())
 				Item.StampNewId();
-            return ItemHandler.CommitChanges();
+
+            var originalAttributes = (await ItemHandler.GetAttributes()).ToDictionary(k => k.Key);
+            foreach (var modifiedAttribute in _attributesMap.Values)
+            {
+                ValuedAttribute originalAttribute;
+                if (originalAttributes.TryGetValue(modifiedAttribute.Key, out originalAttribute))
+                {
+                    modifiedAttribute.ObjectId = originalAttribute.ObjectId;
+                }
+            }
+
+            var deletedAttributes = new List<ValuedAttribute>();
+            foreach (var originalAttribute in originalAttributes.Values)
+            {
+                if (!_attributesMap.ContainsKey(originalAttribute.Key))
+                    deletedAttributes.Add(originalAttribute);
+
+            }
+            await ItemHandler.CommitChanges(_attributesMap.Values, deletedAttributes);
         }
     }
 }

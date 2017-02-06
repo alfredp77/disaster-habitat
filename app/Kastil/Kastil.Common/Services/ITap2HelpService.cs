@@ -12,13 +12,19 @@ namespace Kastil.Common.Services
         Task<IEnumerable<Assessment>> GetAssessments();
         Task<IEnumerable<Assessment>> GetAssessments(string disasterId);
         Task<Assessment> GetAssessment(string disasterId, string assessmentId);
+        Task<IEnumerable<AssessmentAttribute>> GetAssessmentAttributes(string assessmentId);
+        Task SaveAssessmentAttribute(AssessmentAttribute attribute);
+        Task DeleteAssessmentAttribute(string attributeId);
 
         Task<IEnumerable<Shelter>> GetShelters();
         Task<IEnumerable<Shelter>> GetShelters(string disasterId);
         Task<Shelter> GetShelter(string disasterId, string shelterId);
         Task<Shelter> GetShelter(string shelterId);
+        Task<IEnumerable<ShelterAttribute>> GetShelterAttributes(string shelterId);
+        Task SaveShelterAttribute(ShelterAttribute attribute);
+        Task DeleteShelterAttribute(string attributeId);
 
-		Task<IEnumerable<Attribute>> GetAllAttributes();
+        Task<IEnumerable<Attribute>> GetAllAttributes();
 
         Task Save(Assessment assessment);
         Task Save(Shelter shelter);

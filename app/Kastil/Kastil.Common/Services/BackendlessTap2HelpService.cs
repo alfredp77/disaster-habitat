@@ -137,5 +137,46 @@ namespace Kastil.Common.Services
                 await Asyncer.Async(() => context.Delete(shelter));
             }
         }
+
+        public Task<IEnumerable<AssessmentAttribute>> GetAssessmentAttributes(string assessmentId)
+        {
+            var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
+            return Asyncer.Async(() => context.LoadAll().Where(d => d.AssessmentId == assessmentId));
+        }
+
+        public Task SaveAssessmentAttribute(AssessmentAttribute attribute)
+        {
+            var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
+            return Asyncer.Async(() => context.Save(attribute));
+        }
+
+        public async Task DeleteAssessmentAttribute(string attributeId)
+        {
+            var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
+            var assessmentAttribute = context.LoadAll().SingleOrDefault(a => a.ObjectId == attributeId);
+            if (assessmentAttribute != null)
+                await Asyncer.Async(() => context.Delete(assessmentAttribute));
+        }
+
+        public Task<IEnumerable<ShelterAttribute>> GetShelterAttributes(string shelterId)
+        {
+            var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
+            return Asyncer.Async(() => context.LoadAll().Where(d => d.ShelterId == shelterId));
+        }
+
+        public Task SaveShelterAttribute(ShelterAttribute attribute)
+        {
+            var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
+            return Asyncer.Async(() => context.Save(attribute));
+
+        }
+
+        public async Task DeleteShelterAttribute(string attributeId)
+        {
+            var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
+            var shelterAttribute = context.LoadAll().SingleOrDefault(a => a.ObjectId == attributeId);
+            if (shelterAttribute != null)
+                await Asyncer.Async(() => context.Delete(shelterAttribute));
+        }
     }
 }

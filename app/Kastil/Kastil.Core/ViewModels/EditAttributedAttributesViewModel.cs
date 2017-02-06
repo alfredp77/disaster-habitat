@@ -103,9 +103,16 @@ namespace Kastil.Core.ViewModels
 
                 if (context.SelectedAttribute != null)
                 {
+                    var selected = Items.SingleOrDefault(s => s.Attribute.Key == context.SelectedAttribute.Key);
+                    if (selected == null)
+                    {
+                        selected = new SpinnerItem(context.SelectedAttribute.AsBaseAttribute());
+                        Items.Add(selected);
+                    }
+                    SelectedItem = selected;
+
                     EditMode = true;
                     ButtonText = "Update";
-                    SelectedItem = new SpinnerItem(context.SelectedAttribute);
                     AttributeText = context.SelectedAttribute.Key;
                     AttributeValue = context.SelectedAttribute.Value;
                 }

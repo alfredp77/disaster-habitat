@@ -56,26 +56,26 @@ namespace Kastil.Common.Services
 
         private async Task SaveUpdatedItems(string userToken, List<T> updatedItems)
         {
-            var url = Connection.GenerateTableUrl(typeof(T).Name);
-            var headers = new Dictionary<string, string>(Connection.Headers) { { "user-token", userToken } };
-
-            var context = PersistenceContextFactory.CreateFor<T>();
-            foreach (var item in updatedItems)
-            {
-                foreach (var attr in item.Attributes)
-                {
-                    attr.RevokeNewId();    
-                }
-
-                var toSend = AttributesToJson(item.Attributes);
-                var jsonResult = await Caller.Put($"{url}/{item.ObjectId}", headers, toSend);
-
-                var savedAttributes = Serializer.ParseAsObjectArray<Attribute>(jsonResult, AttributeTagName, "objectId").ToList();
-                var savedAttributeIds = new HashSet<string>(savedAttributes.Select(a => a.ObjectId));
-                item.Attributes.RemoveAll(i => string.IsNullOrEmpty(i.ObjectId) || savedAttributeIds.Contains(i.ObjectId));
-                item.Attributes.AddRange(savedAttributes);
-                context.Save(item);
-            }
+//            var url = Connection.GenerateTableUrl(typeof(T).Name);
+//            var headers = new Dictionary<string, string>(Connection.Headers) { { "user-token", userToken } };
+//
+//            var context = PersistenceContextFactory.CreateFor<T>();
+//            foreach (var item in updatedItems)
+//            {
+//                foreach (var attr in item.Attributes)
+//                {
+//                    attr.RevokeNewId();    
+//                }
+//
+//                var toSend = AttributesToJson(item.Attributes);
+//                var jsonResult = await Caller.Put($"{url}/{item.ObjectId}", headers, toSend);
+//
+//                var savedAttributes = Serializer.ParseAsObjectArray<Attribute>(jsonResult, AttributeTagName, "objectId").ToList();
+//                var savedAttributeIds = new HashSet<string>(savedAttributes.Select(a => a.ObjectId));
+//                item.Attributes.RemoveAll(i => string.IsNullOrEmpty(i.ObjectId) || savedAttributeIds.Contains(i.ObjectId));
+//                item.Attributes.AddRange(savedAttributes);
+//                context.Save(item);
+//            }
 
         }
 
