@@ -56,7 +56,7 @@
     <Compile Include="ViewModels\EditAttributedAttributesViewModel.cs" />
     <Compile Include="ViewModels\AttributedListViewModel.cs" />
     <Compile Include="ViewModels\AttributedListItemViewModel.cs" />
-    <Compile Include="ViewModels\AttributeListItemViewModel.cs" />
+    <Compile Include="ViewModels\ValuedAttributeListItemViewModel.cs" />
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
     <Compile Include="ViewModels\SyncViewModel.cs" />

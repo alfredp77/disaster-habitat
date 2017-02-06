@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Kastil.Common.Models;
 
 namespace Kastil.Core.Services
@@ -6,10 +7,11 @@ namespace Kastil.Core.Services
     public interface IAttributedItemHandler
     {
         Attributed CurrentItem { get; }
-        Task CommitChanges();
+        Task CommitChanges(IEnumerable<ValuedAttribute> modifiedAttributes, IEnumerable<ValuedAttribute> deletedAttributes);
         string NamePlaceholderText { get; }
         string LocationPlaceholderText { get; }
         string ItemType { get; }
-		Attribute CreateAttributeFrom(Attribute source);
+		ValuedAttribute CreateAttributeFrom(Attribute source);
+        Task<IEnumerable<ValuedAttribute>> GetAttributes();
     }
 }

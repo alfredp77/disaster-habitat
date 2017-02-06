@@ -66,10 +66,10 @@ namespace Kastil.Core.ViewModels
             ShowViewModel<EditAttributedAttributesViewModel>();
         }
 
-        public MvxCommand<AttributeListItemViewModel> AttributeSelectedCommand => new MvxCommand<AttributeListItemViewModel>(DoAttributeSelectedCommand);
-        private void DoAttributeSelectedCommand(AttributeListItemViewModel obj)
+        public MvxCommand<ValuedAttributeListItemViewModel> AttributeSelectedCommand => new MvxCommand<ValuedAttributeListItemViewModel>(DoAttributeSelectedCommand);
+        private void DoAttributeSelectedCommand(ValuedAttributeListItemViewModel obj)
         {
-			_context.SelectedAttribute = obj.Attribute;
+			_context.SelectedAttribute = obj.Item;
             ShowViewModel<EditAttributedAttributesViewModel>();
         }
         
@@ -102,7 +102,7 @@ namespace Kastil.Core.ViewModels
 
         
         public MvxCommand CancelCommand => new MvxCommand(Close);
-        public ObservableRangeCollection<AttributeListItemViewModel> Attributes { get; } = new ObservableRangeCollection<AttributeListItemViewModel>();
+        public ObservableRangeCollection<ValuedAttributeListItemViewModel> Attributes { get; } = new ObservableRangeCollection<ValuedAttributeListItemViewModel>();
 
         public override Task Initialize()
         {
@@ -124,7 +124,7 @@ namespace Kastil.Core.ViewModels
             {
                 SetTitle();
                 Attributes.Clear();
-				Attributes.AddRange(_context.Attributes.Select(a => new AttributeListItemViewModel(a)));
+				Attributes.AddRange(_context.ValuedAttributes.Select(a => new ValuedAttributeListItemViewModel(a)));
             }
             catch (Exception ex)
             {

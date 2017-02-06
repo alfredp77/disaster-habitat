@@ -36,7 +36,6 @@ namespace Kastil.Core
         {
             Mvx.RegisterSingleton(() => new Connection());
             Mvx.RegisterSingleton<IPersistenceContextFactory>(() => new FileBasedPersistenceContextFactory());
-            Mvx.RegisterType<IJsonSerializer>(() => new JsonSerializer(new AttributeJsonReader()));
             Mvx.RegisterSingleton(() => new AttributedEditContext());
             Mvx.RegisterSingleton(() => new AttributedListContext());
 			Mvx.RegisterSingleton(() => new AssessmentListHandler());

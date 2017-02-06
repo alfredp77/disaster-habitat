@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Models;
 using Kastil.Common.Services;
@@ -23,18 +25,31 @@ namespace Kastil.Core.Services
         }
 
         public Attributed CurrentItem => _shelter;
-        public async Task CommitChanges()
+        public async Task CommitChanges(IEnumerable<ValuedAttribute> modifiedAttributes, IEnumerable<ValuedAttribute> deletedAttributes)
         {
             var service = Resolve<ITap2HelpService>();
+            foreach (var modifiedAttribute in modifiedAttributes.OfType<ShelterAttribute>())
+            {
+                await service.SaveShelterAttribute(modifiedAttribute);
+            }
+            foreach (var deletedAttribute in deletedAttributes.OfType<ShelterAttribute>())
+            {
+                await service.DeleteShelterAttribute(deletedAttribute.ObjectId);
+            }
+
             await service.Save(_shelter);
         }
 
-		public Attribute CreateAttributeFrom(Attribute source)
+        public ValuedAttribute CreateAttributeFrom(Attribute source)
 		{
-			var serializer = Resolve<IJsonSerializer>();
-			var serialized = serializer.Serialize(source);
-			return serializer.Deserialize<ShelterAttribute>(serialized);
+		    return source.CreateValuedAttribute<ShelterAttribute>();
 		}
+
+        public async Task<IEnumerable<ValuedAttribute>> GetAttributes()
+        {
+            var service = Resolve<ITap2HelpService>();
+            return await service.GetShelterAttributes(_shelter.ObjectId);
+        }
 
         public string NamePlaceholderText => "Enter shelter name";
         public string LocationPlaceholderText => "Where is this shelter located?";

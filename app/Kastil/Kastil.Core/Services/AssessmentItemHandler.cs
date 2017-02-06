@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Models;
 using Kastil.Common.Services;
@@ -23,18 +25,31 @@ namespace Kastil.Core.Services
         }
 
         public Attributed CurrentItem => _assessment;
-        public async Task CommitChanges()
+        public async Task CommitChanges(IEnumerable<ValuedAttribute> modifiedAttributes, IEnumerable<ValuedAttribute> deletedAttributes)
         {
             var service = Resolve<ITap2HelpService>();
+            foreach (var modifiedAttribute in modifiedAttributes.OfType<AssessmentAttribute>())
+            {
+                await service.SaveAssessmentAttribute(modifiedAttribute);
+            }
+            foreach (var deletedAttribute in deletedAttributes.OfType<AssessmentAttribute>())
+            {
+                await service.DeleteAssessmentAttribute(deletedAttribute.ObjectId);
+            }
+
             await service.Save(_assessment);
         }
 
-		public Attribute CreateAttributeFrom(Attribute source)
+		public ValuedAttribute CreateAttributeFrom(Attribute source)
 		{
-			var serializer = Resolve<IJsonSerializer>();
-			var serialized = serializer.Serialize(source);
-			return serializer.Deserialize<AssessmentAttribute>(serialized);
+		    return source.CreateValuedAttribute<AssessmentAttribute>();
 		}
+
+        public async Task<IEnumerable<ValuedAttribute>> GetAttributes()
+        {
+            var service = Resolve<ITap2HelpService>();
+            return await service.GetAssessmentAttributes(_assessment.ObjectId);
+        }
 
         public string NamePlaceholderText => "Enter assessment name";
         public string LocationPlaceholderText => "Where was this assessment made?";

@@ -6,33 +6,25 @@ namespace Kastil.Common.Models
 {
 	public class Attribute : BaseModel
 	{
-	    public const string BACKENDLESSNAME = "Attributes";
-
 		public string Key { get; set; }
 
+        public string Type { get; set; }
+    }
+
+    public abstract class ValuedAttribute : BaseModel
+    {
+        public string Key { get; set; }
         public string Value { get; set; }
-
-		[JsonIgnore]
-        public string Category { get; set; }
-
-        [JsonProperty(BACKENDLESSCLASSNAME_ATTRIBUTE)]
-        public override string ClassName => BACKENDLESSNAME;
     }
 
-    public class ShelterAttribute : Attribute
+    public class ShelterAttribute : ValuedAttribute
     {
-        public new const string BACKENDLESSNAME = "ShelterAttribute";
-
-        [JsonProperty(BACKENDLESSCLASSNAME_ATTRIBUTE)]
-		public override string ClassName => BACKENDLESSNAME;
+        public string ShelterId { get; set; }
     }
 
-    public class AssessmentAttribute : Attribute
+    public class AssessmentAttribute : ValuedAttribute
     {
-        public new const string BACKENDLESSNAME = "AssesmentAttribute";
-
-        [JsonProperty(BACKENDLESSCLASSNAME_ATTRIBUTE)]
-        public override string ClassName => BACKENDLESSNAME;
+        public string AssessmentId { get; set; }
     }
 
     public static class AttributeExtensions
