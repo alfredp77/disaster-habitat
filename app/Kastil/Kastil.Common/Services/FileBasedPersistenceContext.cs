@@ -93,6 +93,10 @@ namespace Kastil.Common.Services
             var path = GetPath(id);
             if (FileStore.Exists(path))
                 FileStore.DeleteFile(path);
+
+            var deleted = GetDeletedPath(id);
+            if (FileStore.Exists(deleted))
+                FileStore.DeleteFile(deleted);
         }
 
         public void PersistJson(string id, string json)

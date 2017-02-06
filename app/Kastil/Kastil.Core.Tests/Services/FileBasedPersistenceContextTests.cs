@@ -139,10 +139,13 @@ namespace Kastil.Core.Tests.Services
         {
             var fileName = SetupFileStore(_tm1);
             _fileStore.Setup(f => f.Exists(fileName)).Returns(true);
+            var deletedFileName = SetupDeletedFileStore(_tm1);
+            _fileStore.Setup(f => f.Exists(deletedFileName)).Returns(true);
 
             _context.Purge(_tm1.ObjectId);
 
             _fileStore.Verify(f => f.DeleteFile(fileName), Times.Once);
+            _fileStore.Verify(f => f.DeleteFile(deletedFileName), Times.Once);
         }
 
         [Test]
