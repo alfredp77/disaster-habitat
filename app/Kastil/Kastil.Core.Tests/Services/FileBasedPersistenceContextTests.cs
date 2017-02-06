@@ -39,10 +39,11 @@ namespace Kastil.Core.Tests.Services
 
         private string SetupFileStore(TestModel tm)
         {
-            var fileName = Guid.NewGuid().ToString();
-            _fileStore.Setup(f => f.PathCombine(DATA_FOLDER, tm.ObjectId))
-                .Returns(fileName);
-            return fileName;
+            var fileName = $"{tm.ObjectId}.json";
+            var fullPath = $"{DATA_FOLDER}/{fileName}";
+            _fileStore.Setup(f => f.PathCombine(DATA_FOLDER, fileName))
+                .Returns(fullPath);
+            return fullPath;
         }
 
         private string SetupSerializer(TestModel tm)
@@ -81,7 +82,7 @@ namespace Kastil.Core.Tests.Services
         private string SetupDeserialize(TestModel tm, bool canReadFile=true)
         {
             var json1 = Guid.NewGuid().ToString();
-            var fileName1 = Guid.NewGuid().ToString();
+            var fileName1 = SetupFileStore(tm);
             _fileStore.Setup(f => f.TryReadTextFile(fileName1, out json1)).Returns(canReadFile);
             _serializer.Setup(s => s.Deserialize<TestModel>(json1)).Returns(tm);
             return fileName1;
@@ -114,7 +115,7 @@ namespace Kastil.Core.Tests.Services
         [Test]
         public void Should_Delete_And_Recreate_Folder_On_DeleteAll()
         {
-            _context.DeleteAll();
+            _context.PurgeAll();
 
             _fileStore.Verify(f => f.DeleteFolder(DATA_FOLDER, true), Times.Once);
             _fileStore.Verify(f => f.EnsureFolderExists(DATA_FOLDER));
@@ -126,7 +127,7 @@ namespace Kastil.Core.Tests.Services
             var fileName = SetupFileStore(_tm1);
             _fileStore.Setup(f => f.Exists(fileName)).Returns(true);
 
-            _context.Delete(_tm1);
+            _context.MarkDeleted(_tm1);
 
             _fileStore.Verify(f => f.DeleteFile(fileName), Times.Once);
         }
@@ -137,7 +138,7 @@ namespace Kastil.Core.Tests.Services
             var fileName = SetupFileStore(_tm1);
             _fileStore.Setup(f => f.Exists(fileName)).Returns(false);
 
-            _context.Delete(_tm1);
+            _context.MarkDeleted(_tm1);
 
             _fileStore.Verify(f => f.DeleteFile(fileName), Times.Never);
         }

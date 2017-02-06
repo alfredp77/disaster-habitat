@@ -53,13 +53,13 @@ namespace Kastil.Common.Services
             }
         }
 
-        public void DeleteAll()
+        public void PurgeAll()
         {
             FileStore.DeleteFolder(DataFolder, true);
             FileStore.EnsureFolderExists(DataFolder);
         }
 
-        public void Delete(T document)
+        public void MarkDeleted(T document)
         {
             var path = GetPath(document.ObjectId);
             if (FileStore.Exists(path))

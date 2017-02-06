@@ -9,8 +9,9 @@ namespace Kastil.Common.Services
         void Save(T document);
         void SaveAll(IEnumerable<T> documents);
         IEnumerable<T> LoadAll();
-        void DeleteAll();
+        void PurgeAll();
         void PersistAllJson(IEnumerable<KeyValuePair<string, string>> kvps);
-        void Delete(T document);
+        void MarkDeleted(T document);
+        
     }
 }

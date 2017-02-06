@@ -98,7 +98,7 @@ namespace Kastil.Common.Services
             var assessments = await GetAssessments(disasterId);
             foreach (var assessment in assessments)
             {
-                await Asyncer.Async(() => context.Delete(assessment));
+                await Asyncer.Async(() => context.MarkDeleted(assessment));
             }
         }
 
@@ -108,7 +108,7 @@ namespace Kastil.Common.Services
             var shelters = await GetShelters();
             foreach (var shelter in shelters.Where(s => shelterId == s.ObjectId))
             {
-                await Asyncer.Async(() => context.Delete(shelter));
+                await Asyncer.Async(() => context.MarkDeleted(shelter));
             }
         }        
 
@@ -118,7 +118,7 @@ namespace Kastil.Common.Services
             var shelters = await GetShelters(disasterId);
             foreach (var shelter in shelters)
             {
-                await Asyncer.Async(() => context.Delete(shelter));
+                await Asyncer.Async(() => context.MarkDeleted(shelter));
             }
         }
 
@@ -139,7 +139,7 @@ namespace Kastil.Common.Services
             var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
             var assessmentAttribute = context.LoadAll().SingleOrDefault(a => a.ObjectId == attributeId);
             if (assessmentAttribute != null)
-                await Asyncer.Async(() => context.Delete(assessmentAttribute));
+                await Asyncer.Async(() => context.MarkDeleted(assessmentAttribute));
         }
 
         public Task<IEnumerable<ShelterAttribute>> GetShelterAttributes(string shelterId)
@@ -160,7 +160,7 @@ namespace Kastil.Common.Services
             var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
             var shelterAttribute = context.LoadAll().SingleOrDefault(a => a.ObjectId == attributeId);
             if (shelterAttribute != null)
-                await Asyncer.Async(() => context.Delete(shelterAttribute));
+                await Asyncer.Async(() => context.MarkDeleted(shelterAttribute));
         }
     }
 }

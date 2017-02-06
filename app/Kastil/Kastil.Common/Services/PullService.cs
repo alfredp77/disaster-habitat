@@ -22,7 +22,7 @@ namespace Kastil.Common.Services
             if (persist)
             {
                 var context = PersistenceContextFactory.CreateFor<T>();
-                await Asyncer.Async(context.DeleteAll);
+                await Asyncer.Async(context.PurgeAll);
                 await Asyncer.Async(() => context.PersistAllJson(docs));
             }
 

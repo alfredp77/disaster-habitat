@@ -48,7 +48,7 @@ namespace Kastil.Core.Tests.Services
         {            
             await _service.Pull<TestModel>();
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
-            _persistenceContext.Verify(c => c.DeleteAll(), Times.Never);
+            _persistenceContext.Verify(c => c.PurgeAll(), Times.Never);
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Kastil.Core.Tests.Services
         {
             await _service.Pull<TestModel>();
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
-            _persistenceContext.Verify(c => c.DeleteAll(), Times.Once);
+            _persistenceContext.Verify(c => c.PurgeAll(), Times.Once);
         }
     }
 }
