@@ -21,6 +21,7 @@ namespace Kastil.Core.Tests.Services
         private Mock<IMvxFileStore> _fileStore;
         private Mock<IJsonSerializer> _serializer;        
         private const string DATA_FOLDER = "data";
+        private const string DELETED_FOLDER = "data/deleted";
         private TestModel _tm1, _tm2;
 
         [SetUp]
@@ -45,6 +46,16 @@ namespace Kastil.Core.Tests.Services
                 .Returns(fullPath);
             return fullPath;
         }
+
+        private string SetupDeletedFileStore(TestModel tm)
+        {
+            var fileName = $"{tm.ObjectId}.json";
+            var fullPath = $"{DELETED_FOLDER}/{fileName}";
+            _fileStore.Setup(f => f.PathCombine(DATA_FOLDER, "deleted")).Returns(DELETED_FOLDER);
+            _fileStore.Setup(f => f.PathCombine(DELETED_FOLDER, fileName)).Returns(fullPath);
+            return fullPath;
+        }
+    
 
         private string SetupSerializer(TestModel tm)
         {
@@ -113,7 +124,7 @@ namespace Kastil.Core.Tests.Services
         }
 
         [Test]
-        public void Should_Delete_And_Recreate_Folder_On_DeleteAll()
+        public void Should_Purge_And_Recreate_Folder_On_PurgeAll()
         {
             _context.PurgeAll();
 
@@ -122,23 +133,23 @@ namespace Kastil.Core.Tests.Services
         }
 
         [Test]
-        public void Should_Delete_File_When_Exists()
+        public void Should_Purge_File_When_Exists()
         {
             var fileName = SetupFileStore(_tm1);
             _fileStore.Setup(f => f.Exists(fileName)).Returns(true);
 
-            _context.MarkDeleted(_tm1);
+            _context.Purge(_tm1.ObjectId);
 
             _fileStore.Verify(f => f.DeleteFile(fileName), Times.Once);
         }
 
         [Test]
-        public void Should_Not_Try_To_Delete_File_When_Not_Exists()
+        public void Should_Not_Try_To_Purge_File_When_Not_Exists()
         {
             var fileName = SetupFileStore(_tm1);
             _fileStore.Setup(f => f.Exists(fileName)).Returns(false);
 
-            _context.MarkDeleted(_tm1);
+            _context.Purge(_tm1.ObjectId);
 
             _fileStore.Verify(f => f.DeleteFile(fileName), Times.Never);
         }
@@ -170,6 +181,19 @@ namespace Kastil.Core.Tests.Services
             _fileStore.Verify(f => f.WriteFile(fileName2, json2), Times.Once());
             _serializer.Verify(s => s.Serialize(_tm1), Times.Never);
             _serializer.Verify(s => s.Serialize(_tm2), Times.Never);
+        }
+
+        [Test]
+        public void Should_Move_File_To_Deleted_Folder_When_Marking_Object_As_Deleted()
+        {
+            var fileName = SetupFileStore(_tm1);
+            _fileStore.Setup(f => f.Exists(fileName)).Returns(true);
+            var deletedFileName = SetupDeletedFileStore(_tm1);
+
+            _context.MarkDeleted(_tm1);
+            
+            _fileStore.Verify(f => f.EnsureFolderExists(DELETED_FOLDER), Times.Once);
+            _fileStore.Verify(f => f.TryMove(fileName, deletedFileName, true));
         }
     }
 }

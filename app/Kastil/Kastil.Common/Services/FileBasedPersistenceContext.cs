@@ -32,6 +32,18 @@ namespace Kastil.Common.Services
             return FileStore.PathCombine(DataFolder, $"{id.ToLowerInvariant()}.json");
         }
 
+        private string GetDeletedFolder()
+        {
+            var deletedFolder = FileStore.PathCombine(DataFolder, "deleted");
+            FileStore.EnsureFolderExists(deletedFolder);
+            return deletedFolder;
+        }
+
+        private string GetDeletedPath(string id)
+        {
+            return FileStore.PathCombine(GetDeletedFolder(), $"{id.ToLowerInvariant()}.json");
+        }
+
         public void SaveAll(IEnumerable<T> documents)
         {
             foreach (var document in documents)
@@ -61,7 +73,14 @@ namespace Kastil.Common.Services
 
         public void MarkDeleted(T document)
         {
-            var path = GetPath(document.ObjectId);
+            var filePath = GetPath(document.ObjectId);
+            var deleted = GetDeletedPath(document.ObjectId);
+            FileStore.TryMove(filePath, deleted, true);
+        }
+
+        public void Purge(string id)
+        {
+            var path = GetPath(id);
             if (FileStore.Exists(path))
                 FileStore.DeleteFile(path);
         }
