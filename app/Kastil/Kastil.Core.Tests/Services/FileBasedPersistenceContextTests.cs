@@ -90,20 +90,20 @@ namespace Kastil.Core.Tests.Services
         }
 
 
-        private string SetupDeserialize(TestModel tm, bool canReadFile=true)
+        private void SetupDeserialize(TestModel tm, string pathToFile, bool canReadFile=true)
         {
             var json1 = Guid.NewGuid().ToString();
-            var fileName1 = SetupFileStore(tm);
-            _fileStore.Setup(f => f.TryReadTextFile(fileName1, out json1)).Returns(canReadFile);
+            _fileStore.Setup(f => f.TryReadTextFile(pathToFile, out json1)).Returns(canReadFile);
             _serializer.Setup(s => s.Deserialize<TestModel>(json1)).Returns(tm);
-            return fileName1;
         }
 
         [Test]
         public void Should_Load_All_Documents()
         {
-            var fileName1 = SetupDeserialize(_tm1);
-            var fileName2 = SetupDeserialize(_tm2);
+            var fileName1 = SetupFileStore(_tm1);
+            SetupDeserialize(_tm1, fileName1);
+            var fileName2 = SetupFileStore(_tm2);
+            SetupDeserialize(_tm2, fileName2);
             _fileStore.Setup(f => f.GetFilesIn(DATA_FOLDER)).Returns(new[] { fileName1, fileName2 });
 
             var result = _context.LoadAll();
@@ -114,8 +114,10 @@ namespace Kastil.Core.Tests.Services
         [Test]
         public void Should_Ignore_Unreadable_Files()
         {
-            var fileName1 = SetupDeserialize(_tm1);
-            var fileName2 = SetupDeserialize(_tm2, false);
+            var fileName1 = SetupFileStore(_tm1);
+            SetupDeserialize(_tm1, fileName1);
+            var fileName2 = SetupFileStore(_tm2);
+            SetupDeserialize(_tm2, fileName2, false);
             _fileStore.Setup(f => f.GetFilesIn(DATA_FOLDER)).Returns(new[] { fileName1, fileName2 });
 
             var result = _context.LoadAll();
@@ -194,6 +196,23 @@ namespace Kastil.Core.Tests.Services
             
             _fileStore.Verify(f => f.EnsureFolderExists(DELETED_FOLDER), Times.Once);
             _fileStore.Verify(f => f.TryMove(fileName, deletedFileName, true));
+        }
+
+        [Test]
+        public void Should_Return_Deleted_Objects()
+        {
+            var deletedTm1 = SetupDeletedFileStore(_tm1);
+            SetupDeserialize(_tm1, deletedTm1);
+            var deletedTm2 = SetupDeletedFileStore(_tm2);
+            SetupDeserialize(_tm2, deletedTm2);
+
+            _fileStore.Setup(f => f.GetFilesIn(DELETED_FOLDER)).Returns(new[] { deletedTm1, deletedTm2 });
+
+            var result = _context.LoadDeletedObjects().ToList();
+
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result.Contains(_tm1));
+            Assert.That(result.Contains(_tm2));
         }
     }
 }

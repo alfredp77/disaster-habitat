@@ -13,6 +13,7 @@ namespace Kastil.Common.Services
         void PersistAllJson(IEnumerable<KeyValuePair<string, string>> kvps);
         void MarkDeleted(T document);
         void Purge(string id);
+        IEnumerable<T> LoadDeletedObjects();
 
     }
 }

@@ -54,8 +54,18 @@ namespace Kastil.Common.Services
 
         public IEnumerable<T> LoadAll()
         {
-            var files = FileStore.GetFilesIn(DataFolder);
-			foreach (var file in files.Where(f => f.EndsWith(".json")))
+            return LoadFrom(DataFolder);
+        }
+
+        public IEnumerable<T> LoadDeletedObjects()
+        {
+            return LoadFrom(GetDeletedFolder());
+        }
+
+        private IEnumerable<T> LoadFrom(string folder)
+        {
+            var files = FileStore.GetFilesIn(folder);
+            foreach (var file in files.Where(f => f.EndsWith(".json")))
             {
                 string contents;
                 if (FileStore.TryReadTextFile(file, out contents))
@@ -97,6 +107,6 @@ namespace Kastil.Common.Services
             {
                 PersistJson(kvp.Key, kvp.Value);
             }
-        }
+        }        
     }
 }
