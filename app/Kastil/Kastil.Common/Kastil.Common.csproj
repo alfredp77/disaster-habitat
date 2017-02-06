@@ -67,6 +67,7 @@
     <Compile Include="Services\PullService.cs" />
     <Compile Include="Services\PushService.cs" />
     <Compile Include="Utils\Asyncer.cs" />
+    <Compile Include="Utils\AttributeConverter.cs" />
     <Compile Include="Utils\DateHelper.cs" />
     <Compile Include="Utils\DistanceCalculator.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />

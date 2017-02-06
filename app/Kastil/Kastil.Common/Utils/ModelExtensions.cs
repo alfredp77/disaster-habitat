@@ -12,7 +12,8 @@ namespace Kastil.Common.Utils
 
         public static void StampNewId(this BaseModel model)
 		{
-			model.ObjectId = $"LOCAL-{Guid.NewGuid().ToString()}";
+            if (string.IsNullOrEmpty(model.ObjectId))
+			    model.ObjectId = $"LOCAL-{Guid.NewGuid()}";
 		}
 
 		public static void RevokeNewId(this BaseModel model)

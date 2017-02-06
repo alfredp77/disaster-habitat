@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kastil.Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Attribute = Kastil.Common.Models.Attribute;
 
 namespace Kastil.Common.Utils
 {
@@ -89,21 +87,5 @@ namespace Kastil.Common.Utils
             var obj = JObject.Parse(json);
             return obj.Properties().ToDictionary(p => p.Name, p => p.Value.ToString());
         } 
-    }
-
-    public static class AttributeConverter
-    {
-        public static T CreateValuedAttribute<T>(this Attribute attribute) where T : ValuedAttribute, new()
-        {
-            return new T
-            {
-                Key = attribute.Key
-            };
-        }
-
-        public static Attribute AsBaseAttribute(this ValuedAttribute valuedAttribute)
-        {
-            return new Attribute {Key = valuedAttribute.Key};
-        }
     }
 }

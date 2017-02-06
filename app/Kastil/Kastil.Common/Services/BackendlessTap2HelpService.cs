@@ -110,23 +110,7 @@ namespace Kastil.Common.Services
             {
                 await Asyncer.Async(() => context.Delete(shelter));
             }
-        }
-
-        public async Task DeleteShelters(List<string> shelterIds)
-        {
-            var context = PersistenceContextFactory.CreateFor<Shelter>();
-            var shelters = await GetShelters();
-            foreach (var shelter in shelters.Where(s => shelterIds.Contains(s.ObjectId)))
-            {
-                await Asyncer.Async(() => context.Delete(shelter));
-            }
-        }
-
-        public Task<IEnumerable<DisasterAid>> GetAidsForDisaster(string disasterId)
-        {
-            //TODO: GetDisasterAidItems
-            return null;
-        }
+        }        
 
         public async Task DeleteShelters(string disasterId)
         {

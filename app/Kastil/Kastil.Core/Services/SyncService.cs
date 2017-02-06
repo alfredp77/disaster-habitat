@@ -13,8 +13,7 @@ namespace Kastil.Core.Services
     {
         private ITap2HelpService Tap2HelpService => Resolve<ITap2HelpService>();
         private IPullService PullService => Resolve<IPullService>();
-        private AssessmentPushService AssessmentPushService => Resolve<AssessmentPushService>();
-        private ShelterPushService ShelterPushService => Resolve<ShelterPushService>();
+        private IPushService PushService => Resolve<IPushService>();
         private IPersistenceContextFactory ContextFactory => Resolve<IPersistenceContextFactory>();
 
         public async Task Sync(string userToken)
@@ -50,7 +49,7 @@ namespace Kastil.Core.Services
 
         private async Task PullAttributes()
         {
-            await PullService.Pull<Common.Models.Attribute>("Attributes");
+            await PullService.Pull<Attribute>();
         }
 
         private async Task PushShelters(string userToken)
@@ -60,7 +59,9 @@ namespace Kastil.Core.Services
 
         private async Task PushAssessments(string userToken)
         {
-            await AssessmentPushService.Push(userToken);
+            var savedAssessments = await PushService.Push<Assessment>(userToken);
+            var assessmentIds = new HashSet<string>(savedAssessments.Select(a => a.ObjectId));
+            await PushService.Push<AssessmentAttribute>(userToken, a => assessmentIds.Contains(a.AssessmentId));
         }
     }
 }

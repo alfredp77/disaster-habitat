@@ -5,8 +5,6 @@ using Kastil.Common.Utils;
 using Kastil.Core.Services;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
-using Newtonsoft.Json;
-using JsonSerializer = Kastil.Common.Utils.JsonSerializer;
 
 namespace Kastil.Core
 {
@@ -35,13 +33,12 @@ namespace Kastil.Core
         private static void RegisterNonPlatformSpecificStuff()
         {
             Mvx.RegisterSingleton(() => new Connection());
+			Mvx.RegisterSingleton<IJsonSerializer>(() => new JsonSerializer());
             Mvx.RegisterSingleton<IPersistenceContextFactory>(() => new FileBasedPersistenceContextFactory());
             Mvx.RegisterSingleton(() => new AttributedEditContext());
             Mvx.RegisterSingleton(() => new AttributedListContext());
 			Mvx.RegisterSingleton(() => new AssessmentListHandler());
 			Mvx.RegisterSingleton(() => new ShelterListHandler());
-            Mvx.LazyConstructAndRegisterSingleton(() => new AssessmentPushService());
-            Mvx.LazyConstructAndRegisterSingleton(() => new ShelterPushService());
         }
     }
 }

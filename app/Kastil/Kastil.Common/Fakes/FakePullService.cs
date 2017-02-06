@@ -1,15 +1,16 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Services;
-using Kastil.Common.Utils;
 using Kastil.Common.Models;
 
 namespace Kastil.Common.Fakes
 {
     public class FakePullService : IPullService
     {
-        public Task Pull<T>(string tableName=null) where T : BaseModel
+        public Task<IEnumerable<T>> Pull<T>(string queryString=null, bool persist = true) where T : BaseModel
         {
-            return Asyncer.DoNothing();
+            return Task.FromResult(Enumerable.Empty<T>());
         }
     }
 }

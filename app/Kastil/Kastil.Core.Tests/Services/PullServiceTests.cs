@@ -32,7 +32,7 @@ namespace Kastil.Core.Tests.Services
             _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>()).Returns(_persistenceContext.Object);
             _serializer = CreateMock<IJsonSerializer>();
 
-            _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(true), _connection.Headers))
+            _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(), _connection.Headers))
                 .ReturnsAsync(_json);
             _serializer.Setup(s => s.ParseArray(_json, "data", "id"))
                 .Returns(_kvps);
@@ -54,7 +54,7 @@ namespace Kastil.Core.Tests.Services
         [Test]
         public async Task Should_Persist_All_Json_And_Wipe_Existing_Data()
         {
-            await _service.Pull<TestModel>(null);
+            await _service.Pull<TestModel>();
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
             _persistenceContext.Verify(c => c.DeleteAll(), Times.Once);
         }

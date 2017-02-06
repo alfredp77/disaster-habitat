@@ -44,7 +44,7 @@ namespace Kastil.Core.Tests.Services
 
             await _syncService.PullDisasters();
 
-            _pullService.Verify(p => p.Pull<Disaster>(null), Times.Once);
+            _pullService.Verify(p => p.Pull<Disaster>("", true), Times.Once);
             _tap2HelpService.Verify(s => s.DeleteAssessments(disaster2.ObjectId), Times.Once);
             _tap2HelpService.Verify(s => s.DeleteAssessments(disaster3.ObjectId), Times.Once);
         }

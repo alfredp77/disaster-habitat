@@ -116,6 +116,7 @@ namespace Kastil.Core.Services
             var originalAttributes = (await ItemHandler.GetAttributes()).ToDictionary(k => k.Key);
             foreach (var modifiedAttribute in _attributesMap.Values)
             {
+                modifiedAttribute.StampNewId();
                 ValuedAttribute originalAttribute;
                 if (originalAttributes.TryGetValue(modifiedAttribute.Key, out originalAttribute))
                 {
