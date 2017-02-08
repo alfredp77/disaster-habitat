@@ -20,7 +20,7 @@ namespace Kastil.Core.Tests.Services
         private Mock<IJsonSerializer> _serializer;
 
         private string _json = "the json returned by backendless";
-        private List<KeyValuePair<string, string>> _kvps = new List<KeyValuePair<string, string>>();
+        private List<KeyValuePair<string, string>> _kvps;
         public override void CreateTestableObject()
         {
             _service = new PullService();
@@ -34,7 +34,9 @@ namespace Kastil.Core.Tests.Services
 
             _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(""), _connection.Headers))
                 .ReturnsAsync(_json);
-            _serializer.Setup(s => s.ParseArray(_json, "data", "id"))
+
+            _kvps = new List<KeyValuePair<string, string>>();
+            _serializer.Setup(s => s.ParseArray(_json, "data", "objectId"))
                 .Returns(_kvps);
 
             Ioc.RegisterSingleton(_connection);
@@ -43,12 +45,19 @@ namespace Kastil.Core.Tests.Services
             Ioc.RegisterSingleton(_serializer.Object);
         }
 
-        [Test]
-        public async Task Should_Return_Data_Without_Persisting()
+        private TestModel PrepareTestModel()
         {
             var tm = new TestModel();
             _kvps.Add(new KeyValuePair<string, string>("1", "blah"));
             _serializer.Setup(s => s.Deserialize<TestModel>("blah")).Returns(tm);
+            return tm;
+        }
+
+        [Test]
+        public async Task Should_Return_Data_Without_Persisting()
+        {
+            var tm = PrepareTestModel();
+
             var result = (await _service.Pull<TestModel>(persist:false)).ToList();
 
             Assert.That(result.Count, Is.EqualTo(1));
@@ -60,9 +69,32 @@ namespace Kastil.Core.Tests.Services
         [Test]
         public async Task Should_Persist_All_Json_And_Wipe_Existing_Data()
         {
-            await _service.Pull<TestModel>();
+            var tm = PrepareTestModel();
+            var existing = new TestModel {ObjectId = "xxx"};
+            _persistenceContext.Setup(c => c.LoadAll()).Returns(new[] {existing});
+
+            var result = (await _service.Pull<TestModel>()).ToList();
+
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result.Contains(tm));
+            _persistenceContext.Verify(c => c.Purge(existing.ObjectId), Times.Once);
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
-            _persistenceContext.Verify(c => c.PurgeAll(), Times.Once);
+        }
+
+        [Test]
+        public async Task Should_Not_Wipe_New_Data()
+        {
+            var tm = PrepareTestModel();
+            var existing = new TestModel();
+            existing.StampNewId();
+            _persistenceContext.Setup(c => c.LoadAll()).Returns(new[] { existing });
+
+            var result = (await _service.Pull<TestModel>()).ToList();
+
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result.Contains(tm));
+            _persistenceContext.Verify(c => c.Purge(existing.ObjectId), Times.Never);
+            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
         }
     }
 }
