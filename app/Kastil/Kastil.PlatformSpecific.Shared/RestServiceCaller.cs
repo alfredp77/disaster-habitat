@@ -38,10 +38,11 @@ namespace Kastil.PlatformSpecific.Shared
             {
                 request.Headers[kvp.Key] = kvp.Value;
             }
-            request.ContentType = "application/json";
+            
 
             if (payload != null)
             {
+				request.ContentType = "application/json";
                 using (var writer = new StreamWriter(request.GetRequestStream()))
                 {
                     await writer.WriteAsync(payload);

@@ -29,6 +29,7 @@ namespace Kastil.Common.Services
                 var asDictionary = Serializer.AsDictionary(result);
                 if (asDictionary.ContainsKey("deletionTime"))
                 {
+                    context.Purge(item.ObjectId);
                     deletedItems.Add(new PushResult<T>(item, item.ObjectId));
                 }
                 else
