@@ -24,6 +24,11 @@ namespace Kastil.PlatformSpecific.Shared
 			return await SendRequest(url, headers, "PUT", payload);
 		}
 
+        public async Task<string> Delete(string url, Dictionary<string, string> headers)
+        {
+            return await SendRequest(url, headers, "DELETE");
+        }
+
         private async Task<string> SendRequest(string url, Dictionary<string, string> headers, string method,
             string payload=null)
         {

@@ -25,16 +25,12 @@ namespace Kastil.Common
             {APPLICATION_TYPE_HEADER, REST}
         });
 
-        public static string GenerateTableUrl<T>() where T : BaseModel
+        public static string GenerateTableUrl<T>(string objectId="") where T : BaseModel
         {
-            return GenerateTableUrl(typeof (T).Name);
+            var objectIdParam = string.IsNullOrEmpty(objectId) ? "" : $"/{objectId}";
+            return $"{BASE_NON_HTTPS_URL}/data/{typeof(T).Name}{objectIdParam}";
         }
-
-        public static string GenerateTableUrl(string tableName, bool useHttps=true)
-        {
-			return $"{(useHttps ? BASE_URL : BASE_NON_HTTPS_URL)}/data/{tableName}";
-        }
-
+        
 		public static string LoginUrl => $"{BASE_URL}/users/login";
     }
 }

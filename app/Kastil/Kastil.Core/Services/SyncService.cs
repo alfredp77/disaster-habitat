@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Kastil.Common.Models;
 using Kastil.Common.Services;
@@ -16,14 +17,14 @@ namespace Kastil.Core.Services
         private IPushService PushService => Resolve<IPushService>();
         private IPersistenceContextFactory ContextFactory => Resolve<IPersistenceContextFactory>();
 
-        public async Task Sync(string userToken)
+        public async Task Sync(User user)
         {
 			var currentTime = DateTimeOffset.UtcNow;
 
             await PullDisasters();
             await PullAttributes();
-            await PushAssessments(userToken);
-            await PushShelters(userToken);
+            await PushAssessments(user);
+            await PushShelters(user);
 
 			RecordLastSync(currentTime);
         }
@@ -52,16 +53,37 @@ namespace Kastil.Core.Services
             await PullService.Pull<Attribute>();
         }
 
-        private async Task PushShelters(string userToken)
+        private async Task PushShelters(User user)
         {
             //await PushService.Push<Shelter>(userToken, "Disaster");
         }
 
-        private async Task PushAssessments(string userToken)
-        {
-            var savedAssessments = await PushService.Push<Assessment>(userToken);
-            var assessmentIds = new HashSet<string>(savedAssessments.Select(a => a.ObjectId));
-            await PushService.Push<AssessmentAttribute>(userToken, a => assessmentIds.Contains(a.AssessmentId));
+        private async Task PushAssessments(User user)
+        {            
+            var savedAssessments = await PushService.Push<Assessment>(user.Token);
+            var assessmentIds = new HashSet<string>(savedAssessments.Select(a => a.LocalId));
+            await PushService.Push<AssessmentAttribute>(user.Token, a => assessmentIds.Contains(a.AssessmentId));
+
+            // pull assessments
+			var queryString = WebUtility.UrlEncode($"ownerId='{user.ObjectId}' AND isActive=true").Replace("+","%20");
+            await PullService.Pull<Assessment>($"?where={queryString}");
+
+            // pull attributes
+            await PullService.Pull<AssessmentAttribute>($"?where={queryString}");
+
+            // remove all assessments that do not belong to this user
+            var assessmentContext = ContextFactory.CreateFor<Assessment>();
+            var attributeContext = ContextFactory.CreateFor<AssessmentAttribute>();
+            var existingAssessments = await Tap2HelpService.GetAssessments();
+            foreach (var existingAssessment in existingAssessments.Where(a => !a.IsNew() && !user.ObjectId.Equals(a.OwnerId, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                var attributes = await Tap2HelpService.GetAssessmentAttributes(existingAssessment.ObjectId);
+                foreach (var assessmentAttribute in attributes)
+                {
+                    attributeContext.Purge(assessmentAttribute.ObjectId);
+                }
+                assessmentContext.Purge(existingAssessment.ObjectId);
+            }
         }
     }
 }

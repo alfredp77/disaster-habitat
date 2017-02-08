@@ -66,6 +66,8 @@
     <Compile Include="Services\ITap2HelpService.cs" />
     <Compile Include="Services\PullService.cs" />
     <Compile Include="Services\PushService.cs" />
+    <Compile Include="Services\RemovalPushService.cs" />
+    <Compile Include="Services\SaveOrUpdatePush.cs" />
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\AttributeConverter.cs" />
     <Compile Include="Utils\DateHelper.cs" />

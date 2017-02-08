@@ -8,5 +8,6 @@ namespace Kastil.Common.Services
         Task<string> Get(string url, Dictionary<string, string> headers);
         Task<string> Post(string url, Dictionary<string, string> headers, string payload);
 		Task<string> Put(string url, Dictionary<string, string> headers, string payload);
+        Task<string> Delete(string url, Dictionary<string, string> headers);
     }
 }
