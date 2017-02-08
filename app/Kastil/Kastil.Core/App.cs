@@ -16,6 +16,7 @@ namespace Kastil.Core
 //                .InNamespace(typeof(FakeTap2HelpService).Namespace) // uncomment this line to use the fakes instead                
                 .InNamespace(typeof(ITap2HelpService).Namespace)      // comment this line when using fakes
                 .EndingWith("Service")
+				.Except(typeof(PushService), typeof(SaveOrUpdatePushService), typeof(RemovalPushService))
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
@@ -39,6 +40,10 @@ namespace Kastil.Core
             Mvx.RegisterSingleton(() => new AttributedListContext());
 			Mvx.RegisterSingleton(() => new AssessmentListHandler());
 			Mvx.RegisterSingleton(() => new ShelterListHandler());
+            Mvx.RegisterSingleton(() => new SaveOrUpdatePushService());
+            Mvx.RegisterSingleton(() => new RemovalPushService());
+            Mvx.LazyConstructAndRegisterSingleton<IPushService>(() => new PushService(Mvx.Resolve<SaveOrUpdatePushService>(), Mvx.Resolve<RemovalPushService>()));
+
         }
     }
 }

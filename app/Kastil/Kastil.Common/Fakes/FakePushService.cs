@@ -9,9 +9,9 @@ namespace Kastil.Common.Fakes
 {
     public class FakePushService : IPushService
     {
-        public Task<IEnumerable<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
+        public Task<IEnumerable<PushResult<T>>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
         {
-            return Task.FromResult(Enumerable.Empty<T>());
+            return Task.FromResult(Enumerable.Empty<PushResult<T>>());
         }
     }
 }

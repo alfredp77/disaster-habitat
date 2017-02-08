@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
-using Kastil.Core.Services;
 using Moq;
 using NUnit.Framework;
 
@@ -32,7 +32,7 @@ namespace Kastil.Core.Tests.Services
             _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>()).Returns(_persistenceContext.Object);
             _serializer = CreateMock<IJsonSerializer>();
 
-            _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(), _connection.Headers))
+            _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(""), _connection.Headers))
                 .ReturnsAsync(_json);
             _serializer.Setup(s => s.ParseArray(_json, "data", "id"))
                 .Returns(_kvps);
@@ -44,10 +44,16 @@ namespace Kastil.Core.Tests.Services
         }
 
         [Test]
-        public async Task Should_Persist_All_Json_Without_Wiping_Existing_Data()
-        {            
-            await _service.Pull<TestModel>();
-            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
+        public async Task Should_Return_Data_Without_Persisting()
+        {
+            var tm = new TestModel();
+            _kvps.Add(new KeyValuePair<string, string>("1", "blah"));
+            _serializer.Setup(s => s.Deserialize<TestModel>("blah")).Returns(tm);
+            var result = (await _service.Pull<TestModel>(persist:false)).ToList();
+
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result.Contains(tm));
+            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Never);
             _persistenceContext.Verify(c => c.PurgeAll(), Times.Never);
         }
 

@@ -70,7 +70,7 @@ namespace Kastil.Core.ViewModels
                 }
 
                 var service = Resolve<ISyncService>();
-                await service.Sync(loggedInUser.Token);
+                await service.Sync(loggedInUser);
 
 
 				messenger.Publish(new SyncCompletedEvent(this, true));

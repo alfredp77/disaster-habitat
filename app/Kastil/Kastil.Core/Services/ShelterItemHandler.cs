@@ -28,8 +28,10 @@ namespace Kastil.Core.Services
         public async Task CommitChanges(IEnumerable<ValuedAttribute> modifiedAttributes, IEnumerable<ValuedAttribute> deletedAttributes)
         {
             var service = Resolve<ITap2HelpService>();
-            foreach (var modifiedAttribute in modifiedAttributes.OfType<ShelterAttribute>())
+            await service.Save(_shelter);
+			foreach (var modifiedAttribute in modifiedAttributes.OfType<ShelterAttribute>())
             {
+				modifiedAttribute.ShelterId = _shelter.ObjectId;
                 await service.SaveShelterAttribute(modifiedAttribute);
             }
             foreach (var deletedAttribute in deletedAttributes.OfType<ShelterAttribute>())
@@ -37,7 +39,6 @@ namespace Kastil.Core.Services
                 await service.DeleteShelterAttribute(deletedAttribute.ObjectId);
             }
 
-            await service.Save(_shelter);
         }
 
         public ValuedAttribute CreateAttributeFrom(Attribute source)
