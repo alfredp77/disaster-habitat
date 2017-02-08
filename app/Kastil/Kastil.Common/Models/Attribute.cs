@@ -1,6 +1,5 @@
 using Kastil.Common.Utils;
 using MvvmCross.Platform;
-using Newtonsoft.Json;
 
 namespace Kastil.Common.Models
 {

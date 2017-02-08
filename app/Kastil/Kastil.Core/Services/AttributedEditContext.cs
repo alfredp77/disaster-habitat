@@ -35,9 +35,6 @@ namespace Kastil.Core.Services
             }
         }
 
-        public string NamePlaceholderText => ItemHandler.NamePlaceholderText;
-        public string LocationPlaceholderText => ItemHandler.LocationPlaceholderText;
-
         public bool IsNew { get; private set; }
 
         private List<ValuedAttribute> _modifiedAttributes;

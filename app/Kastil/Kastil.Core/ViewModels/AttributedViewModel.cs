@@ -14,7 +14,7 @@ namespace Kastil.Core.ViewModels
 {
     public class AttributedViewModel : BaseViewModel
     {
-		private AttributedEditContext _context;
+		private readonly AttributedEditContext _context;
 		public AttributedViewModel()
 		{
 			_context = Resolve<AttributedEditContext>();
@@ -34,10 +34,7 @@ namespace Kastil.Core.ViewModels
             }
         }
 
-        public string NamePlaceholderText
-        {
-			get { return _context.ItemHandler.NamePlaceholderText; }
-        }
+        public string NamePlaceholderText => _context.ItemHandler.NamePlaceholderText;
 
         public string Location
         {
@@ -49,15 +46,9 @@ namespace Kastil.Core.ViewModels
 			}
         }
 
-        public string LocationPlaceholderText
-        {
-			get { return _context.ItemHandler.LocationPlaceholderText; }
-        }
+        public string LocationPlaceholderText => _context.ItemHandler.LocationPlaceholderText;
 
-        public bool AddMode
-        {
-			get { return _context.IsNew; }
-        }
+        public bool AddMode => _context.IsNew;
 
         public ICommand AddAttributeCommand => new MvxCommand(DoAddAttrCommand);
         private void DoAddAttrCommand()

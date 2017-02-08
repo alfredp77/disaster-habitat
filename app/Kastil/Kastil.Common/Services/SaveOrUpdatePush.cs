@@ -32,11 +32,7 @@ namespace Kastil.Common.Services
                 }
 
                 context.Save(savedItem);
-                if (savedItem.IsNew())
-                {
-                    context.Purge(item.ObjectId);
-                }
-
+                context.Purge(item.ObjectId);
                 savedItems.Add(new PushResult<T>(savedItem, item.ObjectId));
             }
             return savedItems;
