@@ -39,6 +39,9 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="Connection.Details.cs" />
+    <Compile Include="Events\EditingDoneEvent.cs" />
+    <Compile Include="Events\PopToViewModelPresentationHint.cs" />
+    <Compile Include="Events\SyncCompletedEvent.cs" />
     <Compile Include="Fakes\FakePullService.cs" />
     <Compile Include="Fakes\FakePushService.cs" />
     <Compile Include="Fakes\FakeTap2HelpService.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="Services\PullService.cs" />
     <Compile Include="Services\PushService.cs" />
     <Compile Include="Services\RemovalPushService.cs" />
+    <Compile Include="Services\SaveOrUpdatePushService.cs" />
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\AttributeConverter.cs" />
     <Compile Include="Utils\BackendlessResponse.cs" />
@@ -77,7 +81,6 @@
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\ModelExtensions.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
-    <Compile Include="Utils\SaveOrUpdatePushService.cs" />
     <Compile Include="Utils\SpinnerItem.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="Utils\SyncResult.cs" />

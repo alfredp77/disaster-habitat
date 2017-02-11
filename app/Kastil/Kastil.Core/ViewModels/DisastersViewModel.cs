@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Kastil.Common.Events;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Common.ViewModels;
@@ -9,7 +10,6 @@ using Kastil.Common.Models;
 using Kastil.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using Kastil.Core.Events;
 
 namespace Kastil.Core.ViewModels
 {

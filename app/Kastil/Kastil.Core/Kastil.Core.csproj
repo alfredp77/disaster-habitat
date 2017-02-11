@@ -35,8 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Events\EditingDoneEvent.cs" />
-    <Compile Include="Events\PopToViewModelPresentationHint.cs" />
     <Compile Include="Fakes\FakeSyncService.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,7 +58,6 @@
     <Compile Include="ViewModels\DisasterListItemViewModel.cs" />
     <Compile Include="ViewModels\DisastersViewModel.cs" />
     <Compile Include="ViewModels\SyncViewModel.cs" />
-    <Compile Include="Events\SyncCompletedEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -123,6 +120,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Events\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

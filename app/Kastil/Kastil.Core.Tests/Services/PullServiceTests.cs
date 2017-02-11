@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Kastil.Common;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
+using Kastil.TestUtils;
 using Moq;
 using NUnit.Framework;
 

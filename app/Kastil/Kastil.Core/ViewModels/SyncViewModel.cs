@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Kastil.Common.Events;
 using Kastil.Common.Services;
 using Kastil.Common.ViewModels;
-using Kastil.Core.Events;
 using Kastil.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;

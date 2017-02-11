@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.Core.Services;
+using Kastil.TestUtils;
 using Moq;
 using MvvmCross.Plugins.File;
 using NUnit.Framework;
