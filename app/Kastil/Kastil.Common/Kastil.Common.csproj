@@ -70,8 +70,11 @@
     <Compile Include="Services\SaveOrUpdatePush.cs" />
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\AttributeConverter.cs" />
+    <Compile Include="Utils\BackendlessResponse.cs" />
+    <Compile Include="Utils\BackendlessResponseParser.cs" />
     <Compile Include="Utils\DateHelper.cs" />
     <Compile Include="Utils\DistanceCalculator.cs" />
+    <Compile Include="Utils\IBackendlessResponseParser.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\ModelExtensions.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
