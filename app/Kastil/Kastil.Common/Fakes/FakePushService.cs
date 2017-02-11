@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Services;
 using Kastil.Common.Models;
+using Kastil.Common.Utils;
 
 namespace Kastil.Common.Fakes
 {

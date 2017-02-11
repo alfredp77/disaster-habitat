@@ -67,7 +67,6 @@
     <Compile Include="Services\PullService.cs" />
     <Compile Include="Services\PushService.cs" />
     <Compile Include="Services\RemovalPushService.cs" />
-    <Compile Include="Services\SaveOrUpdatePush.cs" />
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\AttributeConverter.cs" />
     <Compile Include="Utils\BackendlessResponse.cs" />
@@ -78,8 +77,11 @@
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\ModelExtensions.cs" />
     <Compile Include="Utils\ObservableRangeCollection.cs" />
+    <Compile Include="Utils\SaveOrUpdatePushService.cs" />
     <Compile Include="Utils\SpinnerItem.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
+    <Compile Include="Utils\SyncResult.cs" />
+    <Compile Include="Utils\SyncResultExtensions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
