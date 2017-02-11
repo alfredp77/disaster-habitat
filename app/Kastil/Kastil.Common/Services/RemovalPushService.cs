@@ -13,32 +13,34 @@ namespace Kastil.Common.Services
         private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
         private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
         private Connection Connection => Resolve<Connection>();
+        private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
 
-        public async Task<IEnumerable<PushResult<T>>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
+        public async Task<SyncResult<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
         {            
             var headers = new Dictionary<string, string>(Connection.Headers) { { "user-token", userToken } };
             criteria = criteria ?? (a => true);
 
             var context = PersistenceContextFactory.CreateFor<T>();
             var items = await Asyncer.Async(() => context.LoadDeletedObjects());
-            var deletedItems = new List<PushResult<T>>();
+            var result = new SyncResult<T>();
             foreach (var item in items.Where(i => criteria(i)))
             {
                 var url = Connection.GenerateTableUrl<T>(item.ObjectId);
-                var result = await Caller.Delete(url, headers);
-                var asDictionary = Serializer.AsDictionary(result);
+                var json = await Caller.Delete(url, headers);
+                var asDictionary = Serializer.AsDictionary(json);
                 if (asDictionary.ContainsKey("deletionTime"))
                 {
                     context.Purge(item.ObjectId);
-                    deletedItems.Add(new PushResult<T>(item, item.ObjectId));
+                    result.Success(item, item.ObjectId);
                 }
                 else
                 {
-                    // log error 
+                    var parsed = ResponseParser.Parse<T>(json);
+                    result.Failed(item, parsed.ToString());
                 } 
 
             }
-            return deletedItems;
+            return result;
         }
     }
 }

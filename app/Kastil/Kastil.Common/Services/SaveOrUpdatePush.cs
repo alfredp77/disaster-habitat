@@ -13,32 +13,35 @@ namespace Kastil.Common.Services
         private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
         private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
         private Connection Connection => Resolve<Connection>();
+        private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
 
-        public async Task<IEnumerable<PushResult<T>>>  Push<T>(string userToken, Predicate<T> criteria=null) where T : BaseModel
+        public async Task<SyncResult<T>>  Push<T>(string userToken, Predicate<T> criteria=null) where T : BaseModel
         {            
             var headers = new Dictionary<string, string>(Connection.Headers) { { "user-token", userToken } };
             criteria = criteria ?? (a => true);
 
             var context = PersistenceContextFactory.CreateFor<T>();
             var items = await Asyncer.Async(() => context.LoadAll());
-            var savedItems = new List<PushResult<T>>();
+            var result = new SyncResult<T>();
             foreach (var item in items.Where(i => criteria(i)))
             {                
-                var savedItem = await PushItem(item, headers);
-                if (savedItem == null || savedItem.IsNew())
+                var json = await PushItem(item, headers);
+                var parsed = ResponseParser.Parse<T>(json);
+                if (parsed.IsSuccessful)
                 {
-                    // somethin is wrong, log error and continue with the rest
-                    continue;
+                    context.Save(parsed.Content);
+                    context.Purge(item.ObjectId);
+                    result.Success(parsed.Content, item.ObjectId);
                 }
-
-                context.Save(savedItem);
-                context.Purge(item.ObjectId);
-                savedItems.Add(new PushResult<T>(savedItem, item.ObjectId));
+                else
+                {
+                    result.Failed(item, parsed.ToString());
+                }
             }
-            return savedItems;
+            return result;
         }
 
-        private async Task<T> PushItem<T>(T item, Dictionary<string, string> headers) where T : BaseModel
+        private async Task<string> PushItem<T>(T item, Dictionary<string, string> headers) where T : BaseModel
         {            
             var payload = Serializer.Serialize(PrepareItem(item));
 			Task<string> pushTask;
@@ -51,8 +54,7 @@ namespace Kastil.Common.Services
 				pushTask = Caller.Put(Connection.GenerateTableUrl<T>(item.ObjectId), headers, payload);
 			}
 
-            var result = await pushTask;
-            return Serializer.Deserialize<T>(result);
+            return await pushTask;
         }
 
         private T PrepareItem<T>(T item) where T : BaseModel
@@ -64,15 +66,66 @@ namespace Kastil.Common.Services
         }
     }
 
-    public class PushResult<T> where T : BaseModel
+    public class SyncResult<T> where T : BaseModel
     {
-        public T Pushed { get; }
-        public string LocalId { get; }
+        private readonly Dictionary<string, string> _errorMessages = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _localIds = new Dictionary<string, string>();
+        private readonly List<T> _successfulItems = new List<T>();
+        private readonly List<T> _failedItems = new List<T>();
 
-        public PushResult(T pushed, string localId)
+        public void Failed(T item, string errorMessage)
         {
-            Pushed = pushed;
-            LocalId = localId;
+            _failedItems.Add(item);
+            _errorMessages[item.ObjectId] = errorMessage;
+        }
+
+        public void Success(T item, string localId)
+        {
+            _successfulItems.Add(item);
+            _localIds[item.ObjectId] = localId;
+        }
+
+        public IEnumerable<T> SuccessfulItems => _successfulItems;
+        public IEnumerable<T> FailedItems => _failedItems;
+
+        public string GetLocalId(T item)
+        {
+            string localId;
+            _localIds.TryGetValue(item.ObjectId, out localId);
+            return localId;
+        }
+
+        public string GetErrorMessage(T item)
+        {
+            string errorMessage;
+            _errorMessages.TryGetValue(item.ObjectId, out errorMessage);
+            return errorMessage;
         }
     }
+
+
+    public static class SyncResultExtensions
+    {
+        public static SyncResult<T> Merge<T>(this SyncResult<T> me, params SyncResult<T>[] other) where T : BaseModel
+        {
+            var all = new List<SyncResult<T>> {me};
+            all.AddRange(other);
+
+            var merged = new SyncResult<T>();
+            foreach (var syncResult in all)
+            {
+                foreach (var item in syncResult.SuccessfulItems)
+                {
+                    merged.Success(item, syncResult.GetLocalId(item));
+                }
+
+                foreach (var item in syncResult.FailedItems)
+                {
+                    merged.Failed(item, syncResult.GetErrorMessage(item));
+                }
+            }
+            return merged;
+        }
+    }
+
 }

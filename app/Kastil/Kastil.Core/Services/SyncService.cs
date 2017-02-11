@@ -61,8 +61,15 @@ namespace Kastil.Core.Services
         private async Task PushAssessments(User user)
         {            
             var savedAssessments = await PushService.Push<Assessment>(user.Token);
-            var assessmentIds = new HashSet<string>(savedAssessments.Select(a => a.LocalId));
-            await PushService.Push<AssessmentAttribute>(user.Token, a => assessmentIds.Contains(a.AssessmentId));
+            var assessmentIds = new HashSet<string>(savedAssessments.SuccessfulItems.Select(savedAssessments.GetLocalId));
+            var attributePushResult = await PushService.Push<AssessmentAttribute>(user.Token, a => assessmentIds.Contains(a.AssessmentId));
+
+            // if there's any failure, we should not continue doing the next steps
+            if (savedAssessments.FailedItems.Any() || attributePushResult.FailedItems.Any())
+            {
+                // log error
+                return;
+            }
 
             // pull assessments
 			var queryString = WebUtility.UrlEncode($"ownerId='{user.ObjectId}' AND isActive=true").Replace("+","%20");

@@ -12,19 +12,36 @@ namespace Kastil.Common.Services
         private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
         private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
         private Connection Connection => Resolve<Connection>();
-        
-        public async Task<IEnumerable<T>> Pull<T>(string queryString="", bool persist = true) where T : BaseModel
+        private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
+
+        public async Task<SyncResult<T>> Pull<T>(string queryString="", bool persist = true) where T : BaseModel
         {
             var url = $"{Connection.GenerateTableUrl<T>()}{queryString}";
             var json = await Caller.Get(url, Connection.Headers);
-            var docs = Serializer.ParseArray(json, "data", "objectId").ToList();
 
-            if (persist)
+            var parsed = ResponseParser.Parse<T>(json);
+            var result = new SyncResult<T>();
+            if (parsed.IsSuccessful)
             {
-                await Persist<T>(docs);
+                var docs = Serializer.ParseArray(json, "data", "objectId").ToList();
+
+                if (persist)
+                {
+                    await Persist<T>(docs);
+                }
+
+                foreach (var doc in docs)
+                {
+                    var deserialize = Serializer.Deserialize<T>(doc.Value);
+                    result.Success(deserialize, deserialize.ObjectId);
+                }
+            }
+            else
+            {
+                result.Failed(null, parsed.ToString());
             }
 
-            return docs.Select(d => Serializer.Deserialize<T>(d.Value));
+            return result;
         }
 
         private async Task Persist<T>(IEnumerable<KeyValuePair<string, string>> docs) where T : BaseModel

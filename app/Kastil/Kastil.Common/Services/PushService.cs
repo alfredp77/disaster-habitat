@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Kastil.Common.Models;
 
@@ -16,11 +15,11 @@ namespace Kastil.Common.Services
             _removal = removal;
         }      
 
-        public async Task<IEnumerable<PushResult<T>>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
+        public async Task<SyncResult<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
         {
-            await _removal.Push(userToken, criteria);
+            var removed = await _removal.Push(userToken, criteria);
             var saved = await _saveOrUpdate.Push(userToken, criteria);
-            return saved;
+            return saved.Merge(removed);
         }
     }
 }

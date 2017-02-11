@@ -17,6 +17,7 @@ namespace Kastil.Core.Tests.Services
         private Mock<IRestServiceCaller> _restServiceCaller;
         private Mock<IPersistenceContextFactory> _persistenceContextFactory;
         private Mock<IPersistenceContext<TestModel>> _persistenceContext;
+        private Mock<IBackendlessResponseParser> _responseParser;
         private Mock<IJsonSerializer> _serializer;
 
         private string _json = "the json returned by backendless";
@@ -27,6 +28,7 @@ namespace Kastil.Core.Tests.Services
             _connection = new Connection {AppId = "foo", SecretKey = "bar"};
 
             _restServiceCaller = CreateMock<IRestServiceCaller>();
+            _responseParser = CreateMock<IBackendlessResponseParser>();
             _persistenceContextFactory = CreateMock<IPersistenceContextFactory>();
             _persistenceContext = CreateMock<IPersistenceContext<TestModel>>();
             _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>()).Returns(_persistenceContext.Object);
@@ -43,6 +45,7 @@ namespace Kastil.Core.Tests.Services
             Ioc.RegisterSingleton(_restServiceCaller.Object);
             Ioc.RegisterSingleton(_persistenceContextFactory.Object);
             Ioc.RegisterSingleton(_serializer.Object);
+            Ioc.RegisterSingleton(_responseParser.Object);
         }
 
         private TestModel PrepareTestModel()
@@ -58,10 +61,12 @@ namespace Kastil.Core.Tests.Services
         {
             var tm = PrepareTestModel();
 
-            var result = (await _service.Pull<TestModel>(persist:false)).ToList();
+            var result = await _service.Pull<TestModel>(persist:false);
 
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result.Contains(tm));
+            var successful = result.SuccessfulItems.ToList();
+            Assert.That(successful.Count, Is.EqualTo(1));
+            Assert.That(successful[0], Is.EqualTo(tm));
+            Assert.That(result.FailedItems, Is.Empty);
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Never);
             _persistenceContext.Verify(c => c.PurgeAll(), Times.Never);
         }
@@ -73,10 +78,12 @@ namespace Kastil.Core.Tests.Services
             var existing = new TestModel {ObjectId = "xxx"};
             _persistenceContext.Setup(c => c.LoadAll()).Returns(new[] {existing});
 
-            var result = (await _service.Pull<TestModel>()).ToList();
+            var result = await _service.Pull<TestModel>();
 
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result.Contains(tm));
+            var successful = result.SuccessfulItems.ToList();
+            Assert.That(successful.Count, Is.EqualTo(1));
+            Assert.That(successful[0], Is.EqualTo(tm));
+            Assert.That(result.FailedItems, Is.Empty);
             _persistenceContext.Verify(c => c.Purge(existing.ObjectId), Times.Once);
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
         }
@@ -89,10 +96,12 @@ namespace Kastil.Core.Tests.Services
             existing.StampNewId();
             _persistenceContext.Setup(c => c.LoadAll()).Returns(new[] { existing });
 
-            var result = (await _service.Pull<TestModel>()).ToList();
+            var result = (await _service.Pull<TestModel>());
 
-            Assert.That(result.Count, Is.EqualTo(1));
-            Assert.That(result.Contains(tm));
+            var successful = result.SuccessfulItems.ToList();
+            Assert.That(successful.Count, Is.EqualTo(1));
+            Assert.That(successful[0], Is.EqualTo(tm));
+            Assert.That(result.FailedItems, Is.Empty);
             _persistenceContext.Verify(c => c.Purge(existing.ObjectId), Times.Never);
             _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
         }

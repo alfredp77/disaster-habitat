@@ -54,20 +54,30 @@ namespace Kastil.PlatformSpecific.Shared
                 using (var response = await request.GetResponseAsync())
                 {
                     var httpResponse = (HttpWebResponse)response;
-                    if (httpResponse.StatusCode == HttpStatusCode.OK)
-                    {
-                        using (var reader = new StreamReader(httpResponse.GetResponseStream()))
-                        {
-                            return reader.ReadToEnd();
-                        }
-                    }
+                    return ReadResponse(httpResponse);
+                }
+            }
+            catch (WebException ex)
+            {
+                return ReadResponse(ex.Response);
+            }
+        }
+
+        private static string ReadResponse(WebResponse httpResponse)
+        {
+            try
+            {
+                using (var reader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    return reader.ReadToEnd();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return null;
             }
-            return "{}";
+            
         }
     }
 }
