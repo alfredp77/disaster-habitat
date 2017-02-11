@@ -9,6 +9,7 @@ namespace Kastil.Common.Services
 {
     public class RemovalPushService : BaseService, IPushService
     {
+        public const string DeletionTime = "deletionTime";
         private IRestServiceCaller Caller => Resolve<IRestServiceCaller>();
         private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
         private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
@@ -28,7 +29,7 @@ namespace Kastil.Common.Services
                 var url = Connection.GenerateTableUrl<T>(item.ObjectId);
                 var json = await Caller.Delete(url, headers);
                 var asDictionary = Serializer.AsDictionary(json);
-                if (asDictionary.ContainsKey("deletionTime"))
+                if (asDictionary.ContainsKey(DeletionTime))
                 {
                     context.Purge(item.ObjectId);
                     result.Success(item, item.ObjectId);

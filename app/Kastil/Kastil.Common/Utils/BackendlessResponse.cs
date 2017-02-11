@@ -23,7 +23,7 @@ namespace Kastil.Common.Utils
 
         public string ErrorCode { get; private set; }
 
-        public bool IsSuccessful => !string.IsNullOrEmpty(ErrorMessage);
+        public bool IsSuccessful => string.IsNullOrEmpty(ErrorMessage);
 
         public override string ToString()
         {
