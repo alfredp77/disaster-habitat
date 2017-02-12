@@ -16,6 +16,7 @@ namespace Kastil.Common
         private static string CONTENT_TYPE = "application/json";
         private static string BASE_URL = "https://api.backendless.com/v1";
 		private static string BASE_NON_HTTPS_URL = "http://api.backendless.com/v1";
+        private static string USER_TOKEN = "user-token";
 
         private Dictionary<string, string> _headers; 
         public Dictionary<string, string> Headers => _headers ?? (_headers = new Dictionary<string, string>

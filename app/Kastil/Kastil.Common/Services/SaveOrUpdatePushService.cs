@@ -30,7 +30,8 @@ namespace Kastil.Common.Services
                 if (parsed.IsSuccessful)
                 {
                     context.Save(parsed.Content);
-                    context.Purge(item.ObjectId);
+                    if (item.IsNew())
+                        context.Purge(item.ObjectId);
                     result.Success(parsed.Content, item.ObjectId);
                 }
                 else

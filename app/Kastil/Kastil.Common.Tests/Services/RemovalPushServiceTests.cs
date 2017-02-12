@@ -21,7 +21,7 @@ namespace Kastil.Common.Tests.Services
         private IPersistenceContext<Assessment> _persistenceContext;
         private IBackendlessResponseParser _responseParser;
         private IRestServiceCaller _restServiceCaller;
-        private Connection _connection = new Connection();
+        private readonly Connection _connection = new Connection();
         private const string UserToken = "BLAH";
 
         public override void CreateTestableObject()
