@@ -19,32 +19,25 @@ namespace Kastil.Common.Services
             var json = await Caller.Get(url, Connection.Headers);
 
             var parsed = ResponseParser.ParseArray<T>(json);
-            return parsed.IsSuccessful ? Persist(parsed, persist) : Failure(parsed);
+            if (!parsed.IsSuccessful)
+                return Failure(parsed);
+
+            if (persist)
+                Persist(parsed);
+
+            return Success(parsed);
         }        
 
-        private SyncResult<T> Persist<T>(BackendlessResponse<T> parsed, bool persist) where T : BaseModel
+        private static SyncResult<T> Failure<T>(BackendlessResponse<T> parsed) where T : BaseModel
         {
             var result = new SyncResult<T>();
+            result.Failed(null, parsed.ToString());
+            return result;
+        }
 
-            var context = PersistenceContextFactory.CreateFor<T>();
-            if (persist)
-            {
-                var all = context.LoadAll()
-                            .Where(i => !i.IsNew())
-                            .ToDictionary(i => i.ObjectId);
-
-                foreach (var item in parsed.Content)
-                {
-                    context.Save(item);
-                    all.Remove(item.ObjectId);
-                }
-                
-                foreach (var item in all.Values)
-                {
-                    context.Purge(item.ObjectId);
-                }
-            }
-
+        private static SyncResult<T> Success<T>(BackendlessResponse<T> parsed) where T : BaseModel
+        {
+            var result = new SyncResult<T>();
             foreach (var item in parsed.Content)
             {
                 result.Success(item, item.ObjectId);
@@ -53,11 +46,23 @@ namespace Kastil.Common.Services
             return result;
         }
 
-        private static SyncResult<T> Failure<T>(BackendlessResponse<T> parsed) where T : BaseModel
+        private void Persist<T>(BackendlessResponse<T> parsed) where T : BaseModel
         {
-            var result = new SyncResult<T>();
-            result.Failed(null, parsed.ToString());
-            return result;
+            var context = PersistenceContextFactory.CreateFor<T>();
+            var all = context.LoadAll()
+                .Where(i => !i.IsNew())
+                .ToDictionary(i => i.ObjectId);
+
+            foreach (var item in parsed.Content)
+            {
+                context.Save(item);
+                all.Remove(item.ObjectId);
+            }
+
+            foreach (var item in all.Values)
+            {
+                context.Purge(item.ObjectId);
+            }
         }
     }
 }
