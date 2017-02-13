@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using Kastil.Common.Services;
 using Kastil.Common.Utils;
 using Kastil.TestUtils;
 using Moq;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Kastil.Core.Tests.Services
@@ -15,96 +17,125 @@ namespace Kastil.Core.Tests.Services
     {
         private IPullService _service;
         private Connection _connection;
-        private Mock<IRestServiceCaller> _restServiceCaller;
-        private Mock<IPersistenceContextFactory> _persistenceContextFactory;
-        private Mock<IPersistenceContext<TestModel>> _persistenceContext;
-        private Mock<IBackendlessResponseParser> _responseParser;
-        private Mock<IJsonSerializer> _serializer;
+        private IRestServiceCaller _restServiceCaller;
+        private IPersistenceContextFactory _persistenceContextFactory;
+        private IPersistenceContext<TestModel> _persistenceContext;
+        private IBackendlessResponseParser _responseParser;
 
-        private string _json = "the json returned by backendless";
+        private const string Json = "the json returned by backendless";
         private List<KeyValuePair<string, string>> _kvps;
         public override void CreateTestableObject()
         {
             _service = new PullService();
             _connection = new Connection {AppId = "foo", SecretKey = "bar"};
 
-            _restServiceCaller = CreateMock<IRestServiceCaller>();
-            _responseParser = CreateMock<IBackendlessResponseParser>();
-            _persistenceContextFactory = CreateMock<IPersistenceContextFactory>();
-            _persistenceContext = CreateMock<IPersistenceContext<TestModel>>();
-            _persistenceContextFactory.Setup(f => f.CreateFor<TestModel>()).Returns(_persistenceContext.Object);
-            _serializer = CreateMock<IJsonSerializer>();
+            _restServiceCaller = Substitute.For<IRestServiceCaller>();
+            _responseParser = Substitute.For<IBackendlessResponseParser>();
+            _persistenceContextFactory = Substitute.For<IPersistenceContextFactory>();
+            _persistenceContext = Substitute.For<IPersistenceContext<TestModel>>();
+            _persistenceContextFactory.CreateFor<TestModel>().Returns(_persistenceContext);
 
-            _restServiceCaller.Setup(c => c.Get(Connection.GenerateTableUrl<TestModel>(""), _connection.Headers))
-                .ReturnsAsync(_json);
-
-            _kvps = new List<KeyValuePair<string, string>>();
-            _serializer.Setup(s => s.ParseArray(_json, "data", "objectId"))
-                .Returns(_kvps);
+            _restServiceCaller.Get(Connection.GenerateTableUrl<TestModel>(), _connection.Headers).Returns(Task.FromResult(Json));
 
             Ioc.RegisterSingleton(_connection);
-            Ioc.RegisterSingleton(_restServiceCaller.Object);
-            Ioc.RegisterSingleton(_persistenceContextFactory.Object);
-            Ioc.RegisterSingleton(_serializer.Object);
-            Ioc.RegisterSingleton(_responseParser.Object);
+            Ioc.RegisterSingleton(_restServiceCaller);
+            Ioc.RegisterSingleton(_persistenceContextFactory);
+            Ioc.RegisterSingleton(_responseParser);
         }
 
-        private TestModel PrepareTestModel()
+        private static TestModel CreateTestModel()
         {
-            var tm = new TestModel();
-            _kvps.Add(new KeyValuePair<string, string>("1", "blah"));
-            _serializer.Setup(s => s.Deserialize<TestModel>("blah")).Returns(tm);
-            return tm;
+            return new TestModel { ObjectId = Guid.NewGuid().ToString() };
         }
 
-        [Test]
-        public async Task Should_Return_Data_Without_Persisting()
-        {
-            var tm = PrepareTestModel();
-
-            var result = await _service.Pull<TestModel>(persist:false);
-
-            var successful = result.SuccessfulItems.ToList();
-            Assert.That(successful.Count, Is.EqualTo(1));
-            Assert.That(successful[0], Is.EqualTo(tm));
-            Assert.That(result.FailedItems, Is.Empty);
-            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Never);
-            _persistenceContext.Verify(c => c.PurgeAll(), Times.Never);
+        private BackendlessResponse<TestModel> SetupSuccessfulPull(params TestModel[] contents)
+        {            
+            var response = BackendlessResponse<TestModel>.Success(contents);
+            _responseParser.ParseArray<TestModel>(Json).Returns(response);
+            return response;
         }
 
         [Test]
-        public async Task Should_Persist_All_Json_And_Wipe_Existing_Data()
+        public async Task Should_Persist_Successful_Items()
         {
-            var tm = PrepareTestModel();
-            var existing = new TestModel {ObjectId = "xxx"};
-            _persistenceContext.Setup(c => c.LoadAll()).Returns(new[] {existing});
+            var tm1 = CreateTestModel();
+            var tm2 = CreateTestModel();
+            SetupSuccessfulPull(tm1, tm2);
+
+            await _service.Pull<TestModel>();
+
+            _persistenceContext.Received().Save(tm1);
+            _persistenceContext.Received().Save(tm2);
+        }        
+
+        [Test]
+        public async Task Should_Return_Successful_Items()
+        {
+            var tm1 = CreateTestModel();
+            var tm2 = CreateTestModel();
+            SetupSuccessfulPull(tm1, tm2);
 
             var result = await _service.Pull<TestModel>();
 
-            var successful = result.SuccessfulItems.ToList();
-            Assert.That(successful.Count, Is.EqualTo(1));
-            Assert.That(successful[0], Is.EqualTo(tm));
+            var success = result.SuccessfulItems.ToList();
+            Assert.That(success.Count, Is.EqualTo(2));
+            Assert.That(success.Contains(tm1));
+            Assert.That(success.Contains(tm2));
             Assert.That(result.FailedItems, Is.Empty);
-            _persistenceContext.Verify(c => c.Purge(existing.ObjectId), Times.Once);
-            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
         }
 
         [Test]
-        public async Task Should_Not_Wipe_New_Data()
+        public async Task Should_Clear_All_Non_New_Items_When_Pull_Is_Successful()
         {
-            var tm = PrepareTestModel();
-            var existing = new TestModel();
-            existing.StampNewId();
-            _persistenceContext.Setup(c => c.LoadAll()).Returns(new[] { existing });
+            var existing = CreateTestModel();
+            var newItem = new TestModel();
+            newItem.StampNewId();
+            _persistenceContext.LoadAll().Returns(new[] {existing, newItem});
 
-            var result = (await _service.Pull<TestModel>());
+            var pulled = CreateTestModel();
+            SetupSuccessfulPull(pulled);
 
-            var successful = result.SuccessfulItems.ToList();
-            Assert.That(successful.Count, Is.EqualTo(1));
-            Assert.That(successful[0], Is.EqualTo(tm));
-            Assert.That(result.FailedItems, Is.Empty);
-            _persistenceContext.Verify(c => c.Purge(existing.ObjectId), Times.Never);
-            _persistenceContext.Verify(c => c.PersistAllJson(_kvps), Times.Once);
+            await _service.Pull<TestModel>();
+
+            _persistenceContext.Received().Purge(existing.ObjectId);
+            _persistenceContext.DidNotReceive().Purge(newItem.ObjectId);
         }
+
+        [Test]
+        public async Task Should_Not_Persist_When_Specified()
+        {
+            var tm1 = CreateTestModel();
+            var tm2 = CreateTestModel();
+            SetupSuccessfulPull(tm1, tm2);
+
+            var result = await _service.Pull<TestModel>(persist:false);
+
+            _persistenceContext.DidNotReceiveWithAnyArgs().Save(null);
+            _persistenceContext.DidNotReceiveWithAnyArgs().Purge("");
+            var success = result.SuccessfulItems.ToList();
+            Assert.That(success.Count, Is.EqualTo(2));
+            Assert.That(success.Contains(tm1));
+            Assert.That(success.Contains(tm2));
+            Assert.That(result.FailedItems, Is.Empty);
+        }
+
+        [Test]
+        public async Task Should_Not_Purge_Existing_Items()
+        {
+            var pulled = CreateTestModel();
+            var existing = CreateTestModel();
+            existing.ObjectId = pulled.ObjectId;
+            var anotherOne = CreateTestModel();
+
+            _persistenceContext.LoadAll().Returns(new[] { existing, anotherOne });
+
+            SetupSuccessfulPull(pulled);
+
+            await _service.Pull<TestModel>();
+
+            _persistenceContext.Received().Purge(anotherOne.ObjectId);
+            _persistenceContext.DidNotReceive().Purge(existing.ObjectId);           
+        }
+
     }
 }

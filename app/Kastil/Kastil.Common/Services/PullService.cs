@@ -10,7 +10,6 @@ namespace Kastil.Common.Services
     {
         private IRestServiceCaller Caller => Resolve<IRestServiceCaller>();
         private IPersistenceContextFactory PersistenceContextFactory => Resolve<IPersistenceContextFactory>();
-        private IJsonSerializer Serializer => Resolve<IJsonSerializer>();
         private Connection Connection => Resolve<Connection>();
         private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
 
@@ -19,41 +18,46 @@ namespace Kastil.Common.Services
             var url = $"{Connection.GenerateTableUrl<T>()}{queryString}";
             var json = await Caller.Get(url, Connection.Headers);
 
-            var parsed = ResponseParser.Parse<T>(json);
+            var parsed = ResponseParser.ParseArray<T>(json);
+            return parsed.IsSuccessful ? Persist(parsed, persist) : Failure(parsed);
+        }        
+
+        private SyncResult<T> Persist<T>(BackendlessResponse<T> parsed, bool persist) where T : BaseModel
+        {
             var result = new SyncResult<T>();
-            if (parsed.IsSuccessful)
+
+            var context = PersistenceContextFactory.CreateFor<T>();
+            if (persist)
             {
-                var docs = Serializer.ParseArray(json, "data", "objectId").ToList();
+                var all = context.LoadAll()
+                            .Where(i => !i.IsNew())
+                            .ToDictionary(i => i.ObjectId);
 
-                if (persist)
+                foreach (var item in parsed.Content)
                 {
-                    await Persist<T>(docs);
+                    context.Save(item);
+                    all.Remove(item.ObjectId);
                 }
-
-                foreach (var doc in docs)
+                
+                foreach (var item in all.Values)
                 {
-                    var deserialize = Serializer.Deserialize<T>(doc.Value);
-                    result.Success(deserialize, deserialize.ObjectId);
+                    context.Purge(item.ObjectId);
                 }
             }
-            else
+
+            foreach (var item in parsed.Content)
             {
-                result.Failed(null, parsed.ToString());
+                result.Success(item, item.ObjectId);
             }
 
             return result;
         }
 
-        private async Task Persist<T>(IEnumerable<KeyValuePair<string, string>> docs) where T : BaseModel
+        private static SyncResult<T> Failure<T>(BackendlessResponse<T> parsed) where T : BaseModel
         {
-            var context = PersistenceContextFactory.CreateFor<T>();
-
-            var all = context.LoadAll();
-            foreach (var item in all.Where(i => !i.IsNew()))
-            {
-                context.Purge(item.ObjectId);
-            }
-            await Asyncer.Async(() => context.PersistAllJson(docs));
+            var result = new SyncResult<T>();
+            result.Failed(null, parsed.ToString());
+            return result;
         }
     }
 }
