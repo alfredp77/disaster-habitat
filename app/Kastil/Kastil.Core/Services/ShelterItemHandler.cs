@@ -31,7 +31,7 @@ namespace Kastil.Core.Services
             await service.Save(_shelter);
 			foreach (var modifiedAttribute in modifiedAttributes.OfType<ShelterAttribute>())
             {
-				modifiedAttribute.ShelterId = _shelter.ObjectId;
+				modifiedAttribute.ItemId = _shelter.ObjectId;
                 await service.SaveShelterAttribute(modifiedAttribute);
             }
             foreach (var deletedAttribute in deletedAttributes.OfType<ShelterAttribute>())

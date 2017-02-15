@@ -1,5 +1,6 @@
 using Kastil.Common.Utils;
 using MvvmCross.Platform;
+using Newtonsoft.Json;
 
 namespace Kastil.Common.Models
 {
@@ -14,16 +15,19 @@ namespace Kastil.Common.Models
     {
         public string Key { get; set; }
         public string Value { get; set; }
+        public virtual string ItemId { get; set; }
     }
 
     public class ShelterAttribute : ValuedAttribute
     {
-        public string ShelterId { get; set; }
+        [JsonProperty("ShelterId")]
+        public override string ItemId { get; set; }
     }
 
     public class AssessmentAttribute : ValuedAttribute
     {
-        public string AssessmentId { get; set; }
+        [JsonProperty("AssessmentId")]
+        public override string ItemId { get; set; }
     }
 
     public static class AttributeExtensions

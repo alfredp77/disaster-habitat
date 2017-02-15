@@ -29,10 +29,11 @@ namespace Kastil.Common.Services
                 var parsed = ResponseParser.Parse<T>(json);
                 if (parsed.IsSuccessful)
                 {
-                    context.Save(parsed.Content);
+                    var content = parsed.Content.Single();
+                    context.Save(content);
                     if (item.IsNew())
                         context.Purge(item.ObjectId);
-                    result.Success(parsed.Content, item.ObjectId);
+                    result.Success(content, item.ObjectId);
                 }
                 else
                 {

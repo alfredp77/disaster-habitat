@@ -73,6 +73,7 @@
     <Compile Include="Services\SaveOrUpdatePushService.cs" />
     <Compile Include="Utils\Asyncer.cs" />
     <Compile Include="Utils\AttributeConverter.cs" />
+    <Compile Include="Utils\BackendlessQuery.cs" />
     <Compile Include="Utils\BackendlessResponse.cs" />
     <Compile Include="Utils\BackendlessResponseParser.cs" />
     <Compile Include="Utils\DateHelper.cs" />

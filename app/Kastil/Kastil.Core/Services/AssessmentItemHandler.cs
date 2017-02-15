@@ -32,7 +32,7 @@ namespace Kastil.Core.Services
 
 			foreach (var modifiedAttribute in modifiedAttributes.OfType<AssessmentAttribute>())
             {
-				modifiedAttribute.AssessmentId = _assessment.ObjectId;
+				modifiedAttribute.ItemId = _assessment.ObjectId;
                 await service.SaveAssessmentAttribute(modifiedAttribute);
             }
             foreach (var deletedAttribute in deletedAttributes.OfType<AssessmentAttribute>())

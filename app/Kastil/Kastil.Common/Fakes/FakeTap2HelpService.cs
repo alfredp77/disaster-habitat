@@ -121,7 +121,7 @@ namespace Kastil.Common.Fakes
             var attributes = (await CreateRandomAttributes<AssessmentAttribute>()).ToList();
             foreach (var assessmentAttribute in attributes)
             {                
-                assessmentAttribute.AssessmentId = assessment1.ObjectId;
+                assessmentAttribute.ItemId = assessment1.ObjectId;
                 _assessmentAttributes.Add(assessmentAttribute.ObjectId, assessmentAttribute);
             }
             
@@ -172,7 +172,7 @@ namespace Kastil.Common.Fakes
 
         public Task<IEnumerable<AssessmentAttribute>>  GetAssessmentAttributes(string assessmentId)
         {
-            return Task.FromResult(_assessmentAttributes.Values.Where(a => a.AssessmentId == assessmentId));
+            return Task.FromResult(_assessmentAttributes.Values.Where(a => a.ItemId == assessmentId));
         }
 
         public Task SaveAssessmentAttribute(AssessmentAttribute attribute)
@@ -235,7 +235,7 @@ namespace Kastil.Common.Fakes
             var attributes = (await CreateRandomAttributes<ShelterAttribute>()).ToList();
             foreach (var attribute in attributes)
             {
-                attribute.ShelterId = shelter.ObjectId;
+                attribute.ItemId = shelter.ObjectId;
                 _shelterAttributes.Add(attribute.Key, attribute);
             }
             return shelter;
@@ -287,7 +287,7 @@ namespace Kastil.Common.Fakes
 
         public Task<IEnumerable<ShelterAttribute>> GetShelterAttributes(string shelterId)
         {
-            return Task.FromResult(_shelterAttributes.Values.Where(a => a.ShelterId == shelterId));
+            return Task.FromResult(_shelterAttributes.Values.Where(a => a.ItemId == shelterId));
         }
 
         public Task SaveShelterAttribute(ShelterAttribute attribute)

@@ -55,20 +55,34 @@ namespace Kastil.Common.Utils
 
         public IEnumerable<KeyValuePair<string, string>> ParseArray(string json, string arrayPropertyName, string idPropertyName)
         {
-            var obj = JObject.Parse(json);
-            var dataProp = obj.Properties().FirstOrDefault(p => p.Name == arrayPropertyName);
-            if (dataProp == null)
+            if (string.IsNullOrEmpty(json))
                 yield break;
 
-            foreach (var x in dataProp.Value.Children())
+            var token = JToken.Parse(json);
+            var enumerable = Enumerable.Empty<JToken>();
+
+            if (token is JObject && !string.IsNullOrEmpty(arrayPropertyName))
             {
-                var id = x.Children<JProperty>().FirstOrDefault(c => c.Name == idPropertyName);
-                if (id != null)
-                {
-                    yield return new KeyValuePair<string, string>(id.Value.ToString(), x.ToString());
-                }
+                var obj = (JObject)token;
+                var dataProp = obj.Properties().FirstOrDefault(p => p.Name == arrayPropertyName);
+                if (dataProp == null)
+                    enumerable = new List<JToken> { obj };
+                else
+                    enumerable = dataProp.Value.Children();
+
+            }
+            else if (token is JArray)
+            {
+                enumerable = (JArray)token;
+            }
+
+            foreach (var x in enumerable)
+            {
+                var id = x.Children<JProperty>().FirstOrDefault(c => c.Name == idPropertyName)?.Value.ToString() ?? $"NOID-{Guid.NewGuid()}";
+                yield return new KeyValuePair<string, string>(id, x.ToString());
             }
         }
+
 
         public IEnumerable<T> ParseAsObjectArray<T>(string json, string arrayPropertyName, string idPropertyName, Action<T> patch=null)
         {

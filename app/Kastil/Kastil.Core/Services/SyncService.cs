@@ -16,7 +16,7 @@ namespace Kastil.Core.Services
         private IPullService PullService => Resolve<IPullService>();
         private IPushService PushService => Resolve<IPushService>();
         private IPersistenceContextFactory ContextFactory => Resolve<IPersistenceContextFactory>();
-
+        private IBackendlessQueryProvider QueryProvider => Resolve<IBackendlessQueryProvider>();
         public async Task Sync(User user)
         {
 			var currentTime = DateTimeOffset.UtcNow;
@@ -62,7 +62,7 @@ namespace Kastil.Core.Services
         {            
             var savedAssessments = await PushService.Push<Assessment>(user.Token);
             var assessmentIds = new HashSet<string>(savedAssessments.SuccessfulItems.Select(savedAssessments.GetLocalId));
-            var attributePushResult = await PushService.Push<AssessmentAttribute>(user.Token, a => assessmentIds.Contains(a.AssessmentId));
+            var attributePushResult = await PushService.Push<AssessmentAttribute>(user.Token, a => assessmentIds.Contains(a.ItemId));
 
             // if there's any failure, we should not continue doing the next steps
             if (savedAssessments.FailedItems.Any() || attributePushResult.FailedItems.Any())
@@ -72,11 +72,11 @@ namespace Kastil.Core.Services
             }
 
             // pull assessments
-			var queryString = WebUtility.UrlEncode($"ownerId='{user.ObjectId}' AND isActive=true").Replace("+","%20");
-            await PullService.Pull<Assessment>($"?where={queryString}");
+            var query = QueryProvider.Where().OwnedBy(user.ObjectId).IsActive();
+            await PullService.Pull<Assessment>(query);
 
             // pull attributes
-            await PullService.Pull<AssessmentAttribute>($"?where={queryString}");
+            await PullService.Pull<AssessmentAttribute>(query);
 
             // remove all assessments that do not belong to this user
             var assessmentContext = ContextFactory.CreateFor<Assessment>();

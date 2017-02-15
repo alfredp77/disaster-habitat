@@ -7,6 +7,6 @@ namespace Kastil.Common.Services
 {
     public interface IPullService
     {
-        Task<SyncResult<T>> Pull<T>(string queryString="", bool persist=true) where T : BaseModel;
+        Task<SyncResult<T>> Pull<T>(IQuery query=null, bool persist=true) where T : BaseModel;
     }
 }

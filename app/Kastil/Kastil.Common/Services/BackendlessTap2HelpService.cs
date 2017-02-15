@@ -125,7 +125,7 @@ namespace Kastil.Common.Services
         public Task<IEnumerable<AssessmentAttribute>> GetAssessmentAttributes(string assessmentId)
         {
             var context = PersistenceContextFactory.CreateFor<AssessmentAttribute>();
-            return Asyncer.Async(() => context.LoadAll().Where(d => d.AssessmentId == assessmentId));
+            return Asyncer.Async(() => context.LoadAll().Where(d => d.ItemId == assessmentId));
         }
 
         public Task SaveAssessmentAttribute(AssessmentAttribute attribute)
@@ -145,7 +145,7 @@ namespace Kastil.Common.Services
         public Task<IEnumerable<ShelterAttribute>> GetShelterAttributes(string shelterId)
         {
             var context = PersistenceContextFactory.CreateFor<ShelterAttribute>();
-            return Asyncer.Async(() => context.LoadAll().Where(d => d.ShelterId == shelterId));
+            return Asyncer.Async(() => context.LoadAll().Where(d => d.ItemId == shelterId));
         }
 
         public Task SaveShelterAttribute(ShelterAttribute attribute)

@@ -1,12 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
 using Kastil.Common.Models;
 
 namespace Kastil.Common.Utils
 {
     public class BackendlessResponse<T> where T: BaseModel
     {
-        public static BackendlessResponse<T> Success(T content)
+        public static BackendlessResponse<T> Success(params T[] content)
         {
-            return new BackendlessResponse<T> {Content = content};
+            return new BackendlessResponse<T>(content);
         }
 
         public static BackendlessResponse<T> Failed(string code = null, string message = null)
@@ -14,10 +16,14 @@ namespace Kastil.Common.Utils
             return new BackendlessResponse<T> {ErrorCode = code ?? "Unknown", ErrorMessage = message ?? "Something went wrong ..." };
         }
 
-        private BackendlessResponse()
-        {}
+        private readonly List<T> _content;
 
-        public T Content { get; private set; }
+        private BackendlessResponse(params T[] content)
+        {
+            _content = content.ToList();
+        }
+
+        public IEnumerable<T> Content => _content;
 
         public string ErrorMessage { get; private set; }
 
@@ -28,8 +34,11 @@ namespace Kastil.Common.Utils
         public override string ToString()
         {
             return IsSuccessful
-                ? $"Content:{typeof(T).Name}, Id:{Content.ObjectId}"
+                ? $"Content:{typeof(T).Name}, Id:{string.Join(",", _content.Select(c => c.ObjectId))}"
                 : $"{ErrorCode}: {ErrorMessage}";
         }
     }
+
+
+
 }

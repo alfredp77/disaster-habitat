@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Kastil.Common.Utils;
@@ -13,9 +12,9 @@ namespace Kastil.Common.Services
         private Connection Connection => Resolve<Connection>();
         private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
 
-        public async Task<SyncResult<T>> Pull<T>(string queryString="", bool persist = true) where T : BaseModel
+        public async Task<SyncResult<T>> Pull<T>(IQuery query=null, bool persist = true) where T : BaseModel
         {
-            var url = $"{Connection.GenerateTableUrl<T>()}{queryString}";
+            var url = $"{Connection.GenerateTableUrl<T>()}{query}";
             var json = await Caller.Get(url, Connection.Headers);
 
             var parsed = ResponseParser.ParseArray<T>(json);

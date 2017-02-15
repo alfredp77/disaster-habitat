@@ -9,7 +9,7 @@ namespace Kastil.Common.Fakes
 {
     public class FakePullService : IPullService
     {
-        public Task<SyncResult<T>> Pull<T>(string queryString=null, bool persist = true) where T : BaseModel
+        public Task<SyncResult<T>> Pull<T>(IQuery query=null, bool persist = true) where T : BaseModel
         {
             return Task.FromResult(new SyncResult<T>());
         }
