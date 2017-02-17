@@ -26,20 +26,21 @@ namespace Kastil.Core.Services
             _persistenceContextFactory = persistenceContextFactory;
         }
 
-        public async Task Sync(User user)
+        public async Task<SyncResult> Sync(User user)
         {
             if (!await PushWith(user))
-                return;
+                return SyncResult.Failed($"Unable to completely push {typeof(TItem).Name}.");
 
             var query = _queryProvider.Where().OwnedBy(user.ObjectId).IsActive();
             if (!await PullAssessments(query))
-                return;
+                return SyncResult.Failed($"Unable to pull latest {typeof(TItem).Name} from server.");
 
             if (!await PullAttributes(query))
-                return;
+                return SyncResult.Failed($"Unable to pull latest {typeof(TValuedAttribute).Name} from server.");
 
             // remove all assessments that do not belong to this user
             RemoveOtherUsersItems(user);
+            return SyncResult.Success();
         }
 
         private void RemoveOtherUsersItems(User user)

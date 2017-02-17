@@ -12,7 +12,7 @@ namespace Kastil.Common.Services
         private Connection Connection => Resolve<Connection>();
         private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
 
-        public async Task<SyncResult<T>> Pull<T>(IQuery query=null, bool persist = true) where T : BaseModel
+        public async Task<UpdateResult<T>> Pull<T>(IQuery query=null, bool persist = true) where T : BaseModel
         {
             var url = $"{Connection.GenerateTableUrl<T>()}{query}";
             var json = await Caller.Get(url, Connection.Headers);
@@ -27,16 +27,16 @@ namespace Kastil.Common.Services
             return Success(parsed);
         }        
 
-        private static SyncResult<T> Failure<T>(BackendlessResponse<T> parsed) where T : BaseModel
+        private static UpdateResult<T> Failure<T>(BackendlessResponse<T> parsed) where T : BaseModel
         {
-            var result = new SyncResult<T>();
+            var result = new UpdateResult<T>();
             result.Failed(null, parsed.ToString());
             return result;
         }
 
-        private static SyncResult<T> Success<T>(BackendlessResponse<T> parsed) where T : BaseModel
+        private static UpdateResult<T> Success<T>(BackendlessResponse<T> parsed) where T : BaseModel
         {
-            var result = new SyncResult<T>();
+            var result = new UpdateResult<T>();
             foreach (var item in parsed.Content)
             {
                 result.Success(item, item.ObjectId);

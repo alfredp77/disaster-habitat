@@ -16,7 +16,7 @@ namespace Kastil.Common.Services
             _removal = removal;
         }      
 
-        public async Task<SyncResult<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
+        public async Task<UpdateResult<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
         {
             var removed = await _removal.Push(userToken, criteria);
             var saved = await _saveOrUpdate.Push(userToken, criteria);

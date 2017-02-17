@@ -8,9 +8,10 @@ namespace Kastil.Core.Fakes
 {
     public class FakeSyncService : ISyncService
     {
-        public Task Sync(User user)
+        public async Task<SyncResult> Sync(User user)
         {
-            return Task.Delay(TimeSpan.FromSeconds(3));
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            return SyncResult.Success();
         }
     }
 }

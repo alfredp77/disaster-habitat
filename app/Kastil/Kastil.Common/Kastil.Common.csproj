@@ -84,7 +84,7 @@
     <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="Utils\SpinnerItem.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
-    <Compile Include="Utils\SyncResult.cs" />
+    <Compile Include="Utils\UpdateResult.cs" />
     <Compile Include="Utils\SyncResultExtensions.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
   </ItemGroup>
