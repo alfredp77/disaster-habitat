@@ -17,7 +17,8 @@ namespace Kastil.Core.Services
         private IPushService PushService => Resolve<IPushService>();
         private IPersistenceContextFactory ContextFactory => Resolve<IPersistenceContextFactory>();
         private IBackendlessQueryProvider QueryProvider => Resolve<IBackendlessQueryProvider>();
-        public async Task Sync(User user)
+
+        public async Task<SyncResult> Sync(User user)
         {
 			var currentTime = DateTimeOffset.UtcNow;
 
@@ -27,6 +28,7 @@ namespace Kastil.Core.Services
             await PushShelters(user);
 
 			RecordLastSync(currentTime);
+            return new SyncResult();
         }
 
 		private void RecordLastSync(DateTimeOffset currentTime)

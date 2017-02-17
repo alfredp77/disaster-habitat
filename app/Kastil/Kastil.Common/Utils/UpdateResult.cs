@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Kastil.Common.Models;
 
 namespace Kastil.Common.Utils
 {
-    public class SyncResult<T> where T : BaseModel
+    public class UpdateResult<T> where T : BaseModel
     {
         private readonly Dictionary<string, string> _errorMessages = new Dictionary<string, string>();
         private readonly Dictionary<string, string> _localIds = new Dictionary<string, string>();
@@ -13,7 +14,7 @@ namespace Kastil.Common.Utils
         public void Failed(T item, string errorMessage)
         {
             _failedItems.Add(item);
-            _errorMessages[item.ObjectId] = errorMessage;
+            _errorMessages[item?.ObjectId ?? Guid.NewGuid().ToString()] = errorMessage;
         }
 
         public void Success(T item, string localId)

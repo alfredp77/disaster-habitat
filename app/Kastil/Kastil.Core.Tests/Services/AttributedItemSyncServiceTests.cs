@@ -31,8 +31,8 @@ namespace Kastil.Core.Tests.Services
             _queryProvider = Substitute.For<IBackendlessQueryProvider>();
             _query = Substitute.For<IBackendlessQuery>();
             _queryProvider.Where().Returns(_query);
-            _pullService.Pull<Assessment>().ReturnsForAnyArgs(Task.FromResult(new SyncResult<Assessment>()));
-            _pullService.Pull<AssessmentAttribute>().ReturnsForAnyArgs(Task.FromResult(new SyncResult<AssessmentAttribute>()));
+            _pullService.Pull<Assessment>().ReturnsForAnyArgs(Task.FromResult(new UpdateResult<Assessment>()));
+            _pullService.Pull<AssessmentAttribute>().ReturnsForAnyArgs(Task.FromResult(new UpdateResult<AssessmentAttribute>()));
 
             _user = new User {Token = "blah", ObjectId = "xyz"};
             _query.OwnedBy(_user.ObjectId).IsActive().Returns(_query);
@@ -46,43 +46,44 @@ namespace Kastil.Core.Tests.Services
             return new T { ObjectId = Guid.NewGuid().ToString(), OwnerId = ownerId };
         }
 
-        private static SyncResult<T> CreateSyncResult<T>(params string[] localIds) where T : BaseModel, new()
+        private static UpdateResult<T> CreateUpdateResult<T>(params string[] localIds) where T : BaseModel, new()
         {
-            var syncResult = new SyncResult<T>();
+            var updateResult = new UpdateResult<T>();
             foreach (var localId in localIds)
             {
                 var item = CreateItem<T>();
-                syncResult.Success(item, localId);
+                updateResult.Success(item, localId);
             }
-            return syncResult;
+            return updateResult;
         }
 
         [Test]
         public async Task Should_Push_Items_And_Attributes_Of_Successfully_Pushed_Items()
         {
-            var syncResult = CreateSyncResult<Assessment>("1", "2");
-            syncResult.Failed(CreateItem<Assessment>(), "error!");
-            _pushService.Push<Assessment>(_user.Token).Returns(Task.FromResult(syncResult));
-            var attributeSyncResult = CreateSyncResult<AssessmentAttribute>();
+            var updateResult = CreateUpdateResult<Assessment>("1", "2");
+            updateResult.Failed(CreateItem<Assessment>(), "error!");
+            _pushService.Push<Assessment>(_user.Token).Returns(Task.FromResult(updateResult));
+            var attributeSyncResult = CreateUpdateResult<AssessmentAttribute>();
             Predicate<AssessmentAttribute> predicate = null;
             _pushService.Push(_user.Token, Arg.Do<Predicate<AssessmentAttribute>>(p => predicate = p))
                 .Returns(attributeSyncResult);
 
-            await _syncService.Sync(_user);
+            var syncResult = await _syncService.Sync(_user);
 
+            Assert.That(syncResult.HasErrors);
             Assert.That(predicate(new AssessmentAttribute { ItemId = "1"}));
             Assert.That(predicate(new AssessmentAttribute { ItemId = "2" }));
             Assert.That(predicate(new AssessmentAttribute { ItemId = "3" }), Is.False);
         }
 
-        private Tuple<SyncResult<Assessment>, SyncResult<AssessmentAttribute>>  SetupEmptyPush()
+        private Tuple<UpdateResult<Assessment>, UpdateResult<AssessmentAttribute>>  SetupEmptyPush()
         {
-            var syncResult = CreateSyncResult<Assessment>();
-            var attributeSyncResult = CreateSyncResult<AssessmentAttribute>();
-            _pushService.Push<Assessment>(_user.Token).Returns(Task.FromResult(syncResult));
+            var updateResult = CreateUpdateResult<Assessment>();
+            var attributeUpdateResult = CreateUpdateResult<AssessmentAttribute>();
+            _pushService.Push<Assessment>(_user.Token).Returns(Task.FromResult(updateResult));
             _pushService.Push(_user.Token, Arg.Any<Predicate<AssessmentAttribute>>())
-                .Returns(Task.FromResult(attributeSyncResult));
-            return new Tuple<SyncResult<Assessment>, SyncResult<AssessmentAttribute>>(syncResult, attributeSyncResult);
+                .Returns(Task.FromResult(attributeUpdateResult));
+            return new Tuple<UpdateResult<Assessment>, UpdateResult<AssessmentAttribute>>(updateResult, attributeUpdateResult);
         }
 
         [Test]
@@ -90,20 +91,22 @@ namespace Kastil.Core.Tests.Services
         {
             SetupEmptyPush();
 
-            await _syncService.Sync(_user);
+            var syncResult = await _syncService.Sync(_user);
 
+            Assert.That(syncResult.HasErrors, Is.False);
             await _pullService.Received().Pull<Assessment>(_query);
         }
 
         [Test]
         public async Task Should_NOT_Pull_Assesments_When_Push_Has_Some_Failures_On_Assessment()
         {
-            var syncResults = SetupEmptyPush();
-            var assessmentSyncResult = syncResults.Item1;
-            assessmentSyncResult.Failed(CreateItem<Assessment>(), "xxx");
-            
-            await _syncService.Sync(_user);
+            var updateResults = SetupEmptyPush();
+            var assessmentUpdateResult = updateResults.Item1;
+            assessmentUpdateResult.Failed(CreateItem<Assessment>(), "xxx");
 
+            var syncResult = await _syncService.Sync(_user);
+
+            Assert.That(syncResult.HasErrors);
             await _pullService.DidNotReceiveWithAnyArgs().Pull<Assessment>();
         }
 
@@ -112,20 +115,22 @@ namespace Kastil.Core.Tests.Services
         {
             SetupEmptyPush();
 
-            await _syncService.Sync(_user);
+            var syncResult = await _syncService.Sync(_user);
 
+            Assert.That(syncResult.HasErrors, Is.False);
             await _pullService.Received().Pull<AssessmentAttribute>(_query);
         }
 
         [Test]
         public async Task Should_NOT_Pull_Assesments_When_Push_Has_Some_Failures_On_Attributes()
         {
-            var syncResults = SetupEmptyPush();
-            var attributeSyncResult = syncResults.Item2;
-            attributeSyncResult.Failed(CreateItem<AssessmentAttribute>(), "xxx");
+            var updateResults = SetupEmptyPush();
+            var attributeUpdateResult = updateResults.Item2;
+            attributeUpdateResult.Failed(CreateItem<AssessmentAttribute>(), "xxx");
 
-            await _syncService.Sync(_user);
+            var syncResult = await _syncService.Sync(_user);
 
+            Assert.That(syncResult.HasErrors);
             await _pullService.DidNotReceiveWithAnyArgs().Pull<Assessment>();
         }
 
@@ -133,12 +138,13 @@ namespace Kastil.Core.Tests.Services
         public async Task Should_NOT_Pull_Attributes_When_Assessments_Are_Not_Pulled_Successfully()
         {
             SetupEmptyPush();
-            var assessmentPullResult = new SyncResult<Assessment>();
-            assessmentPullResult.Failed(CreateItem<Assessment>(), "error!!");
-            _pullService.Pull<Assessment>(_query).Returns(Task.FromResult(assessmentPullResult));
+            var assessmentUpdateResult = new UpdateResult<Assessment>();
+            assessmentUpdateResult.Failed(CreateItem<Assessment>(), "error!!");
+            _pullService.Pull<Assessment>(_query).Returns(Task.FromResult(assessmentUpdateResult));
 
-            await _syncService.Sync(_user);
+            var syncResult = await _syncService.Sync(_user);
 
+            Assert.That(syncResult.HasErrors);
             await _pullService.DidNotReceiveWithAnyArgs().Pull<AssessmentAttribute>();
         }
 
@@ -183,7 +189,7 @@ namespace Kastil.Core.Tests.Services
         public async Task Should_Not_Purge_Anything_When_Attribute_Was_Not_Pulled_Successfully()
         {
             SetupEmptyPush();
-            var attributePullResult = new SyncResult<Assessment>();
+            var attributePullResult = new UpdateResult<Assessment>();
             attributePullResult.Failed(CreateItem<Assessment>(), "error!!");
             _pullService.Pull<Assessment>(_query).Returns(Task.FromResult(attributePullResult));
 
@@ -193,8 +199,9 @@ namespace Kastil.Core.Tests.Services
             var assessmentAttributeContext = _persistenceContextFactory.CreateFor<AssessmentAttribute>();
             await SetupPurgeTest(assessmentContext, attr1, attr2, assessmentAttributeContext);
 
-            await _syncService.Sync(_user);
+            var syncResult = await _syncService.Sync(_user);
 
+            Assert.That(syncResult.HasErrors);
             assessmentAttributeContext.DidNotReceiveWithAnyArgs().Purge("");
             assessmentContext.DidNotReceiveWithAnyArgs().Purge("");
         }

@@ -130,6 +130,7 @@
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AttributedItemSyncServiceTests.cs" />
+    <Compile Include="Services\DisasterSyncServiceTests.cs" />
     <Compile Include="Services\FakeTap2HelpServiceTests.cs" />
     <Compile Include="Services\FileBasedPersistenceContextTests.cs" />
     <Compile Include="Services\PullServiceTests.cs" />

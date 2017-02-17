@@ -5,12 +5,12 @@ namespace Kastil.Common.Utils
 {
     public static class SyncResultExtensions
     {
-        public static SyncResult<T> Merge<T>(this SyncResult<T> me, params SyncResult<T>[] other) where T : BaseModel
+        public static UpdateResult<T> Merge<T>(this UpdateResult<T> me, params UpdateResult<T>[] other) where T : BaseModel
         {
-            var all = new List<SyncResult<T>> {me};
+            var all = new List<UpdateResult<T>> {me};
             all.AddRange(other);
 
-            var merged = new SyncResult<T>();
+            var merged = new UpdateResult<T>();
             foreach (var syncResult in all)
             {
                 foreach (var item in syncResult.SuccessfulItems)

@@ -10,9 +10,9 @@ namespace Kastil.Common.Fakes
 {
     public class FakePushService : IPushService
     {
-        public Task<SyncResult<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
+        public Task<UpdateResult<T>> Push<T>(string userToken, Predicate<T> criteria = null) where T : BaseModel
         {
-            return Task.FromResult(new SyncResult<T>());
+            return Task.FromResult(new UpdateResult<T>());
         }
     }
 }

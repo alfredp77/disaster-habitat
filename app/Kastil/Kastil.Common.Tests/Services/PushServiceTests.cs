@@ -37,7 +37,7 @@ namespace Kastil.Common.Tests.Services
         private static IPushService SetupRemoval(string token, Predicate<Assessment> predicate, out Assessment removedAssessment)
         {
             var removal = Substitute.For<IPushService>();
-            var removalResult = new SyncResult<Assessment>();
+            var removalResult = new UpdateResult<Assessment>();
             removedAssessment = new Assessment {ObjectId = Guid.NewGuid().ToString()};
             removalResult.Success(removedAssessment, removedAssessment.ObjectId);
             removal.Push(token, predicate).Returns(Task.FromResult(removalResult));
@@ -47,7 +47,7 @@ namespace Kastil.Common.Tests.Services
         private static IPushService SetupSaveOrUpdate(string token, Predicate<Assessment> predicate, out Assessment savedAssessment)
         {
             var saveOrUpdate = Substitute.For<IPushService>();
-            var saveOrUpdateResult = new SyncResult<Assessment>();
+            var saveOrUpdateResult = new UpdateResult<Assessment>();
             savedAssessment = new Assessment {ObjectId = Guid.NewGuid().ToString()};
             saveOrUpdateResult.Success(savedAssessment, "abc");
             saveOrUpdate.Push(token, predicate).Returns(Task.FromResult(saveOrUpdateResult));

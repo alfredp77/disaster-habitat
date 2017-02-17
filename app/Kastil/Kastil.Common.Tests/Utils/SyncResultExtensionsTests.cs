@@ -12,22 +12,22 @@ namespace Kastil.Common.Tests.Utils
     [TestFixture]
     public class SyncResultExtensionsTests
     {
-        private Tuple<SyncResult<Assessment>, Assessment> PrepareSuccessfulSyncResult()
+        private Tuple<UpdateResult<Assessment>, Assessment> PrepareSuccessfulSyncResult()
         {
             var localId = Guid.NewGuid().ToString();
             var assessment = new Assessment { ObjectId = Guid.NewGuid().ToString() };
-            var syncResult = new SyncResult<Assessment>();
+            var syncResult = new UpdateResult<Assessment>();
             syncResult.Success(assessment, localId);
-            return new Tuple<SyncResult<Assessment>, Assessment>(syncResult, assessment);
+            return new Tuple<UpdateResult<Assessment>, Assessment>(syncResult, assessment);
         }
 
-        private Tuple<SyncResult<Assessment>, Assessment> PrepareFailedSyncResult()
+        private Tuple<UpdateResult<Assessment>, Assessment> PrepareFailedSyncResult()
         {
             var localId = Guid.NewGuid().ToString();
             var assessment = new Assessment { ObjectId = Guid.NewGuid().ToString() };
-            var syncResult = new SyncResult<Assessment>();
+            var syncResult = new UpdateResult<Assessment>();
             syncResult.Failed(assessment, localId);
-            return new Tuple<SyncResult<Assessment>, Assessment>(syncResult, assessment);
+            return new Tuple<UpdateResult<Assessment>, Assessment>(syncResult, assessment);
         }
         
 

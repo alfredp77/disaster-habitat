@@ -43,6 +43,7 @@
     <Compile Include="Services\AttributedItemSyncService.cs" />
     <Compile Include="Services\AttributedEditContext.cs" />
     <Compile Include="Services\AttributedListContext.cs" />
+    <Compile Include="Services\DisasterSyncService.cs" />
     <Compile Include="Services\IAttributedListHandler.cs" />
     <Compile Include="Services\IAttributedItemHandler.cs" />
     <Compile Include="Services\ILoginService.cs" />

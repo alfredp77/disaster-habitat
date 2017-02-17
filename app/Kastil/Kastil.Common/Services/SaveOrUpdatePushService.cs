@@ -15,14 +15,14 @@ namespace Kastil.Common.Services
         private Connection Connection => Resolve<Connection>();
         private IBackendlessResponseParser ResponseParser => Resolve<IBackendlessResponseParser>();
 
-        public async Task<SyncResult<T>>  Push<T>(string userToken, Predicate<T> criteria=null) where T : BaseModel
+        public async Task<UpdateResult<T>>  Push<T>(string userToken, Predicate<T> criteria=null) where T : BaseModel
         {            
             var headers = new Dictionary<string, string>(Connection.Headers) { { "user-token", userToken } };
             criteria = criteria ?? (a => true);
 
             var context = PersistenceContextFactory.CreateFor<T>();
             var items = await Asyncer.Async(() => context.LoadAll());
-            var result = new SyncResult<T>();
+            var result = new UpdateResult<T>();
             foreach (var item in items.Where(i => criteria(i)))
             {                
                 var json = await PushItem(item, headers);

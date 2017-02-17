@@ -8,6 +8,6 @@ namespace Kastil.Common.Services
 {
     public interface IPushService
     {
-        Task<SyncResult<T>> Push<T>(string userToken, Predicate<T> criteria=null) where T : BaseModel;
+        Task<UpdateResult<T>> Push<T>(string userToken, Predicate<T> criteria=null) where T : BaseModel;
     }        
 }
