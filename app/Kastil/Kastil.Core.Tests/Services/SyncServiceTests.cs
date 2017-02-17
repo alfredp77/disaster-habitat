@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -5,49 +6,89 @@ using Kastil.Common.Services;
 using Kastil.Core.Services;
 using Kastil.Common.Models;
 using Kastil.TestUtils;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Kastil.Core.Tests.Services
 {
     [TestFixture]
-    public class SyncServiceTests : BaseTest
+    public class SyncServiceTests
     {
         private SyncService _syncService;
-        private Mock<IPushService> _pushService;
-        private Mock<IPullService> _pullService;
-        private Mock<ITap2HelpService> _tap2HelpService;
+        private ISyncService _service1, _service2;
+        private IPersistenceContextFactory _persistenceContextFactory;
+        private User _user;
 
-        public override void CreateTestableObject()
+        [SetUp]
+        public void Setup()
         {
-            _syncService = new SyncService();
-            _pushService = CreateMock<IPushService>();
-            _pullService = CreateMock<IPullService>();
-            _tap2HelpService = CreateMock<ITap2HelpService>();
-
-            Ioc.RegisterSingleton(_pushService.Object);
-            Ioc.RegisterSingleton(_pullService.Object);
-            Ioc.RegisterSingleton(_tap2HelpService.Object);
+            _user = new User {ObjectId = Guid.NewGuid().ToString()};
+            _service1 = Substitute.For<ISyncService>();
+            _service2 = Substitute.For<ISyncService>();
+            _persistenceContextFactory = Substitute.For<IPersistenceContextFactory>();
+            
+            _syncService = new SyncService(_persistenceContextFactory, new [] {_service1, _service2});
         }
 
         [Test]
-        public async Task Should_Clean_Assessments_From_Removed_Disasters()
+        public async Task Should_Return_Failure_When_Any_Of_The_Services_Fails()
         {
-            var disaster1 = new Disaster { ObjectId = "x" };
-            var disaster2 = new Disaster { ObjectId = "y" };
-            var disaster3 = new Disaster { ObjectId = "z" };
-            var disaster4 = new Disaster { ObjectId = "a" };
-            var localDisasters = new List<Disaster> {disaster1, disaster2 ,disaster3};
-            var incomingDisasters = new List<Disaster> {disaster1, disaster4};
-            _tap2HelpService.SetupSequence(s => s.GetDisasters())
-                .ReturnsAsync(localDisasters.AsEnumerable())
-                .ReturnsAsync(incomingDisasters.AsEnumerable());
+            _service1.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+            _service2.Sync(_user).Returns(Task.FromResult(SyncResult.Failed("test error")));
 
-            await _syncService.PullDisasters();
+            var syncResult = await _syncService.Sync(_user);
 
-            _pullService.Verify(p => p.Pull<Disaster>(null, true), Times.Once);
-            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster2.ObjectId), Times.Once);
-            _tap2HelpService.Verify(s => s.DeleteAssessments(disaster3.ObjectId), Times.Once);
+            Assert.That(syncResult.HasErrors);
+            Assert.That(syncResult.ErrorMessage, Is.EqualTo("test error"));
         }
+
+        [Test]
+        public async Task Should_Not_Execute_Subsequent_SyncServices_On_Failure()
+        {
+            _service1.Sync(_user).Returns(Task.FromResult(SyncResult.Failed("test error")));
+            _service2.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+
+            var syncResult = await _syncService.Sync(_user);
+
+            await _service2.DidNotReceive().Sync(_user);
+            Assert.That(syncResult.HasErrors);
+            Assert.That(syncResult.ErrorMessage, Is.EqualTo("test error"));
+        }
+
+        [Test]
+        public async Task Should_Return_Success_When_No_Errors()
+        {
+            _service1.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+            _service2.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+
+            var syncResult = await _syncService.Sync(_user);
+
+            Assert.That(syncResult.HasErrors, Is.False);
+        }
+
+        [Test]
+        public async Task Should_Record_Last_Sync_When_Successful()
+        {
+            _service1.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+            _service2.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+            var currentTime = DateTimeOffset.UtcNow;
+            _syncService.GetCurrentTimeFunc = () => currentTime;
+
+            await _syncService.Sync(_user);
+
+            _persistenceContextFactory.CreateFor<SyncInfo>().Received().Save(Arg.Is<SyncInfo>(s => s.LastSync == currentTime && s.ObjectId == "x"));
+        }
+
+        [Test]
+        public async Task Should_Not_Record_Last_Sync_When_Failed()
+        {
+            _service1.Sync(_user).Returns(Task.FromResult(SyncResult.Failed("test error!")));
+            _service2.Sync(_user).Returns(Task.FromResult(SyncResult.Success()));
+
+            await _syncService.Sync(_user);
+
+            _persistenceContextFactory.DidNotReceive().CreateFor<SyncInfo>();
+        }
+
     }
 }
