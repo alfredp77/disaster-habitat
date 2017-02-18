@@ -31,9 +31,9 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent">
             <EditText
-                android:id="@+id/StaffCode"
-                app:MvxBind="Text StaffCode"
-                android:hint="Enter your staff code to sync data"
+                android:id="@+id/Email"
+                app:MvxBind="Text Email"
+                android:hint="Enter your registered email address"
                 android:textColorHint="@color/gray_bcbcbc"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
@@ -42,6 +42,31 @@
                 android:layout_width="fill_parent"
                 android:background="@android:color/white"
                 android:singleLine="true"
+                android:imeOptions="actionNext" />
+        </LinearLayout>
+		<LinearLayout
+            android:padding="0.5dp"
+            android:background="@drawable/button_rounded"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent">
+            <EditText
+                android:id="@+id/Password"
+                app:MvxBind="Text Password"
+                android:hint="Enter your password"
+                android:textColorHint="@color/gray_bcbcbc"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:background="@android:color/white"
+                android:singleLine="true"
+				android:password="true"
                 android:imeOptions="actionNext" />
         </LinearLayout>
         <Button
