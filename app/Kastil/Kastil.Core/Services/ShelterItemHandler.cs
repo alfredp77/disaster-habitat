@@ -16,7 +16,7 @@ namespace Kastil.Core.Services
         {
             if (shelter == null)
             {
-                _shelter = new Shelter { ObjectId = Guid.NewGuid().ToString(), DisasterId = disasterId };
+                _shelter = new Shelter { DisasterId = disasterId };
             }
             else
             {

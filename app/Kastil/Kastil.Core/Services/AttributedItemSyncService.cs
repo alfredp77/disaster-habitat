@@ -71,11 +71,14 @@ namespace Kastil.Core.Services
         private async Task<bool> PushWith(User user)
         {
             var savedItems = await _pushService.Push<TItem>(user.Token);
+			if (savedItems.FailedItems.Any())
+				return false;
+			
             var itemIds = new HashSet<string>(savedItems.SuccessfulItems.Select(savedItems.GetLocalId));
             var attributePushResult = await _pushService.Push<TValuedAttribute>(user.Token,
                 a => itemIds.Contains(a.ItemId));
 
-            return !savedItems.FailedItems.Any() && !attributePushResult.FailedItems.Any();
+			return !attributePushResult.FailedItems.Any();
         }
 
         private async Task<bool> PullAttributes(IQuery query)

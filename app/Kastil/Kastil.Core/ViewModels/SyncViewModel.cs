@@ -70,10 +70,15 @@ namespace Kastil.Core.ViewModels
                 }
 
                 var service = Resolve<ISyncService>();
-                await service.Sync(loggedInUser);
+                var syncResult = await service.Sync(loggedInUser);
 
+                if (syncResult.HasErrors)
+                {
+                    dialog.HideLoading();
+					await dialog.AlertAsync(syncResult.ErrorMessage);
+                }
 
-				messenger.Publish(new SyncCompletedEvent(this, true));
+                messenger.Publish(new SyncCompletedEvent(this, true));
                 Close();
             }
             catch (Exception ex)
