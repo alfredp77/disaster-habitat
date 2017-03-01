@@ -75,7 +75,7 @@ namespace Kastil.Core.Services
 			availableAttributes.AddRange(
 				_allAttributes.Where(attr => !_attributesMap.ContainsKey(attr.Key))
 					.Select(attr => serializer.Clone(attr)));
-			AvailableAttributes = availableAttributes;
+			AvailableAttributes = ItemHandler.FilterAvailableAttributes(availableAttributes);
 		}
 
         public void AddOrUpdateAttribute(Attribute attribute, string value)

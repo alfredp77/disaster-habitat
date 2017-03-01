@@ -13,5 +13,6 @@ namespace Kastil.Core.Services
         string ItemType { get; }
 		ValuedAttribute CreateAttributeFrom(Attribute source);
         Task<IEnumerable<ValuedAttribute>> GetAttributes();
+        IEnumerable<Attribute> FilterAvailableAttributes(List<Attribute> availableAttributes);
     }
 }

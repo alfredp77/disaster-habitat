@@ -56,5 +56,10 @@ namespace Kastil.Core.Services
         public string NamePlaceholderText => "Enter assessment name";
         public string LocationPlaceholderText => "Where was this assessment made?";
         public string ItemType => typeof(Assessment).Name;
+
+        public IEnumerable<Attribute> FilterAvailableAttributes(List<Attribute> availableAttributes)
+        {
+            return availableAttributes.Where(a => a.IsApplicableFor(AttributeType.Assessment)).ToList();
+        }
     }
 }

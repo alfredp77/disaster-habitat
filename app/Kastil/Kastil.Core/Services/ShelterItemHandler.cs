@@ -55,5 +55,9 @@ namespace Kastil.Core.Services
         public string NamePlaceholderText => "Enter shelter name";
         public string LocationPlaceholderText => "Where is this shelter located?";
         public string ItemType => typeof(Shelter).Name;
+        public IEnumerable<Attribute> FilterAvailableAttributes(List<Attribute> availableAttributes)
+        {
+            return availableAttributes.Where(a => a.IsApplicableFor(AttributeType.Shelter)).ToList();
+        }
     }
 }
